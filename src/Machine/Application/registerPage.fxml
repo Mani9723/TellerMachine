@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.registerController">
+    <AnchorPane fx:id="registerPane" prefHeight="500.0" prefWidth="600.0">
+        <children>
+            <ImageView fitHeight="500.0" fitWidth="600.0" pickOnBounds="true">
+            <image>
+               <Image url="@../images/Everest-Mountain-Powerpoint-Backgrounds-1000x750.jpg" />
+            </image>
+            </ImageView>
+            <VBox layoutX="137.0" layoutY="60.0" prefHeight="400.0" prefWidth="226.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="137.0" AnchorPane.topAnchor="60.0">
+                <children>
+                    <GridPane prefHeight="345.0" prefWidth="326.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                            <JFXButton fx:id="registerButton" buttonType="RAISED" onAction="#handleRegisterButton" prefHeight="56.0" prefWidth="326.0" ripplerFill="#dfed0e" text="REGISTER" GridPane.rowIndex="6">
+                                <font>
+                                    <Font name="Papyrus" size="16.0" />
+                                </font>
+                            </JFXButton>
+                            <JFXTextField fx:id="username" alignment="CENTER" prefHeight="57.0" prefWidth="320.0" promptText="U S E R N A M E *" GridPane.rowIndex="3">
+                                <font>
+                                    <Font name="Papyrus" size="17.0" />
+                                </font>
+                                <focusColor>
+                                    <LinearGradient cycleMethod="REPEAT" endX="0.5238095238095238" endY="0.5" startX="0.4857142857142857" startY="0.5238095238095238">
+                                        <stops>
+                                            <Stop color="#fffe00" />
+                                            <Stop color="#ff5d007a" offset="1.0" />
+                                        </stops>
+                                    </LinearGradient>
+                                </focusColor>
+                                <unFocusColor>
+                                    <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                        <stops>
+                                            <Stop color="#c72626" />
+                                            <Stop color="#0044ff" offset="1.0" />
+                                        </stops>
+                                    </RadialGradient>
+                                </unFocusColor>
+                            </JFXTextField>
+                            <JFXPasswordField fx:id="pass" alignment="CENTER" focusColor="#3dfffd" prefHeight="87.0" prefWidth="320.0" promptText="P A S S W O R D *" unFocusColor="RED" GridPane.rowIndex="4">
+                                <font>
+                                    <Font name="Papyrus" size="17.0" />
+                                </font>
+                            </JFXPasswordField>
+                            <JFXPasswordField fx:id="confirmPass" alignment="CENTER" focusColor="#0040ff" prefHeight="120.0" prefWidth="320.0" promptText="C O N F I R M *" unFocusColor="RED" GridPane.rowIndex="5">
+                                <font>
+                                    <Font name="Papyrus" size="17.0" />
+                                </font>
+                            </JFXPasswordField>
+                            <JFXTextField fx:id="firstName" alignment="CENTER" cache="true" depthTest="DISABLE" focusColor="#2bbf30" prefHeight="81.0" prefWidth="320.0" promptText="F I R S T *">
+                                <font>
+                                    <Font name="Papyrus" size="17.0" />
+                                </font>
+                                <unFocusColor>
+                                    <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                        <stops>
+                                            <Stop color="#4800ff" />
+                                            <Stop color="#4dff00" offset="1.0" />
+                                        </stops>
+                                    </RadialGradient>
+                                </unFocusColor>
+                            </JFXTextField>
+                            <JFXTextField fx:id="lastName" alignment="CENTER" prefHeight="72.0" prefWidth="320.0" promptText="L A S T *" GridPane.rowIndex="1">
+                                <font>
+                                    <Font name="Papyrus" size="17.0" />
+                                </font>
+                                <focusColor>
+                                    <RadialGradient centerX="0.5" centerY="0.980952380952381" cycleMethod="REPEAT" radius="0.5">
+                                        <stops>
+                                            <Stop color="#fffe00" />
+                                            <Stop color="#454399" offset="1.0" />
+                                        </stops>
+                                    </RadialGradient>
+                                </focusColor>
+                                <unFocusColor>
+                                    <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                        <stops>
+                                            <Stop color="#0274ff" />
+                                            <Stop color="RED" offset="1.0" />
+                                        </stops>
+                                    </RadialGradient>
+                                </unFocusColor>
+                            </JFXTextField>
+                            <JFXTextField fx:id="accountType" alignment="CENTER" prefHeight="60.0" prefWidth="320.0" text="Checking" editable="false" GridPane.rowIndex="2">
+                                <font>
+                                    <Font name="Papyrus" size="17.0" />
+                                </font>
+                                <focusColor>
+                                    <RadialGradient centerX="0.5" centerY="1.0" cycleMethod="REPEAT" focusAngle="-18.43" focusDistance="1.0" radius="0.2674418604651163">
+                                        <stops>
+                                            <Stop color="#ffd200" />
+                                            <Stop color="#000aff" offset="1.0" />
+                                        </stops>
+                                    </RadialGradient>
+                                </focusColor>
+                                <unFocusColor>
+                                    <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                        <stops>
+                                            <Stop color="#fff900" />
+                                            <Stop color="#0044ff" offset="1.0" />
+                                        </stops>
+                                    </RadialGradient>
+                                </unFocusColor>
+                            </JFXTextField>
+                        </children>
+                    </GridPane>
+                </children>
+            </VBox>
+            <HBox layoutX="150.0" layoutY="-7.0" prefHeight="60.0" prefWidth="600.0" AnchorPane.bottomAnchor="440.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <children>
+                    <GridPane prefHeight="100.0" prefWidth="551.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="143.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="424.0" minWidth="10.0" prefWidth="357.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                            <Label prefHeight="59.0" prefWidth="440.0" text="        C R E A T E  A N  A C C O U N T" GridPane.columnIndex="1">
+                                <font>
+                                    <Font name="Papyrus" size="13.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </GridPane>
+                </children>
+            </HBox>
+            <JFXButton fx:id="returnButton" buttonType="RAISED" layoutX="14.0" layoutY="380.0" onAction="#returnHandler" prefHeight="60.0" prefWidth="95.0" text="R E T U R N" textFill="WHITE">
+                <font>
+                    <Font name="Papyrus" size="12.0" />
+                </font>
+            </JFXButton>
+        </children>
+    </AnchorPane>
+</StackPane>
