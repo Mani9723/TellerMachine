@@ -61,7 +61,7 @@ public class DialogeBox
 
 	}
 
-	void returnToLogin(String buttonMessage, AnchorPane rootPane, AnchorPane registerPane)
+	void returnToLogin(String buttonMessage, AnchorPane rootPane, StackPane registerPane)
 	{
 		JFXDialogLayout dialogLayout = new JFXDialogLayout();
 		JFXButton button = new JFXButton("Login");
@@ -78,10 +78,10 @@ public class DialogeBox
 		this.dialog.show();
 	}
 
-	private void loadLoginPage(AnchorPane rootPane, AnchorPane registerPane)
+	private void loadLoginPage(AnchorPane rootPane, StackPane registerPane)
 	{
 		try {
-			rootPane = FXMLLoader.load(getClass().getResource(System.getProperty("user.dir")+"\\src\\BankApp\\bankUI.fxml"));
+			rootPane = FXMLLoader.load(getClass().getResource("bankUI.fxml"));
 			registerPane.getChildren().setAll(rootPane);
 		} catch (IOException e){
 			e.printStackTrace();

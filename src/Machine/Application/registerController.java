@@ -4,6 +4,7 @@ import Machine.AccountManager.CheckingAccount;
 import Machine.AccountManager.hashPassword;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -12,7 +13,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class registerController {
@@ -50,6 +55,8 @@ public class registerController {
 	private CheckingAccount checkingAccount;
 	private String passFilePath;
 
+	private DialogeBox dialogeBox = new DialogeBox(stackPane);
+
 	@FXML
 	public void initialize()
 	{
@@ -63,38 +70,30 @@ public class registerController {
 	@FXML
 	void handleRegisterButton(ActionEvent event)
 	{
-		String first = firstName.getText();
-		String last = lastName.getText();
-		String user = username.getText();
-		String password = pass.getText();
-		String confPass = confirmPass .getText();
+		if(event.getSource().equals(registerButton)) {
+			String first = firstName.getText(), last = lastName.getText();
+			String user = username.getText(), password = pass.getText();
+			String confPass = confirmPass.getText();
 
-		if(password.equals(confPass)) {
-			File file = new File(passFilePath);
-			if (file.length() == 0) {
-				System.out.println("File is empty");
-				checkingAccount = new CheckingAccount(user);
-				saveUserToFile(user, password, first, last);
-			} else {
-				System.out.println("Not Empty");
-				if (userAlreadyExists(user)) {
-					System.out.println("Checking username availability");
-					System.out.println("Username is taken");
-					System.exit(-1);
-				} else {
-					System.out.println("Unique username...creating and saving file...");
+			if (password.equals(confPass)) {
+				File file = new File(passFilePath);
+				if (file.length() == 0) {
 					checkingAccount = new CheckingAccount(user);
 					saveUserToFile(user, password, first, last);
+				} else {
+					if (userAlreadyExists(user)) {
+						dialogeBox.OkButton("Username is taken", new JFXDialog());
+					} else {
+						checkingAccount = new CheckingAccount(user);
+						saveUserToFile(user, password, first, last);
+						dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
+					}
 				}
+			} else {
+				dialogeBox.OkButton("Incorrect Credentials", new JFXDialog());
 			}
+			clearFields(pass, confirmPass, firstName, lastName, username);
 		}
-		else {
-			System.out.println("Password does not match");
-			System.exit(-1);
-		}
-
-		System.out.println("User created");
-		clearFields(pass,confirmPass,firstName,lastName,username);
 	}
 
 	private boolean userAlreadyExists(String user)
