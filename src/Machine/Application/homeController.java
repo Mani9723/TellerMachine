@@ -88,4 +88,17 @@ public class homeController {
 		}
 	}
 
+	@FXML
+	void quickCash(ActionEvent event)
+	{
+		if(event.getSource().equals(quickCash)) {
+			try {
+				stackPane = FXMLLoader.load(getClass().getResource("QuickWithdraw.fxml"));
+				secondPane.getChildren().setAll(stackPane);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

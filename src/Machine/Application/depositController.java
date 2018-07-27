@@ -42,7 +42,7 @@ public class depositController {
 	@FXML
 	private Label currBalance;
 
-	private CheckingAccount checkingAccount = new CheckingAccount();
+//	private CheckingAccount checkingAccount = new CheckingAccount();
 
 	@FXML
 	void clear(ActionEvent event)
@@ -56,7 +56,7 @@ public class depositController {
 		//****** VALIDATE INPUT ******
 		if(event.getSource().equals(depositButton)) {
 			String amount = depositInput.getText();
-			checkingAccount.deposit(Double.parseDouble(amount));
+	//		checkingAccount.deposit(Double.parseDouble(amount));
 			depositInput.setText("");
 		}
 	}
@@ -92,7 +92,7 @@ public class depositController {
 	{
 		if(event.getSource().equals(withdraw)) {
 			try {
-				withdrawPane = FXMLLoader.load(getClass().getResource("homePage.fxml"));
+				withdrawPane = FXMLLoader.load(getClass().getResource("withdrawPage.fxml"));
 				stackPane.getChildren().setAll(withdrawPane);
 			} catch (IOException e) {
 				e.printStackTrace();

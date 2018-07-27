@@ -1,5 +1,6 @@
 package Machine.AccountManager;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,14 +18,35 @@ import java.util.Scanner;
 public class CheckingAccount implements Account
 {
 	private double currentBalance;
-	private final static String ACCOUNT_DIR_PATH = System.getProperty("user.dir").concat("\\src\\Log.txt");
+
+	/**
+	 * Holds account information for current user.
+	 */
+	private static String ACCOUNT_DIR_PATH;
+
+	/**
+	 * Holds Usernames and Password for all the users
+	 */
 	private final static String LOGIN_DIR_PATH = System.getProperty("user.dir").concat("\\src\\PassLog.txt");
 
+	public CheckingAccount(boolean isFirstTime)
+	{
+		if(isFirstTime) {
+			createFile(LOGIN_DIR_PATH);
+		}
+	}
+
+	public CheckingAccount(String userAccountName)
+	{
+		ACCOUNT_DIR_PATH = System.getProperty("user.dir").concat("\\src\\")
+				.concat(userAccountName).concat(".txt");
+		createFile(ACCOUNT_DIR_PATH);
+		setCurrentBalance(initializeBalance());
+	}
+	//DEFAULT
 	public CheckingAccount()
 	{
-		createFile(ACCOUNT_DIR_PATH);
-		createFile(LOGIN_DIR_PATH);
-		setCurrentBalance(initializeBalance());
+		//Nothing
 	}
 
 	private void createFile(String path)
@@ -94,5 +116,14 @@ public class CheckingAccount implements Account
 		assert outputStream != null;
 		outputStream.append("\n").append(Double.toString(showBalance()));
 		outputStream.close();
+	}
+
+	public String getLoginDirPath()
+	{
+		return LOGIN_DIR_PATH;
+	}
+	public String getAccountDirPath()
+	{
+		return ACCOUNT_DIR_PATH;
 	}
 }

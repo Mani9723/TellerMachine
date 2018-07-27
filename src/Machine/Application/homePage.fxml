@@ -14,14 +14,14 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.homeController">
+<AnchorPane fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.homeController">
     <children>
         <ImageView fitHeight="500.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../images/flat_landscape_wallpaper_by_nicknufayl-d9frf2v.png" />
          </image>
         </ImageView>
-        <JFXButton fx:id="quickCash" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="350.0" layoutY="163.0" onAction="#withdrawMoney" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@application.css" text="Q U I C K    C A S H" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="163.0">
+        <JFXButton fx:id="quickCash" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="350.0" layoutY="163.0" onAction="#quickCash" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@application.css" text="Q U I C K    C A S H" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="163.0">
             <font>
                 <Font name="Papyrus" size="17.0" />
             </font>

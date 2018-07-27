@@ -11,12 +11,12 @@ public class Main
 {
 	public static void main(String[] args)
 	{
-		CheckingAccount checkingAccount = new CheckingAccount();
-		double bal = checkingAccount.showBalance();
-		System.out.println("Current Balance: $" + bal);
-		checkingAccount.deposit(100);
-		System.out.println("Current Balance: $" + checkingAccount.showBalance());
-		checkingAccount.withdraw(new Random().nextDouble());
-		System.out.println("Current Balance: $" + checkingAccount.showBalance());
+//		CheckingAccount checkingAccount = new CheckingAccount();
+//		double bal = checkingAccount.showBalance();
+//		System.out.println("Current Balance: $" + bal);
+//		checkingAccount.deposit(100);
+//		System.out.println("Current Balance: $" + checkingAccount.showBalance());
+//		checkingAccount.withdraw(new Random().nextDouble());
+//		System.out.println("Current Balance: $" + checkingAccount.showBalance());
 	}
 }

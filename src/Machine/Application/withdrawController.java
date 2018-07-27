@@ -78,7 +78,7 @@ public class withdrawController {
 	private JFXButton qCash;
 	private AnchorPane rootPane;
 
-	private CheckingAccount checkingAccount = new CheckingAccount();
+	//private CheckingAccount checkingAccount = new CheckingAccount();
 
 	@FXML
 	void clear(ActionEvent event)
@@ -91,7 +91,7 @@ public class withdrawController {
 	@FXML
 	void keypadPressed(ActionEvent event)
 	{
-
+		System.out.println("Pressing Key");
 	}
 
 	@FXML
@@ -138,7 +138,7 @@ public class withdrawController {
 	{
 		//****** VALIDATE INPUT *******
 		if(event.getSource().equals(withdrawButton)){
-			checkingAccount.withdraw(Double.parseDouble(moneyTextField.getText()));
+		//	checkingAccount.withdraw(Double.parseDouble(moneyTextField.getText()));
 			moneyTextField.setText("");
 		}
 

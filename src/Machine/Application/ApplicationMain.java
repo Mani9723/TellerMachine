@@ -1,5 +1,6 @@
 package Machine.Application;
 
+import Machine.AccountManager.CheckingAccount;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +14,9 @@ public class ApplicationMain extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("bankUI.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 600, 500));
+	    System.out.println("Making Sure Password File exists...");
+		new CheckingAccount(true);
+	    System.out.println("File Exists...");
         primaryStage.show();
     }
 

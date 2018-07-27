@@ -1,24 +1,29 @@
 package Machine.Application;
 
+import Machine.AccountManager.CheckingAccount;
+import Machine.AccountManager.hashPassword;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class loginController {
 
 	@FXML
-	private AnchorPane rootPane;
+	private AnchorPane rootPane, secondPane, registerPane;
 
 	@FXML
 	private StackPane stackPane;
@@ -40,7 +45,12 @@ public class loginController {
 
 	@FXML
 	private Label capsLockLabel;
-	private AnchorPane secondPane, registerPane;
+
+	@FXML
+	public void initialize()
+	{
+		capsLockLabel.setVisible(false);
+	}
 
 	@FXML
 	void EnterKey(KeyEvent event)
@@ -88,11 +98,33 @@ public class loginController {
 
 	private void loginProcess()
 	{
-		//First make sure that the credentials are valid.
-		//then load home page
-		loadHomePage();
+		if(isValidCredentials(username.getText(),password.getText()))
+			loadHomePage();
+
 	}
-	
+
+	private boolean isValidCredentials(String username, String password)
+	{
+		hashPassword hash = new hashPassword(password);
+		String securePassword = hash.toString();
+		String[] data;
+		Scanner inputStream = null;
+		try{
+			inputStream = new Scanner(new File(new CheckingAccount().getLoginDirPath()));
+			while(inputStream.hasNextLine()) {
+				data = inputStream.nextLine().split(",");
+				if (username.equals(data[0]) && securePassword.equals(data[1])){
+					inputStream.close();
+					return true;
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		inputStream.close();
+		return false;
+	}
+
 	private void loadHomePage()
 	{
 		try{
