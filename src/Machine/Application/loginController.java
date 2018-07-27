@@ -4,6 +4,7 @@ import Machine.AccountManager.CheckingAccount;
 import Machine.AccountManager.hashPassword;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -50,11 +51,15 @@ public class loginController {
 	public void initialize()
 	{
 		capsLockLabel.setVisible(false);
+		login.setDisable(true);
 	}
 
 	@FXML
 	void EnterKey(KeyEvent event)
 	{
+		if(password.getText().length()>0){
+			login.setDisable(false);
+		}
 		if(event.getCode().equals(KeyCode.ENTER)){
 			loginProcess();
 		}
@@ -100,6 +105,11 @@ public class loginController {
 	{
 		if(isValidCredentials(username.getText(),password.getText()))
 			loadHomePage();
+		else {
+			new DialogeBox(stackPane).OkButton("Incorrect Credentials", new JFXDialog());
+			username.setText("");
+			password.setText("");
+		}
 
 	}
 

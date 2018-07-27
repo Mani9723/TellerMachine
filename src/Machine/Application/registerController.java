@@ -54,8 +54,7 @@ public class registerController {
 
 	private CheckingAccount checkingAccount;
 	private String passFilePath;
-
-	private DialogeBox dialogeBox = new DialogeBox(stackPane);
+	private DialogeBox dialogeBox;
 
 	@FXML
 	public void initialize()
@@ -64,6 +63,7 @@ public class registerController {
 		System.out.println("Fetching Password File Path...");
 		passFilePath = new CheckingAccount().getLoginDirPath();
 		System.out.println(passFilePath);
+		dialogeBox = new DialogeBox(stackPane);
 	}
 
 
@@ -75,7 +75,10 @@ public class registerController {
 			String user = username.getText(), password = pass.getText();
 			String confPass = confirmPass.getText();
 
-			if (password.equals(confPass)) {
+			if(emptyFieldExists(pass,confirmPass,firstName,lastName,username))
+				dialogeBox.OkButton("Fields are empty", new JFXDialog());
+
+			else if (password.equals(confPass)) {
 				File file = new File(passFilePath);
 				if (file.length() == 0) {
 					checkingAccount = new CheckingAccount(user);
@@ -90,7 +93,8 @@ public class registerController {
 					}
 				}
 			} else {
-				dialogeBox.OkButton("Incorrect Credentials", new JFXDialog());
+				dialogeBox.OkButton("Password does not match", new JFXDialog());
+				pass.setText(""); confirmPass.setText("");
 			}
 			clearFields(pass, confirmPass, firstName, lastName, username);
 		}
@@ -153,6 +157,14 @@ public class registerController {
 			field.setText("");
 		passwordField.setText("");
 		field2.setText("");
+	}
+
+	private boolean emptyFieldExists(JFXPasswordField passwordField, JFXPasswordField pass, JFXTextField...field)
+	{
+		for(JFXTextField textField: field){
+			if(textField.getText().length() == 0) return true;
+		}
+		return pass.getText().length() == 0 || passwordField.getText().length() == 0;
 	}
 
 }

@@ -65,6 +65,7 @@ public class DialogeBox
 	{
 		JFXDialogLayout dialogLayout = new JFXDialogLayout();
 		JFXButton button = new JFXButton("Login");
+		button.setPrefSize(20,20);
 		button.setAlignment(Pos.CENTER_LEFT);
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.TOP);
 		button.addEventHandler(MouseEvent.MOUSE_RELEASED,(MouseEvent mouseEvent )->{
