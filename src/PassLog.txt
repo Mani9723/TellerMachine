@@ -1,5 +1,1 @@
-Jules,40aac3828d3cdeed049aa1e1a7e283d19828ce26,Julia,Marie,C:\Users\Home\Desktop\IntelliJIDEA\TellerMachine\src\Jules.txt
-liza99,b5b3b0532f7eab89ffdd0f3de27b609b40b13103,Liza,Harris,C:\Users\Home\Desktop\IntelliJIDEA\TellerMachine\src\liza99.txt
-mshah,439a6219bc5acbee5a34f15900a2046048e4a9c6,Mani,Shah,C:\Users\Home\Desktop\IntelliJIDEA\TellerMachine\src\mshah.txt
-lisa97,98e7043a2d431c811cac97fd2395a86acc683c5a,Lisa,Wagner,C:\Users\Home\Desktop\IntelliJIDEA\TellerMachine\src\lisa97.txt
-name,2104daff557cc9c1d488208239722e3b45b0d876,qwerty,asd,C:\Users\Home\Desktop\IntelliJIDEA\TellerMachine\src\name.txt
+mshah,40aac3828d3cdeed049aa1e1a7e283d19828ce26,Mani,Shah,C:\Users\Home\Desktop\IntelliJIDEA\TellerMachine\srcmshah.txt

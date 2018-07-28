@@ -1,6 +1,5 @@
 package Machine.AccountManager;
 
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,10 +26,16 @@ public class CheckingAccount implements Account
 	/**
 	 * Holds Usernames and Password for all the users
 	 */
-	private final static String LOGIN_DIR_PATH = System.getProperty("user.dir").concat("\\src\\PassLog.txt");
+	private static String LOGIN_DIR_PATH;
 
 	public CheckingAccount(boolean isFirstTime)
 	{
+		String directory = System.getProperty("user.dir");
+		File file = new File(directory);
+		if(file.mkdirs()){
+			System.out.println("Directory " + directory + " created");
+		}
+		setLoginDirPath(directory+"\\AccountDB.sqlite");
 		if(isFirstTime) {
 			createFile(LOGIN_DIR_PATH);
 		}
@@ -38,15 +43,19 @@ public class CheckingAccount implements Account
 
 	public CheckingAccount(String userAccountName)
 	{
-		ACCOUNT_DIR_PATH = System.getProperty("user.dir").concat("\\src\\")
-				.concat(userAccountName).concat(".txt");
+		String directory = System.getProperty("user.dir").concat("\\src");
+		File file = new File(directory);
+		if(file.mkdirs()){
+			System.out.println("Directory " + directory + " created");
+		}
+		ACCOUNT_DIR_PATH = directory.concat(userAccountName).concat(".txt");
 		createFile(ACCOUNT_DIR_PATH);
 		setCurrentBalance(initializeBalance());
 	}
 	//DEFAULT
 	public CheckingAccount()
 	{
-		//Nothing
+
 	}
 
 	private void createFile(String path)
@@ -80,6 +89,10 @@ public class CheckingAccount implements Account
 				: Double.parseDouble(balance);
 	}
 
+	private void setLoginDirPath(String path)
+	{
+		LOGIN_DIR_PATH = path;
+	}
 
 	private void setCurrentBalance(double balance)
 	{
