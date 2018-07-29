@@ -12,10 +12,6 @@ class MachineModel
 {
 	private Connection connection;
 
-	MachineModel(String user)
-	{
-		// Default
-	}
 	MachineModel()
 	{
 		connection = DatabaseConnect.connector();
@@ -52,7 +48,9 @@ class MachineModel
 			e.printStackTrace();
 		}
 		finally {
+			assert preparedStatement != null;
 			preparedStatement.close();
+			assert resultSet != null;
 			resultSet.close();
 		}
 		return false;
@@ -75,7 +73,9 @@ class MachineModel
 		}catch (Exception e){
 			e.printStackTrace();
 		} finally {
+			assert preparedStatement != null;
 			preparedStatement.close();
+			assert resultSet != null;
 			resultSet.close();
 		}
 		return false;
@@ -97,8 +97,10 @@ class MachineModel
 		}catch (Exception e){
 			e.printStackTrace();
 		} finally {
-			preparedStatement.close();
-			resultSet.close();
+			if(preparedStatement != null && resultSet != null) {
+				preparedStatement.close();
+				resultSet.close();
+			}
 		}
 		return "Unknown";
 	}
@@ -123,14 +125,34 @@ class MachineModel
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			assert preparedStatement != null;
 			preparedStatement.close();
 		}
 	}
 
 
+	void updateBalance(String balance, String user) throws SQLException
+	{
+		PreparedStatement preparedStatement = null;
+
+		String query = "UPDATE Customer_Information set CurrentBalance = ? where Username = ?";
+
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,balance);
+			preparedStatement.setString(2,user);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			assert preparedStatement != null;
+			preparedStatement.close();
+		}
+	}
+
 	private String getDate()
 	{
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
 		java.util.Date date = new java.util.Date();
 		return dateFormat.format(date);
 	}

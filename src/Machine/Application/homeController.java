@@ -7,9 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -74,14 +78,34 @@ public class homeController implements Initializable
 	void depositMoney(ActionEvent event)
 	{
 		if(event.getSource().equals(deposit)){
-			try {
-				stackPane = FXMLLoader.load(getClass().getResource("depositPage.fxml"));
-				secondPane.getChildren().setAll(stackPane);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			loadDepositPage(event);
+//			try {
+//				stackPane = FXMLLoader.load(getClass().getResource("depositPage.fxml"));
+//				secondPane.getChildren().setAll(stackPane);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 
 		}
+	}
+
+	private void loadDepositPage(ActionEvent event)
+	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("depositPage.fxml"));
+		Parent loginParent = null;
+		try {
+			loginParent = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Scene currScene = new Scene(loginParent);
+		depositController controller = loader.getController();
+		controller.setUsername(getuName());
+		controller.init(machineModel);
+		Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+		homeWindow.setScene(currScene);
+		homeWindow.show();
 	}
 
 	@FXML
@@ -142,7 +166,6 @@ public class homeController implements Initializable
 		}
 
 	}
-
 
 	private void setFirstName(String name)
 	{
