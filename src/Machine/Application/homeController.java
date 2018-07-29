@@ -37,7 +37,7 @@ public class homeController implements Initializable
 	private JFXButton withdraw;
 
 	@FXML
-	private JFXButton exitHome;
+	private JFXButton exitHome, statementButton;
 
 	@FXML
 	private Label greeting;
@@ -58,6 +58,7 @@ public class homeController implements Initializable
 	private Label currBalance;
 
 	private String uName;
+	private String first;
 
 	private MachineModel machineModel;
 
@@ -66,7 +67,6 @@ public class homeController implements Initializable
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		dateTime.setText(getDate());
-		greeting.setText(getAppropriateGreeting(getHour()));
 		accountType.setText("Checking");
 	}
 
@@ -95,6 +95,13 @@ public class homeController implements Initializable
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@FXML
+	void handleStatementButton(ActionEvent event)
+	{
+		System.out.println("Statement Clicked");
+		// Code
 	}
 
 	@FXML
@@ -127,7 +134,8 @@ public class homeController implements Initializable
 	{
 		setMachineModel(machine);
 		try {
-			accountName.setText(machineModel.getAccountInfo(getuName(),"Firstname"));
+			setFirstName(machineModel.getAccountInfo(getuName(),"FirstName"));
+			greeting.setText(getAppropriateGreeting(getHour()) +", " + getFirst());
 			currBalance.setText("$"+machineModel.getAccountInfo(getuName(),"CurrentBalance"));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -135,6 +143,16 @@ public class homeController implements Initializable
 
 	}
 
+
+	private void setFirstName(String name)
+	{
+		first = name;
+	}
+
+	private String getFirst()
+	{
+		return first;
+	}
 	void setUsername(String name)
 	{
 		uName = name;

@@ -86,8 +86,24 @@ public class loginController implements Initializable
 	{
 		if(password.getText().length()>0)
 			login.setDisable(false);
-		if(event.getCode().equals(KeyCode.ENTER))
-			loginProcess(new ActionEvent());
+		if(event.getCode().equals(KeyCode.ENTER)){
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("homePage.fxml"));
+			Parent loginParent = null;
+			try {
+				loginParent = loader.load();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			Scene currScene = new Scene(loginParent);
+			homeController controller = loader.getController();
+			controller.setUsername(username.getText());
+			controller.init(machineModel);
+			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+			homeWindow.setScene(currScene);
+			homeWindow.show();
+		}
+
 	}
 
 	@FXML
