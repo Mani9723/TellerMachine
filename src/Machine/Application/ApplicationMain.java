@@ -9,11 +9,12 @@ import javafx.stage.Stage;
 
 public class ApplicationMain extends Application {
 
+	private MachineModel machineModel = new MachineModel();
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("bankUI.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 600, 500));
+        primaryStage.setTitle("Bank of 'Insert Name'");
+        primaryStage.setScene(new Scene(root));
 	    System.out.println("Making Sure Password File exists...");
 		new CheckingAccount(true);
 	    System.out.println("File Exists...");

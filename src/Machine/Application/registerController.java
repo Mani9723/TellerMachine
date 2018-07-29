@@ -14,11 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.sql.SQLException;
 
 public class registerController {
 
@@ -53,8 +50,11 @@ public class registerController {
 	private JFXButton returnButton;
 
 	private CheckingAccount checkingAccount;
+
 	private String passFilePath;
 	private DialogeBox dialogeBox;
+
+	private MachineModel machineModel = new MachineModel();
 
 	@FXML
 	public void initialize()
@@ -65,7 +65,6 @@ public class registerController {
 		System.out.println(passFilePath);
 		dialogeBox = new DialogeBox(stackPane);
 	}
-
 
 	@FXML
 	void handleRegisterButton(ActionEvent event)
@@ -79,63 +78,79 @@ public class registerController {
 				dialogeBox.OkButton("Fields are empty", new JFXDialog());
 
 			else if (password.equals(confPass)) {
-				File file = new File(passFilePath);
-				if (file.length() == 0) {
-					checkingAccount = new CheckingAccount(user);
-					saveUserToFile(user, password, first, last);
-				} else {
+//				File file = new File(passFilePath);
+//				if (file.length() == 0) {
+//					checkingAccount = new CheckingAccount(user);
+//					saveUserToFile(user, password, first, last);
+//					dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
+//				}
+//           {
 					if (userAlreadyExists(user)) {
 						dialogeBox.OkButton("Username is taken", new JFXDialog());
 					} else {
-						checkingAccount = new CheckingAccount(user);
+						checkingAccount = new CheckingAccount();
 						saveUserToFile(user, password, first, last);
+						clearFields(pass, confirmPass, firstName, lastName, username);
 						dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
 					}
 				}
-			} else {
+			else {
 				dialogeBox.OkButton("Password does not match", new JFXDialog());
 				pass.setText(""); confirmPass.setText("");
 			}
-			clearFields(pass, confirmPass, firstName, lastName, username);
 		}
 	}
 
 	private boolean userAlreadyExists(String user)
 	{
-		String currUserName;
-		Scanner inputStream = null;
-		try{
-			inputStream = new Scanner(new File(passFilePath));
-			while (inputStream.hasNextLine()){
-				currUserName = inputStream.nextLine().split(",")[0];
-				System.out.println(currUserName);
-				if(currUserName.equals(user)){
-					inputStream.close();
-					return true;
-				}
-			}
-		} catch (FileNotFoundException e) {
+		try {
+			return machineModel.isUsernameTaken(user);
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		inputStream.close();
 		return false;
+//		String currUserName;
+//		Scanner inputStream = null;
+//		try{
+//			inputStream = new Scanner(new File(passFilePath));
+//			while (inputStream.hasNextLine()){
+//				currUserName = inputStream.nextLine().split(",")[0];
+//				System.out.println(currUserName);
+//				if(currUserName.equals(user)){
+//					inputStream.close();
+//					return true;
+//				}
+//			}
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		inputStream.close();
+//		return false;
 	}
 
 	private void saveUserToFile(String...details)
 	{
 		hashPassword hash = new hashPassword(details[1]);
-		PrintWriter outputStream = null;
-		try{
-			outputStream = new PrintWriter(new FileOutputStream(passFilePath,true));
-		}catch (IOException e){
+		try {
+			machineModel.saveToDatabase(username.getText(),hash.toString(),
+					firstName.getText(),lastName.getText());
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		assert outputStream != null;
-		outputStream.append(details[0].concat(",").concat(hash.toString().concat(",")
-				.concat(details[2]).concat(",").concat(details[3]).concat(",")
-				.concat(checkingAccount.getAccountDirPath())).concat("\n"));
 
-		outputStream.close();
+
+//		PrintWriter outputStream = null;
+//		try{
+//			outputStream = new PrintWriter(new FileOutputStream(passFilePath,true));
+//		}catch (IOException e){
+//			e.printStackTrace();
+//		}
+//		assert outputStream != null;
+//		outputStream.append(details[0].concat(",").concat(hash.toString().concat(",")
+//				.concat(details[2]).concat(",").concat(details[3]).concat(",")
+//				.concat(checkingAccount.getAccountDirPath())).concat("\n"));
+//
+//		outputStream.close();
 	}
 
 	@FXML

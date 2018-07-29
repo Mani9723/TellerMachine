@@ -62,7 +62,7 @@
                                 <unFocusColor>
                                     <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                                         <stops>
-                                            <Stop color="#c72626" />
+                                            <Stop color="#00ffb7" />
                                             <Stop color="#0044ff" offset="1.0" />
                                         </stops>
                                     </RadialGradient>
@@ -104,31 +104,32 @@
                                     </RadialGradient>
                                 </focusColor>
                                 <unFocusColor>
-                                    <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                    <RadialGradient centerX="0.4666666666666667" centerY="0.5571428571428572" radius="0.5">
                                         <stops>
                                             <Stop color="#0274ff" />
-                                            <Stop color="RED" offset="1.0" />
+                                            <Stop color="#e4ff00" offset="1.0" />
                                         </stops>
                                     </RadialGradient>
                                 </unFocusColor>
                             </JFXTextField>
-                            <JFXTextField fx:id="accountType" alignment="CENTER" prefHeight="60.0" prefWidth="320.0" text="Checking" editable="false" GridPane.rowIndex="2">
+                            <JFXTextField fx:id="accountType" alignment="CENTER" editable="false" prefHeight="60.0" prefWidth="320.0" text="Checking" GridPane.rowIndex="2">
                                 <font>
                                     <Font name="Papyrus" size="17.0" />
                                 </font>
                                 <focusColor>
-                                    <RadialGradient centerX="0.5" centerY="1.0" cycleMethod="REPEAT" focusAngle="-18.43" focusDistance="1.0" radius="0.2674418604651163">
+                                    <RadialGradient centerX="0.45555555555555555" centerY="1.0" focusAngle="-18.43" focusDistance="1.0" proportional="false" radius="0.2674418604651163">
                                         <stops>
                                             <Stop color="#ffd200" />
-                                            <Stop color="#000aff" offset="1.0" />
+                                            <Stop color="#00e7ff" offset="1.0" />
                                         </stops>
                                     </RadialGradient>
                                 </focusColor>
                                 <unFocusColor>
-                                    <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                                    <RadialGradient centerX="0.5111111111111112" centerY="0.5285714285714287" radius="0.5">
                                         <stops>
                                             <Stop color="#fff900" />
-                                            <Stop color="#0044ff" offset="1.0" />
+                                            <Stop color="#fff900" offset="0.007662835249042145" />
+                                 <Stop color="#0044ff" offset="1.0" />
                                         </stops>
                                     </RadialGradient>
                                 </unFocusColor>
@@ -148,18 +149,18 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         </rowConstraints>
                         <children>
-                            <Label prefHeight="59.0" prefWidth="440.0" text="        C R E A T E  A N  A C C O U N T" GridPane.columnIndex="1">
+                            <Label prefHeight="59.0" prefWidth="435.0" text="    O P E N  A N  A C C O U N T" GridPane.columnIndex="1">
                                 <font>
-                                    <Font name="Papyrus" size="13.0" />
+                                    <Font name="Papyrus" size="16.0" />
                                 </font>
                             </Label>
                         </children>
                     </GridPane>
                 </children>
             </HBox>
-            <JFXButton fx:id="returnButton" buttonType="RAISED" layoutX="14.0" layoutY="380.0" onAction="#returnHandler" prefHeight="60.0" prefWidth="95.0" text="R E T U R N" textFill="WHITE">
+            <JFXButton fx:id="returnButton" buttonType="RAISED" layoutX="14.0" layoutY="371.0" onAction="#returnHandler" prefHeight="50.0" prefWidth="118.0" text="R E T U R N" textFill="WHITE">
                 <font>
-                    <Font name="Papyrus" size="12.0" />
+                    <Font name="Papyrus" size="14.0" />
                 </font>
             </JFXButton>
         </children>

@@ -28,7 +28,7 @@ public class DialogeBox
 	{
 		this.dialog = dialog;
 		JFXDialogLayout dialogLayout = new JFXDialogLayout();
-		JFXButton button = new JFXButton("R e t u r n");
+		JFXButton button = new JFXButton("R E T U R N");
 		button.setAlignment(Pos.CENTER);
 		button.setPrefSize(100,50);
 		//button.setStyle("-fx-font: 17 Sitka Small;");
@@ -47,7 +47,7 @@ public class DialogeBox
 	void cancelButton(String buttonMessage)
 	{
 		JFXDialogLayout dialogLayout = new JFXDialogLayout();
-		JFXButton button = new JFXButton("Cancel");
+		JFXButton button = new JFXButton("C A N C E L");
 		button.setAlignment(Pos.CENTER_LEFT);
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.TOP);
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED,(MouseEvent mouseEvent )->{
@@ -64,8 +64,8 @@ public class DialogeBox
 	void returnToLogin(String buttonMessage, AnchorPane rootPane, StackPane registerPane)
 	{
 		JFXDialogLayout dialogLayout = new JFXDialogLayout();
-		JFXButton button = new JFXButton("Login");
-		button.setPrefSize(20,20);
+		JFXButton button = new JFXButton("LOGIN");
+		button.setPrefSize(75,50);
 		button.setAlignment(Pos.CENTER_LEFT);
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.TOP);
 		button.addEventHandler(MouseEvent.MOUSE_RELEASED,(MouseEvent mouseEvent )->{
