@@ -13,7 +13,7 @@ public class ApplicationMain extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("bankUI.fxml"));
-        primaryStage.setTitle("Bank of 'Insert Name'");
+        primaryStage.setTitle("Bank of American");
         primaryStage.setScene(new Scene(root));
 	    System.out.println("Making Sure Password File exists...");
 		new CheckingAccount(true);
