@@ -6,13 +6,17 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class withdrawController {
+public class withdrawController implements Initializable
+{
 
 	@FXML
 	private StackPane stackPane, stackPane2;
@@ -77,8 +81,8 @@ public class withdrawController {
 	@FXML
 	private JFXButton qCash;
 	private AnchorPane rootPane;
+	private int count = 1;
 
-	//private CheckingAccount checkingAccount = new CheckingAccount();
 
 	@FXML
 	void clear(ActionEvent event)
@@ -92,6 +96,45 @@ public class withdrawController {
 	void keypadPressed(ActionEvent event)
 	{
 		System.out.println("Pressing Key");
+		if(event.getSource()==zero){
+			writeToField(moneyTextField,zero);
+		}
+		else if(event.getSource()==one){
+			writeToField(moneyTextField,one);
+		}
+		else if(event.getSource()==two){
+			writeToField(moneyTextField,two);
+		}
+		else if(event.getSource()==three){
+			writeToField(moneyTextField,three);
+		}
+		else if(event.getSource()==four){
+			writeToField(moneyTextField,four);
+		}
+		else if(event.getSource()==five){
+			writeToField(moneyTextField,five);
+		}
+		else if(event.getSource()==six){
+			writeToField(moneyTextField,six);
+		}
+		else if(event.getSource()==seven){
+			writeToField(moneyTextField,seven);
+		}
+		else if(event.getSource()==eight){
+			writeToField(moneyTextField,eight);
+		}
+		else if(event.getSource()==nine){
+			writeToField(moneyTextField,nine);
+		}
+		else if(event.getSource()==decimal){
+			writeToField(moneyTextField,decimal);
+			++count;
+			if(count>1) { decimal.setDisable(true);}
+		}
+	}
+	private void writeToField(JFXTextField field, JFXButton button)
+	{
+		moneyTextField.setText(field.getText()+button.getText());
 	}
 
 	@FXML
@@ -144,4 +187,9 @@ public class withdrawController {
 
 	}
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		moneyTextField.setEditable(false);
+	}
 }

@@ -61,6 +61,22 @@ public class depositController implements Initializable
 
 //	private CheckingAccount checkingAccount = new CheckingAccount();
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+
+	}
+
+	void init(MachineModel machine)
+	{
+		setModel(machine);
+		try {
+			setCurrBalance(machineModel.getAccountInfo(username,"CurrentBalance"));
+			setPreviousBalance();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@FXML
 	void depositEvent(ActionEvent event)
@@ -91,11 +107,6 @@ public class depositController implements Initializable
 			e.printStackTrace();
 		}
 		new DialogeBox(stackPane).OkButton("Deposit Amount: $"+request,new JFXDialog());
-	}
-
-	public void setNewBalance(Double bal)
-	{
-		newBalance = Double.toString(bal);
 	}
 
 	private String newBalance(String request)
@@ -170,7 +181,6 @@ public class depositController implements Initializable
 			}
 		}
 	}
-
 	void setUsername(String user)
 	{
 		username = user;
@@ -185,17 +195,6 @@ public class depositController implements Initializable
 		currBalance.setText("$"+balance);
 	}
 
-	void init(MachineModel machine)
-	{
-		setModel(machine);
-		try {
-			setCurrBalance(machineModel.getAccountInfo(username,"CurrentBalance"));
-			setPreviousBalance();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 	void setModel(MachineModel model)
 	{
 		machineModel = model;
@@ -206,9 +205,8 @@ public class depositController implements Initializable
 		previousBalance = currBalance.getText().substring(1);
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	public void setNewBalance(Double bal)
 	{
-
+		newBalance = Double.toString(bal);
 	}
 }
