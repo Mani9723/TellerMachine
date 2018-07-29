@@ -14,11 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
+import java.sql.SQLException;
 
 public class registerController {
 
@@ -53,6 +50,7 @@ public class registerController {
 	private JFXButton returnButton;
 
 	private CheckingAccount checkingAccount;
+
 	private String passFilePath;
 	private DialogeBox dialogeBox;
 
@@ -80,22 +78,22 @@ public class registerController {
 				dialogeBox.OkButton("Fields are empty", new JFXDialog());
 
 			else if (password.equals(confPass)) {
-				File file = new File(passFilePath);
-				if (file.length() == 0) {
-					checkingAccount = new CheckingAccount(user);
-					saveUserToFile(user, password, first, last);
-					dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
-				} else {
+//				File file = new File(passFilePath);
+//				if (file.length() == 0) {
+//					checkingAccount = new CheckingAccount(user);
+//					saveUserToFile(user, password, first, last);
+//					dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
+//				}
+//           {
 					if (userAlreadyExists(user)) {
 						dialogeBox.OkButton("Username is taken", new JFXDialog());
 					} else {
-						checkingAccount = new CheckingAccount(user);
+						checkingAccount = new CheckingAccount();
 						saveUserToFile(user, password, first, last);
 						clearFields(pass, confirmPass, firstName, lastName, username);
 						dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
 					}
 				}
-			}
 			else {
 				dialogeBox.OkButton("Password does not match", new JFXDialog());
 				pass.setText(""); confirmPass.setText("");
@@ -105,10 +103,12 @@ public class registerController {
 
 	private boolean userAlreadyExists(String user)
 	{
-
-		return true;
-
-
+		try {
+			return machineModel.isUsernameTaken(user);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 //		String currUserName;
 //		Scanner inputStream = null;
 //		try{
@@ -131,7 +131,12 @@ public class registerController {
 	private void saveUserToFile(String...details)
 	{
 		hashPassword hash = new hashPassword(details[1]);
-
+		try {
+			machineModel.saveToDatabase(username.getText(),hash.toString(),
+					firstName.getText(),lastName.getText());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 
 //		PrintWriter outputStream = null;

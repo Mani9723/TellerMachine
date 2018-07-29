@@ -11,11 +11,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -72,7 +76,7 @@ public class loginController implements Initializable
 	}
 
 	@FXML
-	public void initialize()
+	public void init()
 	{
 		//Default
 	}
@@ -83,7 +87,7 @@ public class loginController implements Initializable
 		if(password.getText().length()>0)
 			login.setDisable(false);
 		if(event.getCode().equals(KeyCode.ENTER))
-			loginProcess();
+			loginProcess(new ActionEvent());
 	}
 
 	@FXML
@@ -104,7 +108,7 @@ public class loginController implements Initializable
 	void loginHandler(ActionEvent event)
 	{
 		if(event.getSource().equals(login)){
-			loginProcess();
+			loginProcess(event);
 		}
 	}
 
@@ -122,12 +126,16 @@ public class loginController implements Initializable
 		}
 	}
 
-	private void loginProcess()
+	private void loginProcess(ActionEvent event)
 	{
 		String securePass = new hashPassword(password.getText()).toString();
 		try {
 			if(machineModel.validateLogin(username.getText(),securePass)){
-				loadHomePage();
+				loadHomePage(event);
+			} else{
+				new DialogeBox(stackPane).OkButton("Incorrect Credentials", new JFXDialog());
+				username.setText("");
+				password.setText("");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -135,7 +143,7 @@ public class loginController implements Initializable
 	}
 
 
-//	private void loginProcess()
+	//	private void loginProcess()
 //	{
 //		if(isValidCredentials(username.getText(),password.getText()))
 //			loadHomePage();
@@ -169,15 +177,31 @@ public class loginController implements Initializable
 //		return false;
 //	}
 //
-	private void loadHomePage()
+	private void loadHomePage(ActionEvent event)
 	{
-		try{
-			secondPane= FXMLLoader.load(getClass().getResource("homePage.fxml"));
-			rootPane.getChildren().setAll(secondPane);
-		}
-		catch(IOException e) {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("homePage.fxml"));
+		Parent loginParent = null;
+		try {
+			loginParent = loader.load();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Scene currScene = new Scene(loginParent);
+		homeController controller = loader.getController();
+		controller.setUsername(username.getText());
+		controller.init(machineModel);
+		Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+		homeWindow.setScene(currScene);
+		homeWindow.show();
+
+//		try{
+//			secondPane= FXMLLoader.load(getClass().getResource("homePage.fxml"));
+//			rootPane.getChildren().setAll(secondPane);
+//		}
+//		catch(IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 }

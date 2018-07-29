@@ -18,7 +18,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.registerController">
+<StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.registerController">
     <AnchorPane fx:id="registerPane" prefHeight="500.0" prefWidth="600.0">
         <children>
             <ImageView fitHeight="500.0" fitWidth="600.0" pickOnBounds="true">

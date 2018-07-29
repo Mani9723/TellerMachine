@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 
 /**
  * Defines checking account for any user.
@@ -18,15 +17,12 @@ public class CheckingAccount implements Account
 {
 	private double currentBalance;
 
-	/**
-	 * Holds account information for current user.
-	 */
-	private static String ACCOUNT_DIR_PATH;
+//	/**
+//	 * Holds account information for current user.
+//	 */
+//	private static String ACCOUNT_DIR_PATH;
 
-	/**
-	 * Holds Usernames and Password for all the users
-	 */
-	private static String LOGIN_DIR_PATH;
+	private static String DATABASE_PATH;
 
 	public CheckingAccount(boolean isFirstTime)
 	{
@@ -37,25 +33,26 @@ public class CheckingAccount implements Account
 		}
 		setLoginDirPath(directory+"\\AccountDB.sqlite");
 		if(isFirstTime) {
-			createFile(LOGIN_DIR_PATH);
+			createFile(DATABASE_PATH);
 		}
 	}
 
-	public CheckingAccount(String userAccountName)
-	{
-		String directory = System.getProperty("user.dir").concat("\\src");
-		File file = new File(directory);
-		if(file.mkdirs()){
-			System.out.println("Directory " + directory + " created");
-		}
-		ACCOUNT_DIR_PATH = directory.concat(userAccountName).concat(".txt");
-		createFile(ACCOUNT_DIR_PATH);
-		setCurrentBalance(initializeBalance());
-	}
+//	public CheckingAccount(String userAccountName)
+//	{
+//		String directory = System.getProperty("user.dir").concat("\\src");
+//		File file = new File(directory);
+//		if(file.mkdirs()){
+//			System.out.println("Directory " + directory + " created");
+//		}
+//		ACCOUNT_DIR_PATH = directory.concat(userAccountName).concat(".txt");
+//		createFile(ACCOUNT_DIR_PATH);
+//		//setCurrentBalance(initializeBalance());
+//	}
 	//DEFAULT
 	public CheckingAccount()
 	{
-
+		String directory = System.getProperty("user.dir").concat("\\src");
+		setLoginDirPath(directory+"\\AccountDB.sqlite");
 	}
 
 	private void createFile(String path)
@@ -71,27 +68,27 @@ public class CheckingAccount implements Account
 		}
 	}
 
-	private double initializeBalance()
-	{
-		String balance = "";
-		Scanner input = null;
-		try {
-			input = new Scanner(new File(ACCOUNT_DIR_PATH));
-			while(input.hasNextLine())
-				balance = input.nextLine();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		assert input != null;
-		input.close();
-
-		return balance.equalsIgnoreCase("") ? 0.00
-				: Double.parseDouble(balance);
-	}
+//	private double initializeBalance()
+//	{
+//		String balance = "";
+//		Scanner input = null;
+//		try {
+//			input = new Scanner(new File(ACCOUNT_DIR_PATH));
+//			while(input.hasNextLine())
+//				balance = input.nextLine();
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		assert input != null;
+//		input.close();
+//
+//		return balance.equalsIgnoreCase("") ? 0.00
+//				: Double.parseDouble(balance);
+//	}
 
 	private void setLoginDirPath(String path)
 	{
-		LOGIN_DIR_PATH = path;
+		DATABASE_PATH = path;
 	}
 
 	private void setCurrentBalance(double balance)
@@ -109,34 +106,34 @@ public class CheckingAccount implements Account
 	public void deposit(double amount)
 	{
 		setCurrentBalance(showBalance() + amount);
-		logChange();
+		//logChange();
 	}
 
 	public void withdraw(double amount)
 	{
 		setCurrentBalance(showBalance() - amount);
-		logChange();
+		//logChange();
 	}
 
-	private void logChange()
-	{
-		PrintWriter outputStream = null;
-		try{
-			outputStream = new PrintWriter(new FileOutputStream(ACCOUNT_DIR_PATH,true));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		assert outputStream != null;
-		outputStream.append("\n").append(Double.toString(showBalance()));
-		outputStream.close();
-	}
+//	private void logChange()
+//	{
+//		PrintWriter outputStream = null;
+//		try{
+//			outputStream = new PrintWriter(new FileOutputStream(ACCOUNT_DIR_PATH,true));
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		assert outputStream != null;
+//		outputStream.append("\n").append(Double.toString(showBalance()));
+//		outputStream.close();
+//	}
 
 	public String getLoginDirPath()
 	{
-		return LOGIN_DIR_PATH;
+		return DATABASE_PATH;
 	}
-	public String getAccountDirPath()
-	{
-		return ACCOUNT_DIR_PATH;
-	}
+	//public String getAccountDirPath()
+//	{
+//		return ACCOUNT_DIR_PATH;
+//	}
 }

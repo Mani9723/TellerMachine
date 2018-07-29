@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -56,7 +57,9 @@ public class homeController implements Initializable
 	@FXML
 	private Label currBalance;
 
-	private CheckingAccount checkingAccount;
+	private String uName;
+
+	private MachineModel machineModel;
 
 
 	@Override
@@ -118,6 +121,32 @@ public class homeController implements Initializable
 				e.printStackTrace();
 			}
 		}
+	}
+
+	void init(MachineModel machine)
+	{
+		setMachineModel(machine);
+		try {
+			accountName.setText(machineModel.getAccountInfo(getuName(),"Firstname"));
+			currBalance.setText("$"+machineModel.getAccountInfo(getuName(),"CurrentBalance"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	void setUsername(String name)
+	{
+		uName = name;
+	}
+
+	private void setMachineModel(MachineModel model)
+	{
+		machineModel = model;
+	}
+	private String getuName()
+	{
+		return uName;
 	}
 
 	private String getDate()
