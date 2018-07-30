@@ -79,13 +79,6 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(deposit)){
 			loadDepositPage(event);
-//			try {
-//				stackPane = FXMLLoader.load(getClass().getResource("depositPage.fxml"));
-//				secondPane.getChildren().setAll(stackPane);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-
 		}
 	}
 
@@ -154,12 +147,21 @@ public class homeController implements Initializable
 	void quickCash(ActionEvent event)
 	{
 		if(event.getSource().equals(quickCash)) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("QuickWithdraw.fxml"));
+			Parent loginParent = null;
 			try {
-				stackPane = FXMLLoader.load(getClass().getResource("QuickWithdraw.fxml"));
-				secondPane.getChildren().setAll(stackPane);
+				loginParent = loader.load();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			Scene currScene = new Scene(loginParent);
+			quickWithdrawController controller = loader.getController();
+			controller.setUsername(getuName());
+			controller.init(machineModel);
+			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+			homeWindow.setScene(currScene);
+			homeWindow.show();
 		}
 	}
 

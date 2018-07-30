@@ -205,12 +205,21 @@ public class withdrawController implements Initializable
 	void qkCash(ActionEvent event)
 	{
 		if(event.getSource().equals(qCash)) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("QuickWithdraw.fxml"));
+			Parent loginParent = null;
 			try {
-				stackPane2 = FXMLLoader.load(getClass().getResource("QuickWithdraw.fxml"));
-				stackPane.getChildren().setAll(stackPane2);
+				loginParent = loader.load();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			Scene currScene = new Scene(loginParent);
+			quickWithdrawController controller = loader.getController();
+			controller.setUsername(username);
+			controller.init(machineModel);
+			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+			homeWindow.setScene(currScene);
+			homeWindow.show();
 		}
 	}
 

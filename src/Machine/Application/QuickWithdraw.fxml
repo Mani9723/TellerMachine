@@ -131,7 +131,7 @@
                                                 <Font name="Papyrus" size="22.0" />
                                             </font>
                                         </Label>
-                                        <Label fx:id="date" alignment="CENTER" prefHeight="226.0" prefWidth="334.0" textFill="WHITE">
+                                        <Label fx:id="balanceLabel" alignment="CENTER" prefHeight="226.0" prefWidth="334.0" textFill="WHITE">
                                             <font>
                                                 <Font name="Papyrus" size="22.0" />
                                             </font>
