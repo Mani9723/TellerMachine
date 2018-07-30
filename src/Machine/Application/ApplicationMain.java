@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 
 public class ApplicationMain extends Application {
 
-	private MachineModel machineModel = new MachineModel();
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("bankUI.fxml"));

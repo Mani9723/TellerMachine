@@ -173,12 +173,21 @@ public class depositController implements Initializable
 	void withdraw(ActionEvent event)
 	{
 		if(event.getSource().equals(withdraw)) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("withdrawPage.fxml"));
+			Parent loginParent = null;
 			try {
-				withdrawPane = FXMLLoader.load(getClass().getResource("withdrawPage.fxml"));
-				stackPane.getChildren().setAll(withdrawPane);
+				loginParent = loader.load();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			Scene currScene = new Scene(loginParent);
+			withdrawController controller = loader.getController();
+			controller.setUsername(getUser());
+			controller.init(machineModel);
+			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+			homeWindow.setScene(currScene);
+			homeWindow.show();
 		}
 	}
 	void setUsername(String user)

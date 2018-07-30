@@ -2,17 +2,24 @@ package Machine.Application;
 
 import Machine.AccountManager.CheckingAccount;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
+import javax.crypto.Mac;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class withdrawController implements Initializable
@@ -82,7 +89,29 @@ public class withdrawController implements Initializable
 	private JFXButton qCash;
 	private AnchorPane rootPane;
 	private int count = 1;
+	private String username;
+	private String previousBalance;
+	private String currBalance;
+	private MachineModel machineModel;
+	private String newBalance;
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		moneyTextField.setEditable(false);
+	}
+
+	void init(MachineModel machineModel)
+	{
+		setMachine(machineModel);
+
+		try {
+			setCurrBalance(machineModel.getAccountInfo(username,"CurrentBalance"));
+			setPreviousBalance(getCurrBalance());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@FXML
 	void clear(ActionEvent event)
@@ -154,12 +183,21 @@ public class withdrawController implements Initializable
 	void menu(ActionEvent event)
 	{
 		if(event.getSource().equals(mainMenu)) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("homePage.fxml"));
+			Parent loginParent = null;
 			try {
-				rootPane = FXMLLoader.load(getClass().getResource("homePage.fxml"));
-				stackPane.getChildren().setAll(rootPane);
+				loginParent = loader.load();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			Scene currScene = new Scene(loginParent);
+			homeController controller = loader.getController();
+			controller.setUsername(username);
+			controller.init(machineModel);
+			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+			homeWindow.setScene(currScene);
+			homeWindow.show();
 		}
 	}
 
@@ -179,17 +217,81 @@ public class withdrawController implements Initializable
 	@FXML
 	void withdraw(ActionEvent event)
 	{
-		//****** VALIDATE INPUT *******
+		String request = moneyTextField.getText();
 		if(event.getSource().equals(withdrawButton)){
-		//	checkingAccount.withdraw(Double.parseDouble(moneyTextField.getText()));
-			moneyTextField.setText("");
+			if(validRequest(request)){
+				executeQuery(request);
+				updateBalanceLabel();
+			}else{
+				new DialogeBox(stackPane).OkButton("Invalid Amount: $"+request,new JFXDialog());
+			}
 		}
-
+		moneyTextField.setText("");
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
+	private boolean validRequest(String request)
 	{
-		moneyTextField.setEditable(false);
+		try{
+			Double.parseDouble(request);
+			return true;
+		}catch (NumberFormatException e){
+			return false;
+		}
 	}
+
+	private void executeQuery(String request)
+	{
+		try {
+			machineModel.updateBalance(newBalance(request),username);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		new DialogeBox(stackPane).OkButton("Withdraw Amount: $"+request,new JFXDialog());
+	}
+
+	private void updateBalanceLabel()
+	{
+		setCurrBalance(newBalance);
+		setPreviousBalance(currBalance);
+	}
+
+	void setUsername(String user)
+	{
+		username = user;
+	}
+
+	void setMachine(MachineModel model)
+	{
+		machineModel = model;
+	}
+
+	private String getCurrBalance()
+	{
+		return currBalance;
+	}
+
+	private void setPreviousBalance(String previousBalance)
+	{
+		this.previousBalance = balanceLabel.getText().substring(1);
+	}
+
+	private void setCurrBalance(String currBalance)
+	{
+		balanceLabel.setText("$"+currBalance);
+	}
+	private void setNewBalance(Double bal)
+	{
+		newBalance = Double.toString(bal);
+	}
+
+	private String newBalance(String request)
+	{
+		Double pBal = Double.parseDouble(previousBalance);
+		Double cBal = Double.parseDouble(request);
+		setNewBalance(pBal-cBal);
+		return newBalance;
+	}
+
+
+
 }

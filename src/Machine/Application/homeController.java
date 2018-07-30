@@ -132,12 +132,21 @@ public class homeController implements Initializable
 	void withdrawMoney(ActionEvent event)
 	{
 		if(event.getSource().equals(withdraw)) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("withdrawPage.fxml"));
+			Parent loginParent = null;
 			try {
-				stackPane = FXMLLoader.load(getClass().getResource("withdrawPage.fxml"));
-				secondPane.getChildren().setAll(stackPane);
+				loginParent = loader.load();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			Scene currScene = new Scene(loginParent);
+			withdrawController controller = loader.getController();
+			controller.setUsername(getuName());
+			controller.init(machineModel);
+			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+			homeWindow.setScene(currScene);
+			homeWindow.show();
 		}
 	}
 
