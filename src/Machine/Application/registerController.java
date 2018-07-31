@@ -55,6 +55,7 @@ public class registerController {
 	private DialogeBox dialogeBox;
 
 	private MachineModel machineModel = new MachineModel();
+	private MachineModel newUserModel;
 
 	@FXML
 	public void initialize()
@@ -78,22 +79,15 @@ public class registerController {
 				dialogeBox.OkButton("Fields are empty", new JFXDialog());
 
 			else if (password.equals(confPass)) {
-//				File file = new File(passFilePath);
-//				if (file.length() == 0) {
-//					checkingAccount = new CheckingAccount(user);
-//					saveUserToFile(user, password, first, last);
-//					dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
-//				}
-//           {
-					if (userAlreadyExists(user)) {
-						dialogeBox.OkButton("Username is taken", new JFXDialog());
-					} else {
-						checkingAccount = new CheckingAccount();
-						saveUserToFile(user, password, first, last);
-						clearFields(pass, confirmPass, firstName, lastName, username);
-						dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
-					}
+				if (userAlreadyExists(user)) {
+					dialogeBox.OkButton("Username is taken", new JFXDialog());
+				} else {
+					checkingAccount = new CheckingAccount();
+					saveUserToFile(user, password, first, last);
+					clearFields(pass, confirmPass, firstName, lastName, username);
+					dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
 				}
+			}
 			else {
 				dialogeBox.OkButton("Password does not match", new JFXDialog());
 				pass.setText(""); confirmPass.setText("");
@@ -109,48 +103,19 @@ public class registerController {
 			e.printStackTrace();
 		}
 		return false;
-//		String currUserName;
-//		Scanner inputStream = null;
-//		try{
-//			inputStream = new Scanner(new File(passFilePath));
-//			while (inputStream.hasNextLine()){
-//				currUserName = inputStream.nextLine().split(",")[0];
-//				System.out.println(currUserName);
-//				if(currUserName.equals(user)){
-//					inputStream.close();
-//					return true;
-//				}
-//			}
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		inputStream.close();
-//		return false;
 	}
 
 	private void saveUserToFile(String...details)
 	{
+		//TODO Create table and its row and cols
 		hashPassword hash = new hashPassword(details[1]);
 		try {
 			machineModel.saveToDatabase(username.getText(),hash.toString(),
 					firstName.getText(),lastName.getText());
+			newUserModel = new MachineModel(username.getText()+".sqlite");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-
-//		PrintWriter outputStream = null;
-//		try{
-//			outputStream = new PrintWriter(new FileOutputStream(passFilePath,true));
-//		}catch (IOException e){
-//			e.printStackTrace();
-//		}
-//		assert outputStream != null;
-//		outputStream.append(details[0].concat(",").concat(hash.toString().concat(",")
-//				.concat(details[2]).concat(",").concat(details[3]).concat(",")
-//				.concat(checkingAccount.getAccountDirPath())).concat("\n"));
-//
-//		outputStream.close();
 	}
 
 	@FXML

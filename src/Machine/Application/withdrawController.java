@@ -17,6 +17,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import javax.crypto.Mac;
+import java.io.DataOutput;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -124,7 +125,6 @@ public class withdrawController implements Initializable
 	@FXML
 	void keypadPressed(ActionEvent event)
 	{
-		System.out.println("Pressing Key");
 		if(event.getSource()==zero){
 			writeToField(moneyTextField,zero);
 		}
@@ -228,12 +228,13 @@ public class withdrawController implements Initializable
 	{
 		String request = moneyTextField.getText();
 		if(event.getSource().equals(withdrawButton)){
-			if(validRequest(request)){
+			if(validRequest(request) && isWithinBounds(request)){
 				executeQuery(request);
 				updateBalanceLabel();
+				count = 1;
 			}else{
 				new DialogeBox(stackPane).OkButton("Invalid Amount: $"+request,new JFXDialog());
-			}
+		}
 		}
 		moneyTextField.setText("");
 	}
@@ -246,6 +247,11 @@ public class withdrawController implements Initializable
 		}catch (NumberFormatException e){
 			return false;
 		}
+	}
+	private boolean isWithinBounds(String request)
+	{
+		double bal = Double.parseDouble(request);
+		return bal <= Double.parseDouble(previousBalance);
 	}
 
 	private void executeQuery(String request)

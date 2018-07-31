@@ -14,7 +14,16 @@ class MachineModel
 
 	MachineModel()
 	{
-		connection = DatabaseConnect.connector();
+		connection = DatabaseConnect.connector("AccountDB.sqlite");
+		if(connection == null){
+			System.out.println("Database not connected");
+			System.exit(1);
+		}
+	}
+
+	MachineModel(String newUserFile)
+	{
+		connection = DatabaseConnect.connector(newUserFile);
 		if(connection == null){
 			System.out.println("Database not connected");
 			System.exit(1);

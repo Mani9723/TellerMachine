@@ -9,11 +9,11 @@ import java.sql.*;
  */
 class DatabaseConnect
 {
-	static Connection connector()
+	static Connection connector(String file)
 	{
 		try{
 			Class.forName("org.sqlite.JDBC");
-			return DriverManager.getConnection("jdbc:sqlite:AccountDB.sqlite");
+			return DriverManager.getConnection("jdbc:sqlite:"+file);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null ;

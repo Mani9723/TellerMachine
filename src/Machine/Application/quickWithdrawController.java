@@ -90,9 +90,17 @@ public class quickWithdrawController {
 
 	private void processRequest(String request)
 	{
-		executeQuery(request);
-		updateBalanceLabel();
-		new DialogeBox(stackPane).OkButton("Withdraw Amount $"+request,new JFXDialog());
+		if(validRequest(request)) {
+			executeQuery(request);
+			updateBalanceLabel();
+			new DialogeBox(stackPane).OkButton("Withdraw Amount $" + request, new JFXDialog());
+		} else
+			new DialogeBox(stackPane).OkButton("Invalid Amount: $"+request,new JFXDialog());
+	}
+
+	private boolean validRequest(String request)
+	{
+		return Double.parseDouble(request) <= Double.parseDouble(previousBalance);
 	}
 
 	private void executeQuery(String request)
