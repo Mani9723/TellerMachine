@@ -73,19 +73,8 @@ public class quickWithdrawController {
 	@FXML
 	void cashButtons(ActionEvent event)
 	{
-		String request = "";
-		if(event.getSource().equals(twenty)){
-			request = twenty.getText();
-		}else if(event.getSource().equals(forty)){
-			request = forty.getText();
-		}else if(event.getSource().equals(sixty)){
-			request = sixty.getText();
-		}else if(event.getSource().equals(eighty)){
-			request = eighty.getText();
-		}else if(event.getSource().equals(hundred)){
-			request = hundred.getText();
-		}
-		processRequest(request.substring(1));
+		JFXButton request = (JFXButton)event.getSource();
+		processRequest(request.getText().substring(1));
 	}
 
 	private void processRequest(String request)
@@ -98,7 +87,7 @@ public class quickWithdrawController {
 			new DialogeBox(stackPane).OkButton("Invalid Amount: $"+request,new JFXDialog());
 	}
 
-	private boolean validRequest(String request)
+	private boolean validRequest(String request) throws NumberFormatException
 	{
 		return Double.parseDouble(request) <= Double.parseDouble(previousBalance);
 	}

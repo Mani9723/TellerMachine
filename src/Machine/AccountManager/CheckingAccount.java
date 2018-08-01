@@ -22,6 +22,8 @@ public class CheckingAccount implements Account
 //	 */
 //	private static String ACCOUNT_DIR_PATH;
 
+	boolean dirCreated;
+
 	private static String DATABASE_PATH;
 
 	public CheckingAccount(boolean isFirstTime)
@@ -30,11 +32,22 @@ public class CheckingAccount implements Account
 		File file = new File(directory);
 		if(file.mkdirs()){
 			System.out.println("Directory " + directory + " created");
+			setDirCreated(true);
 		}
 		setLoginDirPath(directory+"\\AccountDB.sqlite");
 		if(isFirstTime) {
 			createFile(DATABASE_PATH);
 		}
+	}
+
+	private boolean getDirCreated()
+	{
+		return dirCreated;
+	}
+
+	private void setDirCreated(boolean val)
+	{
+		dirCreated = val;
 	}
 
 //	public CheckingAccount(String userAccountName)

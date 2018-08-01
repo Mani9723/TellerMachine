@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
  * @version 1.0
  * @since 7/28/2018  15:41
  */
-class MachineModel
+final class MachineModel
 {
 	private Connection connection;
 
@@ -37,6 +37,11 @@ class MachineModel
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	void createTable()
+	{
+
 	}
 
 	boolean validateLogin(String user, String pass) throws SQLException

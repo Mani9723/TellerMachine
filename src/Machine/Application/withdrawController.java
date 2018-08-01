@@ -21,10 +21,12 @@ import java.io.DataOutput;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class withdrawController implements Initializable
 {
+	private DecimalFormat df = new DecimalFormat("########.##");
 
 	@FXML
 	private StackPane stackPane, stackPane2;
@@ -120,43 +122,14 @@ public class withdrawController implements Initializable
 		if(event.getSource().equals(reset)){
 			moneyTextField.setText("");
 		}
+		resetCount();
 	}
 
 	@FXML
 	void keypadPressed(ActionEvent event)
 	{
-		if(event.getSource()==zero){
-			writeToField(moneyTextField,zero);
-		}
-		else if(event.getSource()==one){
-			writeToField(moneyTextField,one);
-		}
-		else if(event.getSource()==two){
-			writeToField(moneyTextField,two);
-		}
-		else if(event.getSource()==three){
-			writeToField(moneyTextField,three);
-		}
-		else if(event.getSource()==four){
-			writeToField(moneyTextField,four);
-		}
-		else if(event.getSource()==five){
-			writeToField(moneyTextField,five);
-		}
-		else if(event.getSource()==six){
-			writeToField(moneyTextField,six);
-		}
-		else if(event.getSource()==seven){
-			writeToField(moneyTextField,seven);
-		}
-		else if(event.getSource()==eight){
-			writeToField(moneyTextField,eight);
-		}
-		else if(event.getSource()==nine){
-			writeToField(moneyTextField,nine);
-		}
-		else if(event.getSource()==decimal){
-			writeToField(moneyTextField,decimal);
+		writeToField(moneyTextField,(JFXButton)event.getSource());
+		if(event.getSource()==decimal){
 			++count;
 			if(count>1) { decimal.setDisable(true);}
 		}
@@ -231,12 +204,17 @@ public class withdrawController implements Initializable
 			if(validRequest(request) && isWithinBounds(request)){
 				executeQuery(request);
 				updateBalanceLabel();
-				count = 1;
 			}else{
 				new DialogeBox(stackPane).OkButton("Invalid Amount: $"+request,new JFXDialog());
+			}
 		}
-		}
+		resetCount();
 		moneyTextField.setText("");
+	}
+
+	private void resetCount()
+	{
+		count = 1;
 	}
 
 	private boolean validRequest(String request)

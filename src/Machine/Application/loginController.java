@@ -152,6 +152,7 @@ public class loginController implements Initializable
 				new DialogeBox(stackPane).OkButton("Incorrect Credentials", new JFXDialog());
 				username.setText("");
 				password.setText("");
+				login.setDisable(true);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

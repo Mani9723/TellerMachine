@@ -7,7 +7,7 @@ import java.sql.*;
  * @version 1.0
  * @since 7/28/2018  15:26
  */
-class DatabaseConnect
+final class DatabaseConnect
 {
 	static Connection connector(String file)
 	{
