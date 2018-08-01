@@ -115,8 +115,21 @@ public class homeController implements Initializable
 	@FXML
 	void handleStatementButton(ActionEvent event)
 	{
-		System.out.println("Statement Clicked");
-		// Code
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("statementPage.fxml"));
+		Parent loginParent = null;
+		try {
+			loginParent = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Scene currScene = new Scene(loginParent);
+		StatementController controller = loader.getController();
+		controller.setUsername(getuName());
+		controller.setMachineModel(machineModel);
+		Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+		homeWindow.setScene(currScene);
+		homeWindow.show();
 	}
 
 	@FXML

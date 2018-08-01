@@ -1,7 +1,11 @@
 package Machine.Application;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -140,6 +144,29 @@ final class MachineModel
 		}
 		return false;
 	}
+
+//	ObservableList getTable(String username)
+//	{
+//		ObservableList<String> observableList = FXCollections.observableArrayList();
+//		PreparedStatement preparedStatement = null;
+//		ResultSet resultSet = null;
+//
+//		String query = "SELECT * from " +username;
+//
+//		try{
+//			preparedStatement = connection.prepareStatement(query);
+//			resultSet = preparedStatement.executeQuery();
+//
+//			while(resultSet.next()){
+//				observableList.add(resultSet.getString("date"),resultSet.getString("type"),resultSet.getString("amount"));
+//			}
+//
+//
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	String getAccountInfo(String currUser, String colName ) throws SQLException
 	{
