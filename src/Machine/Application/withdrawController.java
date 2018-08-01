@@ -231,8 +231,10 @@ public class withdrawController implements Initializable
 
 	private void executeQuery(String request)
 	{
+		String updatedBal = getNewBalance(request);
 		try {
-			machineModel.updateBalance(newBalance(request),username);
+			machineModel.updateMainDB(updatedBal,username);
+			machineModel.insertToStatementDB(username,"Withdrawal",request,previousBalance,updatedBal);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -274,7 +276,7 @@ public class withdrawController implements Initializable
 		newBalance = Double.toString(bal);
 	}
 
-	private String newBalance(String request)
+	private String getNewBalance(String request)
 	{
 		Double pBal = Double.parseDouble(previousBalance);
 		Double cBal = Double.parseDouble(request);

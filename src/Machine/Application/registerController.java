@@ -100,11 +100,11 @@ public class registerController {
 
 	private void saveUserToFile(String...details)
 	{
-		//TODO Create table and its row and cols
 		HashPassword hash = new HashPassword(details[1]);
 		try {
-			machineModel.saveToDatabase(username.getText(),hash.toString(),
-					firstName.getText(),lastName.getText());
+			machineModel.saveToDatabase(details[0],hash.toString(),
+					details[2],details[3]);
+			machineModel.createStatementTable(details[0]);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

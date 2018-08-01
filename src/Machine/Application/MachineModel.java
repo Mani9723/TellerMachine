@@ -2,6 +2,7 @@ package Machine.Application;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author Mani Shah
@@ -32,7 +33,7 @@ final class MachineModel
 		ResultSet resultSet = databaseMetaData.getTables(null, null,
 				"Customer_Information", null);
 		if(!resultSet.next()){
-			createTable();
+			createMainTable();
 		}
 		resultSet.close();
 	}
@@ -46,17 +47,8 @@ final class MachineModel
 		}
 	}
 
-	void createTable() throws SQLException
+	private void createMainTable() throws SQLException
 	{
-//		String query = "CREATE TABLE IF NOT EXISTS Customer_Information (\n" +
-//				"`Username TEXT PRIMARY KEY NOT NULL UNIQUE,\n" +
-//				"`Password TEXT NOT NULL,\n" +
-//				"`Firstname TEXT NOT NULL,\n" +
-//				"`Lastname TEXT NOT NULL,\n" +
-//				"`Currentbalance TEXT NOT NULL UNIQUE,\n" +
-//				"`DateCreated TEXT NOT NULL,\n" +
-//				"`PersonalDBPath TEXT NOT NULL,\n" +
-//				");";
 
 		String query = "CREATE TABLE IF NOT EXISTS Customer_Information (\n"
 				+ "	Username text PRIMARY KEY NOT NULL UNIQUE,\n"
@@ -67,6 +59,12 @@ final class MachineModel
 				+ "	DateCreated text NOT NULL,\n"
 				+ "	PersonalDBPath text\n"
 				+ ")";
+		createPrepStmtExecute(query);
+
+	}
+
+	private void createPrepStmtExecute(String query) throws SQLException
+	{
 		PreparedStatement preparedStatement = null;
 
 		try{
@@ -78,7 +76,18 @@ final class MachineModel
 			assert preparedStatement != null;
 			preparedStatement.close();
 		}
+	}
 
+	void createStatementTable(String user) throws SQLException
+	{
+		String query = "CREATE TABLE IF NOT EXISTS "+user+ " (\n"
+				+ "	Date text PRIMARY KEY NOT NULL UNIQUE,\n"
+				+ "	Type text NOT NULL,\n"
+				+ "	Amount text NOT NULL,\n"
+				+ "	PreviousBalance text NOT NULL,\n"
+				+ "	CurrentBalance text NOT NULL\n"
+				+ ")";
+			createPrepStmtExecute(query);
 	}
 
 	boolean validateLogin(String user, String pass) throws SQLException
@@ -182,7 +191,7 @@ final class MachineModel
 	}
 
 
-	void updateBalance(String balance, String user) throws SQLException
+	void updateMainDB(String balance, String user) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 
@@ -201,11 +210,33 @@ final class MachineModel
 		}
 	}
 
+	void insertToStatementDB(String table, String type, String amount, String prevBal, String newBal) throws SQLException
+	{
+		PreparedStatement preparedStatement = null;
+		String query = "INSERT into "+table+"(date,type,amount,previousbalance,currentbalance)" +
+				"VALUES(?,?,?,?,?)";
+
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,getDate());
+			preparedStatement.setString(2,type);
+			preparedStatement.setString(3,amount);
+			preparedStatement.setString(4,prevBal);
+			preparedStatement.setString(5,newBal);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			assert preparedStatement != null;
+			preparedStatement.close();
+		}
+
+	}
+
 	private String getDate()
 	{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
-		java.util.Date date = new java.util.Date();
-		return dateFormat.format(date);
+		return dateFormat.format(new Date());
 	}
 
 }

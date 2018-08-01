@@ -99,15 +99,17 @@ public class depositController implements Initializable
 
 	private void executeQuery(String request)
 	{
+		String updatedBalance = getNewBalance(request);
 		try {
-			machineModel.updateBalance(newBalance(request),getUser());
+			machineModel.updateMainDB(updatedBalance,getUser());
+			machineModel.insertToStatementDB(getUser(),"Deposit",request,previousBalance,updatedBalance);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		new DialogeBox(stackPane).OkButton("Deposit Amount: $"+request,new JFXDialog());
 	}
 
-	private String newBalance(String request)
+	private String getNewBalance(String request)
 	{
 		Double pBal = Double.parseDouble(previousBalance);
 		Double cBal = Double.parseDouble(request);

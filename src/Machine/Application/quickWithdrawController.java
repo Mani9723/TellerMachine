@@ -94,8 +94,10 @@ public class quickWithdrawController {
 
 	private void executeQuery(String request)
 	{
+		String updatedBal = getNewBalance(request);
 		try {
-			machineModel.updateBalance(newBalance(request),getUser());
+			machineModel.updateMainDB(updatedBal,getUser());
+			machineModel.insertToStatementDB(getUser(),"Withdrawal",request,previousBalance,updatedBal);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -214,7 +216,7 @@ public class quickWithdrawController {
 	{
 		newBalance = Double.toString(bal);
 	}
-	private String newBalance(String request)
+	private String getNewBalance(String request)
 	{
 		Double pBal = Double.parseDouble(previousBalance);
 		Double cBal = Double.parseDouble(request);

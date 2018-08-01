@@ -142,12 +142,9 @@ public class loginController implements Initializable
 
 	private void loginProcess(ActionEvent event)
 	{
-		File file = new File("AccountDB.sqlite");
 		String securePass = new HashPassword(password.getText()).toString();
 		try {
-			if (file.length()==0){
-				System.out.println();
-			} else if(machineModel.validateLogin(username.getText(),securePass)){
+			if(machineModel.validateLogin(username.getText(),securePass)){
 				loadHomePage(event);
 			} else{
 				new DialogeBox(stackPane).OkButton("Incorrect Credentials", new JFXDialog());
@@ -160,41 +157,6 @@ public class loginController implements Initializable
 		}
 	}
 
-
-	//	private void loginProcess()
-//	{
-//		if(isValidCredentials(username.getText(),password.getText()))
-//			loadHomePage();
-//		else {
-//			new DialogeBox(stackPane).OkButton("Incorrect Credentials", new JFXDialog());
-//			username.setText("");
-//			password.setText("");
-//		}
-//
-//	}
-//
-//	private boolean isValidCredentials(String username, String password)
-//	{
-//		HashPassword hash = new HashPassword(password);
-//		String securePassword = hash.toString();
-//		String[] data;
-//		Scanner inputStream = null;
-//		try{
-//			inputStream = new Scanner(new File(new CheckingAccount().getLoginDirPath()));
-//			while(inputStream.hasNextLine()) {
-//				data = inputStream.nextLine().split(",");
-//				if (username.equals(data[0]) && securePassword.equals(data[1])){
-//					inputStream.close();
-//					return true;
-//				}
-//			}
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
-//		inputStream.close();
-//		return false;
-//	}
-//
 	private void loadHomePage(ActionEvent event)
 	{
 		FXMLLoader loader = new FXMLLoader();
