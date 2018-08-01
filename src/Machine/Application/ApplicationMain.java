@@ -1,6 +1,5 @@
 package Machine.Application;
 
-import Machine.AccountManager.CheckingAccount;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,9 +15,6 @@ public class ApplicationMain extends Application {
         primaryStage.setTitle("Bank of American");
         primaryStage.setScene(new Scene(root));
         primaryStage.initStyle(StageStyle.UNDECORATED);
-	    System.out.println("Making Sure Password File exists...");
-		new CheckingAccount(true);
-	    System.out.println("File Exists...");
         primaryStage.show();
     }
 

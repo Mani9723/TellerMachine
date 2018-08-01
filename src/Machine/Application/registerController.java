@@ -1,7 +1,6 @@
 package Machine.Application;
 
-import Machine.AccountManager.CheckingAccount;
-import Machine.AccountManager.hashPassword;
+import Machine.AccountManager.HashPassword;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -13,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -49,22 +47,20 @@ public class registerController {
 	@FXML
 	private JFXButton returnButton;
 
-	private CheckingAccount checkingAccount;
-
-	private String passFilePath;
 	private DialogeBox dialogeBox;
 
-	private MachineModel machineModel = new MachineModel();
-	private MachineModel newUserModel;
+	private MachineModel machineModel;
 
 	@FXML
 	public void initialize()
 	{
 		accountType.setText("CHECKING");
-		System.out.println("Fetching Password File Path...");
-		passFilePath = new CheckingAccount().getLoginDirPath();
-		System.out.println(passFilePath);
 		dialogeBox = new DialogeBox(stackPane);
+	}
+
+	void setMachineModel(MachineModel model)
+	{
+		machineModel = model;
 	}
 
 	@FXML
@@ -77,18 +73,15 @@ public class registerController {
 
 			if(emptyFieldExists(pass,confirmPass,firstName,lastName,username))
 				dialogeBox.OkButton("Fields are empty", new JFXDialog());
-
 			else if (password.equals(confPass)) {
 				if (userAlreadyExists(user)) {
 					dialogeBox.OkButton("Username is taken", new JFXDialog());
 				} else {
-					checkingAccount = new CheckingAccount();
 					saveUserToFile(user, password, first, last);
 					clearFields(pass, confirmPass, firstName, lastName, username);
 					dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
 				}
-			}
-			else {
+			} else {
 				dialogeBox.OkButton("Password does not match", new JFXDialog());
 				pass.setText(""); confirmPass.setText("");
 			}
@@ -108,11 +101,10 @@ public class registerController {
 	private void saveUserToFile(String...details)
 	{
 		//TODO Create table and its row and cols
-		hashPassword hash = new hashPassword(details[1]);
+		HashPassword hash = new HashPassword(details[1]);
 		try {
 			machineModel.saveToDatabase(username.getText(),hash.toString(),
 					firstName.getText(),lastName.getText());
-			newUserModel = new MachineModel(username.getText()+".sqlite");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

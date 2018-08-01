@@ -19,15 +19,22 @@ final class MachineModel
 			System.out.println("Database not connected");
 			System.exit(1);
 		}
+		try {
+			checkIfTableExists();
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
 	}
 
-	MachineModel(String newUserFile)
+	private void checkIfTableExists() throws SQLException
 	{
-		connection = DatabaseConnect.connector(newUserFile);
-		if(connection == null){
-			System.out.println("Database not connected");
-			System.exit(1);
+		DatabaseMetaData databaseMetaData = connection.getMetaData();
+		ResultSet resultSet = databaseMetaData.getTables(null, null,
+				"Customer_Information", null);
+		if(!resultSet.next()){
+			createTable();
 		}
+		resultSet.close();
 	}
 
 	boolean isDbConnected() {
@@ -39,8 +46,38 @@ final class MachineModel
 		}
 	}
 
-	void createTable()
+	void createTable() throws SQLException
 	{
+//		String query = "CREATE TABLE IF NOT EXISTS Customer_Information (\n" +
+//				"`Username TEXT PRIMARY KEY NOT NULL UNIQUE,\n" +
+//				"`Password TEXT NOT NULL,\n" +
+//				"`Firstname TEXT NOT NULL,\n" +
+//				"`Lastname TEXT NOT NULL,\n" +
+//				"`Currentbalance TEXT NOT NULL UNIQUE,\n" +
+//				"`DateCreated TEXT NOT NULL,\n" +
+//				"`PersonalDBPath TEXT NOT NULL,\n" +
+//				");";
+
+		String query = "CREATE TABLE IF NOT EXISTS Customer_Information (\n"
+				+ "	Username text PRIMARY KEY NOT NULL UNIQUE,\n"
+				+ "	Password text NOT NULL,\n"
+				+ "	Firstname text NOT NULL,\n"
+				+ "	Lastname text NOT NULL,\n"
+				+ "	CurrentBalance text NOT NULL,\n"
+				+ "	DateCreated text NOT NULL,\n"
+				+ "	PersonalDBPath text\n"
+				+ ")";
+		PreparedStatement preparedStatement = null;
+
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			assert preparedStatement != null;
+			preparedStatement.close();
+		}
 
 	}
 

@@ -4,11 +4,11 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.security.NoSuchAlgorithmException;
 
-public class hashPassword
+public class HashPassword
 {
 	private String salt, password,securePassword;
 
-	public hashPassword(String password)
+	public HashPassword(String password)
 	{
 		this.salt = "krsna";
 		this.password = password;

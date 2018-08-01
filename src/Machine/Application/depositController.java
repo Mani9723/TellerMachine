@@ -1,7 +1,6 @@
 package Machine.Application;
 
 
-import Machine.AccountManager.CheckingAccount;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -17,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import javax.crypto.Mac;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;

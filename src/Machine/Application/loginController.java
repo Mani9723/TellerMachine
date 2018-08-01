@@ -1,7 +1,6 @@
 package Machine.Application;
 
-import Machine.AccountManager.CheckingAccount;
-import Machine.AccountManager.hashPassword;
+import Machine.AccountManager.HashPassword;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -22,12 +21,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class loginController implements Initializable
 {
@@ -73,12 +70,6 @@ public class loginController implements Initializable
 			capsLockLabel.setVisible(true);
 			capsLockLabel.setText("Not Connected");
 		}
-	}
-
-	@FXML
-	public void init()
-	{
-		//Default
 	}
 
 	@FXML
@@ -132,21 +123,31 @@ public class loginController implements Initializable
 	void register(ActionEvent event)
 	{
 		if(event.getSource().equals(registerButton)){
-			try{
-				stackPane= FXMLLoader.load(getClass().getResource("registerPage.fxml"));
-				rootPane.getChildren().setAll(stackPane);
-			}
-			catch(IOException e) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("registerPage.fxml"));
+			Parent loginParent = null;
+			try {
+				loginParent = loader.load();
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			Scene currScene = new Scene(loginParent);
+			registerController controller = loader.getController();
+			controller.setMachineModel(machineModel);
+			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+			homeWindow.setScene(currScene);
+			homeWindow.show();
 		}
 	}
 
 	private void loginProcess(ActionEvent event)
 	{
-		String securePass = new hashPassword(password.getText()).toString();
+		File file = new File("AccountDB.sqlite");
+		String securePass = new HashPassword(password.getText()).toString();
 		try {
-			if(machineModel.validateLogin(username.getText(),securePass)){
+			if (file.length()==0){
+				System.out.println();
+			} else if(machineModel.validateLogin(username.getText(),securePass)){
 				loadHomePage(event);
 			} else{
 				new DialogeBox(stackPane).OkButton("Incorrect Credentials", new JFXDialog());
@@ -174,7 +175,7 @@ public class loginController implements Initializable
 //
 //	private boolean isValidCredentials(String username, String password)
 //	{
-//		hashPassword hash = new hashPassword(password);
+//		HashPassword hash = new HashPassword(password);
 //		String securePassword = hash.toString();
 //		String[] data;
 //		Scanner inputStream = null;
@@ -211,14 +212,5 @@ public class loginController implements Initializable
 		Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
 		homeWindow.setScene(currScene);
 		homeWindow.show();
-
-//		try{
-//			secondPane= FXMLLoader.load(getClass().getResource("homePage.fxml"));
-//			rootPane.getChildren().setAll(secondPane);
-//		}
-//		catch(IOException e) {
-//			e.printStackTrace();
-//		}
 	}
-
 }

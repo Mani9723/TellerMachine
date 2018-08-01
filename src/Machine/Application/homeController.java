@@ -1,7 +1,5 @@
 package Machine.Application;
 
-import Machine.AccountManager.CheckingAccount;
-
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
