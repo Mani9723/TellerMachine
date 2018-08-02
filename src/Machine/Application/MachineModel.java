@@ -1,11 +1,11 @@
 package Machine.Application;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Date;
 final class MachineModel
 {
 	private Connection connection;
-	private static String date,type,amount,prevBal,currBal;
+	private ObservableList<StatementData> observableList = FXCollections.observableArrayList();
 
 	MachineModel()
 	{
@@ -32,49 +32,15 @@ final class MachineModel
 		}
 	}
 
-	MachineModel(String...columns)
-	{
-		setColValues(columns);
-
-	}
-
-	private void setColValues(String...values)
-	{
-		date = values[0]; type = values[1];
-		amount = values[2]; prevBal = values[3];
-		currBal = values[4];
-	}
-
-	String getdate()
-	{
-		return date;
-	}
-	String getType()
-	{
-		return type;
-	}
-	String getAmount()
-	{
-		return amount;
-	}
-	String getPrevBal()
-	{
-		return prevBal;
-	}
-	String getCurrBal()
-	{
-		return currBal;
-	}
-
-
-
 	private void checkIfTableExists() throws SQLException
 	{
 		DatabaseMetaData databaseMetaData = connection.getMetaData();
 		ResultSet resultSet = databaseMetaData.getTables(null, null,
 				"Customer_Information", null);
 		if(!resultSet.next()){
+			System.out.println("Empty Database Detected...\nCreating a new one...");
 			createMainTable();
+			System.out.println("Database AccountDB.sqlite created...");
 		}
 		resultSet.close();
 	}
@@ -101,6 +67,7 @@ final class MachineModel
 				+ "	PersonalDBPath text\n"
 				+ ")";
 		createPrepStmtExecute(query);
+		System.out.println("Table created Customer_Information");
 
 	}
 
@@ -122,14 +89,41 @@ final class MachineModel
 	void createStatementTable(String user) throws SQLException
 	{
 		String query = "CREATE TABLE IF NOT EXISTS "+user+ " (\n"
-				+ "	Date text PRIMARY KEY NOT NULL UNIQUE,\n"
+				+ "	Date text NOT NULL,\n"
 				+ "	Type text NOT NULL,\n"
 				+ "	Amount text NOT NULL,\n"
 				+ "	PreviousBalance text NOT NULL,\n"
 				+ "	CurrentBalance text NOT NULL\n"
 				+ ")";
-			createPrepStmtExecute(query);
+		createPrepStmtExecute(query);
+		System.out.println("Statement Table created: " + user);
 	}
+
+	ObservableList<StatementData> getStatement(String username) throws SQLException
+	{
+		ResultSet resultSet = null;
+		PreparedStatement preparedStatement = null;
+		String query = "SELECT * from "+ username;
+		Connection connection = DatabaseConnect.connector("AccountDB.sqlite");
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()){
+				observableList.add(new StatementData(resultSet.getString("Date"),resultSet.getString("Type"),
+						resultSet.getString("Amount"),resultSet.getString("PreviousBalance"),
+						resultSet.getString("CurrentBalance")));
+			}
+			return observableList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resultSet.close();
+			preparedStatement.close();
+			connection.close();
+		}
+		return null;
+	}
+
 
 	boolean validateLogin(String user, String pass) throws SQLException
 	{
@@ -153,6 +147,26 @@ final class MachineModel
 			preparedStatement.close();
 			assert resultSet != null;
 			resultSet.close();
+		}
+		return false;
+	}
+
+	boolean isFirstTimeRunning() throws SQLException
+	{
+		ResultSet resultSet = null;
+		PreparedStatement preparedStatement = null;
+		String query = "SELECT * from Customer_Information";
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			if (!resultSet.isBeforeFirst()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resultSet.close();
+			preparedStatement.close();
 		}
 		return false;
 	}
@@ -221,7 +235,7 @@ final class MachineModel
 			preparedStatement.setString(3,values[2]);
 			preparedStatement.setString(4,values[3]);
 			preparedStatement.setString(5,"0.00");
-			preparedStatement.setString(6,getDate());
+			preparedStatement.setString(6,getDate(true));
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -259,7 +273,7 @@ final class MachineModel
 
 		try{
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1,getDate());
+			preparedStatement.setString(1,getDate(false));
 			preparedStatement.setString(2,type);
 			preparedStatement.setString(3,amount);
 			preparedStatement.setString(4,prevBal);
@@ -274,9 +288,14 @@ final class MachineModel
 
 	}
 
-	private String getDate()
+	private String getDate(boolean time)
 	{
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+		SimpleDateFormat dateFormat;
+		if(time)
+			dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+		else
+			dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+
 		return dateFormat.format(new Date());
 	}
 

@@ -1,7 +1,6 @@
 package Machine.Application;
 
 import com.jfoenix.controls.JFXButton;
-import com.sun.xml.internal.bind.v2.TODO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,9 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -66,8 +62,6 @@ public class StatementController implements Initializable
 
 	private String username;
 
-	private ObservableList<StatementData> observableList = FXCollections.observableArrayList();
-
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
@@ -83,36 +77,11 @@ public class StatementController implements Initializable
 	void init()
 	{
 		try {
-			fillTable();
+			table.setItems(machineModel.getStatement(username));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
-	private void fillTable() throws SQLException
-	{
-		ResultSet resultSet = null;
-		PreparedStatement preparedStatement = null;
-		String query = "SELECT * from "+ username;
-		Connection connection = DatabaseConnect.connector("AccountDB.sqlite");
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			resultSet = preparedStatement.executeQuery();
-			while(resultSet.next()){
-				observableList.add(new StatementData(resultSet.getString("Date"),resultSet.getString("Type"),
-						resultSet.getString("Amount"),resultSet.getString("PreviousBalance"),
-						resultSet.getString("CurrentBalance")));
-			}
-			table.setItems(observableList);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			resultSet.close();
-			preparedStatement.close();
-			connection.close();
-		}
-	}
-
 
 	public void handleMenu(ActionEvent event)
 	{

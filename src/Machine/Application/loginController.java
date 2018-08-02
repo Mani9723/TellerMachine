@@ -20,7 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -78,21 +77,36 @@ public class loginController implements Initializable
 		if(password.getText().length()>0)
 			login.setDisable(false);
 		if(event.getCode().equals(KeyCode.ENTER)){
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("homePage.fxml"));
-			Parent loginParent = null;
 			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
+				if(machineModel.isFirstTimeRunning()){
+					new DialogeBox(stackPane).OkButton("Welcome, please register first",new JFXDialog());
+				} else if(processCredentials()){
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(getClass().getResource("homePage.fxml"));
+					Parent loginParent = null;
+					try {
+						loginParent = loader.load();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					Scene currScene = new Scene(loginParent);
+					homeController controller = loader.getController();
+					controller.setUsername(username.getText());
+					controller.init(machineModel);
+					Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+					homeWindow.setScene(currScene);
+					homeWindow.show();
+				}
+				else {
+					new DialogeBox(stackPane).OkButton("Incorrect Credentials", new JFXDialog());
+					username.setText("");
+					password.setText("");
+					login.setDisable(true);
+				}
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			Scene currScene = new Scene(loginParent);
-			homeController controller = loader.getController();
-			controller.setUsername(username.getText());
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
+
 		}
 
 	}
@@ -142,10 +156,12 @@ public class loginController implements Initializable
 
 	private void loginProcess(ActionEvent event)
 	{
-		String securePass = new HashPassword(password.getText()).toString();
 		try {
-			if(machineModel.validateLogin(username.getText(),securePass)){
-				loadHomePage(event);
+			if(machineModel.isFirstTimeRunning()){
+				new DialogeBox(stackPane).OkButton("Welcome, please register first",new JFXDialog());
+			}
+			else if(processCredentials()){
+				loadHomePage(event,null);
 			} else{
 				new DialogeBox(stackPane).OkButton("Incorrect Credentials", new JFXDialog());
 				username.setText("");
@@ -157,7 +173,18 @@ public class loginController implements Initializable
 		}
 	}
 
-	private void loadHomePage(ActionEvent event)
+	private boolean processCredentials()
+	{
+		String securePass = new HashPassword(password.getText()).toString();
+		try {
+			return machineModel.validateLogin(username.getText(),securePass);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	private void loadHomePage(ActionEvent event, KeyEvent eventK)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("homePage.fxml"));
@@ -171,7 +198,11 @@ public class loginController implements Initializable
 		homeController controller = loader.getController();
 		controller.setUsername(username.getText());
 		controller.init(machineModel);
-		Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
+		Stage homeWindow;
+		if(event == null) {
+			homeWindow = (Stage) ((Node) eventK.getSource()).getScene().getWindow();
+		} else
+			homeWindow = (Stage)((Node) event.getSource()).getScene().getWindow();
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
