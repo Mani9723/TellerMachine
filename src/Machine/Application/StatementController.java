@@ -76,8 +76,8 @@ public class StatementController implements Initializable
 		dateCol.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		typeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
 		amountCol.setCellValueFactory(new PropertyValueFactory<>("Amount"));
-		prevCol.setCellValueFactory(new PropertyValueFactory<>("PreviousBalance"));
-		currCol.setCellValueFactory(new PropertyValueFactory<>("CurrentBalance"));
+		prevCol.setCellValueFactory(new PropertyValueFactory<>("prevBal"));
+		currCol.setCellValueFactory(new PropertyValueFactory<>("currBal"));
 	}
 
 	void init()
@@ -89,7 +89,6 @@ public class StatementController implements Initializable
 		}
 	}
 
-	// TODO Finish Tableview
 	private void fillTable() throws SQLException
 	{
 		ResultSet resultSet = null;
