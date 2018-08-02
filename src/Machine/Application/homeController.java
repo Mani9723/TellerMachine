@@ -127,6 +127,7 @@ public class homeController implements Initializable
 		StatementController controller = loader.getController();
 		controller.setUsername(getuName());
 		controller.setMachineModel(machineModel);
+		controller.init();
 		Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
 		homeWindow.setScene(currScene);
 		homeWindow.show();

@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -34,22 +36,22 @@ public class StatementController implements Initializable
 	private AnchorPane pane;
 
 	@FXML
-	private TableView<MachineModel> table;
+	private TableView<StatementData> table;
 
 	@FXML
-	private TableColumn<MachineModel, String> dateCol;
+	private TableColumn<StatementData, String> dateCol;
 
 	@FXML
-	private TableColumn<MachineModel, String> typeCol;
+	private TableColumn<StatementData, String> typeCol;
 
 	@FXML
-	private TableColumn<MachineModel, String> amountCol;
+	private TableColumn<StatementData, String> amountCol;
 
 	@FXML
-	private TableColumn<MachineModel, String> prevCol;
+	private TableColumn<StatementData, String> prevCol;
 
 	@FXML
-	private TableColumn<MachineModel, String> currCol;
+	private TableColumn<StatementData, String> currCol;
 
 	@FXML
 	private Label accountname;
@@ -64,29 +66,53 @@ public class StatementController implements Initializable
 
 	private String username;
 
-	ObservableList<MachineModel> observableList = FXCollections.observableArrayList();
+	private ObservableList<StatementData> observableList = FXCollections.observableArrayList();
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		dateLabel.setText(getDate());
-		//fillTable();
+		dateCol.setCellValueFactory(new PropertyValueFactory<>("Date"));
+		typeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
+		amountCol.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+		prevCol.setCellValueFactory(new PropertyValueFactory<>("PreviousBalance"));
+		currCol.setCellValueFactory(new PropertyValueFactory<>("CurrentBalance"));
+	}
+
+	void init()
+	{
+		try {
+			fillTable();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// TODO Finish Tableview
-//	private void fillTable()
-//	{
-//		Connection connection = DatabaseConnect.connector(username+".sqlite");
-//		try {
-//			ResultSet resultSet = connection.createStatement().executeQuery("SELECT * from "+username);
-//			while(resultSet.next()){
-//				observableList.add(resultSet.getString(""))
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	private void fillTable() throws SQLException
+	{
+		ResultSet resultSet = null;
+		PreparedStatement preparedStatement = null;
+		String query = "SELECT * from "+ username;
+		Connection connection = DatabaseConnect.connector("AccountDB.sqlite");
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()){
+				observableList.add(new StatementData(resultSet.getString("Date"),resultSet.getString("Type"),
+						resultSet.getString("Amount"),resultSet.getString("PreviousBalance"),
+						resultSet.getString("CurrentBalance")));
+			}
+			table.setItems(observableList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resultSet.close();
+			preparedStatement.close();
+			connection.close();
+		}
+	}
 
 
 	public void handleMenu(ActionEvent event)

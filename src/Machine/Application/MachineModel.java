@@ -16,6 +16,7 @@ import java.util.Date;
 final class MachineModel
 {
 	private Connection connection;
+	private static String date,type,amount,prevBal,currBal;
 
 	MachineModel()
 	{
@@ -30,6 +31,42 @@ final class MachineModel
 			e.printStackTrace();
 		}
 	}
+
+	MachineModel(String...columns)
+	{
+		setColValues(columns);
+
+	}
+
+	private void setColValues(String...values)
+	{
+		date = values[0]; type = values[1];
+		amount = values[2]; prevBal = values[3];
+		currBal = values[4];
+	}
+
+	String getdate()
+	{
+		return date;
+	}
+	String getType()
+	{
+		return type;
+	}
+	String getAmount()
+	{
+		return amount;
+	}
+	String getPrevBal()
+	{
+		return prevBal;
+	}
+	String getCurrBal()
+	{
+		return currBal;
+	}
+
+
 
 	private void checkIfTableExists() throws SQLException
 	{
@@ -145,29 +182,6 @@ final class MachineModel
 		return false;
 	}
 
-//	ObservableList getTable(String username)
-//	{
-//		ObservableList<String> observableList = FXCollections.observableArrayList();
-//		PreparedStatement preparedStatement = null;
-//		ResultSet resultSet = null;
-//
-//		String query = "SELECT * from " +username;
-//
-//		try{
-//			preparedStatement = connection.prepareStatement(query);
-//			resultSet = preparedStatement.executeQuery();
-//
-//			while(resultSet.next()){
-//				observableList.add(resultSet.getString("date"),resultSet.getString("type"),resultSet.getString("amount"));
-//			}
-//
-//
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
-
 	String getAccountInfo(String currUser, String colName ) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
@@ -265,5 +279,7 @@ final class MachineModel
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
 		return dateFormat.format(new Date());
 	}
+
+
 
 }
