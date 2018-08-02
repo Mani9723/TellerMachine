@@ -221,7 +221,7 @@ final class MachineModel
 	}
 
 
-	void saveToDatabase(String...values) throws SQLException
+	void saveUserToDatabase(String...values) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 
@@ -291,10 +291,8 @@ final class MachineModel
 	private String getDate(boolean time)
 	{
 		SimpleDateFormat dateFormat;
-		if(time)
-			dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
-		else
-			dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		dateFormat = time ? new SimpleDateFormat("MM/dd/yyyy hh:mm:ss")
+				:new SimpleDateFormat("MM/dd/yyyy");
 
 		return dateFormat.format(new Date());
 	}

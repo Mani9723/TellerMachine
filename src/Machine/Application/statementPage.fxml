@@ -13,25 +13,28 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.StatementController">
+<AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.StatementController">
    <children>
-      <ImageView fitHeight="500.0" fitWidth="600.0" pickOnBounds="true">
+      <ImageView fitHeight="500.0" fitWidth="700.0" opacity="0.95" pickOnBounds="true">
          <image>
-            <Image url="@../images/c38ac8e163d09254f86afa331da35693.jpg" />
+            <Image url="@../images/landscape__1____forest_mountain_by_ncoll36-daxsdd5.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="table" layoutY="75.0" opacity="0.75" prefHeight="426.0" prefWidth="600.0" stylesheets="@application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <TableView fx:id="table" layoutY="75.0" opacity="0.78" prefHeight="426.0" prefWidth="600.0" stylesheets="@application.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
         <columns>
-          <TableColumn fx:id="dateCol" editable="false" prefWidth="116.0" resizable="false" text="   Date" />
-          <TableColumn fx:id="typeCol" editable="false" prefWidth="98.0" resizable="false" text="Type" />
-            <TableColumn fx:id="amountCol" editable="false" prefWidth="104.0" resizable="false" text="Amount" />
-            <TableColumn fx:id="prevCol" editable="false" minWidth="9.0" prefWidth="136.0" resizable="false" text="Previous Balance" />
+          <TableColumn fx:id="dateCol" editable="false" prefWidth="123.0" resizable="false" text="   Date" />
+          <TableColumn fx:id="typeCol" editable="false" prefWidth="113.0" resizable="false" text="Type" />
+            <TableColumn fx:id="amountCol" editable="false" prefWidth="122.0" resizable="false" text="Amount" />
+            <TableColumn fx:id="prevCol" editable="false" minWidth="9.0" prefWidth="169.0" resizable="false" text="Previous Balance" />
             <TableColumn fx:id="currCol" editable="false" minWidth="0.0" prefWidth="145.0" resizable="false" text="Current Balance" />
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
-      <HBox prefHeight="72.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <HBox prefHeight="72.0" prefWidth="600.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <GridPane prefHeight="72.0" prefWidth="602.0">
+            <GridPane prefHeight="72.0" prefWidth="673.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="10.0" prefWidth="202.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="282.0" minWidth="10.0" prefWidth="195.0" />
@@ -46,7 +49,7 @@
                         <Font name="Papyrus" size="20.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="menuButton" buttonType="RAISED" onAction="#handleMenu" prefHeight="56.0" prefWidth="180.0" text="Menu" textAlignment="CENTER" wrapText="true">
+                  <JFXButton fx:id="menuButton" buttonType="RAISED" onAction="#handleMenu" opacity="0.77" prefHeight="7.0" prefWidth="200.0" styleClass="quickCash" stylesheets="@application.css" text="Menu" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Papyrus" size="20.0" />
                      </font>

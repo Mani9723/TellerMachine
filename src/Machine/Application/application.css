@@ -94,7 +94,7 @@
 }
 
 .table-row-cell, .tree-table-row-cell {
-    -fx-cell-size: 40px;
+    -fx-cell-size: 30px;
 }
 
 .table-cell {

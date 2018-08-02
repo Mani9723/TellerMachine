@@ -14,14 +14,14 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.homeController">
+<AnchorPane fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.homeController">
     <children>
-        <ImageView fitHeight="500.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../images/flat_landscape_wallpaper_by_nicknufayl-d9frf2v.png" />
          </image>
         </ImageView>
-        <JFXButton fx:id="quickCash" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="350.0" layoutY="120.0" onAction="#quickCash" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@application.css" text="Q U I C K    C A S H" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="120.0">
+        <JFXButton fx:id="quickCash" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="409.0" layoutY="120.0" onAction="#quickCash" opacity="0.90" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@application.css" text="Q U I C K    C A S H" textFill="black" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="120.0">
             <font>
                 <Font name="Papyrus" size="17.0" />
             </font>
@@ -36,7 +36,7 @@
                </stops>
             </RadialGradient>
          </ripplerFill></JFXButton>
-        <JFXButton fx:id="deposit" buttonType="RAISED" layoutX="350.0" layoutY="207.0" onAction="#depositMoney" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@application.css" text="D E P O S I T" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="207.0">
+        <JFXButton fx:id="deposit" buttonType="RAISED" layoutX="409.0" layoutY="207.0" onAction="#depositMoney" opacity="0.90" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@application.css" text="D E P O S I T" textFill="black" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="207.0">
             <effect>
                 <InnerShadow />
             </effect>
@@ -52,7 +52,7 @@
             </RadialGradient>
          </ripplerFill>
         </JFXButton>
-        <JFXButton fx:id="withdraw" buttonType="RAISED" layoutX="350.0" layoutY="295.0" onAction="#withdrawMoney" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" text="W I T H D R A W " AnchorPane.bottomAnchor="132.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="295.0">
+        <JFXButton fx:id="withdraw" buttonType="RAISED" layoutX="409.0" layoutY="296.0" onAction="#withdrawMoney" opacity="0.90" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" text="W I T H D R A W " textFill="black" AnchorPane.bottomAnchor="131.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="296.0">
             <font>
                 <Font name="Papyrus" size="17.0" />
             </font>
@@ -64,7 +64,7 @@
                </stops>
             </RadialGradient>
          </ripplerFill></JFXButton>
-        <JFXButton fx:id="exitHome" buttonType="RAISED" layoutX="14.0" layoutY="433.0" onAction="#exitToHome" opacity="0.83" prefHeight="48.0" prefWidth="245.0" styleClass="exitHome" text="E X I T" AnchorPane.topAnchor="433.0">
+        <JFXButton fx:id="exitHome" buttonType="RAISED" layoutX="73.0" layoutY="435.0" onAction="#exitToHome" opacity="0.83" prefHeight="48.0" prefWidth="245.0" styleClass="exitHome" text="E X I T" AnchorPane.topAnchor="435.0">
             <font>
                 <Font name="Papyrus" size="12.0" />
             </font>
@@ -90,7 +90,7 @@
         </HBox>
         <AnchorPane layoutX="14.0" layoutY="120.0" prefHeight="304.0" prefWidth="319.0" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="120.0">
             <children>
-                <GridPane layoutX="1.0" layoutY="65.0" prefHeight="238.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+                <GridPane layoutX="1.0" layoutY="65.0" prefHeight="238.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="65.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -116,7 +116,7 @@
                 </GridPane>
             </children>
         </AnchorPane>
-      <JFXButton fx:id="statementButton" layoutX="349.0" layoutY="387.0" onAction="#handleStatementButton" prefHeight="72.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@application.css" text="STATEMENT">
+      <JFXButton fx:id="statementButton" layoutX="409.0" layoutY="387.0" onAction="#handleStatementButton" opacity="0.80" prefHeight="72.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@application.css" text="STATEMENT" textFill="black">
          <font>
             <Font name="Papyrus" size="16.0" />
          </font>

@@ -17,11 +17,11 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.quickWithdrawController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.quickWithdrawController">
     <children>
-        <AnchorPane fx:id="quickPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0">
+        <AnchorPane fx:id="quickPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
             <children>
-                <ImageView fitHeight="500.0" fitWidth="600.0" pickOnBounds="true">
+                <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true">
                     <effect>
                         <GaussianBlur radius="0.0" />
                     </effect>
@@ -29,7 +29,7 @@
                         <Image url="@../images/2808141-sunrise-lake-artwork-gradient-vectors-landscape___landscape-nature-wallpapers.jpg" />
                     </image>
                 </ImageView>
-                <GridPane layoutX="217.0" layoutY="155.0" prefHeight="381.0" prefWidth="371.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="217.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="100.0">
+                <GridPane layoutX="217.0" layoutY="155.0" prefHeight="381.0" prefWidth="371.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="100.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -144,9 +144,9 @@
                 </HBox>
                 <VBox layoutY="100.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="100.0">
                     <children>
-                        <AnchorPane prefHeight="429.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="400.0" prefWidth="100.0">
                             <children>
-                                <GridPane layoutX="14.0" prefHeight="323.0" prefWidth="181.0" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                <GridPane layoutX="14.0" prefHeight="323.0" prefWidth="181.0" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     </columnConstraints>
@@ -156,7 +156,7 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <JFXButton fx:id="mainMenu" buttonType="RAISED" onAction="#goToMenu" prefHeight="48.0" prefWidth="179.0" styleClass="exitHome" stylesheets="@application.css" text="MAIN MENU">
+                                        <JFXButton fx:id="mainMenu" buttonType="RAISED" onAction="#goToMenu" prefHeight="48.0" prefWidth="179.0" styleClass="exitHome" stylesheets="@application.css" text="MAIN MENU" GridPane.hgrow="ALWAYS">
                                             <font>
                                                 <Font name="Papyrus" size="20.0" />
                                             </font>

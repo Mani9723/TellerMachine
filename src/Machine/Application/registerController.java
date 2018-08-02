@@ -102,7 +102,7 @@ public class registerController {
 	{
 		HashPassword hash = new HashPassword(details[1]);
 		try {
-			machineModel.saveToDatabase(details[0],hash.toString(),
+			machineModel.saveUserToDatabase(details[0],hash.toString(),
 					details[2],details[3]);
 			machineModel.createStatementTable(details[0]);
 		} catch (SQLException e) {
