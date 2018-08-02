@@ -225,8 +225,8 @@ final class MachineModel
 	{
 		PreparedStatement preparedStatement = null;
 
-		String query = "INSERT into Customer_Information(username,password,firstname,lastname,currentbalance,datecreated)" +
-				"VALUES(?,?,?,?,?,?)";
+		String query = "INSERT into Customer_Information(username,password,firstname,lastname,currentbalance,datecreated,email)" +
+				"VALUES(?,?,?,?,?,?,?)";
 
 		try{
 			preparedStatement = connection.prepareStatement(query);
@@ -236,6 +236,7 @@ final class MachineModel
 			preparedStatement.setString(4,values[3]);
 			preparedStatement.setString(5,"0.00");
 			preparedStatement.setString(6,getDate(true));
+			preparedStatement.setString(7,values[4]);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -39,7 +39,7 @@ public class registerController {
 	private JFXTextField firstName;
 
 	@FXML
-	private JFXTextField lastName;
+	private JFXTextField lastName, emailLabel;
 
 	@FXML
 	private JFXTextField accountType;
@@ -69,7 +69,7 @@ public class registerController {
 		if(event.getSource().equals(registerButton)) {
 			String first = firstName.getText(), last = lastName.getText();
 			String user = username.getText(), password = pass.getText();
-			String confPass = confirmPass.getText();
+			String confPass = confirmPass.getText(), email = emailLabel.getText();
 
 			if(emptyFieldExists(pass,confirmPass,firstName,lastName,username))
 				dialogeBox.OkButton("Fields are empty", new JFXDialog());
@@ -77,7 +77,7 @@ public class registerController {
 				if (userAlreadyExists(user)) {
 					dialogeBox.OkButton("Username is taken", new JFXDialog());
 				} else {
-					saveUserToFile(user, password, first, last);
+					saveUserToFile(user, password, first, last,email);
 					clearFields(pass, confirmPass, firstName, lastName, username);
 					dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
 				}
@@ -103,7 +103,7 @@ public class registerController {
 		HashPassword hash = new HashPassword(details[1]);
 		try {
 			machineModel.saveUserToDatabase(details[0],hash.toString(),
-					details[2],details[3]);
+					details[2],details[3],details[4]);
 			machineModel.createStatementTable(details[0]);
 		} catch (SQLException e) {
 			e.printStackTrace();

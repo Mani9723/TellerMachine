@@ -126,7 +126,7 @@
                                     </RadialGradient>
                                 </unFocusColor>
                             </JFXTextField>
-                     <JFXTextField alignment="CENTER" promptText="E M A I L*" GridPane.rowIndex="5">
+                     <JFXTextField fx:id="emailLabel" alignment="CENTER" promptText="E M A I L*" GridPane.rowIndex="5">
                         <font>
                            <Font name="Papyrus" size="17.0" />
                         </font>
