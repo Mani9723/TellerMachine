@@ -141,10 +141,8 @@ public class loginController implements Initializable
 				drawerPane.close();
 				exitResetPass.setDisable(true);
 				exitResetPass.setVisible(false);
-			}
-			else
+			} else
 				drawerPane.open();
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

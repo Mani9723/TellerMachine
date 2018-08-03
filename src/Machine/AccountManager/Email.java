@@ -55,7 +55,7 @@ public class Email
 		this.content = "PLEASE DO NOT REPLY TO THIS ADDRESS AS IT IS NOT MONITORED\n" +
 				"\nDear Customer, \n" +
 				"\tYour temporary password is: " + tempPass +
-				"Please go back and use your temporary password to login." +
+				"\nPlease go back and use your temporary password to login." +
 				"\nTEMPORARY CODE EXPIRES IN 15 MINUTES.";
 	}
 

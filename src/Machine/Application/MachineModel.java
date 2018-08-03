@@ -266,16 +266,17 @@ final class MachineModel
 		}
 	}
 
-	void updateSpecificValueMainDB(String user, String col, String value) throws SQLException
+	void updateTempPassCells(String user, String tempPass, String time) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 
-		String query = "UPDATE Customer_Information set "+col+" = ? where Username = ?";
+		String query = "UPDATE Customer_Information set TempPassword = ?, ExpireTime = ? where Username = ?";
 
 		try{
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1,value);
-			preparedStatement.setString(2,user);
+			preparedStatement.setString(1,tempPass);
+			preparedStatement.setString(2,time);
+			preparedStatement.setString(3,user);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -311,12 +312,9 @@ final class MachineModel
 	private String getDate(boolean time)
 	{
 		SimpleDateFormat dateFormat;
-		dateFormat = time ? new SimpleDateFormat("MM/dd/yyyy hh:mm:ss")
+		dateFormat = time ? new SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
 				:new SimpleDateFormat("MM/dd/yyyy");
 
 		return dateFormat.format(new Date());
 	}
-
-
-
 }

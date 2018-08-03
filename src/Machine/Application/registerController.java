@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
@@ -56,6 +58,8 @@ public class registerController {
 	{
 		accountType.setText("CHECKING");
 		dialogeBox = new DialogeBox(stackPane);
+		registerButton.setDisable(true);
+		registerButton.setOpacity(0.42);
 	}
 
 	void setMachineModel(MachineModel model)
@@ -139,4 +143,11 @@ public class registerController {
 		return pass.getText().length() == 0 || passwordField.getText().length() == 0;
 	}
 
+	public void enableRegisterButton(KeyEvent keyEvent)
+	{
+		if(emailLabel.getText().length()>6) {
+			registerButton.setDisable(false);
+			registerButton.setOpacity(0.85);
+		}
+	}
 }

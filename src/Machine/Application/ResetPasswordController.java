@@ -2,36 +2,26 @@ package Machine.Application;
 
 import Machine.AccountManager.Email;
 import Machine.AccountManager.HashPassword;
+
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 
 public class ResetPasswordController implements Initializable
 {
-
-	@FXML
-	private StackPane stackPane;
-
-	@FXML
-	private AnchorPane rootPane;
 	@FXML
 	private JFXTextField usernameInput;
 
-	@FXML
-	private JFXTextField emailInput;
-
-	private String hiddenEmail,actualEmail;
+	private String actualEmail;
 
 	@FXML
 	public Label sent;
@@ -39,8 +29,8 @@ public class ResetPasswordController implements Initializable
 	@FXML
 	private JFXButton sendButton;
 
-	MachineModel machineModel;
-	Email email;
+	private Email email;
+	private MachineModel machineModel;
 
 
 	public void sendEmailCode(ActionEvent event)
@@ -48,10 +38,11 @@ public class ResetPasswordController implements Initializable
 		if(event.getSource().equals(sendButton)){
 			getEmailAddress();
 			email.setRecipient(actualEmail);
-			hiddenEmail = hideEmail(actualEmail);
+			String hiddenEmail = hideEmail(actualEmail);
 			email.sendEmail();
 			sent.setText("Sent: " + hiddenEmail);
 		}
+		sendButton.setDisable(true);
 	}
 
 	private String hideEmail(String emailToHide)
@@ -69,17 +60,27 @@ public class ResetPasswordController implements Initializable
 	}
 
 
-	public void getEmailAddress()
+	private void getEmailAddress()
 	{
-		String secureTempPass = new HashPassword("tempPass").toString();
+		String secureTempPass;
+		secureTempPass = new HashPassword(generateRandomWord()).toString();
 		email = new Email(secureTempPass);
 		try {
 			setActualEmail(machineModel.getAccountInfo(usernameInput.getText(),"email"));
-			machineModel.updateSpecificValueMainDB(usernameInput.getText(),"TempPassword",secureTempPass);
+			machineModel.updateTempPassCells(usernameInput.getText()
+					,secureTempPass,Long.toString(System.currentTimeMillis()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//emailInput.setText(hideEmail(actualEmail));
+	}
+
+	private String generateRandomWord()
+	{
+		Random random = new Random();
+		StringBuilder randomWord = new StringBuilder();
+		for(int i = 0; i < 3; i++)
+			randomWord.append((char) (random.nextInt(26) + 65));
+		return randomWord.toString();
 	}
 
 	private void setActualEmail(String email)
@@ -90,6 +91,20 @@ public class ResetPasswordController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		sendButton.setDisable(true);
+		sendButton.setOpacity(0.50);
 		machineModel = new MachineModel();
+	}
+
+	public void handleKeyPressed()
+	{
+		if(usernameInput.getText().length() > 3){
+			sendButton.setDisable(false);
+			sendButton.setOpacity(0.9);
+		}
+		if(usernameInput.getText().isEmpty() || usernameInput.getText().length() < 3){
+			sendButton.setDisable(true);
+			sendButton.setOpacity(0.50);
+		}
 	}
 }
