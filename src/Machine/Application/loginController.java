@@ -1,11 +1,9 @@
 package Machine.Application;
 
 import Machine.AccountManager.HashPassword;
+import Machine.AccountManager.Email;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +30,9 @@ public class loginController implements Initializable
 	private AnchorPane rootPane, secondPane, registerPane;
 
 	@FXML
+	private JFXDrawer drawerPane;
+
+	@FXML
 	private StackPane stackPane;
 
 	@FXML
@@ -41,7 +42,7 @@ public class loginController implements Initializable
 	private JFXPasswordField password;
 
 	@FXML
-	private JFXButton login;
+	private JFXButton login, exitResetPass;
 
 	@FXML
 	private JFXButton registerButton;
@@ -61,6 +62,8 @@ public class loginController implements Initializable
 
 		capsLockLabel.setVisible(false);
 		login.setDisable(true);
+		exitResetPass.setDisable(true);
+		exitResetPass.setVisible(false);
 
 		if(machineModel.isDbConnected()) {
 			capsLockLabel.setText("Connected");
@@ -122,7 +125,29 @@ public class loginController implements Initializable
 	@FXML
 	void handleCapsLock(KeyEvent event)
 	{
+		// DO NOTHING
+	}
 
+	@FXML
+	void resetPassword(ActionEvent event)
+	{
+		exitResetPass.setDisable(false);
+		exitResetPass.setVisible(true);
+		try {
+			StackPane resetPane = FXMLLoader.load(getClass().getResource("ResetPasswordPage.fxml"));
+			drawerPane.setSidePane(resetPane);
+
+			if(drawerPane.isShown() && event.getSource().equals(exitResetPass)) {
+				drawerPane.close();
+				exitResetPass.setDisable(true);
+				exitResetPass.setVisible(false);
+			}
+			else
+				drawerPane.open();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML

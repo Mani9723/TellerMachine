@@ -11,7 +11,7 @@ public class ApplicationMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("bankUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
         primaryStage.setTitle("Bank of American");
         primaryStage.setScene(new Scene(root));
         primaryStage.initStyle(StageStyle.UNDECORATED);

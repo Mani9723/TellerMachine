@@ -115,7 +115,7 @@ public class registerController {
 	{
 		if(event.getSource().equals(returnButton)) {
 			try {
-				rootPane = FXMLLoader.load(getClass().getResource("bankUI.fxml"));
+				rootPane = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
 				stackPane.getChildren().setAll(rootPane);
 			} catch (IOException e) {
 				e.printStackTrace();

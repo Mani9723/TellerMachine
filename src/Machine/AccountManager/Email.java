@@ -19,43 +19,51 @@ import javax.activation.DataSource;
 public class Email
 {
 	private String emailUsername, password;
-	private String recipient,subject,content,filePath,name;
+	private String recipient,subject,content;//,filePath,name;
 	private final String from = "764people@gmail.com";
-	private boolean chooseFile = false;
+	//private boolean chooseFile = false;
+	private String tempPass;
 
-	public Email()
+	public Email(String tempPassword)
 	{
 		this.emailUsername = from;
 		this.password = "srilaprabhupada";
+		this.tempPass = tempPassword;
+		setContent();
+		setSubject();
 	}
 
 	public void setRecipient(String recipient) { this.recipient = recipient;}
-	public void setChooseFile(boolean val)
+	//	public void setChooseFile(boolean val)
+//	{
+//		chooseFile = val;
+//	}
+//	//public void setFilePath(String path)
+//	{
+//		filePath = path;
+//	}
+//	//public void setFileName(String name)
+//	{
+//		this.name = name;
+//	}
+	private void setSubject()
 	{
-		chooseFile = val;
+		this.subject = "Password Reset";
 	}
-	public void setFilePath(String path)
+	private void setContent()
 	{
-		filePath = path;
-	}
-	public void setFileName(String name)
-	{
-		this.name = name;
-	}
-	public void setSubject(String subject)
-	{
-		this.subject = subject;
-	}
-	public void setContent(String content)
-	{
-		this.content = content;
+		this.content = "PLEASE DO NOT REPLY TO THIS ADDRESS AS IT IS NOT MONITORED\n" +
+				"\nDear Customer, \n" +
+				"\tYour temporary password is: " + tempPass +
+				"Please go back and use your temporary password to login." +
+				"\nTEMPORARY CODE EXPIRES IN 15 MINUTES.";
 	}
 
-	public void sendEmail()
+	public boolean sendEmail()
 	{
-		email();
+		return email();
 	}
-	private void email()
+	private boolean email()
 	{
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -73,51 +81,18 @@ public class Email
 				});
 
 		try {
-			if(!chooseFile){
-				Message message = new MimeMessage(session);
-				message.setFrom(new InternetAddress(from));
-				message.setRecipients(Message.RecipientType.TO,
-						InternetAddress.parse(recipient));
-				message.setSubject(subject);
-				message.setText(content);
-				System.out.println("Sending message...");
-				long start = System.currentTimeMillis();
-				Transport.send(message);
-				System.out.println(System.currentTimeMillis()-start);
-				System.out.println("Message sent to : " + recipient);
-
-
-			}else {
-				Message message = new MimeMessage(session);
-				message.setFrom(new InternetAddress(from));
-				message.setRecipients(Message.RecipientType.TO,
-						InternetAddress.parse(this.recipient));
-				message.setSubject(this.subject);
-
-				MimeBodyPart messageBodyPart;
-				MimeBodyPart emailText = new MimeBodyPart();
-				emailText.setText(this.content);
-
-				Multipart multipart = new MimeMultipart();
-
-				messageBodyPart = new MimeBodyPart();
-				String file = filePath;
-				String fileName = name;
-				DataSource source = new FileDataSource(file);
-				messageBodyPart.setDataHandler(new DataHandler(source));
-				messageBodyPart.setFileName(fileName);
-
-				multipart.addBodyPart(emailText);
-				multipart.addBodyPart(messageBodyPart);
-
-				message.setContent(multipart);
-
-				System.out.println("Sending message...");
-				long start = System.currentTimeMillis();
-				Transport.send(message);
-				System.out.println("Done in: " + (System.currentTimeMillis() - start) + "ms");
-			}
-
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(recipient));
+			message.setSubject(subject);
+			message.setText(content);
+			System.out.println("Sending message...");
+			long start = System.currentTimeMillis();
+			Transport.send(message);
+			System.out.println(System.currentTimeMillis()-start);
+			System.out.println("Message sent to : " + recipient);
+			return true;
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}

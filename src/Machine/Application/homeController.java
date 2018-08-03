@@ -104,7 +104,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(exitHome)){
 			try {
-				rootPane = FXMLLoader.load(getClass().getResource("bankUI.fxml"));
+				rootPane = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
 				secondPane.getChildren().setAll(rootPane);
 			} catch (IOException e) {
 				e.printStackTrace();

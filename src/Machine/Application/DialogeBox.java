@@ -82,7 +82,7 @@ public class DialogeBox
 	private void loadLoginPage(AnchorPane rootPane, StackPane registerPane)
 	{
 		try {
-			rootPane = FXMLLoader.load(getClass().getResource("bankUI.fxml"));
+			rootPane = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
 			registerPane.getChildren().setAll(rootPane);
 		} catch (IOException e){
 			e.printStackTrace();

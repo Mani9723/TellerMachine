@@ -266,6 +266,25 @@ final class MachineModel
 		}
 	}
 
+	void updateSpecificValueMainDB(String user, String col, String value) throws SQLException
+	{
+		PreparedStatement preparedStatement = null;
+
+		String query = "UPDATE Customer_Information set "+col+" = ? where Username = ?";
+
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,value);
+			preparedStatement.setString(2,user);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			assert preparedStatement != null;
+			preparedStatement.close();
+		}
+	}
+
 	void insertToStatementDB(String table, String type, String amount, String prevBal, String newBal) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
