@@ -42,7 +42,7 @@ public class loginController implements Initializable
 	private JFXPasswordField password;
 
 	@FXML
-	private JFXButton login, exitResetPass;
+	private JFXButton login, exitResetPass, exitNewPass;
 
 	@FXML
 	private JFXButton registerButton;
@@ -135,6 +135,26 @@ public class loginController implements Initializable
 		exitResetPass.setVisible(true);
 		try {
 			StackPane resetPane = FXMLLoader.load(getClass().getResource("ResetPasswordPage.fxml"));
+			drawerPane.setSidePane(resetPane);
+
+			if(drawerPane.isShown() && event.getSource().equals(exitResetPass)) {
+				drawerPane.close();
+				exitResetPass.setDisable(true);
+				exitResetPass.setVisible(false);
+			} else
+				drawerPane.open();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void createNewPassword(ActionEvent event)
+	{
+		exitResetPass.setDisable(false);
+		exitResetPass.setVisible(true);
+		try {
+			AnchorPane resetPane = FXMLLoader.load(getClass().getResource("ChangePassPage.fxml"));
 			drawerPane.setSidePane(resetPane);
 
 			if(drawerPane.isShown() && event.getSource().equals(exitResetPass)) {

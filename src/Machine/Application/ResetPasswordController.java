@@ -41,6 +41,7 @@ public class ResetPasswordController implements Initializable
 			String hiddenEmail = hideEmail(actualEmail);
 			email.sendEmail();
 			sent.setText("Sent: " + hiddenEmail);
+			usernameInput.setText("");
 		}
 		sendButton.setDisable(true);
 	}

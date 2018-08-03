@@ -220,6 +220,26 @@ final class MachineModel
 		return "Unknown";
 	}
 
+	void updateNewPassword(String user, String newPass) throws SQLException
+	{
+		PreparedStatement preparedStatement = null;
+
+		String query = "UPDATE Customer_Information set Password = ?, TempPassword = ? where Username = ?";
+
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,newPass);
+			preparedStatement.setString(2,"");
+			preparedStatement.setString(3,user);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			assert preparedStatement != null;
+			preparedStatement.close();
+		}
+	}
+
 
 	void saveUserToDatabase(String...values) throws SQLException
 	{
