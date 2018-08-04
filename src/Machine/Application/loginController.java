@@ -43,7 +43,7 @@ public class loginController implements Initializable
 	private JFXPasswordField password;
 
 	@FXML
-	private JFXButton login, exitResetPass, exitNewPass;
+	private JFXButton login, exitResetPass, forgotButton, makeNewPass;
 
 	@FXML
 	private JFXButton registerButton;
@@ -84,12 +84,17 @@ public class loginController implements Initializable
 	@FXML
 	void EnterKey(KeyEvent event)
 	{
-		if(password.getText().length()>0)
+		if(password.getText().length()>3)
 			login.setDisable(false);
+		if(password.getText().length()<3 || username.getText().length() < 3)
+			login.setDisable(true);
 		if(event.getCode().equals(KeyCode.ENTER)){
 			try {
 				if(machineModel.isFirstTimeRunning()){
 					dialogeBox.OkButton("Welcome, please register first",new JFXDialog());
+					username.setText("");
+					password.setText("");
+					login.setDisable(true);
 				} else if(processCredentials()){
 					FXMLLoader loader = new FXMLLoader();
 					loader.setLocation(getClass().getResource("homePage.fxml"));
@@ -149,13 +154,22 @@ public class loginController implements Initializable
 				drawerPane.close();
 				exitResetPass.setDisable(true);
 				exitResetPass.setVisible(false);
+				modifyButtonVisibility(false);
 			} else {
 				drawerPane.open();
+				modifyButtonVisibility(true);
 			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void modifyButtonVisibility(boolean disable)
+	{
+		registerButton.setDisable(disable);
+		forgotButton.setDisable(disable);
+		makeNewPass.setDisable(disable);
 	}
 
 	@FXML
@@ -171,8 +185,12 @@ public class loginController implements Initializable
 				drawerPane.close();
 				exitResetPass.setDisable(true);
 				exitResetPass.setVisible(false);
-			} else
+				modifyButtonVisibility(false);
+			} else {
 				drawerPane.open();
+				modifyButtonVisibility(true);
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

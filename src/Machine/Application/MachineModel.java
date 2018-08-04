@@ -64,7 +64,9 @@ final class MachineModel
 				+ "	Lastname text NOT NULL,\n"
 				+ "	CurrentBalance text NOT NULL,\n"
 				+ "	DateCreated text NOT NULL,\n"
-				+ "	PersonalDBPath text\n"
+				+ "	Email text NOT NULL,\n"
+				+ "	TempPassword text,\n"
+				+ "	ExpireTime text\n"
 				+ ")";
 		createPrepStmtExecute(query);
 		System.out.println("Table created Customer_Information");

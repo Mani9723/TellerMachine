@@ -64,7 +64,6 @@ public class DialogeBox
 		button.setPrefSize(80,50);
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.CENTER);
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED,(MouseEvent mouseEvent )->{
-			parent.setEffect(null);
 			this.dialog.close();
 		});
 		Label label = new Label(buttonMessage);
@@ -74,7 +73,6 @@ public class DialogeBox
 		dialogLayout.setActions(button);
 		dialogLayout.setPrefWidth(250);
 		this.dialog.show();
-		parent.setEffect(gaussianBlur);
 	}
 
 	void cancelButton(String buttonMessage)

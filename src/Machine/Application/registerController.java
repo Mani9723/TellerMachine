@@ -81,7 +81,7 @@ public class registerController {
 				if (userAlreadyExists(user)) {
 					dialogeBox.OkButton("Username is taken", new JFXDialog());
 				} else {
-					saveUserToFile(user, password, first, last,email);
+					saveUserToFile(user, password, first, last, email);
 					clearFields(pass, confirmPass, firstName, lastName, username);
 					dialogeBox.returnToLogin("Welcome " + first, stackPane, stackPane);
 				}
