@@ -169,6 +169,8 @@ public class loginController implements Initializable
 		registerButton.setDisable(disable);
 		forgotButton.setDisable(disable);
 		makeNewPass.setDisable(disable);
+		username.setDisable(disable);
+		password.setDisable(disable);
 	}
 
 	@FXML

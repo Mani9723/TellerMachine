@@ -144,8 +144,8 @@ public class withdrawController implements Initializable
 	{
 		if(event.getSource().equals(LOGOUT)) {
 			try {
-				rootPane = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
-				stackPane.getChildren().setAll(rootPane);
+				stackPane2 = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
+				stackPane.getChildren().setAll(stackPane2);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

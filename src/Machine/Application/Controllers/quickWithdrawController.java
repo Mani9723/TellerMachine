@@ -164,8 +164,8 @@ public class quickWithdrawController implements Initializable
 	{
 		if(event.getSource().equals(exit)) {
 			try {
-				rootPane = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
-				stackPane.getChildren().setAll(rootPane);
+				stackPane2 = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
+				stackPane.getChildren().setAll(stackPane2);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -137,10 +137,11 @@ public class depositController implements Initializable
 	@FXML
 	void logout(ActionEvent event)
 	{
+		StackPane stackPane1;
 		if(event.getSource().equals(logout)) {
 			try {
-				rootPane = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
-				stackPane.getChildren().setAll(rootPane);
+				 stackPane1 = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
+				stackPane.getChildren().setAll(stackPane1);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
