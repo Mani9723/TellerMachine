@@ -17,12 +17,12 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.registerController">
+<StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.registerController">
     <AnchorPane fx:id="registerPane" prefHeight="500.0" prefWidth="600.0">
         <children>
             <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true">
             <image>
-               <Image url="@../images/Everest-Mountain-Powerpoint-Backgrounds-1000x750.jpg" />
+               <Image url="@../../images/Everest-Mountain-Powerpoint-Backgrounds-1000x750.jpg" />
             </image>
             </ImageView>
             <VBox layoutX="137.0" layoutY="60.0" prefHeight="400.0" prefWidth="226.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="137.0" AnchorPane.topAnchor="60.0">
@@ -42,7 +42,7 @@
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         </rowConstraints>
                         <children>
-                            <JFXButton fx:id="registerButton" alignment="TOP_CENTER" buttonType="RAISED" contentDisplay="BOTTOM" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleRegisterButton" opacity="0.82" prefHeight="46.0" prefWidth="444.0" ripplerFill="#dfed0e" styleClass="quickCash" stylesheets="@application.css" text="REGISTER" GridPane.rowIndex="7">
+                            <JFXButton fx:id="registerButton" alignment="TOP_CENTER" buttonType="RAISED" contentDisplay="BOTTOM" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleRegisterButton" opacity="0.82" prefHeight="46.0" prefWidth="444.0" ripplerFill="#dfed0e" styleClass="quickCash" stylesheets="@../FXMLs/application.css" text="REGISTER" GridPane.rowIndex="7">
                                 <font>
                                     <Font name="Papyrus" size="16.0" />
                                 </font>

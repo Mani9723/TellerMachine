@@ -1,4 +1,4 @@
-package Machine.Application;
+package Machine.Application.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -144,7 +144,7 @@ public class withdrawController implements Initializable
 	{
 		if(event.getSource().equals(LOGOUT)) {
 			try {
-				rootPane = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
+				rootPane = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
 				stackPane.getChildren().setAll(rootPane);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -157,7 +157,7 @@ public class withdrawController implements Initializable
 	{
 		if(event.getSource().equals(mainMenu)) {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("homePage.fxml"));
+			loader.setLocation(getClass().getResource("..\\FXMLs\\homePage.fxml"));
 			Parent loginParent = null;
 			try {
 				loginParent = loader.load();
@@ -179,7 +179,7 @@ public class withdrawController implements Initializable
 	{
 		if(event.getSource().equals(qCash)) {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("QuickWithdraw.fxml"));
+			loader.setLocation(getClass().getResource("..\\FXMLs\\QuickWithdraw.fxml"));
 			Parent loginParent = null;
 			try {
 				loginParent = loader.load();

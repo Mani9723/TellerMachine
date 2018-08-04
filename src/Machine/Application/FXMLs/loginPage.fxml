@@ -16,7 +16,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.loginController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.loginController">
    <children>
       <AnchorPane fx:id="rootPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -24,7 +24,7 @@
                <children>
                   <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <image>
-                        <Image url="@../images/Stefanus-martanto-blue-mountains-orange-sky-ipad-wallpaper-768x768.jpg" />
+                        <Image url="@../../images/Stefanus-martanto-blue-mountains-orange-sky-ipad-wallpaper-768x768.jpg" />
                      </image>
                   </ImageView>
                   <Label alignment="CENTER" layoutX="192.0" layoutY="58.0" prefHeight="42.0" prefWidth="316.0" text="W E L C O M E " textFill="WHITE">
@@ -135,7 +135,7 @@
                         </RadialGradient>
                      </textFill>
                   </Label>
-                  <JFXButton fx:id="exitResetPass" layoutX="518.0" layoutY="14.0" onAction="#resetPassword" prefHeight="32.0" prefWidth="120.0" styleClass="exitHome" stylesheets="@application.css" text="BACK TO LOGIN">
+                  <JFXButton fx:id="exitResetPass" layoutX="518.0" layoutY="14.0" onAction="#resetPassword" prefHeight="32.0" prefWidth="120.0" styleClass="exitHome" stylesheets="@../FXMLs/application.css" text="BACK TO LOGIN">
                      <font>
                         <Font name="Papyrus" size="10.0" />
                      </font>

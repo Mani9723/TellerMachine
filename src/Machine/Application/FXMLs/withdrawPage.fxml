@@ -17,13 +17,13 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.withdrawController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.withdrawController">
     <children>
         <AnchorPane fx:id="withdrawPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
             <children>
                 <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true">
                     <image>
-                        <Image url="@../images/50-Beautiful-and-Minimalist-Presentation-Backgrounds-02.jpg" />
+                        <Image url="@../../images/50-Beautiful-and-Minimalist-Presentation-Backgrounds-02.jpg" />
                     </image>
                 </ImageView>
                 <GridPane layoutX="263.0" layoutY="256.0" prefHeight="245.0" prefWidth="317.0" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="150.0">
@@ -39,47 +39,47 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <JFXButton fx:id="seven" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="172.0" styleClass="seven" stylesheets="@application.css" text="7">
+                        <JFXButton fx:id="seven" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="172.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="7">
                             <font>
                                 <Font name="Papyrus" size="22.0" />
                             </font></JFXButton>
-                        <JFXButton fx:id="eight" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="184.0" styleClass="seven" stylesheets="@application.css" text="8" GridPane.columnIndex="1">
+                        <JFXButton fx:id="eight" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="184.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="8" GridPane.columnIndex="1">
                             <font>
                                 <Font name="Papyrus" size="22.0" />
                             </font></JFXButton>
-                        <JFXButton fx:id="nine" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="168.0" styleClass="seven" stylesheets="@application.css" text="9" GridPane.columnIndex="2">
+                        <JFXButton fx:id="nine" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="168.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="9" GridPane.columnIndex="2">
                             <font>
                                 <Font name="Papyrus" size="22.0" />
                             </font></JFXButton>
-                        <JFXButton fx:id="four" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="163.0" styleClass="seven" stylesheets="@application.css" text="4" GridPane.rowIndex="1">
+                        <JFXButton fx:id="four" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="163.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="4" GridPane.rowIndex="1">
                             <font>
                                 <Font name="Papyrus" size="22.0" />
                             </font></JFXButton>
-                        <JFXButton fx:id="five" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="141.0" styleClass="seven" stylesheets="@application.css" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <JFXButton fx:id="five" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="141.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <font>
                                 <Font name="Papyrus" size="22.0" />
                             </font></JFXButton>
-                        <JFXButton fx:id="six" onAction="#keypadPressed" opacity="0.89" prefHeight="136.0" prefWidth="142.0" styleClass="seven" stylesheets="@application.css" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <JFXButton fx:id="six" onAction="#keypadPressed" opacity="0.89" prefHeight="136.0" prefWidth="142.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
                             <font>
                                 <Font name="Papyrus" size="22.0" />
                             </font></JFXButton>
-                        <JFXButton fx:id="one" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="183.0" styleClass="seven" stylesheets="@application.css" text="1" GridPane.rowIndex="2">
+                        <JFXButton fx:id="one" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="183.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="1" GridPane.rowIndex="2">
                             <font>
                                 <Font name="Papyrus" size="22.0" />
                             </font></JFXButton>
-                        <JFXButton fx:id="two" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="162.0" styleClass="seven" stylesheets="@application.css" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <JFXButton fx:id="two" onAction="#keypadPressed" opacity="0.89" prefHeight="62.0" prefWidth="162.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <font>
                                 <Font name="Papyrus" size="22.0" />
                             </font></JFXButton>
-                        <JFXButton fx:id="three" onAction="#keypadPressed" opacity="0.89" prefHeight="168.0" prefWidth="132.0" styleClass="seven" stylesheets="@application.css" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <JFXButton fx:id="three" onAction="#keypadPressed" opacity="0.89" prefHeight="168.0" prefWidth="132.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2">
                             <font>
                                 <Font name="Papyrus" size="22.0" />
                             </font></JFXButton>
-                        <JFXButton fx:id="zero" onAction="#keypadPressed" opacity="0.89" prefHeight="63.0" prefWidth="292.0" styleClass="seven" stylesheets="@application.css" text="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                        <JFXButton fx:id="zero" onAction="#keypadPressed" opacity="0.89" prefHeight="63.0" prefWidth="292.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                             <font>
                                 <Font name="Papyrus" size="21.0" />
                             </font></JFXButton>
-                        <JFXButton fx:id="decimal" onAction="#keypadPressed" opacity="0.89" prefHeight="61.0" prefWidth="134.0" styleClass="seven" stylesheets="@application.css" text="." GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <JFXButton fx:id="decimal" onAction="#keypadPressed" opacity="0.89" prefHeight="61.0" prefWidth="134.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="." GridPane.columnIndex="2" GridPane.rowIndex="3">
                             <font>
                                 <Font name="Times New Roman" size="32.0" />
                             </font></JFXButton>
@@ -98,11 +98,11 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <JFXButton fx:id="withdrawButton" buttonType="RAISED" onAction="#withdraw" opacity="0.87" prefHeight="67.0" prefWidth="167.0" ripplerFill="BLACK" styleClass="takeOut" stylesheets="@application.css" text="WITHDRAW">
+                                        <JFXButton fx:id="withdrawButton" buttonType="RAISED" onAction="#withdraw" opacity="0.87" prefHeight="67.0" prefWidth="167.0" ripplerFill="BLACK" styleClass="takeOut" stylesheets="@../FXMLs/application.css" text="WITHDRAW">
                                             <font>
                                                 <Font name="Papyrus" size="15.0" />
                                             </font></JFXButton>
-                                        <JFXButton fx:id="reset" buttonType="RAISED" onAction="#clear" opacity="0.87" prefHeight="67.0" prefWidth="146.0" styleClass="clear" stylesheets="@application.css" text="CLEAR" textFill="WHITE" GridPane.columnIndex="1">
+                                        <JFXButton fx:id="reset" buttonType="RAISED" onAction="#clear" opacity="0.87" prefHeight="67.0" prefWidth="146.0" styleClass="clear" stylesheets="@../FXMLs/application.css" text="CLEAR" textFill="WHITE" GridPane.columnIndex="1">
                                             <font>
                                                 <Font name="Papyrus" size="15.0" />
                                             </font></JFXButton>
@@ -128,7 +128,7 @@
                                     <font>
                                         <Font name="Papyrus" size="21.0" />
                                     </font></Label>
-                                <JFXTextField fx:id="moneyTextField" alignment="CENTER_RIGHT" layoutX="275.0" layoutY="60.0" prefHeight="77.0" prefWidth="410.0" promptText="0.00" stylesheets="@application.css">
+                                <JFXTextField fx:id="moneyTextField" alignment="CENTER_RIGHT" layoutX="275.0" layoutY="60.0" prefHeight="77.0" prefWidth="410.0" promptText="0.00" stylesheets="@../FXMLs/application.css">
                                     <font>
                                         <Font name="Papyrus" size="23.0" />
                                     </font>
@@ -152,7 +152,7 @@
                                         </RadialGradient>
                                     </unFocusColor>
                                 </JFXTextField>
-                                <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="276.0" layoutY="70.0" prefHeight="77.0" prefWidth="49.0" stylesheets="@application.css" text="\$">
+                                <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="276.0" layoutY="70.0" prefHeight="77.0" prefWidth="49.0" stylesheets="@../FXMLs/application.css" text="\$">
                                     <font>
                                         <Font name="Papyrus" size="38.0" />
                                     </font>
@@ -178,15 +178,15 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <JFXButton fx:id="mainMenu" buttonType="RAISED" onAction="#menu" prefHeight="73.0" prefWidth="196.0" styleClass="quickCash" stylesheets="@application.css" text="MAIN MENU">
+                                        <JFXButton fx:id="mainMenu" buttonType="RAISED" onAction="#menu" prefHeight="73.0" prefWidth="196.0" styleClass="quickCash" stylesheets="@../FXMLs/application.css" text="MAIN MENU">
                                             <font>
                                                 <Font name="Papyrus" size="21.0" />
                                             </font></JFXButton>
-                                        <JFXButton fx:id="LOGOUT" buttonType="RAISED" onAction="#logOut" opacity="0.9" prefHeight="71.0" prefWidth="196.0" styleClass="exitHome" stylesheets="@application.css" text="LOGOUT" GridPane.rowIndex="2">
+                                        <JFXButton fx:id="LOGOUT" buttonType="RAISED" onAction="#logOut" opacity="0.9" prefHeight="71.0" prefWidth="196.0" styleClass="exitHome" stylesheets="@../FXMLs/application.css" text="LOGOUT" GridPane.rowIndex="2">
                                             <font>
                                                 <Font name="Papyrus" size="21.0" />
                                             </font></JFXButton>
-                                        <JFXButton fx:id="qCash" buttonType="RAISED" onAction="#qkCash" prefHeight="77.0" prefWidth="196.0" styleClass="takeOut" stylesheets="@application.css" text="QUICK CASH" GridPane.rowIndex="1">
+                                        <JFXButton fx:id="qCash" buttonType="RAISED" onAction="#qkCash" prefHeight="77.0" prefWidth="196.0" styleClass="takeOut" stylesheets="@../FXMLs/application.css" text="QUICK CASH" GridPane.rowIndex="1">
                                             <font>
                                                 <Font name="Papyrus" size="18.0" />
                                             </font></JFXButton>

@@ -1,7 +1,6 @@
-package Machine.Application;
+package Machine.Application.Controllers;
 
 import Machine.AccountManager.HashPassword;
-import Machine.AccountManager.Email;
 
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
@@ -97,7 +96,7 @@ public class loginController implements Initializable
 					login.setDisable(true);
 				} else if(processCredentials()){
 					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(getClass().getResource("homePage.fxml"));
+					loader.setLocation(getClass().getResource("..\\FXMLs\\homePage.fxml"));
 					Parent loginParent = null;
 					try {
 						loginParent = loader.load();
@@ -146,7 +145,7 @@ public class loginController implements Initializable
 		exitResetPass.setDisable(false);
 		exitResetPass.setVisible(true);
 		try {
-			StackPane resetPane = FXMLLoader.load(getClass().getResource("ResetPasswordPage.fxml"));
+			StackPane resetPane = FXMLLoader.load(getClass().getResource("..\\FXMLs\\ResetPasswordPage.fxml"));
 			drawerPane.setSidePane(resetPane);
 			drawerPane.setDirection(JFXDrawer.DrawerDirection.TOP);
 
@@ -178,7 +177,7 @@ public class loginController implements Initializable
 		exitResetPass.setDisable(false);
 		exitResetPass.setVisible(true);
 		try {
-			StackPane resetPane = FXMLLoader.load(getClass().getResource("ChangePassPage.fxml"));
+			StackPane resetPane = FXMLLoader.load(getClass().getResource("..\\FXMLs\\ChangePassPage.fxml"));
 			drawerPane.setSidePane(resetPane);
 
 			if(drawerPane.isShown() && event.getSource().equals(exitResetPass)) {
@@ -209,7 +208,7 @@ public class loginController implements Initializable
 	{
 		if(event.getSource().equals(registerButton)){
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("registerPage.fxml"));
+			loader.setLocation(getClass().getResource("..\\FXMLs\\registerPage.fxml"));
 			Parent loginParent = null;
 			try {
 				loginParent = loader.load();
@@ -258,7 +257,7 @@ public class loginController implements Initializable
 	private void loadHomePage(ActionEvent event, KeyEvent eventK)
 	{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("homePage.fxml"));
+		loader.setLocation(getClass().getResource("..\\FXMLs\\homePage.fxml"));
 		Parent loginParent = null;
 		try {
 			loginParent = loader.load();

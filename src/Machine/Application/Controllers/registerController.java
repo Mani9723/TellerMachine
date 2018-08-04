@@ -1,4 +1,4 @@
-package Machine.Application;
+package Machine.Application.Controllers;
 
 import Machine.AccountManager.HashPassword;
 
@@ -9,7 +9,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -119,7 +118,7 @@ public class registerController {
 	{
 		if(event.getSource().equals(returnButton)) {
 			try {
-				stackPane1 = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
+				stackPane1 = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
 				stackPane.getChildren().setAll(stackPane1);
 			} catch (IOException e) {
 				e.printStackTrace();

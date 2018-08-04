@@ -1,4 +1,4 @@
-package Machine.Application;
+package Machine.Application.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
@@ -84,7 +84,7 @@ public class homeController implements Initializable
 	private void loadDepositPage(ActionEvent event)
 	{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("depositPage.fxml"));
+		loader.setLocation(getClass().getResource("..\\FXMLs\\depositPage.fxml"));
 		Parent loginParent = null;
 		try {
 			loginParent = loader.load();
@@ -105,7 +105,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(exitHome)){
 			try {
-				stackPane = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
+				stackPane = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
 				secondPane.getChildren().setAll(stackPane);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -117,7 +117,7 @@ public class homeController implements Initializable
 	void handleStatementButton(ActionEvent event)
 	{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("statementPage.fxml"));
+		loader.setLocation(getClass().getResource("..\\FXMLs\\statementPage.fxml"));
 		Parent loginParent = null;
 		try {
 			loginParent = loader.load();
@@ -139,7 +139,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(withdraw)) {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("withdrawPage.fxml"));
+			loader.setLocation(getClass().getResource("..\\FXMLs\\withdrawPage.fxml"));
 			Parent loginParent = null;
 			try {
 				loginParent = loader.load();
@@ -161,7 +161,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(quickCash)) {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("QuickWithdraw.fxml"));
+			loader.setLocation(getClass().getResource("..\\FXMLs\\QuickWithdraw.fxml"));
 			Parent loginParent = null;
 			try {
 				loginParent = loader.load();

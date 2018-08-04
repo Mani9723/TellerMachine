@@ -10,15 +10,15 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.StackPane?>
-<StackPane fx:id="NewPasswordPane" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.ChangePassController">
+<StackPane fx:id="NewPasswordPane" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.ChangePassController">
    <children>
       <ImageView fitHeight="500.0" fitWidth="300.0" opacity="0.9" pickOnBounds="true">
          <image>
-            <Image url="@../images/croppedVersion.jpg" />
+            <Image url="@../../images/croppedVersion.jpg" />
          </image>
       </ImageView>
       <VBox layoutX="7.0" layoutY="6.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -46,7 +46,7 @@
                         <Font name="Papyrus" size="19.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="15.0" right="15.0" />
+                        <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
                   </JFXTextField>
                   <JFXTextField fx:id="newPass" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="New password" unFocusColor="WHITE" GridPane.rowIndex="3">
@@ -54,7 +54,7 @@
                         <Font name="Papyrus" size="19.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="15.0" right="15.0" />
+                        <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
                   </JFXTextField>
                   <JFXTextField fx:id="confNewPass" alignment="CENTER" focusColor="WHITE" labelFloat="true" onKeyReleased="#KeyReleased" promptText="Confirm" unFocusColor="WHITE" GridPane.rowIndex="4">
@@ -62,10 +62,10 @@
                         <Font name="Papyrus" size="19.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="15.0" right="15.0" />
+                        <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <JFXButton fx:id="changeButton" buttonType="RAISED" onAction="#verifyNewPassword" prefHeight="0.0" prefWidth="160.0" styleClass="seven" stylesheets="@application.css" text="C H A N G E" GridPane.rowIndex="5">
+                  <JFXButton fx:id="changeButton" buttonType="RAISED" onAction="#verifyNewPassword" prefHeight="0.0" prefWidth="160.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="C H A N G E" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="70.0" right="70.0" />
                      </GridPane.margin>
@@ -78,12 +78,12 @@
                         <Font name="Papyrus" size="19.0" />
                      </font>
                      <GridPane.margin>
-                        <Insets left="15.0" right="15.0" />
+                        <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
                   </JFXTextField>
                   <ImageView fx:id="imgLeft" fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../images/61401818-elegant-check-mark-flat-icon-imitation-draw-with-white-chalk-on-green-chalkboard-flat-pictogram-and-.jpg" />
+                        <Image url="@../../images/61401818-elegant-check-mark-flat-icon-imitation-draw-with-white-chalk-on-green-chalkboard-flat-pictogram-and-.jpg" />
                      </image>
                      <GridPane.margin>
                         <Insets left="25.0" />
@@ -91,7 +91,7 @@
                   </ImageView>
                   <ImageView fx:id="imgRight" fitHeight="32.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../images/61401818-elegant-check-mark-flat-icon-imitation-draw-with-white-chalk-on-green-chalkboard-flat-pictogram-and-.jpg" />
+                        <Image url="@../../images/61401818-elegant-check-mark-flat-icon-imitation-draw-with-white-chalk-on-green-chalkboard-flat-pictogram-and-.jpg" />
                      </image>
                      <GridPane.margin>
                         <Insets left="245.0" />

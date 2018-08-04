@@ -1,4 +1,4 @@
-package Machine.Application;
+package Machine.Application.Controllers;
 
 
 import com.jfoenix.controls.JFXButton;
@@ -139,7 +139,7 @@ public class depositController implements Initializable
 	{
 		if(event.getSource().equals(logout)) {
 			try {
-				rootPane = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
+				rootPane = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
 				stackPane.getChildren().setAll(rootPane);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -152,7 +152,7 @@ public class depositController implements Initializable
 	{
 		if(event.getSource().equals(menu)) {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("homePage.fxml"));
+			loader.setLocation(getClass().getResource("..\\FXMLs\\homePage.fxml"));
 			Parent loginParent = null;
 			try {
 				loginParent = loader.load();
@@ -174,7 +174,7 @@ public class depositController implements Initializable
 	{
 		if(event.getSource().equals(withdraw)) {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("withdrawPage.fxml"));
+			loader.setLocation(getClass().getResource("..\\FXMLs\\withdrawPage.fxml"));
 			Parent loginParent = null;
 			try {
 				loginParent = loader.load();

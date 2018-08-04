@@ -1,8 +1,6 @@
-package Machine.Application;
+package Machine.Application.Controllers;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,7 +85,7 @@ public class StatementController implements Initializable
 	{
 		if(event.getSource().equals(menuButton)){
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("homePage.fxml"));
+			loader.setLocation(getClass().getResource("..\\FXMLs\\homePage.fxml"));
 			Parent loginParent = null;
 			try {
 				loginParent = loader.load();
