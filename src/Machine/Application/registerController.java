@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class registerController {
 
 	@FXML
-	private StackPane stackPane;
+	private StackPane stackPane, stackPane1;
 
 	@FXML
 	private AnchorPane registerPane, rootPane;
@@ -58,8 +58,8 @@ public class registerController {
 	{
 		accountType.setText("CHECKING");
 		dialogeBox = new DialogeBox(stackPane);
-		registerButton.setDisable(true);
-		registerButton.setOpacity(0.42);
+		dialogeBox.setNonStackPane(registerPane);
+		disableRegisterButton();
 	}
 
 	void setMachineModel(MachineModel model)
@@ -83,7 +83,7 @@ public class registerController {
 				} else {
 					saveUserToFile(user, password, first, last,email);
 					clearFields(pass, confirmPass, firstName, lastName, username);
-					dialogeBox.returnToLogin("Welcome " + first, rootPane, stackPane);
+					dialogeBox.returnToLogin("Welcome " + first, stackPane, stackPane);
 				}
 			} else {
 				dialogeBox.OkButton("Password does not match", new JFXDialog());
@@ -119,8 +119,8 @@ public class registerController {
 	{
 		if(event.getSource().equals(returnButton)) {
 			try {
-				rootPane = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
-				stackPane.getChildren().setAll(rootPane);
+				stackPane1 = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
+				stackPane.getChildren().setAll(stackPane1);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -146,8 +146,20 @@ public class registerController {
 	public void enableRegisterButton(KeyEvent keyEvent)
 	{
 		if(emailLabel.getText().length()>6) {
-			registerButton.setDisable(false);
-			registerButton.setOpacity(0.85);
+			enableRegisterButton();
+		}else if(emailLabel.getText().isEmpty() || emailLabel.getText().length()<6){
+			disableRegisterButton();
 		}
+	}
+
+	private void enableRegisterButton()
+	{
+		registerButton.setDisable(false);
+		registerButton.setOpacity(0.85);
+	}
+	private void disableRegisterButton()
+	{
+		registerButton.setDisable(true);
+		registerButton.setOpacity(0.42);
 	}
 }

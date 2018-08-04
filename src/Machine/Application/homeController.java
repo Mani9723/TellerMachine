@@ -65,6 +65,7 @@ public class homeController implements Initializable
 	private MachineModel machineModel;
 
 
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -104,8 +105,8 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(exitHome)){
 			try {
-				rootPane = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
-				secondPane.getChildren().setAll(rootPane);
+				stackPane = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
+				secondPane.getChildren().setAll(stackPane);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

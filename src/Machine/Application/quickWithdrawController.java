@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,9 +15,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class quickWithdrawController {
+public class quickWithdrawController implements Initializable
+{
 
 	@FXML
 	private StackPane stackPane, stackPane2;
@@ -58,6 +62,8 @@ public class quickWithdrawController {
 
 	private String username,previousBalance,newBalance,currBalance;
 
+	private DialogeBox dialogeBox;
+
 	void init(MachineModel machineModel)
 	{
 		setModel(machineModel);
@@ -82,9 +88,9 @@ public class quickWithdrawController {
 		if(validRequest(request)) {
 			executeQuery(request);
 			updateBalanceLabel();
-			new DialogeBox(stackPane).OkButton("Withdraw Amount $" + request, new JFXDialog());
+			dialogeBox.OkButton("Withdraw Amount $" + request, new JFXDialog());
 		} else
-			new DialogeBox(stackPane).OkButton("Invalid Amount: $"+request,new JFXDialog());
+			dialogeBox.OkButton("Invalid Amount: $"+request,new JFXDialog());
 	}
 
 	private boolean validRequest(String request) throws NumberFormatException
@@ -225,5 +231,10 @@ public class quickWithdrawController {
 	}
 
 
-
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		dialogeBox = new DialogeBox(stackPane);
+		dialogeBox.setNonStackPane(quickPane);
+	}
 }

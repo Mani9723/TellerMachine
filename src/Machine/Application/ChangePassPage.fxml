@@ -13,7 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="NewPasswordPane" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.ChangePassController">
+<?import javafx.scene.layout.StackPane?>
+<StackPane fx:id="NewPasswordPane" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.ChangePassController">
    <children>
       <ImageView fitHeight="500.0" fitWidth="300.0" opacity="0.9" pickOnBounds="true">
          <image>
@@ -40,7 +41,7 @@
                         <Font name="Papyrus" size="12.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="tempPass" alignment="CENTER" focusColor="#0b33ae" labelFloat="true" promptText="Temp Pass" unFocusColor="WHITE" GridPane.rowIndex="2">
+                  <JFXTextField fx:id="tempPass" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Temp Pass" unFocusColor="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font name="Papyrus" size="19.0" />
                      </font>
@@ -48,7 +49,7 @@
                         <Insets left="15.0" right="15.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <JFXTextField fx:id="newPass" alignment="CENTER" labelFloat="true" promptText="New password" unFocusColor="WHITE" GridPane.rowIndex="3">
+                  <JFXTextField fx:id="newPass" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="New password" unFocusColor="WHITE" GridPane.rowIndex="3">
                      <font>
                         <Font name="Papyrus" size="19.0" />
                      </font>
@@ -56,7 +57,7 @@
                         <Insets left="15.0" right="15.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <JFXTextField fx:id="confNewPass" alignment="CENTER" labelFloat="true" onKeyReleased="#KeyReleased" promptText="Confirm" unFocusColor="WHITE" GridPane.rowIndex="4">
+                  <JFXTextField fx:id="confNewPass" alignment="CENTER" focusColor="WHITE" labelFloat="true" onKeyReleased="#KeyReleased" promptText="Confirm" unFocusColor="WHITE" GridPane.rowIndex="4">
                      <font>
                         <Font name="Papyrus" size="19.0" />
                      </font>
@@ -72,7 +73,7 @@
                         <Font name="Papyrus" size="12.0" />
                      </font>
                   </JFXButton>
-                  <JFXTextField fx:id="username" alignment="CENTER" focusColor="#0b33ae" labelFloat="true" promptText="Username" unFocusColor="WHITE" GridPane.rowIndex="1">
+                  <JFXTextField fx:id="username" alignment="CENTER" focusColor="WHITE" labelFloat="true" promptText="Username" unFocusColor="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font name="Papyrus" size="19.0" />
                      </font>
@@ -101,4 +102,4 @@
          </children>
       </VBox>
    </children>
-</AnchorPane>
+</StackPane>

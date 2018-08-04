@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 public class withdrawController implements Initializable
 {
-	private DecimalFormat df = new DecimalFormat("########.##");
+	private DecimalFormat df = new DecimalFormat("##.##");
 
 	@FXML
 	private StackPane stackPane, stackPane2;
@@ -94,10 +94,13 @@ public class withdrawController implements Initializable
 	private String currBalance;
 	private MachineModel machineModel;
 	private String newBalance;
+	private DialogeBox dialogeBox;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		dialogeBox = new DialogeBox(stackPane);
+		dialogeBox.setNonStackPane(withdrawPane);
 		moneyTextField.setEditable(false);
 	}
 
@@ -202,7 +205,7 @@ public class withdrawController implements Initializable
 				executeQuery(request);
 				updateBalanceLabel();
 			}else{
-				new DialogeBox(stackPane).OkButton("Invalid Amount: $"+request,new JFXDialog());
+				dialogeBox.OkButton("Invalid Amount: $"+request,new JFXDialog());
 			}
 		}
 		resetCount();
@@ -238,7 +241,7 @@ public class withdrawController implements Initializable
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		new DialogeBox(stackPane).OkButton("Withdraw Amount: $"+request,new JFXDialog());
+		dialogeBox.OkButton("Withdraw Amount: $"+request,new JFXDialog());
 	}
 
 	private void updateBalanceLabel()

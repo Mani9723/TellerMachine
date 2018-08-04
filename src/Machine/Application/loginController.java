@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -54,10 +55,16 @@ public class loginController implements Initializable
 	private Label capsLockLabel;
 
 	private MachineModel machineModel;
+	private DialogeBox dialogeBox;
+	private GaussianBlur gaussianBlur;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		gaussianBlur = new GaussianBlur();
+		gaussianBlur.setRadius(7.5);
+		dialogeBox = new DialogeBox(stackPane);
+		dialogeBox.setNonStackPane(rootPane);
 		machineModel = new MachineModel();
 
 		capsLockLabel.setVisible(false);
@@ -82,7 +89,7 @@ public class loginController implements Initializable
 		if(event.getCode().equals(KeyCode.ENTER)){
 			try {
 				if(machineModel.isFirstTimeRunning()){
-					new DialogeBox(stackPane).OkButton("Welcome, please register first",new JFXDialog());
+					dialogeBox.OkButton("Welcome, please register first",new JFXDialog());
 				} else if(processCredentials()){
 					FXMLLoader loader = new FXMLLoader();
 					loader.setLocation(getClass().getResource("homePage.fxml"));
@@ -101,7 +108,7 @@ public class loginController implements Initializable
 					homeWindow.show();
 				}
 				else {
-					new DialogeBox(stackPane).OkButton("Incorrect Credentials", new JFXDialog());
+					dialogeBox.OkButton("Incorrect Credentials", new JFXDialog());
 					username.setText("");
 					password.setText("");
 					login.setDisable(true);
@@ -136,13 +143,16 @@ public class loginController implements Initializable
 		try {
 			StackPane resetPane = FXMLLoader.load(getClass().getResource("ResetPasswordPage.fxml"));
 			drawerPane.setSidePane(resetPane);
+			drawerPane.setDirection(JFXDrawer.DrawerDirection.TOP);
 
 			if(drawerPane.isShown() && event.getSource().equals(exitResetPass)) {
 				drawerPane.close();
 				exitResetPass.setDisable(true);
 				exitResetPass.setVisible(false);
-			} else
+			} else {
 				drawerPane.open();
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -154,7 +164,7 @@ public class loginController implements Initializable
 		exitResetPass.setDisable(false);
 		exitResetPass.setVisible(true);
 		try {
-			AnchorPane resetPane = FXMLLoader.load(getClass().getResource("ChangePassPage.fxml"));
+			StackPane resetPane = FXMLLoader.load(getClass().getResource("ChangePassPage.fxml"));
 			drawerPane.setSidePane(resetPane);
 
 			if(drawerPane.isShown() && event.getSource().equals(exitResetPass)) {
@@ -201,12 +211,12 @@ public class loginController implements Initializable
 	{
 		try {
 			if(machineModel.isFirstTimeRunning()){
-				new DialogeBox(stackPane).OkButton("Welcome, please register first",new JFXDialog());
+				dialogeBox.OkButton("Welcome, please register first",new JFXDialog());
 			}
 			else if(processCredentials()){
 				loadHomePage(event,null);
 			} else{
-				new DialogeBox(stackPane).OkButton("Incorrect Credentials", new JFXDialog());
+				dialogeBox.OkButton("Incorrect Credentials", new JFXDialog());
 				username.setText("");
 				password.setText("");
 				login.setDisable(true);

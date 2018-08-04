@@ -56,13 +56,13 @@ public class depositController implements Initializable
 	private String previousBalance, newBalance;
 
 	private MachineModel machineModel;
-
-//	private CheckingAccount checkingAccount = new CheckingAccount();
+	private DialogeBox dialogeBox;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-
+		dialogeBox = new DialogeBox(stackPane);
+		dialogeBox.setNonStackPane(depositPane);
 	}
 
 	void init(MachineModel machine)
@@ -85,7 +85,7 @@ public class depositController implements Initializable
 				executeQuery(request);
 				updateBalanceLabel();
 			} else{
-				new DialogeBox(stackPane).OkButton("Invalid Amount: $"+request,new JFXDialog());
+				dialogeBox.OkButton("Invalid Amount: $"+request,new JFXDialog());
 			}
 		}
 		depositInput.setText("");
@@ -106,7 +106,7 @@ public class depositController implements Initializable
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		new DialogeBox(stackPane).OkButton("Deposit Amount: $"+request,new JFXDialog());
+		dialogeBox.OkButton("Deposit Amount: $"+request,new JFXDialog());
 	}
 
 	private String getNewBalance(String request)
