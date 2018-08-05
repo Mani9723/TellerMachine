@@ -64,12 +64,14 @@ public class homeController implements Initializable
 	private String first;
 
 	private MachineModel machineModel;
+	private LoadScene loadScene;
 
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		loadScene = new LoadScene();
 		dateTime.setText(getDate());
 		accountType.setText("Checking");
 	}
@@ -84,21 +86,8 @@ public class homeController implements Initializable
 
 	private void loadDepositPage(ActionEvent event)
 	{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("..\\FXMLs\\depositPage.fxml"));
-		Parent loginParent = null;
-		try {
-			loginParent = loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Scene currScene = new Scene(loginParent);
-		depositController controller = loader.getController();
-		controller.setUsername(getuName());
-		controller.init(machineModel);
-		Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-		homeWindow.setScene(currScene);
-		homeWindow.show();
+		loadScene.setActionEvent(event);
+		loadScene.depositPage("..\\FXMLs\\depositPage.fxml",getuName(),machineModel);
 	}
 
 	@FXML
@@ -117,66 +106,23 @@ public class homeController implements Initializable
 	@FXML
 	void handleStatementButton(ActionEvent event)
 	{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("..\\FXMLs\\statementPage.fxml"));
-		Parent loginParent = null;
-		try {
-			loginParent = loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Scene currScene = new Scene(loginParent);
-		StatementController controller = loader.getController();
-		controller.setUsername(getuName());
-		controller.setMachineModel(machineModel);
-		controller.init();
-		Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-		homeWindow.setScene(currScene);
-		homeWindow.show();
+		loadScene.setActionEvent(event);
+		loadScene.statementScene("..\\FXMLs\\statementPage.fxml",getuName(),machineModel);
+
 	}
 
 	@FXML
 	void withdrawMoney(ActionEvent event)
 	{
-		if(event.getSource().equals(withdraw)) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\withdrawPage.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			withdrawController controller = loader.getController();
-			controller.setUsername(getuName());
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
-		}
+		loadScene.setActionEvent(event);
+		loadScene.withdrawScene("..\\FXMLs\\withdrawPage.fxml",getuName(),machineModel);
 	}
 
 	@FXML
 	void quickCash(ActionEvent event)
 	{
-		if(event.getSource().equals(quickCash)) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\QuickWithdraw.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			quickWithdrawController controller = loader.getController();
-			controller.setUsername(getuName());
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
-		}
+		loadScene.setActionEvent(event);
+		loadScene.quickCashScene("..\\FXMLs\\QuickWithdraw.fxml",uName,machineModel);
 	}
 
 	void init(MachineModel machine)

@@ -96,10 +96,12 @@ public class withdrawController implements Initializable
 	private MachineModel machineModel;
 	private String newBalance;
 	private DialogeBox dialogeBox;
+	private LoadScene loadScene;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(withdrawPane);
 		moneyTextField.setEditable(false);
@@ -157,21 +159,8 @@ public class withdrawController implements Initializable
 	void menu(ActionEvent event)
 	{
 		if(event.getSource().equals(mainMenu)) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\homePage.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			homeController controller = loader.getController();
-			controller.setUsername(username);
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
+			loadScene.setActionEvent(event);
+			loadScene.homeSceneAction("..\\FXMLs\\homePage.fxml",username,machineModel);
 		}
 	}
 
@@ -179,21 +168,8 @@ public class withdrawController implements Initializable
 	void qkCash(ActionEvent event)
 	{
 		if(event.getSource().equals(qCash)) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\QuickWithdraw.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			quickWithdrawController controller = loader.getController();
-			controller.setUsername(username);
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
+			loadScene.setActionEvent(event);
+			loadScene.quickCashScene("..\\FXMLs\\QuickWithdraw.fxml",username,machineModel);
 		}
 	}
 

@@ -59,9 +59,12 @@ public class depositController implements Initializable
 	private MachineModel machineModel;
 	private DialogeBox dialogeBox;
 
+	private LoadScene loadScene;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(depositPane);
 	}
@@ -153,44 +156,17 @@ public class depositController implements Initializable
 	void menu(ActionEvent event)
 	{
 		if(event.getSource().equals(menu)) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\homePage.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			homeController controller = loader.getController();
-			controller.setUsername(getUser());
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
+			loadScene.setActionEvent(event);
+			loadScene.homeSceneAction("..\\FXMLs\\homePage.fxml",username,machineModel);
 		}
 	}
 
 	@FXML
 	void withdraw(ActionEvent event)
 	{
-		if(event.getSource().equals(withdraw)) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\withdrawPage.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			withdrawController controller = loader.getController();
-			controller.setUsername(getUser());
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
-		}
+		loadScene.setActionEvent(event);
+		loadScene.withdrawScene("..\\FXMLs\\withdrawPage.fxml",username,machineModel);
+
 	}
 	void setUsername(String user)
 	{

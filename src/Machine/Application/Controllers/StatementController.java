@@ -84,22 +84,10 @@ public class StatementController implements Initializable
 
 	public void handleMenu(ActionEvent event)
 	{
+		LoadScene loadScene = new LoadScene();
 		if(event.getSource().equals(menuButton)){
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\homePage.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			homeController controller = loader.getController();
-			controller.setUsername(username);
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
+			loadScene.setActionEvent(event);
+			loadScene.homeSceneAction("..\\FXMLs\\homePage.fxml",username,machineModel);
 		}
 	}
 

@@ -57,10 +57,12 @@ public class loginController implements Initializable
 	private MachineModel machineModel;
 	private DialogeBox dialogeBox;
 	private GaussianBlur gaussianBlur;
+	private LoadScene loadScene;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		loadScene = new LoadScene();
 		gaussianBlur = new GaussianBlur();
 		gaussianBlur.setRadius(7.5);
 		dialogeBox = new DialogeBox(stackPane);
@@ -96,21 +98,8 @@ public class loginController implements Initializable
 					password.setText("");
 					login.setDisable(true);
 				} else if(processCredentials()){
-					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(getClass().getResource("..\\FXMLs\\homePage.fxml"));
-					Parent loginParent = null;
-					try {
-						loginParent = loader.load();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					Scene currScene = new Scene(loginParent);
-					homeController controller = loader.getController();
-					controller.setUsername(username.getText());
-					controller.init(machineModel);
-					Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-					homeWindow.setScene(currScene);
-					homeWindow.show();
+					loadScene.setKeyEvent(event);
+					loadScene.homeScene("..\\FXMLs\\homePage.fxml", username, machineModel);
 				}
 				else {
 					dialogeBox.OkButton("Incorrect Credentials", new JFXDialog());
@@ -210,20 +199,10 @@ public class loginController implements Initializable
 	void register(ActionEvent event)
 	{
 		if(event.getSource().equals(registerButton)){
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\registerPage.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			registerController controller = loader.getController();
-			controller.setMachineModel(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
+			loadScene.setActionEvent(event);
+			//loadScene.setResgisterController(new registerController());
+			loadScene.registerScene("..\\FXMLs\\registerPage.fxml",machineModel);
+
 		}
 	}
 
@@ -259,24 +238,7 @@ public class loginController implements Initializable
 
 	private void loadHomePage(ActionEvent event, KeyEvent eventK)
 	{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("..\\FXMLs\\homePage.fxml"));
-		Parent loginParent = null;
-		try {
-			loginParent = loader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		Scene currScene = new Scene(loginParent);
-		homeController controller = loader.getController();
-		controller.setUsername(username.getText());
-		controller.init(machineModel);
-		Stage homeWindow;
-		if(event == null) {
-			homeWindow = (Stage) ((Node) eventK.getSource()).getScene().getWindow();
-		} else
-			homeWindow = (Stage)((Node) event.getSource()).getScene().getWindow();
-		homeWindow.setScene(currScene);
-		homeWindow.show();
+		loadScene.setActionEvent(event);
+		loadScene.homeSceneAction("..\\FXMLs\\homePage.fxml",username.getText(),machineModel);
 	}
 }

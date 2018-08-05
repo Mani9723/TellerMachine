@@ -63,10 +63,12 @@ public class quickWithdrawController implements Initializable
 
 	private String username,previousBalance,newBalance,currBalance;
 
+	private LoadScene loadScene;
 	private DialogeBox dialogeBox;
 
 	void init(MachineModel machineModel)
 	{
+		loadScene = new LoadScene();
 		setModel(machineModel);
 		try {
 			setCurrBalance(machineModel.getAccountInfo(getUser(),"CurrentBalance"));
@@ -119,45 +121,15 @@ public class quickWithdrawController implements Initializable
 	@FXML
 	void clickOther(ActionEvent event)
 	{
-		if(event.getSource().equals(other)) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\withdrawPage.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			withdrawController controller = loader.getController();
-			controller.setUsername(getUser());
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
-		}
+		loadScene.setActionEvent(event);
+		loadScene.withdrawScene("..\\FXMLs\\withdrawPage.fxml",username,machineModel);
 	}
 
 	@FXML
 	void goToDeposit(ActionEvent event)
 	{
-		if(event.getSource().equals(deposit)) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\depositPage.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			depositController controller = loader.getController();
-			controller.setUsername(getUser());
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
-		}
+		loadScene.setActionEvent(event);
+		loadScene.depositPage("..\\FXMLs\\depositPage.fxml",username,machineModel);
 	}
 
 	@FXML
@@ -176,23 +148,8 @@ public class quickWithdrawController implements Initializable
 	@FXML
 	void goToMenu(ActionEvent event)
 	{
-		if(event.getSource().equals(mainMenu)) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\homePage.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			homeController controller = loader.getController();
-			controller.setUsername(username);
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
-		}
+		loadScene.setActionEvent(event);
+		loadScene.homeSceneAction("..\\FXMLs\\homePage.fxml",username,machineModel);
 	}
 
 	void setUsername(String user)
