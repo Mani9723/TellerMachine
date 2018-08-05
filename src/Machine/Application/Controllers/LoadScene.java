@@ -22,8 +22,6 @@ import java.io.IOException;
  * @since 7/28/2018  22:53
  */
 
-// TODO create a general LoadScene class. Design Properly.//
-// NOT COMPLETE
 @SuppressWarnings("SameParameterValue")
 
 class LoadScene
