@@ -2,6 +2,7 @@ package Machine.Application.Controllers;
 
 import Machine.AccountManager.HashPassword;
 
+import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

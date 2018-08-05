@@ -1,5 +1,6 @@
 package Machine.Application.Controllers;
 
+import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -236,7 +237,7 @@ public class withdrawController implements Initializable
 	{
 		String updatedBal = getNewBalance(request);
 		try {
-			machineModel.updateMainDB(updatedBal,username);
+			machineModel.updateBalanceMainDB(updatedBal,username);
 			machineModel.insertToStatementDB(username,"Withdrawal",request,previousBalance,updatedBal);
 		} catch (SQLException e) {
 			e.printStackTrace();

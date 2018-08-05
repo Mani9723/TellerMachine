@@ -2,6 +2,7 @@ package Machine.Application.Controllers;
 
 import Machine.AccountManager.HashPassword;
 
+import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPasswordField;
@@ -15,8 +16,13 @@ import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class registerController {
+
+	private Pattern pattern;
+	private Matcher matcher;
 
 	@FXML
 	private StackPane stackPane, stackPane1;
@@ -52,6 +58,10 @@ public class registerController {
 
 	private MachineModel machineModel;
 
+	private static final String EMAIL_PATTERN =
+			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
 	@FXML
 	public void initialize()
 	{
@@ -74,21 +84,32 @@ public class registerController {
 			String user = username.getText(), password = pass.getText();
 			String confPass = confirmPass.getText(), email = emailLabel.getText();
 
-			if(emptyFieldExists(pass,confirmPass,firstName,lastName,username))
-				dialogeBox.OkButton("Fields are empty", new JFXDialog());
-			else if (password.equals(confPass)) {
-				if (userAlreadyExists(user)) {
-					dialogeBox.OkButton("Username is taken", new JFXDialog());
-				} else {
-					saveUserToFile(user, password, first, last, email);
-					clearFields(pass, confirmPass, firstName, lastName, username);
-					dialogeBox.returnToLogin("Welcome " + first, stackPane, stackPane);
+			if(isValidEmailAddress(email)) {
+				if (emptyFieldExists(pass, confirmPass, firstName, lastName, username))
+					dialogeBox.OkButton("Fields are empty", new JFXDialog());
+				else if (password.equals(confPass)) {
+					if (userAlreadyExists(user)) {
+						dialogeBox.OkButton("Username is taken", new JFXDialog());
+					} else {
+						saveUserToFile(user, password, first, last, email);
+						clearFields(pass, confirmPass, firstName, lastName, username);
+						dialogeBox.returnToLogin("Welcome " + first, stackPane, stackPane);
+					}
+				} else{
+					dialogeBox.OkButton("Password Mismatch", new JFXDialog());
 				}
 			} else {
-				dialogeBox.OkButton("Password does not match", new JFXDialog());
+				dialogeBox.OkButton("Invalid Email", new JFXDialog());
 				pass.setText(""); confirmPass.setText("");
 			}
 		}
+	}
+
+	private boolean isValidEmailAddress(String request)
+	{
+		pattern = Pattern.compile(EMAIL_PATTERN);
+		matcher = pattern.matcher(request);
+		return matcher.matches();
 	}
 
 	private boolean userAlreadyExists(String user)

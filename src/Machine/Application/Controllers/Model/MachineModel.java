@@ -1,6 +1,7 @@
-package Machine.Application.Controllers;
+package Machine.Application.Controllers.Model;
 
 
+import Machine.Application.Controllers.StatementData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -13,12 +14,13 @@ import java.util.Date;
  * @version 1.0
  * @since 7/28/2018  15:41
  */
-final class MachineModel
+@SuppressWarnings("ConstantConditions")
+public final class MachineModel
 {
 	private Connection connection;
 	private ObservableList<StatementData> observableList = FXCollections.observableArrayList();
 
-	MachineModel()
+	public MachineModel()
 	{
 		connection = DatabaseConnect.connector("AccountDB.sqlite");
 		if(connection == null){
@@ -45,7 +47,7 @@ final class MachineModel
 		resultSet.close();
 	}
 
-	boolean isDbConnected() {
+	public boolean isDbConnected() {
 		try {
 			return !connection.isClosed();
 		} catch (SQLException e) {
@@ -56,7 +58,6 @@ final class MachineModel
 
 	private void createMainTable() throws SQLException
 	{
-
 		String query = "CREATE TABLE IF NOT EXISTS Customer_Information (\n"
 				+ "	Username text PRIMARY KEY NOT NULL UNIQUE,\n"
 				+ "	Password text NOT NULL,\n"
@@ -88,7 +89,7 @@ final class MachineModel
 		}
 	}
 
-	void createStatementTable(String user) throws SQLException
+	public void createStatementTable(String user) throws SQLException
 	{
 		String query = "CREATE TABLE IF NOT EXISTS "+user+ " (\n"
 				+ "	Date text NOT NULL,\n"
@@ -101,33 +102,29 @@ final class MachineModel
 		System.out.println("Statement Table created: " + user);
 	}
 
-	ObservableList<StatementData> getStatement(String username) throws SQLException
+	public ObservableList<StatementData> getStatement(String username) throws SQLException
 	{
-		ResultSet resultSet = null;
-		PreparedStatement preparedStatement = null;
 		String query = "SELECT * from "+ username;
-		Connection connection = DatabaseConnect.connector("AccountDB.sqlite");
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			resultSet = preparedStatement.executeQuery();
-			while(resultSet.next()){
-				observableList.add(new StatementData(resultSet.getString("Date"),resultSet.getString("Type"),
-						resultSet.getString("Amount"),resultSet.getString("PreviousBalance"),
+
+		try (Connection connection = DatabaseConnect.connector("AccountDB.sqlite")) {
+			PreparedStatement preparedStatement = null;
+			ResultSet resultSet = null;
+			if (connection != null) preparedStatement = connection.prepareStatement(query);
+			if (preparedStatement != null) resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				observableList.add(new StatementData(resultSet.getString("Date"), resultSet.getString("Type"),
+						resultSet.getString("Amount"), resultSet.getString("PreviousBalance"),
 						resultSet.getString("CurrentBalance")));
 			}
 			return observableList;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			resultSet.close();
-			preparedStatement.close();
-			connection.close();
 		}
 		return null;
 	}
 
 
-	boolean validateLogin(String user, String pass) throws SQLException
+	public boolean validateLogin(String user, String pass) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -153,7 +150,7 @@ final class MachineModel
 		return false;
 	}
 
-	boolean isFirstTimeRunning() throws SQLException
+	public boolean isFirstTimeRunning() throws SQLException
 	{
 		ResultSet resultSet = null;
 		PreparedStatement preparedStatement = null;
@@ -173,7 +170,7 @@ final class MachineModel
 		return false;
 	}
 
-	boolean isUsernameTaken(String user) throws SQLException
+	public boolean isUsernameTaken(String user) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -198,7 +195,7 @@ final class MachineModel
 		return false;
 	}
 
-	String getAccountInfo(String currUser, String colName ) throws SQLException
+	public String getAccountInfo(String currUser, String colName ) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -222,17 +219,19 @@ final class MachineModel
 		return "Unknown";
 	}
 
-	void updateNewPassword(String user, String newPass) throws SQLException
+	public void updateNewPassword(String user, String newPass) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 
-		String query = "UPDATE Customer_Information set Password = ?, TempPassword = ? where Username = ?";
+		String query = "UPDATE Customer_Information set Password = ?, TempPassword = ?, " +
+				"ExpireTime = ? where Username = ?";
 
 		try{
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1,newPass);
 			preparedStatement.setString(2,"");
-			preparedStatement.setString(3,user);
+			preparedStatement.setString(3,"");
+			preparedStatement.setString(4,user);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -243,7 +242,7 @@ final class MachineModel
 	}
 
 
-	void saveUserToDatabase(String...values) throws SQLException
+	public void saveUserToDatabase(String...values) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 
@@ -269,7 +268,7 @@ final class MachineModel
 	}
 
 
-	void updateMainDB(String balance, String user) throws SQLException
+	public void updateBalanceMainDB(String balance, String user) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 
@@ -288,7 +287,7 @@ final class MachineModel
 		}
 	}
 
-	void updateTempPassCells(String user, String tempPass, String time) throws SQLException
+	public void updateTempPassCells(String user, String tempPass, String time) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 
@@ -308,7 +307,7 @@ final class MachineModel
 		}
 	}
 
-	void insertToStatementDB(String table, String type, String amount, String prevBal, String newBal) throws SQLException
+	public void insertToStatementDB(String table, String type, String amount, String prevBal, String newBal) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 		String query = "INSERT into "+table+"(date,type,amount,previousbalance,currentbalance)" +

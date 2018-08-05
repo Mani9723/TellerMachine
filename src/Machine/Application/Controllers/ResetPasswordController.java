@@ -3,6 +3,7 @@ package Machine.Application.Controllers;
 import Machine.AccountManager.Email;
 import Machine.AccountManager.HashPassword;
 
+import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;

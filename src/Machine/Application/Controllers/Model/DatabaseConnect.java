@@ -1,4 +1,4 @@
-package Machine.Application.Controllers;
+package Machine.Application.Controllers.Model;
 
 import java.sql.*;
 

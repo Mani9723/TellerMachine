@@ -1,5 +1,6 @@
 package Machine.Application.Controllers;
 
+import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import javafx.event.ActionEvent;
@@ -102,7 +103,7 @@ public class quickWithdrawController implements Initializable
 	{
 		String updatedBal = getNewBalance(request);
 		try {
-			machineModel.updateMainDB(updatedBal,getUser());
+			machineModel.updateBalanceMainDB(updatedBal,getUser());
 			machineModel.insertToStatementDB(getUser(),"Withdrawal",request,previousBalance,updatedBal);
 		} catch (SQLException e) {
 			e.printStackTrace();

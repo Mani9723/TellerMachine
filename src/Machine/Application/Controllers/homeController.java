@@ -1,5 +1,6 @@
 package Machine.Application.Controllers;
 
+import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,6 +1,7 @@
 package Machine.Application.Controllers;
 
 
+import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -101,7 +102,7 @@ public class depositController implements Initializable
 	{
 		String updatedBalance = getNewBalance(request);
 		try {
-			machineModel.updateMainDB(updatedBalance,getUser());
+			machineModel.updateBalanceMainDB(updatedBalance,getUser());
 			machineModel.insertToStatementDB(getUser(),"Deposit",request,previousBalance,updatedBalance);
 		} catch (SQLException e) {
 			e.printStackTrace();

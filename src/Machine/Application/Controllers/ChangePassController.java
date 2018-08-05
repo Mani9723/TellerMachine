@@ -1,6 +1,7 @@
 package Machine.Application.Controllers;
 
 import Machine.AccountManager.HashPassword;
+import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -55,13 +56,13 @@ public class ChangePassController implements Initializable
 		changeButton.setOpacity(0.50);
 		imgLeft.setVisible(false);
 		imgRight.setVisible(false);
-		confNewPass.setOpacity(0.70);
-		username.setOpacity(0.70);
-		tempPass.setOpacity(0.70);
-		newPass.setOpacity(0.70);
-		username.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
-		tempPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
-		newPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
+		confNewPass.setOpacity(1.0);
+		username.setOpacity(1.0);
+		tempPass.setOpacity(1.0);
+		newPass.setOpacity(1.0);
+//		username.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
+//		tempPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
+//		newPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
 		confNewPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));
 	}
 
@@ -79,9 +80,8 @@ public class ChangePassController implements Initializable
 				if(validTimeAndInput(temp,user)) {
 					hashPassword = new HashPassword(conf);
 					machineModel.updateNewPassword(user, hashPassword.toString());
-//					imgLeft.setVisible(true);
-//					imgRight.setVisible(true);
 					clearAllFields();
+					dialogeBox.drawerOkButton("Success\nPassword Changed", new JFXDialog());
 
 				}
 			} catch (SQLException e) {
@@ -94,26 +94,27 @@ public class ChangePassController implements Initializable
 		}
 	}
 
-	private boolean validTimeAndInput(String userTempPass, String user)
+	private boolean validTimeAndInput(String userTempPass, String user) throws SQLException
 	{
 
 		String tempPassFromDB;
-		try{
-			long currTime = System.currentTimeMillis();
-			long oldTime = Long.parseLong(machineModel.getAccountInfo(user,"ExpireTime"));
+		long currTime = System.currentTimeMillis();
+		long oldTime;
+		if (machineModel.isUsernameTaken(user)) {
+			oldTime = Long.parseLong(machineModel.getAccountInfo(user, "ExpireTime"));
 			tempPassFromDB = machineModel.getAccountInfo(user, "TempPassword");
-			if(!tempPassFromDB.equals(userTempPass)){
-				dialogeBox.drawerOkButton("Invalid Code",new JFXDialog());
-			}else if(!machineModel.isUsernameTaken(user)){
-				dialogeBox.drawerOkButton("Invalid Username", new JFXDialog());
-			}else if(currTime - oldTime > FIFTEEN_MIN){
-				dialogeBox.drawerOkButton("Expired Code", new JFXDialog());
+			if (currTime - oldTime > FIFTEEN_MIN) {
+				dialogeBox.drawerOkButton("Code Expired", new JFXDialog());
+				return false;
+			} else if (!tempPassFromDB.equals(userTempPass)) {
+				dialogeBox.drawerOkButton("Invalid Code", new JFXDialog());
+				return false;
 			}
 			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}else {
+			dialogeBox.drawerOkButton("Invalid Username", new JFXDialog());
+			return false;
 		}
-		return false;
 	}
 
 	private void clearAllFields()
