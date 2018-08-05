@@ -9,12 +9,10 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -58,6 +56,8 @@ public class registerController {
 
 	private MachineModel machineModel;
 
+	private LoadScene loadScene;
+
 	private static final String EMAIL_PATTERN =
 			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -65,6 +65,7 @@ public class registerController {
 	@FXML
 	public void initialize()
 	{
+		loadScene = new LoadScene(stackPane,stackPane1);
 		accountType.setText("CHECKING");
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(registerPane);
@@ -138,12 +139,7 @@ public class registerController {
 	void returnHandler(ActionEvent event)
 	{
 		if(event.getSource().equals(returnButton)) {
-			try {
-				stackPane1 = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
-				stackPane.getChildren().setAll(stackPane1);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			loadScene.loginPage("..\\FXMLs\\loginPage.fxml");
 		}
 	}
 
