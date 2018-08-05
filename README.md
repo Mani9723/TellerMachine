@@ -2,6 +2,7 @@
 
 * A relatively simple implementation of an 'online' bank account. 
 * A new user can create an account with basic information, including email address. 
+* Email is used to process requests for account details change.
 * Allows for exceptions where the user can reset a password using time sensitive code that enables the user to create a new password. 
 * Simple actions like deposits and variations of withdrawing money are allowed.
 * Account activity can be viewed in the form of a statement.
