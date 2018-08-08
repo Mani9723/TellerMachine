@@ -113,6 +113,7 @@ class LoadScene
 		homeWindow.show();
 	}
 
+
 	void depositPage(String fxml, String username, MachineModel machineModel)
 	{
 		FXMLLoader loader = new FXMLLoader();

@@ -85,6 +85,7 @@ public class registerController {
 			String user = username.getText(), password = pass.getText();
 			String confPass = confirmPass.getText(), email = emailLabel.getText();
 
+
 			if(isValidEmailAddress(email)) {
 				if (emptyFieldExists(pass, confirmPass, firstName, lastName, username))
 					dialogeBox.OkButton("Fields are empty", new JFXDialog());

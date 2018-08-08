@@ -16,6 +16,7 @@ import java.util.Date;
 @SuppressWarnings("ConstantConditions")
 public final class MachineModel
 {
+
 	private Connection connection;
 	private ObservableList<StatementData> observableList = FXCollections.observableArrayList();
 
