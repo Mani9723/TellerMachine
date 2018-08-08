@@ -139,7 +139,7 @@ public class loginController implements Initializable
 			drawerPane.setSidePane(resetPane);
 			drawerPane.setDirection(JFXDrawer.DrawerDirection.TOP);
 
-			if(drawerPane.isShown() && event.getSource().equals(exitResetPass)) {
+			if(drawerPane.isOpened() && event.getSource().equals(exitResetPass)) {
 				drawerPane.close();
 				exitResetPass.setDisable(true);
 				exitResetPass.setVisible(false);
@@ -172,7 +172,7 @@ public class loginController implements Initializable
 			StackPane resetPane = FXMLLoader.load(getClass().getResource("..\\FXMLs\\ChangePassPage.fxml"));
 			drawerPane.setSidePane(resetPane);
 
-			if(drawerPane.isShown() && event.getSource().equals(exitResetPass)) {
+			if(drawerPane.isOpened() && event.getSource().equals(exitResetPass)) {
 				drawerPane.close();
 				exitResetPass.setDisable(true);
 				exitResetPass.setVisible(false);

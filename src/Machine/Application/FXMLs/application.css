@@ -60,7 +60,7 @@
 .table-view, .tree-table-view {
     /* Constants used throughout the tableview. */
     -fx-table-header-border-color: transparent;
-    -fx-table-cell-border-color: -fx-box-border; /* Horizontal Lines*/
+    -fx-table-cell-border-color: transparent; /* Horizontal Lines*/
     -fx-background-color: transparent;
 }
 
@@ -69,10 +69,9 @@
    to the edge of the tableview, or up to the 'column control' button. */
 .table-view .filler, .tree-table-view .filler, .table-view .column-header,
 .tree-table-view .column-header {
-    -fx-size: 65;
-    -fx-border-style: null;
-    -fx-border-color: -swatch-grey;
-    -fx-border-width: 0 0 2 0;
+    -fx-size: 65;    -fx-border-style: null;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 0 0;
     -fx-background-color: transparent;
 }
 
@@ -95,9 +94,10 @@
 
 .table-row-cell, .tree-table-row-cell {
     -fx-cell-size: 30px;
+    -fx-alignment: CENTER;
 }
 
 .table-cell {
     -fx-border-color: transparent; /* Vertical Lines*/
-    -fx-border-width: 1;
+    -fx-border-width: 0;
 }

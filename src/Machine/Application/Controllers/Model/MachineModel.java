@@ -1,6 +1,5 @@
 package Machine.Application.Controllers.Model;
 
-
 import Machine.Application.Controllers.StatementData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -113,8 +112,8 @@ public final class MachineModel
 			if (preparedStatement != null) resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				observableList.add(new StatementData(resultSet.getString("Date"), resultSet.getString("Type"),
-						resultSet.getString("Amount"), resultSet.getString("PreviousBalance"),
-						resultSet.getString("CurrentBalance")));
+						"$"+resultSet.getString("Amount"), "$"+resultSet.getString("PreviousBalance"),
+						"$"+resultSet.getString("CurrentBalance")));
 			}
 			return observableList;
 		} catch (SQLException e) {

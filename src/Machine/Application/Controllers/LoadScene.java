@@ -8,12 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import sun.nio.cs.ext.MacHebrew;
-
-import javax.crypto.Mac;
 import java.io.IOException;
 
 /**
@@ -22,21 +18,18 @@ import java.io.IOException;
  * @since 7/28/2018  22:53
  */
 
-@SuppressWarnings("SameParameterValue")
+@SuppressWarnings({"SameParameterValue", "ConstantConditions"})
 
 class LoadScene
 {
 	private StackPane stackPaneCurr, stackPaneGoal;
-	private AnchorPane anchorPane;
-	private homeController home;
-	private registerController register;
 
-	public void setActionEvent(ActionEvent actionEvent)
+	void setActionEvent(ActionEvent actionEvent)
 	{
 		this.actionEvent = actionEvent;
 	}
 
-	public void setKeyEvent(KeyEvent keyEvent)
+	void setKeyEvent(KeyEvent keyEvent)
 	{
 		this.keyEvent = keyEvent;
 	}
@@ -48,11 +41,6 @@ class LoadScene
 	{
 		stackPaneCurr = stckpaneCurr;
 		stackPaneGoal = stckPaneGoal;
-	}
-
-	LoadScene(AnchorPane anchorPane)
-	{
-		this.anchorPane = anchorPane;
 	}
 
 	LoadScene()

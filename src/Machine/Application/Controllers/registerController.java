@@ -88,7 +88,7 @@ public class registerController {
 			if(isValidEmailAddress(email)) {
 				if (emptyFieldExists(pass, confirmPass, firstName, lastName, username))
 					dialogeBox.OkButton("Fields are empty", new JFXDialog());
-				else if (password.equals(confPass)) {
+				else if (password.equals(confPass) && isValidPassword(confPass)) {
 					if (userAlreadyExists(user)) {
 						dialogeBox.OkButton("Username is taken", new JFXDialog());
 					} else {
@@ -97,13 +97,18 @@ public class registerController {
 						dialogeBox.returnToLogin("Welcome " + first, stackPane, stackPane);
 					}
 				} else{
-					dialogeBox.OkButton("Password Mismatch", new JFXDialog());
+					dialogeBox.OkButton("Invalid Password", new JFXDialog());
 				}
 			} else {
 				dialogeBox.OkButton("Invalid Email", new JFXDialog());
 				pass.setText(""); confirmPass.setText("");
 			}
 		}
+	}
+
+	private boolean isValidPassword(String request)
+	{
+		return request.length()>= 8;
 	}
 
 	private boolean isValidEmailAddress(String request)
