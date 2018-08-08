@@ -92,6 +92,8 @@ public class depositController implements Initializable
 	private MachineModel machineModel;
 	private DialogeBox dialogeBox;
 
+	private int count = 1;
+
 	private LoadScene loadScene;
 
 	@Override
@@ -126,6 +128,7 @@ public class depositController implements Initializable
 			}
 		}
 		depositInput.setText("");
+		resetCount();
 	}
 
 	private void updateBalanceLabel()
@@ -169,6 +172,7 @@ public class depositController implements Initializable
 	{
 		if(event.getSource().equals(clear))
 			depositInput.setText("");
+		resetCount();
 	}
 
 	@FXML
@@ -185,6 +189,11 @@ public class depositController implements Initializable
 		}
 	}
 
+	private void resetCount()
+	{
+		--count;
+		decimal.setDisable(false);
+	}
 
 	@FXML
 	void menu(ActionEvent event)
@@ -249,6 +258,10 @@ public class depositController implements Initializable
 	public void handleKeyPad(ActionEvent event)
 	{
 		writeToTextField(depositInput,(JFXButton)event.getSource());
+		if(event.getSource().equals(decimal)){
+			++count;
+			decimal.setDisable(true);
+		}
 	}
 
 	private void writeToTextField(JFXTextField field, JFXButton button)

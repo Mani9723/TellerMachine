@@ -192,6 +192,7 @@ public class withdrawController implements Initializable
 	private void resetCount()
 	{
 		count = 1;
+		decimal.setDisable(false);
 	}
 
 	private boolean validRequest(String request)
