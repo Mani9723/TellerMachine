@@ -189,6 +189,7 @@ public class withdrawController implements Initializable
 		moneyTextField.setText("");
 	}
 
+
 	private void resetCount()
 	{
 		count = 1;

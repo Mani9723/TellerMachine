@@ -167,6 +167,7 @@ public class depositController implements Initializable
 		}
 	}
 
+
 	@FXML
 	void clearButton(ActionEvent event)
 	{
