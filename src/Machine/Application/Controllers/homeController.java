@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -59,6 +60,8 @@ public class homeController implements Initializable
 
 	@FXML
 	private Label currBalance;
+
+	private DecimalFormat decimalFormat = new DecimalFormat("##.##");
 
 	private String uName;
 	private String first;
@@ -132,7 +135,8 @@ public class homeController implements Initializable
 		try {
 			setFirstName(machineModel.getAccountInfo(getuName(),"FirstName"));
 			greeting.setText(getAppropriateGreeting(getHour()) +", " + getFirst());
-			currBalance.setText("$"+machineModel.getAccountInfo(getuName(),"CurrentBalance"));
+			String bal = machineModel.getAccountInfo(getuName(),"CurrentBalance");
+			currBalance.setText("$"+decimalFormat.format(Double.parseDouble(bal)));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

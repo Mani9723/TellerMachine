@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class quickWithdrawController implements Initializable
@@ -61,6 +62,8 @@ public class quickWithdrawController implements Initializable
 
 	private MachineModel machineModel;
 
+	private DecimalFormat decimalFormat = new DecimalFormat("##.##");
+
 	private String username,previousBalance,newBalance,currBalance;
 
 	private LoadScene loadScene;
@@ -71,7 +74,8 @@ public class quickWithdrawController implements Initializable
 		loadScene = new LoadScene();
 		setModel(machineModel);
 		try {
-			setCurrBalance(machineModel.getAccountInfo(getUser(),"CurrentBalance"));
+			String bal = machineModel.getAccountInfo(getUser(),"CurrentBalance");
+			setCurrBalance(decimalFormat.format(Double.parseDouble(bal)));
 			setPreviousBalance();
 		} catch (SQLException e) {
 			e.printStackTrace();

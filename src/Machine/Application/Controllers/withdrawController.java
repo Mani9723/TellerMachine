@@ -88,6 +88,8 @@ public class withdrawController implements Initializable
 
 	@FXML
 	private JFXButton qCash;
+
+	private DecimalFormat decimalFormat = new DecimalFormat("##.##");
 	private AnchorPane rootPane;
 	private int count = 1;
 	private String username;
@@ -251,7 +253,7 @@ public class withdrawController implements Initializable
 
 	private void setCurrBalance(String currBalance)
 	{
-		balanceLabel.setText("$"+currBalance);
+		balanceLabel.setText("$"+decimalFormat.format(Double.parseDouble(currBalance)));
 	}
 	private void setNewBalance(Double bal)
 	{

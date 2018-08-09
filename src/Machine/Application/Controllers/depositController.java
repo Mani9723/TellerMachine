@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class depositController implements Initializable
@@ -86,6 +87,8 @@ public class depositController implements Initializable
 
 	@FXML
 	private JFXButton decimal;
+
+	private DecimalFormat decimalFormat = new DecimalFormat("##.##");
 
 	private String previousBalance, newBalance;
 
@@ -237,7 +240,7 @@ public class depositController implements Initializable
 	}
 	private void setCurrBalance(String balance)
 	{
-		currBalance.setText("$"+balance);
+		currBalance.setText("$"+decimalFormat.format(Double.parseDouble(balance)));
 	}
 
 	void setModel(MachineModel model)
