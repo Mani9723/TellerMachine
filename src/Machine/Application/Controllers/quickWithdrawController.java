@@ -126,14 +126,14 @@ public class quickWithdrawController implements Initializable
 	void clickOther(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.withdrawScene("..\\FXMLs\\withdrawPage.fxml",username,machineModel);
+		loadScene.withdrawScene("../FXMLs/withdrawPage.fxml",username,machineModel);
 	}
 
 	@FXML
 	void goToDeposit(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.depositPage("..\\FXMLs\\depositPage.fxml",username,machineModel);
+		loadScene.depositPage("../FXMLs/depositPage.fxml",username,machineModel);
 	}
 
 	@FXML
@@ -141,7 +141,7 @@ public class quickWithdrawController implements Initializable
 	{
 		if(event.getSource().equals(exit)) {
 			try {
-				stackPane2 = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
+				stackPane2 = FXMLLoader.load(getClass().getResource("../FXMLs/loginPage.fxml"));
 				stackPane.getChildren().setAll(stackPane2);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -153,7 +153,7 @@ public class quickWithdrawController implements Initializable
 	void goToMenu(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.homeSceneAction("..\\FXMLs\\homePage.fxml",username,machineModel);
+		loadScene.homeSceneAction("../FXMLs/homePage.fxml",username,machineModel);
 	}
 
 	void setUsername(String user)

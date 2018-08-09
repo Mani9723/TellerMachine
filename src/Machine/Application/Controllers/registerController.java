@@ -145,7 +145,7 @@ public class registerController {
 	void returnHandler(ActionEvent event)
 	{
 		if(event.getSource().equals(returnButton)) {
-			loadScene.loginPage("..\\FXMLs\\loginPage.fxml");
+			loadScene.loginPage("../FXMLs/loginPage.fxml");
 		}
 	}
 

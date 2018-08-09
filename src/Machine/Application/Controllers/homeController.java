@@ -91,7 +91,7 @@ public class homeController implements Initializable
 	private void loadDepositPage(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.depositPage("..\\FXMLs\\depositPage.fxml",getuName(),machineModel);
+		loadScene.depositPage("../FXMLs/depositPage.fxml",getuName(),machineModel);
 	}
 
 	@FXML
@@ -99,7 +99,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(exitHome)){
 			try {
-				stackPane = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
+				stackPane = FXMLLoader.load(getClass().getResource("../FXMLs/loginPage.fxml"));
 				secondPane.getChildren().setAll(stackPane);
 			} catch (IOException e) {
 				e.printStackTrace();

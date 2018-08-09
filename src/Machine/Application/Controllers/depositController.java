@@ -185,7 +185,7 @@ public class depositController implements Initializable
 		StackPane stackPane1;
 		if(event.getSource().equals(logout)) {
 			try {
-				 stackPane1 = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
+				 stackPane1 = FXMLLoader.load(getClass().getResource("../FXMLs/loginPage.fxml"));
 				stackPane.getChildren().setAll(stackPane1);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -204,7 +204,7 @@ public class depositController implements Initializable
 	{
 		if(event.getSource().equals(menu)) {
 			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction("..\\FXMLs\\homePage.fxml",getUser(),machineModel);
+			loadScene.homeSceneAction("../FXMLs/homePage.fxml",getUser(),machineModel);
 		}
 	}
 
@@ -213,7 +213,7 @@ public class depositController implements Initializable
 	{
 		if(event.getSource().equals(withdraw)) {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("..\\FXMLs\\withdrawPage.fxml"));
+			loader.setLocation(getClass().getResource("../FXMLs/withdrawPage.fxml"));
 			Parent loginParent = null;
 			try {
 				loginParent = loader.load();

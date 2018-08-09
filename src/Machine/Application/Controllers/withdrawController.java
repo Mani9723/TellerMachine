@@ -149,7 +149,7 @@ public class withdrawController implements Initializable
 	{
 		if(event.getSource().equals(LOGOUT)) {
 			try {
-				stackPane2 = FXMLLoader.load(getClass().getResource("..\\FXMLs\\loginPage.fxml"));
+				stackPane2 = FXMLLoader.load(getClass().getResource("../FXMLs/loginPage.fxml"));
 				stackPane.getChildren().setAll(stackPane2);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -162,7 +162,7 @@ public class withdrawController implements Initializable
 	{
 		if(event.getSource().equals(mainMenu)) {
 			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction("..\\FXMLs\\homePage.fxml",username,machineModel);
+			loadScene.homeSceneAction("../FXMLs/homePage.fxml",username,machineModel);
 		}
 	}
 
@@ -171,7 +171,7 @@ public class withdrawController implements Initializable
 	{
 		if(event.getSource().equals(qCash)) {
 			loadScene.setActionEvent(event);
-			loadScene.quickCashScene("..\\FXMLs\\QuickWithdraw.fxml",username,machineModel);
+			loadScene.quickCashScene("../FXMLs/QuickWithdraw.fxml",username,machineModel);
 		}
 	}
 
