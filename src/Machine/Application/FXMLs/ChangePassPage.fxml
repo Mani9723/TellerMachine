@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="500.0" fitWidth="300.0" opacity="0.9" pickOnBounds="true">
          <image>
-            <Image url="@../../images/croppedVersion.jpg" />
+            <Image url="@/Machine/images/croppedVersion.jpg" />
          </image>
       </ImageView>
       <VBox layoutX="7.0" layoutY="6.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -65,7 +65,7 @@
                         <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <JFXButton fx:id="changeButton" buttonType="RAISED" onAction="#verifyNewPassword" prefHeight="0.0" prefWidth="160.0" styleClass="seven" stylesheets="@../FXMLs/application.css" text="C H A N G E" GridPane.rowIndex="5">
+                  <JFXButton fx:id="changeButton" buttonType="RAISED" onAction="#verifyNewPassword" prefHeight="0.0" prefWidth="160.0" styleClass="seven" stylesheets="@/Machine/Application/FXMLs/application.css" text="C H A N G E" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="70.0" right="70.0" />
                      </GridPane.margin>
@@ -83,7 +83,7 @@
                   </JFXTextField>
                   <ImageView fx:id="imgLeft" fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../../images/61401818-elegant-check-mark-flat-icon-imitation-draw-with-white-chalk-on-green-chalkboard-flat-pictogram-and-.jpg" />
+                        <Image url="@/Machine/images/61401818-elegant-check-mark-flat-icon-imitation-draw-with-white-chalk-on-green-chalkboard-flat-pictogram-and-.jpg" />
                      </image>
                      <GridPane.margin>
                         <Insets left="25.0" />
@@ -91,7 +91,7 @@
                   </ImageView>
                   <ImageView fx:id="imgRight" fitHeight="32.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                      <image>
-                        <Image url="@../../images/61401818-elegant-check-mark-flat-icon-imitation-draw-with-white-chalk-on-green-chalkboard-flat-pictogram-and-.jpg" />
+                        <Image url="@/Machine/images/61401818-elegant-check-mark-flat-icon-imitation-draw-with-white-chalk-on-green-chalkboard-flat-pictogram-and-.jpg" />
                      </image>
                      <GridPane.margin>
                         <Insets left="245.0" />

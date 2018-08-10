@@ -18,7 +18,7 @@
     <children>
         <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../../images/flat_landscape_wallpaper_by_nicknufayl-d9frf2v.png" />
+            <Image url="@/Machine/images/flat_landscape_wallpaper_by_nicknufayl-d9frf2v.png" />
          </image>
         </ImageView>
         <JFXButton fx:id="quickCash" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="409.0" layoutY="120.0" onAction="#quickCash" opacity="0.90" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@../FXMLs/application.css" text="Q U I C K    C A S H" textFill="black" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="120.0">
