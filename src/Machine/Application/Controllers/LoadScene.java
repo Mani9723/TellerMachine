@@ -23,19 +23,15 @@ import java.io.IOException;
 class LoadScene
 {
 	private StackPane stackPaneCurr, stackPaneGoal;
-
-	void setActionEvent(ActionEvent actionEvent)
-	{
-		this.actionEvent = actionEvent;
-	}
-
-	void setKeyEvent(KeyEvent keyEvent)
-	{
-		this.keyEvent = keyEvent;
-	}
-
 	private ActionEvent actionEvent;
 	private KeyEvent keyEvent;
+	private final String loginFxml = "/Machine/Application/FXMLs/loginPage.fxml";
+	private final String homeFxml = "/Machine/Application/FXMLs/homePage.fxml";
+	private final String depositFxml = "/Machine/Application/FXMLs/depositPage.fxml";
+	private final String withdrawFxml = "/Machine/Application/FXMLs/withdrawPage.fxml";
+	private final String registerFxml = "/Machine/Application/FXMLs/registerPage.fxml";
+	private final String statementFxml = "/Machine/Application/FXMLs/statementPage.fxml";
+	private final String quickFxml = "/Machine/Application/FXMLs/QuickWithdraw.fxml";
 
 	LoadScene(StackPane stckpaneCurr, StackPane stckPaneGoal)
 	{
@@ -49,19 +45,30 @@ class LoadScene
 	}
 
 
-	void loginPage(String fxmlPath)
+	void loginPage()
 	{
 		try {
-			stackPaneGoal = FXMLLoader.load(getClass().getResource(fxmlPath));
+			stackPaneGoal = FXMLLoader.load(getClass().getResource(loginFxml));
 			stackPaneCurr.getChildren().setAll(stackPaneGoal);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	void homeScene(String fxmlPath, JFXTextField username, MachineModel machineModel)
+
+	void setActionEvent(ActionEvent actionEvent)
+	{
+		this.actionEvent = actionEvent;
+	}
+
+	void setKeyEvent(KeyEvent keyEvent)
+	{
+		this.keyEvent = keyEvent;
+	}
+
+	void homeScene(JFXTextField username, MachineModel machineModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(fxmlPath));
+		loader.setLocation(getClass().getResource(homeFxml));
 		Parent loginParent = null;
 		try {
 			loginParent = loader.load();
@@ -76,10 +83,10 @@ class LoadScene
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
-	void homeSceneAction(String fxmlPath, String username, MachineModel machineModel)
+	void homeSceneAction(String username, MachineModel machineModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(fxmlPath));
+		loader.setLocation(getClass().getResource(homeFxml));
 		Parent loginParent = null;
 		try {
 			loginParent = loader.load();
@@ -95,10 +102,10 @@ class LoadScene
 		homeWindow.show();
 	}
 
-	void registerScene(String fxmlPath, MachineModel machineModel)
+	void registerScene(MachineModel machineModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(fxmlPath));
+		loader.setLocation(getClass().getResource(registerFxml));
 		Parent loginParent = null;
 		try {
 			loginParent = loader.load();
@@ -114,10 +121,10 @@ class LoadScene
 	}
 
 
-	void depositPage(String fxml, String username, MachineModel machineModel)
+	void depositPage(String username, MachineModel machineModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(fxml));
+		loader.setLocation(getClass().getResource(depositFxml));
 		Parent loginParent = null;
 		try {
 			loginParent = loader.load();
@@ -133,10 +140,10 @@ class LoadScene
 		homeWindow.show();
 	}
 
-	void statementScene(String fxml, String username, MachineModel machineModel)
+	void statementScene(String username, MachineModel machineModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(fxml));
+		loader.setLocation(getClass().getResource(statementFxml));
 		Parent loginParent = null;
 		try {
 			loginParent = loader.load();
@@ -153,10 +160,10 @@ class LoadScene
 		homeWindow.show();
 	}
 
-	void withdrawScene(String fxml, String username, MachineModel machineModel)
+	void withdrawScene(String username, MachineModel machineModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(fxml));
+		loader.setLocation(getClass().getResource(withdrawFxml));
 		Parent loginParent = null;
 		try {
 			loginParent = loader.load();
@@ -172,10 +179,10 @@ class LoadScene
 		homeWindow.show();
 	}
 
-	void quickCashScene(String fxml, String username, MachineModel machineModel)
+	void quickCashScene( String username, MachineModel machineModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(fxml));
+		loader.setLocation(getClass().getResource(quickFxml));
 		Parent loginParent = null;
 		try {
 			loginParent = loader.load();

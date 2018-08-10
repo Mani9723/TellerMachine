@@ -87,7 +87,7 @@ public class StatementController implements Initializable
 		LoadScene loadScene = new LoadScene();
 		if(event.getSource().equals(menuButton)){
 			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction("../FXMLs/homePage.fxml",username,machineModel);
+			loadScene.homeSceneAction(username,machineModel);
 		}
 	}
 

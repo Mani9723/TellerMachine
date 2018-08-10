@@ -204,7 +204,7 @@ public class depositController implements Initializable
 	{
 		if(event.getSource().equals(menu)) {
 			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction("../FXMLs/homePage.fxml",getUser(),machineModel);
+			loadScene.homeSceneAction(getUser(),machineModel);
 		}
 	}
 
@@ -212,21 +212,8 @@ public class depositController implements Initializable
 	void withdraw(ActionEvent event)
 	{
 		if(event.getSource().equals(withdraw)) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("../FXMLs/withdrawPage.fxml"));
-			Parent loginParent = null;
-			try {
-				loginParent = loader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Scene currScene = new Scene(loginParent);
-			withdrawController controller = loader.getController();
-			controller.setUsername(getUser());
-			controller.init(machineModel);
-			Stage homeWindow = (Stage)((Node)event.getSource()).getScene().getWindow();
-			homeWindow.setScene(currScene);
-			homeWindow.show();
+			loadScene.setActionEvent(event);
+			loadScene.withdrawScene(getUser(),machineModel);
 		}
 	}
 	void setUsername(String user)

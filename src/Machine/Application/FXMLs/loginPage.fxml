@@ -104,7 +104,7 @@
                               <Font name="Papyrus" size="15.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="forgotButton" onAction="#resetPassword" prefHeight="25.0" prefWidth="309.0" text="Forgot Password" textFill="WHITE" GridPane.rowIndex="4">
+                        <JFXButton fx:id="forgotButton" onAction="#resetPassword" prefHeight="25.0" prefWidth="309.0" text="Forgot Username/Password" textFill="WHITE" GridPane.rowIndex="4">
                            <font>
                               <Font name="Papyrus" size="15.0" />
                            </font>

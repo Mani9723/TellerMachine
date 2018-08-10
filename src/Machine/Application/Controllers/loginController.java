@@ -99,7 +99,7 @@ public class loginController implements Initializable
 					login.setDisable(true);
 				} else if(processCredentials()){
 					loadScene.setKeyEvent(event);
-					loadScene.homeScene("../FXMLs/homePage.fxml", username, machineModel);
+					loadScene.homeScene(username, machineModel);
 				}
 				else {
 					dialogeBox.OkButton("Incorrect Credentials", new JFXDialog());
@@ -135,7 +135,7 @@ public class loginController implements Initializable
 		exitResetPass.setDisable(false);
 		exitResetPass.setVisible(true);
 		try {
-			StackPane resetPane = FXMLLoader.load(getClass().getResource("../FXMLs/ResetPasswordPage.fxml"));
+			StackPane resetPane = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/ResetPasswordPage.fxml"));
 			drawerPane.setSidePane(resetPane);
 			drawerPane.setDirection(JFXDrawer.DrawerDirection.TOP);
 
@@ -169,7 +169,7 @@ public class loginController implements Initializable
 		exitResetPass.setDisable(false);
 		exitResetPass.setVisible(true);
 		try {
-			StackPane resetPane = FXMLLoader.load(getClass().getResource("../FXMLs/ChangePassPage.fxml"));
+			StackPane resetPane = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/ChangePassPage.fxml"));
 			drawerPane.setSidePane(resetPane);
 
 
@@ -202,7 +202,7 @@ public class loginController implements Initializable
 		if(event.getSource().equals(registerButton)){
 			loadScene.setActionEvent(event);
 			//loadScene.setResgisterController(new registerController());
-			loadScene.registerScene("../FXMLs/registerPage.fxml",machineModel);
+			loadScene.registerScene(machineModel);
 
 		}
 	}
@@ -214,7 +214,7 @@ public class loginController implements Initializable
 				dialogeBox.OkButton("Welcome, please register first",new JFXDialog());
 			}
 			else if(processCredentials()){
-				loadHomePage(event,null);
+				loadHomePage(event);
 			} else{
 				dialogeBox.OkButton("Incorrect Credentials", new JFXDialog());
 				username.setText("");
@@ -237,9 +237,9 @@ public class loginController implements Initializable
 		return false;
 	}
 
-	private void loadHomePage(ActionEvent event, KeyEvent eventK)
+	private void loadHomePage(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.homeSceneAction("../FXMLs/homePage.fxml",username.getText(),machineModel);
+		loadScene.homeSceneAction(username.getText(),machineModel);
 	}
 }

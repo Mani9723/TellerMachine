@@ -91,7 +91,7 @@ public class homeController implements Initializable
 	private void loadDepositPage(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.depositPage("../FXMLs/depositPage.fxml",getuName(),machineModel);
+		loadScene.depositPage(getuName(),machineModel);
 	}
 
 	@FXML
@@ -111,7 +111,7 @@ public class homeController implements Initializable
 	void handleStatementButton(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.statementScene("..\\FXMLs\\statementPage.fxml",getuName(),machineModel);
+		loadScene.statementScene(getuName(),machineModel);
 
 	}
 
@@ -119,14 +119,14 @@ public class homeController implements Initializable
 	void withdrawMoney(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.withdrawScene("..\\FXMLs\\withdrawPage.fxml",getuName(),machineModel);
+		loadScene.withdrawScene(getuName(),machineModel);
 	}
 
 	@FXML
 	void quickCash(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.quickCashScene("..\\FXMLs\\QuickWithdraw.fxml",uName,machineModel);
+		loadScene.quickCashScene(uName,machineModel);
 	}
 
 	void init(MachineModel machine)
