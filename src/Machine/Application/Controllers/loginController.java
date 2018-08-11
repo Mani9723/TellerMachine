@@ -197,7 +197,6 @@ public class loginController implements Initializable
 	{
 		if(event.getSource().equals(registerButton)){
 			loadScene.setActionEvent(event);
-			//loadScene.setResgisterController(new registerController());
 			loadScene.registerScene(machineModel);
 
 		}

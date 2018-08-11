@@ -63,7 +63,7 @@ public class ChangePassController implements Initializable
 //		username.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
 //		tempPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
 //		newPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
-		confNewPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));
+	//	confNewPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));
 	}
 
 
@@ -77,21 +77,32 @@ public class ChangePassController implements Initializable
 		String conf = confNewPass.getText();
 		if(password.equals(conf)) {
 			try {
-				if(validTimeAndInput(temp,user)) {
-					hashPassword = new HashPassword(conf);
-					machineModel.updateNewPassword(user, hashPassword.toString());
-					clearAllFields();
-					dialogeBox.drawerOkButton("Success\nPassword Changed", new JFXDialog());
-
+				if(validPassword(password)){
+					if(validTimeAndInput(temp,user)) {
+						hashPassword = new HashPassword(conf);
+						machineModel.updateNewPassword(user, hashPassword.toString());
+						clearAllFields();
+						dialogeBox.drawerOkButton("Success\nPassword Changed", new JFXDialog());
+					}else{
+						dialogeBox.drawerOkButton("Password Doesn't Match", new JFXDialog());
+						newPass.setText("");
+						confNewPass.setText("");
+					}
+				}else {
+					dialogeBox.drawerOkButton("Password is short", new JFXDialog());
+					newPass.setText("");
+					confNewPass.setText("");
 				}
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}else{
-			dialogeBox.drawerOkButton("Password Doesn't Match", new JFXDialog());
-			newPass.setText("");
-			confNewPass.setText("");
 		}
+	}
+
+	private boolean validPassword(String pass)
+	{
+		return pass.length()>=8;
 	}
 
 	private boolean validTimeAndInput(String userTempPass, String user) throws SQLException
