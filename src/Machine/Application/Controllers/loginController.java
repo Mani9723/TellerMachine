@@ -8,16 +8,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -135,7 +131,7 @@ public class loginController implements Initializable
 		exitResetPass.setDisable(false);
 		exitResetPass.setVisible(true);
 		try {
-			StackPane resetPane = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/ResetPasswordPage.fxml"));
+			StackPane resetPane = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/SendCodePage.fxml"));
 			drawerPane.setSidePane(resetPane);
 			drawerPane.setDirection(JFXDrawer.DrawerDirection.TOP);
 

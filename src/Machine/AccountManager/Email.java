@@ -28,12 +28,16 @@ public class Email
 	{
 		this.emailUsername = from;
 		this.password = "srilaprabhupada";
-		this.tempPass = tempPassword;
+		if (tempPassword != null)
+			this.tempPass = tempPassword;
 		setContent();
 		setSubject();
 	}
 
-	public void setRecipient(String recipient) { this.recipient = recipient;}
+	public void setRecipient(String recipient)
+	{
+		this.recipient = recipient;
+	}
 	//	public void setChooseFile(boolean val)
 //	{
 //		chooseFile = val;
@@ -57,6 +61,12 @@ public class Email
 				"\tYour temporary password is: " + tempPass +
 				"\nPlease go back and use your temporary password to login." +
 				"\nTEMPORARY CODE EXPIRES IN 15 MINUTES.";
+	}
+
+	public void setUsernameRequestContent(String user)
+	{
+		this.content = "PLEASE DO NOT REPLY TO THIS ADDRESS AS IT IS NOT MONITORED\n" +
+				"\nYour username is: " + user;
 	}
 
 	public boolean sendEmail()

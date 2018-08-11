@@ -87,18 +87,24 @@ public class registerController {
 
 
 			if(isValidEmailAddress(email)) {
-				if (emptyFieldExists(pass, confirmPass, firstName, lastName, username))
-					dialogeBox.OkButton("Fields are empty", new JFXDialog());
-				else if (password.equals(confPass) && isValidPassword(confPass)) {
-					if (userAlreadyExists(user)) {
-						dialogeBox.OkButton("Username is taken", new JFXDialog());
+				if(!emailExists(email)) {
+					if (emptyFieldExists(pass, confirmPass, firstName, lastName, username))
+						dialogeBox.OkButton("Fields are empty", new JFXDialog());
+					else if (password.equals(confPass) && isValidPassword(confPass)) {
+						if (userAlreadyExists(user)) {
+							dialogeBox.OkButton("Username is taken", new JFXDialog());
+						} else {
+							saveUserToFile(user, password, first, last, email);
+							clearFields(pass, confirmPass, firstName, lastName, username);
+							dialogeBox.returnToLogin("Welcome " + first, stackPane, stackPane);
+						}
 					} else {
-						saveUserToFile(user, password, first, last, email);
-						clearFields(pass, confirmPass, firstName, lastName, username);
-						dialogeBox.returnToLogin("Welcome " + first, stackPane, stackPane);
+						dialogeBox.OkButton("Invalid Password", new JFXDialog());
+						pass.setText(""); confirmPass.setText("");
 					}
-				} else{
-					dialogeBox.OkButton("Invalid Password", new JFXDialog());
+				}else{
+					dialogeBox.OkButton("Email is already registered", new JFXDialog());
+					emailLabel.setText("");
 				}
 			} else {
 				dialogeBox.OkButton("Invalid Email", new JFXDialog());
@@ -128,7 +134,15 @@ public class registerController {
 		}
 		return false;
 	}
-
+	private boolean emailExists(String request)
+	{
+		try{
+			return machineModel.emailAlreadyExists(request.toLowerCase());
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		return false;
+	}
 	private void saveUserToFile(String...details)
 	{
 		HashPassword hash = new HashPassword(details[1]);

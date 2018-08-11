@@ -218,6 +218,70 @@ public final class MachineModel
 		}
 		return "Unknown";
 	}
+	public String getUsername(String email ) throws SQLException
+	{
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String query = "SELECT * from Customer_Information WHERE Email = ?";
+
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,email);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()){
+				return resultSet.getString("Username");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null && resultSet != null) {
+				preparedStatement.close();
+				resultSet.close();
+			}
+		}
+		return "Unknown";
+	}
+
+	public String verfiyEmailAddres(String request) throws SQLException
+	{
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String query = "SELECT * from Customer_Information WHERE Email = ?";
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, request);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next())
+				return resultSet.getString("Email");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			preparedStatement.close();
+			resultSet.close();
+		}
+		return "Unknown";
+	}
+
+	public boolean emailAlreadyExists(String request) throws SQLException
+	{
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String query = "SELECT * from Customer_Information WHERE Email = ?";
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, request);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next())
+				if(resultSet.getString("Email").equalsIgnoreCase(request))
+					return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			preparedStatement.close();
+			resultSet.close();
+		}
+		return false;
+	}
 
 	public void updateNewPassword(String user, String newPass) throws SQLException
 	{
