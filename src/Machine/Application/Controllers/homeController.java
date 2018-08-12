@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -35,7 +37,7 @@ public class homeController implements Initializable
 	private JFXButton quickCash;
 
 	@FXML
-	private JFXButton deposit;
+	private JFXButton deposit, settingButton;
 
 	@FXML
 	private JFXButton withdraw;
@@ -68,15 +70,24 @@ public class homeController implements Initializable
 
 	private MachineModel machineModel;
 	private LoadScene loadScene;
+	private Image image;
 
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		settingButton.setText("");
+		image = new Image(getClass().getResourceAsStream("/Machine/images/user-2517433_960_7201.png"));
 		loadScene = new LoadScene();
 		dateTime.setText(getDate());
 		accountType.setText("Checking");
+		ImageView imageView = new ImageView(image);
+		imageView.setPreserveRatio(false);
+		imageView.setSmooth(true);
+		imageView.setFitHeight(40);
+		imageView.setFitWidth(40);
+		settingButton.setGraphic(imageView);
 	}
 
 	@FXML
@@ -92,6 +103,15 @@ public class homeController implements Initializable
 	{
 		loadScene.setActionEvent(event);
 		loadScene.depositPage(getuName(),machineModel);
+	}
+
+	@FXML
+	void settings(ActionEvent event)
+	{
+		if(event.getSource().equals(settingButton)){
+			loadScene.setActionEvent(event);
+			loadScene.settingsScene(getuName(),machineModel);
+		}
 	}
 
 	@FXML

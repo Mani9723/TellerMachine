@@ -59,14 +59,15 @@ public class Email
 		this.content = "PLEASE DO NOT REPLY TO THIS ADDRESS AS IT IS NOT MONITORED\n" +
 				"\nDear Customer, \n" +
 				"\tYour temporary password is: " + tempPass +
-				"\nPlease go back and use your temporary password to login." +
+				"\nPlease go back and click on reset password." +
 				"\nTEMPORARY CODE EXPIRES IN 15 MINUTES.";
 	}
 
 	public void setUsernameRequestContent(String user)
 	{
 		this.content = "PLEASE DO NOT REPLY TO THIS ADDRESS AS IT IS NOT MONITORED\n" +
-				"\nYour username is: " + user;
+				"\nYour username is: " + user + "" +
+				"\nYou can now reset your password";
 	}
 
 	public boolean sendEmail()

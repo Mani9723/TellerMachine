@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
@@ -16,11 +17,11 @@
 
 <AnchorPane fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../FXMLs/application.css" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.homeController">
     <children>
-        <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@/Machine/images/flat_landscape_wallpaper_by_nicknufayl-d9frf2v.png" />
+            <Image url="@../../images/flat_landscape_wallpaper_by_nicknufayl-d9frf2v.png" />
          </image>
-        </ImageView>
+      </ImageView>
         <JFXButton fx:id="quickCash" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="409.0" layoutY="120.0" onAction="#quickCash" opacity="0.90" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@../FXMLs/application.css" text="Q U I C K    C A S H" textFill="black" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="120.0">
             <font>
                 <Font name="Papyrus" size="17.0" />
@@ -86,6 +87,14 @@
                     <font>
                         <Font name="Papyrus" size="23.0" />
                     </font></Label>
+            <JFXButton fx:id="settingButton" prefHeight="40.0" onAction="#settings" prefWidth="40.0" ripplerFill="WHITE" text="a">
+               <HBox.margin>
+                  <Insets left="20.0" top="30.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="1.0" />
+               </font>
+            </JFXButton>
             </children>
         </HBox>
         <AnchorPane layoutX="14.0" layoutY="120.0" prefHeight="304.0" prefWidth="319.0" AnchorPane.bottomAnchor="77.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="120.0">

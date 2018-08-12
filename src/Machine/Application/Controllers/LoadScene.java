@@ -32,6 +32,7 @@ class LoadScene
 	private final String registerFxml = "/Machine/Application/FXMLs/registerPage.fxml";
 	private final String statementFxml = "/Machine/Application/FXMLs/statementPage.fxml";
 	private final String quickFxml = "/Machine/Application/FXMLs/QuickWithdraw.fxml";
+	private final String settingsFxml = "/Machine/Application/FXMLs/SettingPage.fxml";
 
 	LoadScene(StackPane stckpaneCurr, StackPane stckPaneGoal)
 	{
@@ -155,6 +156,24 @@ class LoadScene
 		controller.setUsername(username);
 		controller.setMachineModel(machineModel);
 		controller.init();
+		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+		homeWindow.setScene(currScene);
+		homeWindow.show();
+	}
+
+	void settingsScene(String username, MachineModel machineModel)
+	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(settingsFxml));
+		Parent loginParent = null;
+		try {
+			loginParent = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Scene currScene = new Scene(loginParent);
+		SettingsController controller = loader.getController();
+		controller.init(username, machineModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 		homeWindow.setScene(currScene);
 		homeWindow.show();
