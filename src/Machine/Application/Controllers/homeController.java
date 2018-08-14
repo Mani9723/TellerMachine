@@ -119,7 +119,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(exitHome)){
 			try {
-				stackPane = FXMLLoader.load(getClass().getResource("../FXMLs/loginPage.fxml"));
+				stackPane = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/loginPage.fxml"));
 				secondPane.getChildren().setAll(stackPane);
 			} catch (IOException e) {
 				e.printStackTrace();

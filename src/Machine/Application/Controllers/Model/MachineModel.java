@@ -306,7 +306,7 @@ public final class MachineModel
 	}
 
 
-	public void saveUserToDatabase(String...values) throws SQLException
+	public void saveUserToMainDB(String...values) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 

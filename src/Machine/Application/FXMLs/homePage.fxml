@@ -19,10 +19,10 @@
     <children>
       <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../../images/flat_landscape_wallpaper_by_nicknufayl-d9frf2v.png" />
+            <Image url="@/Machine/images/flat_landscape_wallpaper_by_nicknufayl-d9frf2v.png" />
          </image>
       </ImageView>
-        <JFXButton fx:id="quickCash" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="409.0" layoutY="120.0" onAction="#quickCash" opacity="0.90" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@../FXMLs/application.css" text="Q U I C K    C A S H" textFill="black" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="120.0">
+        <JFXButton fx:id="quickCash" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="409.0" layoutY="120.0" onAction="#quickCash" opacity="0.90" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@/Machine/Application/FXMLs/application.css" text="Q U I C K    C A S H" textFill="black" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="120.0">
             <font>
                 <Font name="Papyrus" size="17.0" />
             </font>
@@ -37,7 +37,7 @@
                </stops>
             </RadialGradient>
          </ripplerFill></JFXButton>
-        <JFXButton fx:id="deposit" buttonType="RAISED" layoutX="409.0" layoutY="207.0" onAction="#depositMoney" opacity="0.90" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@../FXMLs/application.css" text="D E P O S I T" textFill="black" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="207.0">
+        <JFXButton fx:id="deposit" buttonType="RAISED" layoutX="409.0" layoutY="207.0" onAction="#depositMoney" opacity="0.90" prefHeight="73.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@/Machine/Application/FXMLs/application.css" text="D E P O S I T" textFill="black" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="409.0" AnchorPane.rightAnchor="46.0" AnchorPane.topAnchor="207.0">
             <effect>
                 <InnerShadow />
             </effect>
@@ -113,7 +113,7 @@
                             <font>
                                 <Font name="Papyrus" size="23.0" />
                             </font></Label>
-                        <Label fx:id="balanceLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="175.0" stylesheets="@../FXMLs/application.css" text="BALANCE" textFill="WHITE" GridPane.rowIndex="1">
+                        <Label fx:id="balanceLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="65.0" prefWidth="175.0" stylesheets="@/Machine/Application/FXMLs/application.css" text="BALANCE" textFill="WHITE" GridPane.rowIndex="1">
                             <font>
                                 <Font name="Papyrus" size="23.0" />
                             </font></Label>
@@ -125,7 +125,7 @@
                 </GridPane>
             </children>
         </AnchorPane>
-      <JFXButton fx:id="statementButton" layoutX="409.0" layoutY="387.0" onAction="#handleStatementButton" opacity="0.80" prefHeight="72.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@../FXMLs/application.css" text="STATEMENT" textFill="black">
+      <JFXButton fx:id="statementButton" layoutX="409.0" layoutY="387.0" onAction="#handleStatementButton" opacity="0.80" prefHeight="72.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@/Machine/Application/FXMLs/application.css" text="STATEMENT" textFill="black">
          <font>
             <Font name="Papyrus" size="16.0" />
          </font>

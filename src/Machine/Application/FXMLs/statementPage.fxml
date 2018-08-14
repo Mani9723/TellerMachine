@@ -24,7 +24,7 @@
             <Image url="@/Machine/images/landscape__1____forest_mountain_by_ncoll36-daxsdd5.jpg" />
          </image>
       </ImageView>
-      <TableView fx:id="table" layoutY="75.0" opacity="0.78" prefHeight="399.0" prefWidth="690.0" stylesheets="@/Machine/Application/FXMLs/application.css" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <TableView fx:id="table" layoutY="75.0" opacity="0.78" prefHeight="399.0" prefWidth="690.0"  AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
         <columns>
           <TableColumn fx:id="dateCol" editable="false" prefWidth="123.0" resizable="false" text="   Date" />
           <TableColumn fx:id="typeCol" editable="false" prefWidth="113.0" resizable="false" text="Type" />
