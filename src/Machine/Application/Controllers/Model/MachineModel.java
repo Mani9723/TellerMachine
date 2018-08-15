@@ -123,6 +123,26 @@ public final class MachineModel
 		return null;
 	}
 
+	public void deleteUser(String username) throws SQLException
+	{
+		PreparedStatement preparedStatement = null;
+		String query = "DELETE FROM Customer_Information where username = ?";
+
+		preparedStatement = connection.prepareStatement(query);
+		preparedStatement.setString(1,username);
+		preparedStatement.execute();
+
+		deleteUserTable(username);
+	}
+
+	private void deleteUserTable(String username) throws SQLException
+	{
+		String query = "DROP TABLE " + username;
+		PreparedStatement preparedStatement = null;
+
+		preparedStatement = connection.prepareStatement(query);
+		preparedStatement.execute();
+	}
 
 	public boolean validateLogin(String user, String pass) throws SQLException
 	{

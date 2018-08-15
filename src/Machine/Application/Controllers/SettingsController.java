@@ -26,7 +26,7 @@ public class SettingsController implements Initializable
 {
 
 	@FXML
-	private JFXButton confirmButton, menuButton;
+	private JFXButton confirmButton, menuButton, delAccount, confDel, cancel;
 
 	@FXML
 	private StackPane stackPane;
@@ -56,6 +56,9 @@ public class SettingsController implements Initializable
 	private JFXPasswordField confnewPass;
 
 	@FXML
+	private JFXPasswordField reenterPassword;
+
+	@FXML
 	private Label date;
 
 	private MachineModel machineModel;
@@ -76,6 +79,9 @@ public class SettingsController implements Initializable
 		date.setTextFill(Color.valueOf("white"));
 		gaussianBlur.setRadius(7.5);
 		confirmButton.setDisable(true);
+		cancel.setVisible(false);
+		confDel.setVisible(false);
+		reenterPassword.setVisible(false);
 	}
 
 	void init(String user, MachineModel machine)
@@ -88,6 +94,55 @@ public class SettingsController implements Initializable
 			email.setText(machineModel.getAccountInfo(user,"Email"));
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void handleDelButton(ActionEvent event)
+	{
+		if(event.getSource().equals(delAccount)){
+			reenterPassword.setVisible(true);
+			confDel.setVisible(true);
+			cancel.setVisible(true);
+			currPass.setDisable(true);
+			newPass.setDisable(true);
+			confnewPass.setDisable(true);
+		}
+	}
+
+	public void confirmDelButton(ActionEvent event)
+	{
+		if(event.getSource().equals(confDel) && reenterPassword.getText().length()>=8){
+			String pass = reenterPassword.getText();
+			HashPassword hashPassword = new HashPassword(pass);
+			try{
+				if(machineModel.getAccountInfo(username.getText(),"Password").equals(hashPassword.toString())){
+					machineModel.deleteUser(username.getText());
+					loadScene = new LoadScene(stackPane,new StackPane());
+					loadScene.loginPage();
+					dialogeBox.OkButton("Thank you for you being a customer.\nYour account is deleted",
+							new JFXDialog());
+				}else{
+					dialogeBox.OkButton("Incorrect Password", new JFXDialog());
+					reenterPassword.setText("");
+				}
+			}catch (SQLException e){
+				e.printStackTrace();
+			}
+		}else{
+			dialogeBox.OkButton("Please Enter Password", new JFXDialog());
+		}
+	}
+
+	public void cancelDelButton(ActionEvent event)
+	{
+		if(event.getSource().equals(cancel)){
+			reenterPassword.setVisible(false);
+			reenterPassword.setText("");
+			confDel.setVisible(false);
+			cancel.setVisible(false);
+			currPass.setDisable(false);
+			newPass.setDisable(false);
+			confnewPass.setDisable(false);
 		}
 	}
 
