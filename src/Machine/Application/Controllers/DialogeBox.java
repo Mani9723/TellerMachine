@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -44,6 +46,12 @@ public class DialogeBox
 		button.setAlignment(Pos.CENTER);
 		button.setPrefSize(100,50);
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.CENTER);
+		button.addEventHandler(KeyEvent.KEY_PRESSED,(KeyEvent event ) ->{
+			if(event.getCode().equals(KeyCode.ENTER)){
+				parent.setEffect(null);
+				this.dialog.close();
+			}
+		});
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED,(MouseEvent mouseEvent )->{
 			parent.setEffect(null);
 			this.dialog.close();

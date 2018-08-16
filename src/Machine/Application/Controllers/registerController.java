@@ -108,7 +108,7 @@ public class registerController {
 				}
 			} else {
 				dialogeBox.OkButton("Invalid Email", new JFXDialog());
-				pass.setText(""); confirmPass.setText("");
+				emailLabel.setText("");
 			}
 		}
 	}

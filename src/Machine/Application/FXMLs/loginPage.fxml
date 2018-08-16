@@ -24,7 +24,7 @@
                <children>
                   <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <image>
-                        <Image url="@/Machine/images/Stefanus-martanto-blue-mountains-orange-sky-ipad-wallpaper-768x768.jpg" />
+                        <Image url="@/Machine/images/stefanus-martanto-blue-mountains-orange-sky-ipad-wallpaper.jpg" />
                      </image>
                   </ImageView>
                   <Label alignment="CENTER" layoutX="192.0" layoutY="58.0" prefHeight="42.0" prefWidth="316.0" text="W E L C O M E " textFill="WHITE">
@@ -122,18 +122,10 @@
                         <Font name="Papyrus" size="20.0" />
                      </font>
                   </JFXButton>
-                  <Label fx:id="capsLockLabel" layoutX="534.0" layoutY="256.0" onKeyReleased="#handleCapsLock" prefHeight="41.0" prefWidth="74.0" text="CAPS LOCK ">
+                  <Label fx:id="capsLockLabel" layoutX="534.0" layoutY="256.0" onKeyReleased="#handleCapsLock" prefHeight="41.0" prefWidth="146.0" text="CAPS LOCK " textFill="yellow">
                      <font>
                         <Font size="13.0" />
                      </font>
-                     <textFill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                           <stops>
-                              <Stop color="RED" />
-                              <Stop color="#3f00ff" offset="1.0" />
-                           </stops>
-                        </RadialGradient>
-                     </textFill>
                   </Label>
                   <JFXButton fx:id="exitResetPass" layoutX="518.0" layoutY="14.0" onAction="#resetPassword" prefHeight="32.0" prefWidth="120.0" styleClass="exitHome" stylesheets="@/Machine/Application/FXMLs/application.css" text="BACK TO LOGIN">
                      <font>

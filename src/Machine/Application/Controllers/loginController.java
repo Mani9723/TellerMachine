@@ -50,6 +50,7 @@ public class loginController implements Initializable
 	@FXML
 	private Label capsLockLabel;
 
+	private boolean isCapsOn = false;
 	private MachineModel machineModel;
 	private DialogeBox dialogeBox;
 	private GaussianBlur gaussianBlur;
@@ -66,17 +67,18 @@ public class loginController implements Initializable
 		machineModel = new MachineModel();
 
 		capsLockLabel.setVisible(false);
+		capsLockLabel.setText("CAPS LOCK ON");
 		login.setDisable(true);
 		exitResetPass.setDisable(true);
 		exitResetPass.setVisible(false);
 
-		if(machineModel.isDbConnected()) {
-			capsLockLabel.setText("Connected");
-			capsLockLabel.setVisible(true);
-		}else {
-			capsLockLabel.setVisible(true);
-			capsLockLabel.setText("Not Connected");
-		}
+//		if(machineModel.isDbConnected()) {
+//			capsLockLabel.setText("CAPS LOCK ON");
+//			capsLockLabel.setVisible(true);
+//		}else {
+//			capsLockLabel.setVisible(true);
+//			capsLockLabel.setText("Not Connected");
+//		}
 	}
 
 	@FXML
@@ -86,6 +88,15 @@ public class loginController implements Initializable
 			login.setDisable(false);
 		if(password.getText().length()<3 || username.getText().length() < 3)
 			login.setDisable(true);
+		if(event.getCode().equals(KeyCode.CAPS)){
+			if(isCapsOn){
+				isCapsOn = false;
+				capsLockLabel.setVisible(false);
+			}else{
+				isCapsOn = true;
+				capsLockLabel.setVisible(true);
+			}
+		}
 		if(event.getCode().equals(KeyCode.ENTER)){
 			try {
 				if(machineModel.isFirstTimeRunning()){
