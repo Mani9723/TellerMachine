@@ -18,16 +18,9 @@ import java.util.ResourceBundle;
 
 public class ChangePassController implements Initializable
 {
+	private final static long FIFTEEN_MIN = 900000;
 	@FXML
 	private StackPane NewPasswordPane;
-
-	@FXML
-	private ImageView imgLeft;
-
-	@FXML
-	private ImageView imgRight;
-
-	private final static long FIFTEEN_MIN = 900000;
 
 	@FXML
 	private JFXTextField tempPass;
@@ -46,31 +39,26 @@ public class ChangePassController implements Initializable
 
 	private MachineModel machineModel;
 	private DialogeBox dialogeBox;
+	private static HashPassword hashPassword;
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		hashPassword = new HashPassword();
 		dialogeBox = new DialogeBox(NewPasswordPane);
 		changeButton.setDisable(true);
 		changeButton.setOpacity(0.50);
-		imgLeft.setVisible(false);
-		imgRight.setVisible(false);
 		confNewPass.setOpacity(1.0);
 		username.setOpacity(1.0);
 		tempPass.setOpacity(1.0);
 		newPass.setOpacity(1.0);
-//		username.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
-//		tempPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
-//		newPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));;
-	//	confNewPass.setBackground(new Background(new BackgroundFill(Paint.valueOf("snow"),null,null)));
 	}
 
 
 	public void verifyNewPassword()
 	{
 		machineModel = new MachineModel();
-		HashPassword hashPassword;
 		String user = username.getText();
 		String temp = tempPass.getText();
 		String password = newPass.getText();
@@ -79,17 +67,17 @@ public class ChangePassController implements Initializable
 			try {
 				if(validPassword(password)){
 					if(validTimeAndInput(temp,user)) {
-						hashPassword = new HashPassword(conf);
+						hashPassword.setHashPassword(conf);
 						machineModel.updateNewPassword(user, hashPassword.toString());
 						clearAllFields();
-						dialogeBox.drawerOkButton("Success\nPassword Changed", new JFXDialog());
+						setDialogMessageAndShow("Success\nPassword Changed");
 					}else{
-						dialogeBox.drawerOkButton("Password Doesn't Match", new JFXDialog());
+						setDialogMessageAndShow("Password Doesn't Match");
 						newPass.setText("");
 						confNewPass.setText("");
 					}
 				}else {
-					dialogeBox.drawerOkButton("Password is short", new JFXDialog());
+					setDialogMessageAndShow("Password >= 8 Chars");
 					newPass.setText("");
 					confNewPass.setText("");
 				}
@@ -98,6 +86,11 @@ public class ChangePassController implements Initializable
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private void setDialogMessageAndShow(String message)
+	{
+		dialogeBox.drawerOkButton(message,new JFXDialog());
 	}
 
 	private boolean validPassword(String pass)

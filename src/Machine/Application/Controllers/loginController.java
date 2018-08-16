@@ -3,7 +3,11 @@ package Machine.Application.Controllers;
 import Machine.AccountManager.HashPassword;
 
 import Machine.Application.Controllers.Model.MachineModel;
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,11 +24,10 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class loginController implements Initializable
-{
+public class loginController implements Initializable {
 
 	@FXML
-	private AnchorPane rootPane, secondPane, registerPane;
+	private AnchorPane rootPane;
 
 	@FXML
 	private JFXDrawer drawerPane;
@@ -51,17 +54,14 @@ public class loginController implements Initializable
 	private Label capsLockLabel;
 
 	private boolean isCapsOn = false;
-	private MachineModel machineModel;
+	private static MachineModel machineModel;
 	private DialogeBox dialogeBox;
-	private GaussianBlur gaussianBlur;
 	private LoadScene loadScene;
+	private static HashPassword hashPassword;
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources)
-	{
+	public void initialize(URL location, ResourceBundle resources) {
 		loadScene = new LoadScene();
-		gaussianBlur = new GaussianBlur();
-		gaussianBlur.setRadius(7.5);
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(rootPane);
 		machineModel = new MachineModel();
@@ -71,132 +71,52 @@ public class loginController implements Initializable
 		login.setDisable(true);
 		exitResetPass.setDisable(true);
 		exitResetPass.setVisible(false);
-
-//		if(machineModel.isDbConnected()) {
-//			capsLockLabel.setText("CAPS LOCK ON");
-//			capsLockLabel.setVisible(true);
-//		}else {
-//			capsLockLabel.setVisible(true);
-//			capsLockLabel.setText("Not Connected");
-//		}
 	}
 
 	@FXML
-	void EnterKey(KeyEvent event)
-	{
-		if(password.getText().length()>3)
+	public void EnterKey(KeyEvent event) {
+		if (password.getText().length() > 3)
 			login.setDisable(false);
-		if(password.getText().length()<3 || username.getText().length() < 3)
+		if (password.getText().length() < 3 || username.getText().length() < 3)
 			login.setDisable(true);
-		if(event.getCode().equals(KeyCode.CAPS)){
-			if(isCapsOn){
-				isCapsOn = false;
-				capsLockLabel.setVisible(false);
-			}else{
-				isCapsOn = true;
-				capsLockLabel.setVisible(true);
-			}
+		if (event.getCode().equals(KeyCode.CAPS)) {
+			switchCapsLockLabel();
 		}
-		if(event.getCode().equals(KeyCode.ENTER)){
+		if (event.getCode().equals(KeyCode.ENTER)) {
 			try {
-				if(machineModel.isFirstTimeRunning()){
-					dialogeBox.OkButton("Welcome, please register first",new JFXDialog());
-					username.setText("");
-					password.setText("");
-					login.setDisable(true);
-				} else if(processCredentials()){
-					loadScene.setKeyEvent(event);
-					loadScene.homeScene(username, machineModel);
-				}
-				else {
-					dialogeBox.OkButton("Incorrect Credentials", new JFXDialog());
-					username.setText("");
-					password.setText("");
-					login.setDisable(true);
+				if (machineModel.isFirstTimeRunning()) {
+					showFirstTimeUsingDialog();
+				} else if (processCredentials()) {
+					loadHomePage(null,event);
+				} else {
+					handleIncorrectCredentials();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
 		}
-
 	}
 
 	@FXML
-	void exit(ActionEvent event)
-	{
-		if(event.getSource().equals(exit)){
+	void exit(ActionEvent event) {
+		if (event.getSource().equals(exit)) {
 			System.exit(0);
 		}
 	}
 
 	@FXML
-	void handleCapsLock(KeyEvent event)
-	{
-		// DO NOTHING
-	}
-
-	@FXML
-	void resetPassword(ActionEvent event)
-	{
-		exitResetPass.setDisable(false);
-		exitResetPass.setVisible(true);
-		try {
-			StackPane resetPane = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/SendCodePage.fxml"));
-			drawerPane.setSidePane(resetPane);
-			drawerPane.setDirection(JFXDrawer.DrawerDirection.TOP);
-
-			if(drawerPane.isOpened() && event.getSource().equals(exitResetPass)) {
-				drawerPane.close();
-				exitResetPass.setDisable(true);
-				exitResetPass.setVisible(false);
-				modifyButtonVisibility(false);
-			} else {
-				drawerPane.open();
-				modifyButtonVisibility(true);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void modifyButtonVisibility(boolean disable)
-	{
-		registerButton.setDisable(disable);
-		forgotButton.setDisable(disable);
-		makeNewPass.setDisable(disable);
-		username.setDisable(disable);
-		password.setDisable(disable);
+	void resetPassword(ActionEvent event) {
+		openDrawerPane("/Machine/Application/FXMLs/SendCodePage.fxml",event);
 	}
 
 	@FXML
 	void createNewPassword(ActionEvent event)
 	{
-		exitResetPass.setDisable(false);
-		exitResetPass.setVisible(true);
-		try {
-			StackPane resetPane = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/ChangePassPage.fxml"));
-			drawerPane.setSidePane(resetPane);
-
-
-			if(drawerPane.isOpened() && event.getSource().equals(exitResetPass)) {
-				drawerPane.close();
-				exitResetPass.setDisable(true);
-				exitResetPass.setVisible(false);
-				modifyButtonVisibility(false);
-			} else {
-				drawerPane.open();
-				modifyButtonVisibility(true);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		openDrawerPane("/Machine/Application/FXMLs/ChangePassPage.fxml",event);
 	}
 
 	@FXML
-	void loginHandler(ActionEvent event)
+	void loginButtonHandler(ActionEvent event)
 	{
 		if(event.getSource().equals(login)){
 			loginProcess(event);
@@ -204,7 +124,7 @@ public class loginController implements Initializable
 	}
 
 	@FXML
-	void register(ActionEvent event)
+	void registerButton(ActionEvent event)
 	{
 		if(event.getSource().equals(registerButton)){
 			loadScene.setActionEvent(event);
@@ -213,28 +133,60 @@ public class loginController implements Initializable
 		}
 	}
 
+    private void modifyButtonVisibility(boolean disable)
+    {
+        registerButton.setDisable(disable);
+        forgotButton.setDisable(disable);
+        makeNewPass.setDisable(disable);
+        username.setDisable(disable);
+        password.setDisable(disable);
+    }
+
 	private void loginProcess(ActionEvent event)
 	{
 		try {
 			if(machineModel.isFirstTimeRunning()){
-				dialogeBox.OkButton("Welcome, please register first",new JFXDialog());
-			}
-			else if(processCredentials()){
-				loadHomePage(event);
+				showFirstTimeUsingDialog();
+			} else if(processCredentials()){
+				loadHomePage(event,null);
 			} else{
-				dialogeBox.OkButton("Incorrect Credentials", new JFXDialog());
-				username.setText("");
-				password.setText("");
-				login.setDisable(true);
+				handleIncorrectCredentials();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
+	private void switchCapsLockLabel()
+	{
+		if (isCapsOn) {
+			isCapsOn = false;
+			capsLockLabel.setVisible(false);
+		} else {
+			isCapsOn = true;
+			capsLockLabel.setVisible(true);
+		}
+	}
+
+	private void handleIncorrectCredentials() {
+		dialogeBox.OkButton("Incorrect Credentials", new JFXDialog());
+		username.setText("");
+		password.setText("");
+		login.setDisable(true);
+	}
+
+	private void showFirstTimeUsingDialog()
+	{
+		dialogeBox.OkButton("Welcome, please register first", new JFXDialog());
+		username.setText("");
+		password.setText("");
+		login.setDisable(true);
+	}
+
 	private boolean processCredentials()
 	{
-		String securePass = new HashPassword(password.getText()).toString();
+		hashPassword.setHashPassword(password.getText());
+		String securePass = hashPassword.toString();
 		try {
 			return machineModel.validateLogin(username.getText(),securePass);
 		} catch (SQLException e) {
@@ -243,9 +195,35 @@ public class loginController implements Initializable
 		return false;
 	}
 
-	private void loadHomePage(ActionEvent event)
+	private void loadHomePage(ActionEvent event, KeyEvent keyEvent)
 	{
-		loadScene.setActionEvent(event);
+		if(event != null)
+			loadScene.setActionEvent(event);
+		else if(keyEvent != null)
+			loadScene.setKeyEvent(keyEvent);
 		loadScene.homeSceneAction(username.getText(),machineModel);
+	}
+
+	private void openDrawerPane(String scenePath, ActionEvent event)
+	{
+		exitResetPass.setDisable(false);
+		exitResetPass.setVisible(true);
+		try {
+			StackPane resetPane = FXMLLoader.load(getClass().getResource(scenePath));
+			drawerPane.setSidePane(resetPane);
+
+			if (drawerPane.isShown() && event.getSource().equals(exitResetPass)) {
+				drawerPane.close();
+				exitResetPass.setDisable(true);
+				exitResetPass.setVisible(false);
+				modifyButtonVisibility(false);
+			} else {
+				drawerPane.open();
+				modifyButtonVisibility(true);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

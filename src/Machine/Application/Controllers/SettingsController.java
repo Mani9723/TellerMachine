@@ -10,12 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -64,20 +62,18 @@ public class SettingsController implements Initializable
 	private MachineModel machineModel;
 	private LoadScene loadScene;
 	private DialogeBox dialogeBox;
-	private HashPassword hashPassword;
-	private GaussianBlur gaussianBlur;
+	private static HashPassword hashPassword;
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		gaussianBlur = new GaussianBlur();
+		hashPassword = new HashPassword();
 		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(anchor);
 		date.setText(getDate());
 		date.setTextFill(Color.valueOf("white"));
-		gaussianBlur.setRadius(7.5);
 		confirmButton.setDisable(true);
 		cancel.setVisible(false);
 		confDel.setVisible(false);
@@ -96,24 +92,28 @@ public class SettingsController implements Initializable
 			e.printStackTrace();
 		}
 	}
-
+	@FXML
+	public void handleButtonEnable()
+	{
+		String pass = confnewPass.getText();
+		if (pass.length() >= 8)
+			confirmButton.setDisable(false);
+		else
+			confirmButton.setDisable(true);
+	}
+	@FXML
 	public void handleDelButton(ActionEvent event)
 	{
 		if(event.getSource().equals(delAccount)){
-			reenterPassword.setVisible(true);
-			confDel.setVisible(true);
-			cancel.setVisible(true);
-			currPass.setDisable(true);
-			newPass.setDisable(true);
-			confnewPass.setDisable(true);
+			setFunctionality(true);
 		}
 	}
-
+	@FXML
 	public void confirmDelButton(ActionEvent event)
 	{
 		if(event.getSource().equals(confDel) && reenterPassword.getText().length()>=8){
 			String pass = reenterPassword.getText();
-			HashPassword hashPassword = new HashPassword(pass);
+			hashPassword.setHashPassword(pass);
 			try{
 				if(machineModel.getAccountInfo(username.getText(),"Password").equals(hashPassword.toString())){
 					machineModel.deleteUser(username.getText());
@@ -133,19 +133,17 @@ public class SettingsController implements Initializable
 		}
 	}
 
+	@FXML
 	public void cancelDelButton(ActionEvent event)
 	{
 		if(event.getSource().equals(cancel)){
-			reenterPassword.setVisible(false);
+			setFunctionality(false);
 			reenterPassword.setText("");
-			confDel.setVisible(false);
-			cancel.setVisible(false);
-			currPass.setDisable(false);
-			newPass.setDisable(false);
-			confnewPass.setDisable(false);
+
 		}
 	}
 
+	@FXML
 	public void loadHomeScene(ActionEvent event)
 	{
 		if(event.getSource().equals(menuButton)){
@@ -153,13 +151,13 @@ public class SettingsController implements Initializable
 			loadScene.homeSceneAction(username.getText(),machineModel);
 		}
 	}
-
+	@FXML
 	public void handlePassChange(ActionEvent event)
 	{
 		if(event.getSource().equals(confirmButton)){
 			if(isCurrentValid()) {
 				if (validatePass()) {
-					hashPassword = new HashPassword(newPass.getText());
+					hashPassword.setHashPassword(newPass.getText());
 					try {
 						machineModel.updateNewPassword(username.getText(), hashPassword.toString());
 					} catch (SQLException e) {
@@ -180,7 +178,7 @@ public class SettingsController implements Initializable
 
 	private boolean isCurrentValid()
 	{
-		hashPassword = new HashPassword(currPass.getText());
+		hashPassword.setHashPassword(currPass.getText());
 		String encryptedPass = hashPassword.toString();
 		try {
 			return encryptedPass.equals(machineModel.getAccountInfo(username.getText(),"Password"));
@@ -190,11 +188,22 @@ public class SettingsController implements Initializable
 		return false;
 	}
 
+	private void setFunctionality(boolean isFunctional)
+	{
+		confDel.setVisible(isFunctional);
+		cancel.setVisible(isFunctional);
+		currPass.setDisable(isFunctional);
+		newPass.setDisable(isFunctional);
+		confnewPass.setDisable(isFunctional);
+		reenterPassword.setVisible(isFunctional);
+	}
+
 	private boolean validatePass()
 	{
 		return newPass.getText().equals(confnewPass.getText())
 				&& newPass.getText().length() >=8 && confnewPass.getText().length() >=8;
 	}
+
 
 	private String getDate()
 	{
@@ -203,13 +212,5 @@ public class SettingsController implements Initializable
 		return dateFormat.format(date);
 	}
 
-	@FXML
-	public void handleButtonEnable()
-	{
-		String pass = confnewPass.getText();
-		if (pass.length() >= 8)
-			confirmButton.setDisable(false);
-		else
-			confirmButton.setDisable(true);
-	}
+
 }

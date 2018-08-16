@@ -133,7 +133,9 @@ public class SendCodeController implements Initializable
 	private void getEmailAddress()
 	{
 		String secureTempPass;
-		secureTempPass = new HashPassword(generateRandomWord()).toString();
+		HashPassword hashPassword = new HashPassword();
+		hashPassword.setHashPassword(generateRandomWord());
+		secureTempPass = hashPassword.toString();
 		email = new Email(secureTempPass);
 		try {
 			setActualEmail(machineModel.getAccountInfo(usernameInput.getText(), "email"));

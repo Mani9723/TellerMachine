@@ -19,14 +19,11 @@ import java.util.regex.Pattern;
 
 public class registerController {
 
-	private Pattern pattern;
-	private Matcher matcher;
+	@FXML
+	private StackPane stackPane;
 
 	@FXML
-	private StackPane stackPane, stackPane1;
-
-	@FXML
-	private AnchorPane registerPane, rootPane;
+	private AnchorPane registerPane;
 
 	@FXML
 	private JFXButton registerButton;
@@ -52,24 +49,26 @@ public class registerController {
 	@FXML
 	private JFXButton returnButton;
 
+	private final static double VISIBLE_VAL = 0.85, INVISIBLE_VAL = 0.42;
+
 	private DialogeBox dialogeBox;
-
 	private MachineModel machineModel;
-
 	private LoadScene loadScene;
-
 	private static final String EMAIL_PATTERN =
-			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			"^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
 					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	private static HashPassword hashPassword;
+
 
 	@FXML
 	public void initialize()
 	{
-		loadScene = new LoadScene(stackPane,stackPane1);
+		hashPassword = new HashPassword();
+		loadScene = new LoadScene(stackPane,new StackPane());
 		accountType.setText("CHECKING");
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(registerPane);
-		disableRegisterButton();
+		setRegisterButtonVisbility(true,INVISIBLE_VAL);
 	}
 
 	void setMachineModel(MachineModel model)
@@ -86,12 +85,12 @@ public class registerController {
 			String confPass = confirmPass.getText(), email = emailLabel.getText();
 
 
-			if(isValidEmailAddress(email)) {
+			if(isValidEmailFromat(email)) {
 				if(!emailExists(email)) {
 					if (emptyFieldExists(pass, confirmPass, firstName, lastName, username))
 						dialogeBox.OkButton("Fields are empty", new JFXDialog());
-					else if (password.equals(confPass) && isValidPassword(confPass)) {
-						if (userAlreadyExists(user)) {
+					else if (password.equals(confPass) && isValidPasswordLength(confPass)) {
+						if (usernameAlreadyExists(user)) {
 							dialogeBox.OkButton("Username is taken", new JFXDialog());
 						} else {
 							saveUserToFile(user, password, first, last, email);
@@ -113,19 +112,26 @@ public class registerController {
 		}
 	}
 
-	private boolean isValidPassword(String request)
+	@FXML
+	void returnButtonHandler(ActionEvent event)
+	{
+		if(event.getSource().equals(returnButton))
+			loadScene.loginPage();
+	}
+
+	private boolean isValidPasswordLength(String request)
 	{
 		return request.length()>= 8;
 	}
 
-	private boolean isValidEmailAddress(String request)
+	private boolean isValidEmailFromat(String request)
 	{
-		pattern = Pattern.compile(EMAIL_PATTERN);
-		matcher = pattern.matcher(request);
+		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+		Matcher matcher = pattern.matcher(request);
 		return matcher.matches();
 	}
 
-	private boolean userAlreadyExists(String user)
+	private boolean usernameAlreadyExists(String user)
 	{
 		try {
 			return machineModel.isUsernameTaken(user);
@@ -134,6 +140,7 @@ public class registerController {
 		}
 		return false;
 	}
+
 	private boolean emailExists(String request)
 	{
 		try{
@@ -143,23 +150,16 @@ public class registerController {
 		}
 		return false;
 	}
+
 	private void saveUserToFile(String...details)
 	{
-		HashPassword hash = new HashPassword(details[1]);
+		hashPassword.setHashPassword(details[1]);
 		try {
-			machineModel.saveUserToMainDB(details[0],hash.toString(),
+			machineModel.saveUserToMainDB(details[0],hashPassword.toString(),
 					details[2],details[3],details[4]);
 			machineModel.createStatementTable(details[0]);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-	}
-
-	@FXML
-	void returnHandler(ActionEvent event)
-	{
-		if(event.getSource().equals(returnButton)) {
-			loadScene.loginPage();
 		}
 	}
 
@@ -174,28 +174,23 @@ public class registerController {
 	private boolean emptyFieldExists(JFXPasswordField passwordField, JFXPasswordField pass, JFXTextField...field)
 	{
 		for(JFXTextField textField: field){
-			if(textField.getText().length() == 0) return true;
+			if(textField.getText().isEmpty()) return true;
 		}
-		return pass.getText().length() == 0 || passwordField.getText().length() == 0;
+		return pass.getText().isEmpty() || passwordField.getText().isEmpty();
 	}
 
-	public void enableRegisterButton(KeyEvent keyEvent)
+	public void enableRegisterButton()
 	{
 		if(emailLabel.getText().length()>6) {
-			enableRegisterButton();
+			setRegisterButtonVisbility(false,VISIBLE_VAL);
 		}else if(emailLabel.getText().isEmpty() || emailLabel.getText().length()<6){
-			disableRegisterButton();
+			setRegisterButtonVisbility(true,INVISIBLE_VAL);
 		}
 	}
 
-	private void enableRegisterButton()
+	private void setRegisterButtonVisbility(boolean disable, double opacity)
 	{
-		registerButton.setDisable(false);
-		registerButton.setOpacity(0.85);
-	}
-	private void disableRegisterButton()
-	{
-		registerButton.setDisable(true);
-		registerButton.setOpacity(0.42);
+		registerButton.setDisable(disable);
+		registerButton.setOpacity(opacity);
 	}
 }
