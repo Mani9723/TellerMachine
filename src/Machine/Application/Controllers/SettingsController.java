@@ -151,12 +151,13 @@ public class SettingsController implements Initializable
 			loadScene.homeSceneAction(username.getText(),machineModel);
 		}
 	}
+
 	@FXML
 	public void handlePassChange(ActionEvent event)
 	{
 		if(event.getSource().equals(confirmButton)){
-			if(isCurrentValid()) {
-				if (validatePass()) {
+			if(isCurrentPassValid()) {
+				if (validateNewPass()) {
 					hashPassword.setHashPassword(newPass.getText());
 					try {
 						machineModel.updateNewPassword(username.getText(), hashPassword.toString());
@@ -176,7 +177,7 @@ public class SettingsController implements Initializable
 		}
 	}
 
-	private boolean isCurrentValid()
+	private boolean isCurrentPassValid()
 	{
 		hashPassword.setHashPassword(currPass.getText());
 		String encryptedPass = hashPassword.toString();
@@ -198,12 +199,11 @@ public class SettingsController implements Initializable
 		reenterPassword.setVisible(isFunctional);
 	}
 
-	private boolean validatePass()
+	private boolean validateNewPass()
 	{
 		return newPass.getText().equals(confnewPass.getText())
 				&& newPass.getText().length() >=8 && confnewPass.getText().length() >=8;
 	}
-
 
 	private String getDate()
 	{
@@ -211,6 +211,4 @@ public class SettingsController implements Initializable
 		Date date = new Date();
 		return dateFormat.format(date);
 	}
-
-
 }

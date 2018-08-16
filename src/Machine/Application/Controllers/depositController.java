@@ -9,13 +9,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -91,12 +87,9 @@ public class depositController implements Initializable
 	private DecimalFormat decimalFormat = new DecimalFormat("##.##");
 
 	private String previousBalance, newBalance;
-
 	private MachineModel machineModel;
 	private DialogeBox dialogeBox;
-
-	private int count = 1;
-
+	private static int count = 1;
 	private LoadScene loadScene;
 
 	@Override
@@ -132,6 +125,56 @@ public class depositController implements Initializable
 		}
 		depositInput.setText("");
 		resetCount();
+	}
+
+	@FXML
+	void clearButton(ActionEvent event)
+	{
+		if(event.getSource().equals(clear))
+			depositInput.setText("");
+		resetCount();
+	}
+
+	@FXML
+	void logout(ActionEvent event)
+	{
+		StackPane stackPane1;
+		if(event.getSource().equals(logout)) {
+			try {
+				stackPane1 = FXMLLoader.load(getClass().getResource("../FXMLs/loginPage.fxml"));
+				stackPane.getChildren().setAll(stackPane1);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@FXML
+	void menu(ActionEvent event)
+	{
+		if(event.getSource().equals(menu)) {
+			loadScene.setActionEvent(event);
+			loadScene.homeSceneAction(getUser(),machineModel);
+		}
+	}
+
+	@FXML
+	void withdraw(ActionEvent event)
+	{
+		if(event.getSource().equals(withdraw)) {
+			loadScene.setActionEvent(event);
+			loadScene.withdrawScene(getUser(),machineModel);
+		}
+	}
+
+	@FXML
+	public void handleKeyPad(ActionEvent event)
+	{
+		writeToTextField(depositInput,(JFXButton)event.getSource());
+		if(event.getSource().equals(decimal)){
+			++count;
+			decimal.setDisable(true);
+		}
 	}
 
 	private void updateBalanceLabel()
@@ -170,52 +213,12 @@ public class depositController implements Initializable
 		}
 	}
 
-
-	@FXML
-	void clearButton(ActionEvent event)
-	{
-		if(event.getSource().equals(clear))
-			depositInput.setText("");
-		resetCount();
-	}
-
-	@FXML
-	void logout(ActionEvent event)
-	{
-		StackPane stackPane1;
-		if(event.getSource().equals(logout)) {
-			try {
-				 stackPane1 = FXMLLoader.load(getClass().getResource("../FXMLs/loginPage.fxml"));
-				stackPane.getChildren().setAll(stackPane1);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	private void resetCount()
 	{
 		--count;
 		decimal.setDisable(false);
 	}
 
-	@FXML
-	void menu(ActionEvent event)
-	{
-		if(event.getSource().equals(menu)) {
-			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(getUser(),machineModel);
-		}
-	}
-
-	@FXML
-	void withdraw(ActionEvent event)
-	{
-		if(event.getSource().equals(withdraw)) {
-			loadScene.setActionEvent(event);
-			loadScene.withdrawScene(getUser(),machineModel);
-		}
-	}
 	void setUsername(String user)
 	{
 		username = user;
@@ -240,19 +243,9 @@ public class depositController implements Initializable
 		previousBalance = currBalance.getText().substring(1);
 	}
 
-	public void setNewBalance(Double bal)
+	private void setNewBalance(Double bal)
 	{
 		newBalance = Double.toString(bal);
-	}
-
-	@FXML
-	public void handleKeyPad(ActionEvent event)
-	{
-		writeToTextField(depositInput,(JFXButton)event.getSource());
-		if(event.getSource().equals(decimal)){
-			++count;
-			decimal.setDisable(true);
-		}
 	}
 
 	private void writeToTextField(JFXTextField field, JFXButton button)

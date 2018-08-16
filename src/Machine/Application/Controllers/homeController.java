@@ -6,15 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,7 +24,7 @@ public class homeController implements Initializable
 {
 
 	@FXML
-	private AnchorPane secondPane, rootPane;
+	private AnchorPane secondPane;
 
 	@FXML
 	private StackPane stackPane;
@@ -70,15 +66,14 @@ public class homeController implements Initializable
 
 	private MachineModel machineModel;
 	private LoadScene loadScene;
-	private Image image;
 
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		Image image =new Image(getClass().getResourceAsStream("/Machine/images/user-2517433_960_7201.png"));
 		settingButton.setText("");
-		image = new Image(getClass().getResourceAsStream("/Machine/images/user-2517433_960_7201.png"));
 		loadScene = new LoadScene();
 		dateTime.setText(getDate());
 		accountType.setText("Checking");
@@ -98,11 +93,13 @@ public class homeController implements Initializable
 		}
 	}
 
-
+	@FXML
 	private void loadDepositPage(ActionEvent event)
 	{
-		loadScene.setActionEvent(event);
-		loadScene.depositPage(getuName(),machineModel);
+		if(event.getSource().equals(deposit)) {
+			loadScene.setActionEvent(event);
+			loadScene.depositPage(getuName(), machineModel);
+		}
 	}
 
 	@FXML
@@ -130,23 +127,29 @@ public class homeController implements Initializable
 	@FXML
 	void handleStatementButton(ActionEvent event)
 	{
-		loadScene.setActionEvent(event);
-		loadScene.statementScene(getuName(),machineModel);
+		if(event.getSource().equals(statementButton)) {
+			loadScene.setActionEvent(event);
+			loadScene.statementScene(getuName(), machineModel);
+		}
 
 	}
 
 	@FXML
 	void withdrawMoney(ActionEvent event)
 	{
-		loadScene.setActionEvent(event);
-		loadScene.withdrawScene(getuName(),machineModel);
+		if(event.getSource().equals(withdraw)) {
+			loadScene.setActionEvent(event);
+			loadScene.withdrawScene(getuName(), machineModel);
+		}
 	}
 
 	@FXML
 	void quickCash(ActionEvent event)
 	{
-		loadScene.setActionEvent(event);
-		loadScene.quickCashScene(uName,machineModel);
+		if(event.getSource().equals(quickCash)) {
+			loadScene.setActionEvent(event);
+			loadScene.quickCashScene(uName, machineModel);
+		}
 	}
 
 	void init(MachineModel machine)

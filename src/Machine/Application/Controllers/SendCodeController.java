@@ -35,7 +35,6 @@ public class SendCodeController implements Initializable
 
 	private String actualEmail;
 	private boolean toggleSelected = false;
-
 	private Email email;
 	private MachineModel machineModel;
 
@@ -146,7 +145,6 @@ public class SendCodeController implements Initializable
 			e.printStackTrace();
 		}
 	}
-
 
 	private String generateRandomWord()
 	{

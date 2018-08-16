@@ -8,13 +8,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +20,6 @@ import java.util.ResourceBundle;
 
 public class withdrawController implements Initializable
 {
-	private DecimalFormat df = new DecimalFormat("##.##");
 
 	@FXML
 	private StackPane stackPane, stackPane2;
@@ -90,7 +85,6 @@ public class withdrawController implements Initializable
 	private JFXButton qCash;
 
 	private DecimalFormat decimalFormat = new DecimalFormat("##.##");
-	private AnchorPane rootPane;
 	private int count = 1;
 	private String username;
 	private String previousBalance;
@@ -139,10 +133,7 @@ public class withdrawController implements Initializable
 			if(count>1) { decimal.setDisable(true);}
 		}
 	}
-	private void writeToField(JFXTextField field, JFXButton button)
-	{
-		moneyTextField.setText(field.getText()+button.getText());
-	}
+
 
 	@FXML
 	void logOut(ActionEvent event)
@@ -191,6 +182,10 @@ public class withdrawController implements Initializable
 		moneyTextField.setText("");
 	}
 
+	private void writeToField(JFXTextField field, JFXButton button)
+	{
+		moneyTextField.setText(field.getText()+button.getText());
+	}
 
 	private void resetCount()
 	{

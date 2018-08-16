@@ -7,13 +7,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -61,13 +57,17 @@ public class quickWithdrawController implements Initializable
 	private JFXButton deposit;
 
 	private MachineModel machineModel;
-
 	private DecimalFormat decimalFormat = new DecimalFormat("##.##");
-
-	private String username,previousBalance,newBalance,currBalance;
-
+	private String username,previousBalance,newBalance;
 	private LoadScene loadScene;
 	private DialogeBox dialogeBox;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources)
+	{
+		dialogeBox = new DialogeBox(stackPane);
+		dialogeBox.setNonStackPane(quickPane);
+	}
 
 	void init(MachineModel machineModel)
 	{
@@ -88,38 +88,6 @@ public class quickWithdrawController implements Initializable
 	{
 		JFXButton request = (JFXButton)event.getSource();
 		processRequest(request.getText().substring(1));
-	}
-
-	private void processRequest(String request)
-	{
-		if(validRequest(request)) {
-			executeQuery(request);
-			updateBalanceLabel();
-			dialogeBox.OkButton("Withdraw Amount $" + request, new JFXDialog());
-		} else
-			dialogeBox.OkButton("Invalid Amount: $"+request,new JFXDialog());
-	}
-
-	private boolean validRequest(String request) throws NumberFormatException
-	{
-		return Double.parseDouble(request) <= Double.parseDouble(previousBalance);
-	}
-
-	private void executeQuery(String request)
-	{
-		String updatedBal = getNewBalance(request);
-		try {
-			machineModel.updateBalanceMainDB(updatedBal,getUser());
-			machineModel.insertToStatementDB(getUser(),"Withdrawal",request,previousBalance,updatedBal);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void updateBalanceLabel()
-	{
-		setCurrBalance(newBalance);
-		setPreviousBalance();
 	}
 
 	@FXML
@@ -156,6 +124,38 @@ public class quickWithdrawController implements Initializable
 		loadScene.homeSceneAction(username,machineModel);
 	}
 
+	private void processRequest(String request)
+	{
+		if(validRequest(request)) {
+			executeQuery(request);
+			updateBalanceLabel();
+			dialogeBox.OkButton("Withdraw Amount $" + request, new JFXDialog());
+		} else
+			dialogeBox.OkButton("Invalid Amount: $"+request,new JFXDialog());
+	}
+
+	private boolean validRequest(String request) throws NumberFormatException
+	{
+		return Double.parseDouble(request) <= Double.parseDouble(previousBalance);
+	}
+
+	private void executeQuery(String request)
+	{
+		String updatedBal = getNewBalance(request);
+		try {
+			machineModel.updateBalanceMainDB(updatedBal,getUser());
+			machineModel.insertToStatementDB(getUser(),"Withdrawal",request,previousBalance,updatedBal);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void updateBalanceLabel()
+	{
+		setCurrBalance(newBalance);
+		setPreviousBalance();
+	}
+
 	void setUsername(String user)
 	{
 		username = user;
@@ -180,23 +180,16 @@ public class quickWithdrawController implements Initializable
 		previousBalance = balanceLabel.getText().substring(1);
 	}
 
-	public void setNewBalance(Double bal)
+	private void setNewBalance(Double bal)
 	{
 		newBalance = Double.toString(bal);
 	}
+
 	private String getNewBalance(String request)
 	{
 		Double pBal = Double.parseDouble(previousBalance);
 		Double cBal = Double.parseDouble(request);
 		setNewBalance(pBal-cBal);
 		return newBalance;
-	}
-
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources)
-	{
-		dialogeBox = new DialogeBox(stackPane);
-		dialogeBox.setNonStackPane(quickPane);
 	}
 }
