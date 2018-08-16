@@ -203,9 +203,13 @@ public class SettingsController implements Initializable
 		return dateFormat.format(date);
 	}
 
-	public void handleButtonEnable(javafx.scene.input.KeyEvent keyEvent)
+	@FXML
+	public void handleButtonEnable()
 	{
 		String pass = confnewPass.getText();
-		if (pass.length() >= 8) confirmButton.setDisable(false);
+		if (pass.length() >= 8)
+			confirmButton.setDisable(false);
+		else
+			confirmButton.setDisable(true);
 	}
 }
