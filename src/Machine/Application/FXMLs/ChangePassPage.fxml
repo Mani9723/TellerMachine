@@ -81,22 +81,6 @@
                         <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <ImageView fx:id="imgLeft" fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
-                     <image>
-                        <Image url="@/Machine/images/61401818-elegant-check-mark-flat-icon-imitation-draw-with-white-chalk-on-green-chalkboard-flat-pictogram-and-.jpg" />
-                     </image>
-                     <GridPane.margin>
-                        <Insets left="25.0" />
-                     </GridPane.margin>
-                  </ImageView>
-                  <ImageView fx:id="imgRight" fitHeight="32.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
-                     <image>
-                        <Image url="@/Machine/images/61401818-elegant-check-mark-flat-icon-imitation-draw-with-white-chalk-on-green-chalkboard-flat-pictogram-and-.jpg" />
-                     </image>
-                     <GridPane.margin>
-                        <Insets left="245.0" />
-                     </GridPane.margin>
-                  </ImageView>
                </children>
             </GridPane>
          </children>
