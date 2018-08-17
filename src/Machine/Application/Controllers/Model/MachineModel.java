@@ -1,9 +1,17 @@
 package Machine.Application.Controllers.Model;
 
 import Machine.Application.Controllers.StatementData;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+import java.io.FileNotFoundException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -412,6 +420,52 @@ public final class MachineModel
 			preparedStatement.close();
 		}
 
+	}
+
+	// FIXEME : Keeps throwing java.lang.ClassNotFoundException: org.slf4j.LoggerFactory
+	// See what can be done.
+	public void saveStatementToPdf(String username) throws SQLException, FileNotFoundException
+	{
+		String date, type, amount, prevBal,  currBal;
+		String query = "SELECT * FROM " + username;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		preparedStatement = connection.prepareStatement(query);
+		resultSet = preparedStatement.executeQuery();
+
+		PdfWriter writer = new PdfWriter("statement.pdf");
+		PdfDocument pdfDocument = new PdfDocument(writer);
+		Document document = new Document(pdfDocument,PageSize.A4);
+		Table table = new Table(5);
+
+		Cell cell;
+
+		while(resultSet.next()){
+			date = resultSet.getString("Date");
+			cell = new Cell().add(new Paragraph(date));
+			table.addCell(cell);
+
+			type = resultSet.getString("Type");
+			cell = new Cell().add(new Paragraph(type));
+			table.addCell(cell);
+
+			amount = resultSet.getString("Amount");
+			cell = new Cell().add(new Paragraph(amount));
+			table.addCell(cell);
+
+			prevBal = resultSet.getString("PreviousBalance");
+			cell = new Cell().add(new Paragraph(prevBal));
+			table.addCell(cell);
+
+			currBal = resultSet.getString("CurrentBalance");
+			cell = new Cell().add(new Paragraph(currBal));
+			table.addCell(cell);
+		}
+
+		document.add(table);
+		document.close();
+		preparedStatement.close();
+		resultSet.close();
 	}
 
 	private String getDate(boolean time)

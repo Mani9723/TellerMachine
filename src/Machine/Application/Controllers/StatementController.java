@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -55,6 +57,9 @@ public class StatementController implements Initializable
 	private JFXButton menuButton;
 
 	@FXML
+	private MenuItem saveButton, emailButton;
+
+	@FXML
 	private Label dateLabel;
 
 	private MachineModel machineModel;
@@ -82,12 +87,23 @@ public class StatementController implements Initializable
 		}
 	}
 
+	@FXML
 	public void handleMenu(ActionEvent event)
 	{
 		LoadScene loadScene = new LoadScene();
 		if(event.getSource().equals(menuButton)){
 			loadScene.setActionEvent(event);
 			loadScene.homeSceneAction(username,machineModel);
+		}
+	}
+
+	@FXML
+	public void handleSavePdf()
+	{
+		try {
+			machineModel.saveStatementToPdf(username);
+		} catch (SQLException | FileNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -108,4 +124,6 @@ public class StatementController implements Initializable
 		Date date = new Date();
 		return dateFormat.format(date);
 	}
+
+
 }

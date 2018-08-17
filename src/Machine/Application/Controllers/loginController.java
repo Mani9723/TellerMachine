@@ -65,6 +65,7 @@ public class loginController implements Initializable {
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(rootPane);
 		machineModel = new MachineModel();
+		hashPassword = new HashPassword();
 
 		capsLockLabel.setVisible(false);
 		capsLockLabel.setText("CAPS LOCK ON");
@@ -197,11 +198,14 @@ public class loginController implements Initializable {
 
 	private void loadHomePage(ActionEvent event, KeyEvent keyEvent)
 	{
-		if(event != null)
+		if(event != null) {
 			loadScene.setActionEvent(event);
-		else if(keyEvent != null)
+			loadScene.homeSceneAction(username.getText(),machineModel);
+		}
+		else if(keyEvent != null) {
 			loadScene.setKeyEvent(keyEvent);
-		loadScene.homeSceneAction(username.getText(),machineModel);
+			loadScene.homeScene(username,machineModel);
+		}
 	}
 
 	private void openDrawerPane(String scenePath, ActionEvent event)

@@ -8,7 +8,12 @@ public class HashPassword
 {
 	private String salt, password,securePassword;
 
-	public HashPassword(String password)
+	public HashPassword()
+	{
+		// DO NOTHING
+	}
+
+	public void setHashPassword(String password)
 	{
 		this.salt = "krsna";
 		this.password = password;

@@ -10,6 +10,10 @@
     <orderEntry type="library" name="sqlite-jdbc-3.23.1" level="project" />
     <orderEntry type="library" name="activation" level="project" />
     <orderEntry type="library" name="mail" level="project" />
-    <orderEntry type="library" name="jfoenix-8.0.7" level="project" />
+    <orderEntry type="library" name="jfoenix-8.0.1" level="project" />
+    <orderEntry type="library" name="io-7.1.2" level="project" />
+    <orderEntry type="library" name="forms-7.1.2" level="project" />
+    <orderEntry type="library" name="layout-7.1.2" level="project" />
+    <orderEntry type="library" name="kernel-7.1.2" level="project" />
   </component>
 </module>

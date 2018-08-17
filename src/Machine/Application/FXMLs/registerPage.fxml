@@ -155,7 +155,7 @@
                     </GridPane>
                 </children>
             </HBox>
-            <JFXButton fx:id="returnButton" buttonType="RAISED" layoutX="14.0" layoutY="371.0" onAction="#returnHandler" prefHeight="50.0" prefWidth="118.0" text="R E T U R N" textFill="WHITE">
+            <JFXButton fx:id="returnButton" buttonType="RAISED" layoutX="14.0" layoutY="371.0" onAction="#returnButtonHandler" prefHeight="50.0" prefWidth="118.0" text="R E T U R N" textFill="WHITE">
                 <font>
                     <Font name="Papyrus" size="14.0" />
                 </font>
