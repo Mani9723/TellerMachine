@@ -1,8 +1,7 @@
 package Machine.Application.Controllers.Model;
 
 import Machine.Application.Controllers.StatementData;
-import com.itextpdf.io.font.FontProgram;
-import javafx.scene.paint.Color;
+import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -13,7 +12,6 @@ import com.itextpdf.layout.element.Table;
 
 import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
-import com.sun.javafx.font.FontConstants;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -448,37 +446,37 @@ public final class MachineModel
 		document.add(new Paragraph("Bank Of American").setTextAlignment(TextAlignment.CENTER).setBold());
 		document.add(new Paragraph("Transaction History: " + getAccountInfo(username,"FirstName").toUpperCase())
 				.setTextAlignment(TextAlignment.CENTER).setBold());
-		cell = new Cell().add(new Paragraph("Date"));
+		cell = new Cell().add(new Paragraph("Date")).setBold().setItalic();
 		table.addCell(cell);
-		cell = new Cell().add(new Paragraph("Type"));
+		cell = new Cell().add(new Paragraph("Type")).setBold().setItalic();
 		table.addCell(cell);
-		cell = new Cell().add(new Paragraph("Amount"));
+		cell = new Cell().add(new Paragraph("Amount")).setBold().setItalic();
 		table.addCell(cell);
-		cell = new Cell().add(new Paragraph("Previous Balance"));
+		cell = new Cell().add(new Paragraph("Previous Balance")).setBold().setItalic();
 		table.addCell(cell);
-		cell = new Cell().add(new Paragraph("New Balance"));
+		cell = new Cell().add(new Paragraph("New Balance")).setBold().setItalic();
 		table.addCell(cell);
 
 
 		while(resultSet.next()){
 			date = resultSet.getString("Date");
-			cell = new Cell().add(new Paragraph(date)).setPadding(20);
+			cell = new Cell().add(new Paragraph(date)).setPadding(10).setHorizontalAlignment(HorizontalAlignment.CENTER);
 			table.addCell(cell);
 
 			type = resultSet.getString("Type");
-			cell = new Cell().add(new Paragraph(type)).setPadding(20);
+			cell = new Cell().add(new Paragraph(type)).setPadding(10);
 			table.addCell(cell);
 
 			amount = resultSet.getString("Amount");
-			cell = new Cell().add(new Paragraph("$"+amount)).setPadding(20);
+			cell = new Cell().add(new Paragraph("$"+amount)).setPadding(10);
 			table.addCell(cell);
 
 			prevBal = resultSet.getString("PreviousBalance");
-			cell = new Cell().add(new Paragraph("$"+prevBal)).setPadding(20);
+			cell = new Cell().add(new Paragraph("$"+prevBal)).setPadding(10).setHorizontalAlignment(HorizontalAlignment.CENTER);
 			table.addCell(cell);
 
 			currBal = resultSet.getString("CurrentBalance");
-			cell = new Cell().add(new Paragraph("$"+currBal)).setPadding(20);
+			cell = new Cell().add(new Paragraph("$"+currBal)).setPadding(10);
 			table.addCell(cell);
 		}
 		table.setHorizontalAlignment(HorizontalAlignment.CENTER);
