@@ -1,6 +1,8 @@
 package Machine.Application.Controllers.Model;
 
 import Machine.Application.Controllers.StatementData;
+import com.itextpdf.io.font.FontProgram;
+import javafx.scene.paint.Color;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -9,8 +11,13 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 
+import com.itextpdf.layout.property.HorizontalAlignment;
+import com.itextpdf.layout.property.TextAlignment;
+import com.sun.javafx.font.FontConstants;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -422,9 +429,7 @@ public final class MachineModel
 
 	}
 
-	// FIXEME : Keeps throwing java.lang.ClassNotFoundException: org.slf4j.LoggerFactory
-	// See what can be done.
-	public void saveStatementToPdf(String username) throws SQLException, FileNotFoundException
+	public String saveStatementToPdf(String username, File file) throws SQLException, FileNotFoundException
 	{
 		String date, type, amount, prevBal,  currBal;
 		String query = "SELECT * FROM " + username;
@@ -433,39 +438,56 @@ public final class MachineModel
 		preparedStatement = connection.prepareStatement(query);
 		resultSet = preparedStatement.executeQuery();
 
-		PdfWriter writer = new PdfWriter("statement.pdf");
+		PdfWriter writer = new PdfWriter(file.getAbsoluteFile()+"/Statement.pdf");
 		PdfDocument pdfDocument = new PdfDocument(writer);
 		Document document = new Document(pdfDocument,PageSize.A4);
 		Table table = new Table(5);
 
 		Cell cell;
 
+		document.add(new Paragraph("Bank Of American").setTextAlignment(TextAlignment.CENTER).setBold());
+		document.add(new Paragraph("Transaction History: " + getAccountInfo(username,"FirstName").toUpperCase())
+				.setTextAlignment(TextAlignment.CENTER).setBold());
+		cell = new Cell().add(new Paragraph("Date"));
+		table.addCell(cell);
+		cell = new Cell().add(new Paragraph("Type"));
+		table.addCell(cell);
+		cell = new Cell().add(new Paragraph("Amount"));
+		table.addCell(cell);
+		cell = new Cell().add(new Paragraph("Previous Balance"));
+		table.addCell(cell);
+		cell = new Cell().add(new Paragraph("New Balance"));
+		table.addCell(cell);
+
+
 		while(resultSet.next()){
 			date = resultSet.getString("Date");
-			cell = new Cell().add(new Paragraph(date));
+			cell = new Cell().add(new Paragraph(date)).setPadding(20);
 			table.addCell(cell);
 
 			type = resultSet.getString("Type");
-			cell = new Cell().add(new Paragraph(type));
+			cell = new Cell().add(new Paragraph(type)).setPadding(20);
 			table.addCell(cell);
 
 			amount = resultSet.getString("Amount");
-			cell = new Cell().add(new Paragraph(amount));
+			cell = new Cell().add(new Paragraph("$"+amount)).setPadding(20);
 			table.addCell(cell);
 
 			prevBal = resultSet.getString("PreviousBalance");
-			cell = new Cell().add(new Paragraph(prevBal));
+			cell = new Cell().add(new Paragraph("$"+prevBal)).setPadding(20);
 			table.addCell(cell);
 
 			currBal = resultSet.getString("CurrentBalance");
-			cell = new Cell().add(new Paragraph(currBal));
+			cell = new Cell().add(new Paragraph("$"+currBal)).setPadding(20);
 			table.addCell(cell);
 		}
-
+		table.setHorizontalAlignment(HorizontalAlignment.CENTER);
 		document.add(table);
 		document.close();
 		preparedStatement.close();
 		resultSet.close();
+
+		return file.getPath();
 	}
 
 	private String getDate(boolean time)

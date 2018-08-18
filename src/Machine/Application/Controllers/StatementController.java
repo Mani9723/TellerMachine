@@ -2,6 +2,7 @@ package Machine.Application.Controllers;
 
 import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +16,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +33,8 @@ import java.util.ResourceBundle;
 public class StatementController implements Initializable
 {
 
+	@FXML
+	private StackPane stackPane;
 	@FXML
 	private AnchorPane pane;
 
@@ -63,13 +69,15 @@ public class StatementController implements Initializable
 	private Label dateLabel;
 
 	private MachineModel machineModel;
-
 	private String username;
+	private DialogeBox dialogeBox;
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		dialogeBox = new DialogeBox(stackPane);
+		dialogeBox.setNonStackPane(pane);
 		dateLabel.setText(getDate());
 		dateCol.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		typeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
@@ -100,11 +108,27 @@ public class StatementController implements Initializable
 	@FXML
 	public void handleSavePdf()
 	{
+		File file = getDestinationFromUser();
 		try {
-			machineModel.saveStatementToPdf(username);
+			if(file != null) {
+				String path = machineModel.saveStatementToPdf(username, file);
+				dialogeBox.OkButton("Statement saved:"+path, new JFXDialog());
+			}else dialogeBox.OkButton("Please Choose a location", new JFXDialog());
 		} catch (SQLException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private File getDestinationFromUser()
+	{
+		DirectoryChooser fileChooser = new DirectoryChooser();
+		File file = fileChooser.showDialog(null);
+		if(file != null) {
+			return file;
+		}else{
+			dialogeBox.OkButton("Invalid File", new JFXDialog());
+		}
+		return null;
 	}
 
 	void setMachineModel(MachineModel model)
