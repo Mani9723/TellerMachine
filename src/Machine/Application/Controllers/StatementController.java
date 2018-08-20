@@ -3,6 +3,7 @@ package Machine.Application.Controllers;
 import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDrawer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,9 +35,11 @@ public class StatementController implements Initializable
 {
 
 	@FXML
-	private StackPane stackPane;
+	private StackPane stackPane, optionScene;
 	@FXML
-	private AnchorPane pane;
+	private AnchorPane pane, optionPane;
+	@FXML
+	private JFXDrawer drawerPane;
 
 	@FXML
 	private TableView<StatementData> table;
@@ -98,10 +101,23 @@ public class StatementController implements Initializable
 	@FXML
 	public void handleMenu(ActionEvent event)
 	{
-		LoadScene loadScene = new LoadScene();
 		if(event.getSource().equals(menuButton)){
-			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(username,machineModel);
+			try {
+				optionScene = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/StatementOptions.fxml"));
+				drawerPane.setSidePane(optionScene);
+
+				if (drawerPane.isShown()) {
+					drawerPane.close();
+					table.setOpacity(0.78);
+				} else {
+					drawerPane.open();
+					table.setOpacity(0.2);
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
 	}
 
