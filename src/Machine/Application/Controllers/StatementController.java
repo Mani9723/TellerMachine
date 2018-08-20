@@ -103,7 +103,11 @@ public class StatementController implements Initializable
 	{
 		if(event.getSource().equals(menuButton)){
 			try {
-				optionScene = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/StatementOptions.fxml"));
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(getClass().getResource("/Machine/Application/FXMLs/StatementOptions.fxml"));
+				optionScene = loader.load();
+				StatementOptionController controller = loader.getController();
+				controller.init(username,machineModel);
 				drawerPane.setSidePane(optionScene);
 
 				if (drawerPane.isShown()) {
