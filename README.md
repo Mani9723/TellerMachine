@@ -27,8 +27,8 @@ jfoenix-8.0.1.jar
 sqlite-jdbc-3.23.1.jar
 activation.jar
 mail.jar
-forms-7.1.2
-io-7.1.2
+forms-7.1.2.jar
+io-7.1.2.jar
 kernel-7.1.2
 layout-7.1.2
 slf4j-api-1.7.25
