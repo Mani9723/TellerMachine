@@ -29,9 +29,9 @@ activation.jar
 mail.jar
 forms-7.1.2.jar
 io-7.1.2.jar
-kernel-7.1.2
-layout-7.1.2
-slf4j-api-1.7.25
+kernel-7.1.2.jar
+layout-7.1.2.jar
+slf4j-api-1.7.25.jar
 slf4j-simple-1.7.25
 ```
 ## Deployment
