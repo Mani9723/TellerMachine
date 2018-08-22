@@ -43,7 +43,8 @@ public class Email
 		this();
 		this.sendStatement = sendStatement;
 		if(this.sendStatement){
-
+			this.subject = "\t\tBANK OF AMERICAN\n\t\tSTATEMENT";
+			this.content = "Dear Customer,\n\t Your statement is attached.\n";
 		}
 	}
 
@@ -102,7 +103,7 @@ public class Email
 				});
 
 		try {
-			if(sendStatement) {
+			if(!this.sendStatement) {
 				Message message = new MimeMessage(session);
 				message.setFrom(new InternetAddress(from));
 				message.setRecipients(Message.RecipientType.TO,

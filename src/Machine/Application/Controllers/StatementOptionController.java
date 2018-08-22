@@ -51,6 +51,7 @@ public class StatementOptionController {
 		setMachineModel(machineModel);
 		statusImage.setVisible(false);
 		statusLabel.setVisible(false);
+		emailButton.setDisable(true);
 	}
 
 	private void setUsername(String user)
@@ -71,13 +72,12 @@ public class StatementOptionController {
 				setPath(file.getPath());
 				try {
 					machineModel.saveStatementToPdf(username, file);
-					statusImage.setVisible(true);
-					statusLabel.setText("S A V E D");
-					statusLabel.setVisible(true);
+					showStatus(true,"S A V E D");
 				} catch (SQLException | FileNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
+			emailButton.setDisable(false);
 		}
 	}
 
@@ -90,16 +90,24 @@ public class StatementOptionController {
 		}
 	}
 
-	//TODO: Complete this method
 	public void handleEmailButton(ActionEvent event)
 	{
-		Email email = new Email(null);
+		Email email = new Email(true);
 		if(event.getSource().equals(emailButton)){
+			try {
+				email.setRecipient(machineModel.getAccountInfo(username,"Email"));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			FileChooser fileChooser = new FileChooser();
-			fileChooser.showOpenDialog(null);
-
-
+			fileChooser.setTitle("Choose Statement");
+			File file = fileChooser.showOpenDialog(null);
+			email.setFilePath(file.getPath());
+			email.setFileName(file.getName());
+			email.sendEmail();
 		}
+		showStatus(true,"S E N T");
+		emailButton.setDisable(true);
 	}
 
 	private void setPath(String path)
@@ -109,10 +117,18 @@ public class StatementOptionController {
 	private File getDestinationFromUser()
 	{
 		DirectoryChooser fileChooser = new DirectoryChooser();
+		fileChooser.setTitle("Select Location");
 		File file = fileChooser.showDialog(null);
 		if(file != null) {
 			return file;
 		}
 		return null;
+	}
+
+	private void showStatus(boolean visible, String message)
+	{
+		statusImage.setVisible(visible);
+		statusLabel.setText(message);
+		statusLabel.setVisible(visible);
 	}
 }
