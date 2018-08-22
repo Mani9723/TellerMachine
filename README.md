@@ -32,7 +32,7 @@ io-7.1.2.jar
 kernel-7.1.2.jar
 layout-7.1.2.jar
 slf4j-api-1.7.25.jar
-slf4j-simple-1.7.25
+slf4j-simple-1.7.25.jar
 ```
 ## Deployment
 
