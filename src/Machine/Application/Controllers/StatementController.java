@@ -66,9 +66,6 @@ public class StatementController implements Initializable
 	private JFXButton menuButton;
 
 	@FXML
-	private MenuItem saveButton, emailButton;
-
-	@FXML
 	private Label dateLabel;
 
 	private MachineModel machineModel;
@@ -113,9 +110,11 @@ public class StatementController implements Initializable
 				if (drawerPane.isShown()) {
 					drawerPane.close();
 					table.setOpacity(0.78);
+					menuButton.setText("Options");
 				} else {
 					drawerPane.open();
 					table.setOpacity(0.2);
+					menuButton.setText("Return");
 				}
 
 			} catch (IOException e) {

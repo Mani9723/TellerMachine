@@ -40,16 +40,13 @@ public class StatementOptionController {
 	private Label statusLabel;
 
 	private MachineModel machineModel;
-	private DialogeBox dialogeBox;
 	private String username, statementPath;
 
 	void init(String username, MachineModel machineModel)
 	{
-		dialogeBox = new DialogeBox(optionPane);
 		setUsername(username);
 		setMachineModel(machineModel);
-		statusImage.setVisible(false);
-		statusLabel.setVisible(false);
+		showStatus(false,"");
 		emailButton.setDisable(true);
 	}
 
