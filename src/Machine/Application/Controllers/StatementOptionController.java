@@ -3,7 +3,6 @@ package Machine.Application.Controllers;
 import Machine.AccountManager.Email;
 import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;

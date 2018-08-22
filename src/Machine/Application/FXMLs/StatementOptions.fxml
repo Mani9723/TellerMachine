@@ -17,7 +17,7 @@
    <children>
       <ImageView fitHeight="408.0" fitWidth="124.0" pickOnBounds="true">
          <image>
-            <Image url="@/Machine/images/landscape__1____forest_mountain_by_ncoll36-daxsdd5V2.jpg" />
+            <Image url="@/Machine/images/landscape__1____forest_mountain_by_ncoll36-daxsdd51.jpg" />
          </image>
       </ImageView>
       <HBox prefHeight="408.0" prefWidth="176.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

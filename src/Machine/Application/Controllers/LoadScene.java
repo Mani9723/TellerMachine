@@ -3,11 +3,13 @@ package Machine.Application.Controllers;
 import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -33,6 +35,11 @@ class LoadScene
 	private final String statementFxml = "/Machine/Application/FXMLs/statementPage.fxml";
 	private final String quickFxml = "/Machine/Application/FXMLs/QuickWithdraw.fxml";
 	private final String settingsFxml = "/Machine/Application/FXMLs/SettingPage.fxml";
+
+	private double xOffset = 0;
+	private double yOffset = 0;
+
+
 
 	LoadScene(StackPane stckpaneCurr, StackPane stckPaneGoal)
 	{
@@ -81,9 +88,24 @@ class LoadScene
 		controller.setUsername(username.getText());
 		controller.init(machineModel);
 		Stage homeWindow = (Stage)((Node)keyEvent.getSource()).getScene().getWindow();
+		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
+
+	private void allowDragableScene(Parent parent, Stage stage)
+	{
+		parent.setOnMousePressed(event -> {
+			xOffset = event.getSceneX();
+			yOffset = event.getSceneY();
+		});
+
+		parent.setOnMouseDragged(event -> {
+			stage.setX(event.getScreenX() - xOffset);
+			stage.setY(event.getScreenY() - yOffset);
+		});
+	}
+
 	void homeSceneAction(String username, MachineModel machineModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
@@ -99,6 +121,7 @@ class LoadScene
 		controller.setUsername(username);
 		controller.init(machineModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
@@ -117,6 +140,7 @@ class LoadScene
 		registerController controller = loader.getController();
 		controller.setMachineModel(machineModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
@@ -137,6 +161,7 @@ class LoadScene
 		controller.setUsername(username);
 		controller.init(machineModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
@@ -157,6 +182,7 @@ class LoadScene
 		controller.setMachineModel(machineModel);
 		controller.init();
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
@@ -175,6 +201,7 @@ class LoadScene
 		SettingsController controller = loader.getController();
 		controller.init(username, machineModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
@@ -194,6 +221,7 @@ class LoadScene
 		controller.setUsername(username);
 		controller.init(machineModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
@@ -213,6 +241,7 @@ class LoadScene
 		controller.setUsername(username);
 		controller.init(machineModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
