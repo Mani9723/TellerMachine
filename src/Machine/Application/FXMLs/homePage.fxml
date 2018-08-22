@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@../FXMLs/application.css" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.homeController">
+<AnchorPane fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@/Machine/Application/FXMLs/application.css" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.homeController">
     <children>
       <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" AnchorPane.topAnchor="0.0">
          <image>
@@ -65,7 +65,7 @@
                </stops>
             </RadialGradient>
          </ripplerFill></JFXButton>
-        <JFXButton fx:id="exitHome" buttonType="RAISED" layoutX="73.0" layoutY="435.0" onAction="#exitToHome" opacity="0.83" prefHeight="48.0" prefWidth="245.0" styleClass="exitHome" text="E X I T" AnchorPane.topAnchor="435.0">
+        <JFXButton fx:id="exitHome" buttonType="RAISED" layoutX="73.0" layoutY="435.0" onAction="#exitToHome" opacity="0.83" prefHeight="48.0" prefWidth="245.0" styleClass="exitHome" text="L O G O U T" AnchorPane.topAnchor="435.0">
             <font>
                 <Font name="Papyrus" size="12.0" />
             </font>

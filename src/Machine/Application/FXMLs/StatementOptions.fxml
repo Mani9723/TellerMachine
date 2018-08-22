@@ -34,7 +34,7 @@
                   <RowConstraints maxHeight="119.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton fx:id="homeButton" buttonType="RAISED" onAction="#handleHomeButton" prefHeight="41.0" prefWidth="62.0" styleClass="other" stylesheets="@application.css" text="Home" textFill="#282828">
+                  <JFXButton fx:id="homeButton" buttonType="RAISED" onAction="#handleHomeButton" prefHeight="41.0" prefWidth="62.0" styleClass="other" stylesheets="@/Machine/Application/FXMLs/application.css" text="Home" textFill="#282828">
                      <GridPane.margin>
                         <Insets left="32.0" />
                      </GridPane.margin>
@@ -42,7 +42,7 @@
                         <Font name="Papyrus" size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="saveButton" buttonType="RAISED" onAction="#handleSavePdf" styleClass="other" stylesheets="@application.css" text="Save" textFill="#282828" GridPane.rowIndex="1">
+                  <JFXButton fx:id="saveButton" buttonType="RAISED" onAction="#handleSavePdf" styleClass="other" stylesheets="@/Machine/Application/FXMLs/application.css" text="Save" textFill="#282828" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="34.0" />
                      </GridPane.margin>
@@ -50,7 +50,7 @@
                         <Font name="Papyrus" size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="emailButton" buttonType="RAISED" onAction="#handleEmailButton" styleClass="other" stylesheets="@application.css" text="Email" textFill="#282828" GridPane.rowIndex="3">
+                  <JFXButton fx:id="emailButton" buttonType="RAISED" onAction="#handleEmailButton" styleClass="other" stylesheets="@/Machine/Application/FXMLs/application.css" text="Email" textFill="#282828" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="34.0" />
                      </GridPane.margin>
@@ -58,7 +58,7 @@
                         <Font name="Papyrus" size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="printButton" buttonType="RAISED" prefHeight="41.0" prefWidth="60.0" styleClass="other" stylesheets="@application.css" text="Print" textFill="#282828" GridPane.rowIndex="4">
+                  <JFXButton fx:id="printButton" buttonType="RAISED" prefHeight="41.0" prefWidth="60.0" styleClass="other" stylesheets="@/Machine/Application/FXMLs/application.css" text="Print" textFill="#282828" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="34.0" />
                      </GridPane.margin>
