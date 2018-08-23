@@ -124,20 +124,6 @@ public class StatementController implements Initializable
 		}
 	}
 
-	@FXML
-	public void handleSavePdf()
-	{
-		File file = getDestinationFromUser();
-		try {
-			if(file != null) {
-				String path = machineModel.saveStatementToPdf(username, file);
-				dialogeBox.OkButton("Statement saved:"+path, new JFXDialog());
-			}else dialogeBox.OkButton("Please Choose a location", new JFXDialog());
-		} catch (SQLException | FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
 	private File getDestinationFromUser()
 	{
 		DirectoryChooser fileChooser = new DirectoryChooser();
