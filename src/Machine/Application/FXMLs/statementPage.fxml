@@ -22,7 +22,7 @@
          <children>
             <ImageView fitHeight="500.0" fitWidth="700.0" opacity="0.95" pickOnBounds="true">
                <image>
-                  <Image url="@../../images/landscape__1____forest_mountain_by_ncoll36-daxsdd5.jpg" />
+                  <Image url="@/Machine/images/landscape__1____forest_mountain_by_ncoll36-daxsdd5.jpg" />
                </image>
             </ImageView>
             <TableView fx:id="table" layoutY="75.0" opacity="0.78" prefHeight="399.0" prefWidth="690.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="92.0">
@@ -57,7 +57,7 @@
                                     <Font name="Papyrus" size="20.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="menuButton" buttonType="RAISED" onAction="#handleMenu" opacity="0.77" prefHeight="38.0" prefWidth="93.0" styleClass="other" stylesheets="@application.css" text="Options" textAlignment="CENTER" wrapText="true">
+                              <JFXButton fx:id="menuButton" buttonType="RAISED" onAction="#handleMenu" opacity="0.77" prefHeight="38.0" prefWidth="93.0" styleClass="other" stylesheets="@/Machine/Application/FXMLs/application.css" text="Options" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font name="Papyrus" size="18.0" />
                                  </font>

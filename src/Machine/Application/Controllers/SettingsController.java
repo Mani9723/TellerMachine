@@ -111,7 +111,7 @@ public class SettingsController implements Initializable
 	@FXML
 	public void confirmDelButton(ActionEvent event)
 	{
-		if(event.getSource().equals(confDel) && reenterPassword.getText().length()>=8){
+		if(event.getSource().equals(confDel) && !reenterPassword.getText().isEmpty()){
 			String pass = reenterPassword.getText();
 			hashPassword.setHashPassword(pass);
 			try{
