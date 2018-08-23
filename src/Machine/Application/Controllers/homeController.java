@@ -30,7 +30,7 @@ public class homeController implements Initializable
 	private StackPane stackPane;
 
 	@FXML
-	private JFXButton quickCash;
+	private JFXButton quickCash, showAccButton;
 
 	@FXML
 	private JFXButton deposit, settingButton;
@@ -42,7 +42,7 @@ public class homeController implements Initializable
 	private JFXButton exitHome, statementButton;
 
 	@FXML
-	private Label greeting;
+	private Label greeting, accountNumber;
 
 	@FXML
 	private Label dateTime;
@@ -61,10 +61,9 @@ public class homeController implements Initializable
 
 	private DecimalFormat decimalFormat = new DecimalFormat("##.##");
 
-	private String uName;
-	private String first;
-
-	private MachineModel machineModel;
+	private String uName,first;
+	private boolean isNumVisible;
+	private static MachineModel machineModel;
 	private LoadScene loadScene;
 
 
@@ -83,6 +82,8 @@ public class homeController implements Initializable
 		imageView.setFitHeight(40);
 		imageView.setFitWidth(40);
 		settingButton.setGraphic(imageView);
+		accountNumber.setVisible(false);
+		isNumVisible = false;
 	}
 
 	@FXML
@@ -206,6 +207,28 @@ public class homeController implements Initializable
 		if(hour>=0 && hour<12) return "Good Morning ";
 		else if(hour>=12 && hour<16) return "Good Afternoon ";
 		else return "Good Evening ";
+
+	}
+
+	public void handleAccountNumberButton(ActionEvent event)
+	{
+		if(event.getSource().equals(showAccButton)){
+			if(!isNumVisible){
+				showAccButton.setText("HIDE ACCOUNT NUMBER");
+				accountNumber.setVisible(true);
+				try {
+					accountNumber.setText(machineModel.getAccountInfo(getuName(),"AccountNumber"));
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				isNumVisible = true;
+			} else{
+				isNumVisible = false;
+				showAccButton.setText("SHOW ACCOUNT NUMBER");
+				accountNumber.setVisible(false);
+			}
+		}
+
 
 	}
 }

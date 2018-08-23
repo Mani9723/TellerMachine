@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * @author Mani Shah
@@ -77,6 +78,7 @@ public final class MachineModel
 				+ "	Firstname text NOT NULL,\n"
 				+ "	Lastname text NOT NULL,\n"
 				+ "	CurrentBalance text NOT NULL,\n"
+				+ "	AccountNumber text NOT NULL,\n"
 				+ "	DateCreated text NOT NULL,\n"
 				+ "	Email text NOT NULL,\n"
 				+ "	TempPassword text,\n"
@@ -341,10 +343,16 @@ public final class MachineModel
 
 	public void saveUserToMainDB(String...values) throws SQLException
 	{
+		int minimum = 1000, maximum = 9999;
+		String accNum = "40866870";
+		Random rand = new Random();
+		int num = minimum + rand.nextInt((maximum - minimum) + 1);
+		accNum += Integer.toString(num);
+
 		PreparedStatement preparedStatement = null;
 
-		String query = "INSERT into Customer_Information(username,password,firstname,lastname,currentbalance,datecreated,email)" +
-				"VALUES(?,?,?,?,?,?,?)";
+		String query = "INSERT into Customer_Information(username,password,firstname,lastname,currentbalance,datecreated,email,AccountNumber)" +
+				"VALUES(?,?,?,?,?,?,?,?)";
 
 		try{
 			preparedStatement = connection.prepareStatement(query);
@@ -355,6 +363,7 @@ public final class MachineModel
 			preparedStatement.setString(5,"0.00");
 			preparedStatement.setString(6,getDate(true));
 			preparedStatement.setString(7,values[4]);
+			preparedStatement.setString(8,accNum);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

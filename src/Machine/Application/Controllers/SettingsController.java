@@ -59,7 +59,7 @@ public class SettingsController implements Initializable
 	@FXML
 	private Label date;
 
-	private MachineModel machineModel;
+	private static MachineModel machineModel;
 	private LoadScene loadScene;
 	private DialogeBox dialogeBox;
 	private static HashPassword hashPassword;
