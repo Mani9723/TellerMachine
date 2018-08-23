@@ -124,18 +124,6 @@ public class StatementController implements Initializable
 		}
 	}
 
-	private File getDestinationFromUser()
-	{
-		DirectoryChooser fileChooser = new DirectoryChooser();
-		File file = fileChooser.showDialog(null);
-		if(file != null) {
-			return file;
-		}else{
-			dialogeBox.OkButton("Invalid File", new JFXDialog());
-		}
-		return null;
-	}
-
 	void setMachineModel(MachineModel model)
 	{
 		machineModel = model;
