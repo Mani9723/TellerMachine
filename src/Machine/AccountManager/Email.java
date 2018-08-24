@@ -21,7 +21,7 @@ public class Email
 	private String emailUsername, password;
 	private String recipient,subject,content,filePath,name;
 	private final String from = "764people@gmail.com";
-	private boolean chooseFile = false, sendStatement;
+	private boolean sendStatement;
 	private String tempPass;
 
 	public Email()
@@ -85,7 +85,7 @@ public class Email
 	{
 		email();
 	}
-	private boolean email()
+	private void email()
 	{
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -115,7 +115,6 @@ public class Email
 				Transport.send(message);
 				System.out.println(System.currentTimeMillis() - start);
 				System.out.println("Message sent to : " + recipient);
-				return true;
 			}
 			else{
 				Message message = new MimeMessage(session);
@@ -146,7 +145,6 @@ public class Email
 				long start = System.currentTimeMillis();
 				Transport.send(message);
 				System.out.println("Done in: " + (System.currentTimeMillis() - start) + "ms");
-				return true;
 			}
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
