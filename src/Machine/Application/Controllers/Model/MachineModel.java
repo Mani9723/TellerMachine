@@ -1,7 +1,6 @@
 package Machine.Application.Controllers.Model;
 
 import Machine.Application.Controllers.StatementData;
-import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -27,7 +26,7 @@ import java.util.Random;
  * @version 1.0
  * @since 7/28/2018  15:41
  */
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "TryFinallyCanBeTryWithResources"})
 public final class MachineModel
 {
 
@@ -61,6 +60,7 @@ public final class MachineModel
 		resultSet.close();
 	}
 
+	@SuppressWarnings("unused")
 	public boolean isDbConnected() {
 		try {
 			return !connection.isClosed();
@@ -117,7 +117,7 @@ public final class MachineModel
 		System.out.println("Statement Table created: " + user);
 	}
 
-	public ObservableList<StatementData> getStatement(String username) throws SQLException
+	public ObservableList<StatementData> getStatement(String username)
 	{
 		String query = "SELECT * from "+ username;
 
@@ -140,7 +140,7 @@ public final class MachineModel
 
 	public void deleteUser(String username) throws SQLException
 	{
-		PreparedStatement preparedStatement = null;
+		PreparedStatement preparedStatement;
 		String query = "DELETE FROM Customer_Information where username = ?";
 
 		preparedStatement = connection.prepareStatement(query);
@@ -153,7 +153,7 @@ public final class MachineModel
 	private void deleteUserTable(String username) throws SQLException
 	{
 		String query = "DROP TABLE " + username;
-		PreparedStatement preparedStatement = null;
+		PreparedStatement preparedStatement;
 
 		preparedStatement = connection.prepareStatement(query);
 		preparedStatement.execute();
@@ -185,22 +185,16 @@ public final class MachineModel
 		return false;
 	}
 
-	public boolean isFirstTimeRunning() throws SQLException
+	public boolean isFirstTimeRunning()
 	{
-		ResultSet resultSet = null;
-		PreparedStatement preparedStatement = null;
 		String query = "SELECT * from Customer_Information";
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			resultSet = preparedStatement.executeQuery();
+		try (PreparedStatement preparedStatement = connection.prepareStatement(query)
+		     ;ResultSet resultSet = preparedStatement.executeQuery()) {
 			if (!resultSet.isBeforeFirst()) {
 				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			resultSet.close();
-			preparedStatement.close();
 		}
 		return false;
 	}
@@ -343,8 +337,6 @@ public final class MachineModel
 
 	public void saveUserToMainDB(String...values) throws SQLException
 	{
-
-
 		PreparedStatement preparedStatement = null;
 
 		String query = "INSERT into Customer_Information(username,password,firstname,lastname,currentbalance,datecreated,email,AccountNumber)" +
@@ -442,12 +434,12 @@ public final class MachineModel
 
 	}
 
-	public String saveStatementToPdf(String username, File file) throws SQLException, FileNotFoundException
+	public void saveStatementToPdf(String username, File file) throws SQLException, FileNotFoundException
 	{
 		String date, type, amount, prevBal,  currBal;
 		String query = "SELECT * FROM " + username;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
+		PreparedStatement preparedStatement;
+		ResultSet resultSet;
 		preparedStatement = connection.prepareStatement(query);
 		resultSet = preparedStatement.executeQuery();
 
@@ -499,8 +491,6 @@ public final class MachineModel
 		document.close();
 		preparedStatement.close();
 		resultSet.close();
-
-		return file.getPath();
 	}
 
 	private String getDate(boolean time)

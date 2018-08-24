@@ -88,11 +88,7 @@ public class StatementController implements Initializable
 
 	void init()
 	{
-		try {
-			table.setItems(machineModel.getStatement(username));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		table.setItems(machineModel.getStatement(username));
 	}
 
 	@FXML

@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@/Machine/Application/FXMLs/application.css" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.homeController">
+<AnchorPane fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@/Machine/Application/FXMLs/application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.homeController">
     <children>
       <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" AnchorPane.topAnchor="0.0">
          <image>
@@ -131,7 +131,7 @@
                   </JFXButton>
                   <Label fx:id="accountNumber" alignment="CENTER" prefHeight="20.0" prefWidth="215.0" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
-                        <Font name="Papyrus" size="18.0" />
+                        <Font name="Papyrus" size="15.0" />
                      </font>
                   </Label>
                     </children>

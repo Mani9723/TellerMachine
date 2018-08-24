@@ -84,7 +84,7 @@ public class loginController implements Initializable {
 			switchCapsLockLabel();
 		}
 		if (event.getCode().equals(KeyCode.ENTER)) {
-			try {
+//			try {
 				if (machineModel.isFirstTimeRunning()) {
 					showFirstTimeUsingDialog();
 				} else if (processCredentials()) {
@@ -92,9 +92,9 @@ public class loginController implements Initializable {
 				} else {
 					handleIncorrectCredentials();
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
 		}
 	}
 
@@ -145,7 +145,6 @@ public class loginController implements Initializable {
 
 	private void loginProcess(ActionEvent event)
 	{
-		try {
 			if(machineModel.isFirstTimeRunning()){
 				showFirstTimeUsingDialog();
 			} else if(processCredentials()){
@@ -153,9 +152,6 @@ public class loginController implements Initializable {
 			} else{
 				handleIncorrectCredentials();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	private void switchCapsLockLabel()
