@@ -178,15 +178,15 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <JFXButton fx:id="mainMenu" buttonType="RAISED" onAction="#menu" prefHeight="73.0" prefWidth="196.0" styleClass="quickCash" stylesheets="@/Machine/Application/FXMLs/application.css" text="MAIN MENU">
+                                        <JFXButton fx:id="mainMenu" buttonType="RAISED" onAction="#menu" prefHeight="52.0" prefWidth="196.0" styleClass="quickCash" stylesheets="@/Machine/Application/FXMLs/application.css" text="MAIN MENU">
                                             <font>
                                                 <Font name="Papyrus" size="21.0" />
                                             </font></JFXButton>
-                                        <JFXButton fx:id="LOGOUT" buttonType="RAISED" onAction="#logOut" opacity="0.9" prefHeight="71.0" prefWidth="196.0" styleClass="exitHome" stylesheets="@/Machine/Application/FXMLs/application.css" text="LOGOUT" GridPane.rowIndex="2">
+                                        <JFXButton fx:id="LOGOUT" buttonType="RAISED" onAction="#logOut" opacity="0.9" prefHeight="52.0" prefWidth="196.0" styleClass="exitHome" stylesheets="@/Machine/Application/FXMLs/application.css" text="LOGOUT" GridPane.rowIndex="2">
                                             <font>
                                                 <Font name="Papyrus" size="21.0" />
                                             </font></JFXButton>
-                                        <JFXButton fx:id="qCash" buttonType="RAISED" onAction="#qkCash" prefHeight="77.0" prefWidth="196.0" styleClass="takeOut" stylesheets="@/Machine/Application/FXMLs/application.css" text="QUICK CASH" GridPane.rowIndex="1">
+                                        <JFXButton fx:id="qCash" buttonType="RAISED" onAction="#qkCash" prefHeight="55.0" prefWidth="196.0" styleClass="takeOut" stylesheets="@/Machine/Application/FXMLs/application.css" text="QUICK CASH" GridPane.rowIndex="1">
                                             <font>
                                                 <Font name="Papyrus" size="18.0" />
                                             </font></JFXButton>
