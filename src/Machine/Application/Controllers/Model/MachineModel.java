@@ -343,11 +343,7 @@ public final class MachineModel
 
 	public void saveUserToMainDB(String...values) throws SQLException
 	{
-		int minimum = 1000, maximum = 9999;
-		String accNum = "40866870";
-		Random rand = new Random();
-		int num = minimum + rand.nextInt((maximum - minimum) + 1);
-		accNum += Integer.toString(num);
+
 
 		PreparedStatement preparedStatement = null;
 
@@ -363,7 +359,7 @@ public final class MachineModel
 			preparedStatement.setString(5,"0.00");
 			preparedStatement.setString(6,getDate(true));
 			preparedStatement.setString(7,values[4]);
-			preparedStatement.setString(8,accNum);
+			preparedStatement.setString(8,generateAccountNumber());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -371,6 +367,16 @@ public final class MachineModel
 			assert preparedStatement != null;
 			preparedStatement.close();
 		}
+	}
+
+	private String generateAccountNumber()
+	{
+		int minimum = 1000, maximum = 9999;
+		String accNum = "40866870";
+		Random rand = new Random();
+		int num = minimum + rand.nextInt((maximum - minimum) + 1);
+		accNum += Integer.toString(num);
+		return accNum;
 	}
 
 
