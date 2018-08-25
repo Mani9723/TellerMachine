@@ -12,7 +12,7 @@ public class HashPassword
 	{
 		this.salt = "krsna";
 		this.password = password;
-		securePassword = makeSecurePassword();
+		setSecurePassword(makeSecurePassword());
 	}
 
 	private String makeSecurePassword()
@@ -39,10 +39,14 @@ public class HashPassword
 		secureRandom.nextBytes(saltArray);
 		return saltArray;
 	}
-
+	
+	private void setSecurePassword(String hashedPass)
+	{
+		this.securePassword = hashedPass;	
+	}
 	private String getSecurePassword()
 	{
-		return securePassword;
+		return this.securePassword;
 	}
 	@Override
 	public String toString()
