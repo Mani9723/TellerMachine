@@ -8,16 +8,11 @@ public class HashPassword
 {
 	private String salt, password,securePassword;
 
-	public HashPassword()
-	{
-		// DO NOTHING
-	}
-
-	public void setHashPassword(String password)
+	public HashPassword(String password)
 	{
 		this.salt = "krsna";
 		this.password = password;
-		securePassword = makeSecurePassword();
+		setSecurePassword(makeSecurePassword());
 	}
 
 	private String makeSecurePassword()
@@ -44,10 +39,14 @@ public class HashPassword
 		secureRandom.nextBytes(saltArray);
 		return saltArray;
 	}
-
+	
+	private void setSecurePassword(String hashedPass)
+	{
+		this.securePassword = hashedPass;	
+	}
 	private String getSecurePassword()
 	{
-		return securePassword;
+		return this.securePassword;
 	}
 	@Override
 	public String toString()
