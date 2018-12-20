@@ -1,6 +1,5 @@
 package Machine.AccountManager;
 
-
 import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;

@@ -1,6 +1,7 @@
 package Machine.Application.Controllers.Model;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
  * @author Mani Shah
