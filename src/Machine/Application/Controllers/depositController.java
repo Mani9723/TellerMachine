@@ -117,6 +117,7 @@ public class depositController implements Initializable
 		String request = depositInput.getText();
 		if(event.getSource().equals(depositButton)){
 			if(isAmountValid(request)){
+				request = Double.toString(Double.parseDouble(request));
 				executeQuery(request);
 				updateBalanceLabel();
 			} else{
@@ -192,7 +193,7 @@ public class depositController implements Initializable
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		dialogeBox.OkButton("Deposit Amount: $"+request,new JFXDialog());
+		dialogeBox.OkButton("Deposit Amount: $"+Double.parseDouble(request),new JFXDialog());
 	}
 
 	private String getNewBalance(String request)

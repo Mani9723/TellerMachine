@@ -172,6 +172,7 @@ public class withdrawController implements Initializable
 		String request = moneyTextField.getText();
 		if(event.getSource().equals(withdrawButton)){
 			if(validRequest(request) && isWithinBounds(request)){
+				request = Double.toString(Double.parseDouble(request));
 				executeQuery(request);
 				updateBalanceLabel();
 			}else{
@@ -217,7 +218,7 @@ public class withdrawController implements Initializable
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		dialogeBox.OkButton("Withdraw Amount: $"+request,new JFXDialog());
+		dialogeBox.OkButton("Withdraw Amount: $"+Double.parseDouble(request),new JFXDialog());
 	}
 
 	private void updateBalanceLabel()
