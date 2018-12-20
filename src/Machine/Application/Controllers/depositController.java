@@ -23,10 +23,10 @@ public class depositController implements Initializable
 {
 
 	@FXML
-	private StackPane stackPane, withdrawPane;
+	private StackPane stackPane;
 
 	@FXML
-	private AnchorPane depositPane, rootPane, secondPane;
+	private AnchorPane depositPane;
 
 	@FXML
 	private JFXButton menu;
@@ -51,35 +51,35 @@ public class depositController implements Initializable
 	@FXML
 	private Label currBalance;
 
-	@FXML
-	private JFXButton seven;
-
-	@FXML
-	private JFXButton three;
-
-	@FXML
-	private JFXButton two;
-
-	@FXML
-	private JFXButton one;
-
-	@FXML
-	private JFXButton six;
-
-	@FXML
-	private JFXButton five;
-
-	@FXML
-	private JFXButton four;
-
-	@FXML
-	private JFXButton nine;
-
-	@FXML
-	private JFXButton eight;
-
-	@FXML
-	private JFXButton zero;
+//	@FXML
+//	private JFXButton seven;
+//
+//	@FXML
+//	private JFXButton three;
+//
+//	@FXML
+//	private JFXButton two;
+//
+//	@FXML
+//	private JFXButton one;
+//
+//	@FXML
+//	private JFXButton six;
+//
+//	@FXML
+//	private JFXButton five;
+//
+//	@FXML
+//	private JFXButton four;
+//
+//	@FXML
+//	private JFXButton nine;
+//
+//	@FXML
+//	private JFXButton eight;
+//
+//	@FXML
+//	private JFXButton zero;
 
 	@FXML
 	private JFXButton decimal;
@@ -89,7 +89,7 @@ public class depositController implements Initializable
 	private String previousBalance, newBalance;
 	private MachineModel machineModel;
 	private DialogeBox dialogeBox;
-	private static int count = 1;
+	private static int count;
 	private LoadScene loadScene;
 
 	@Override
@@ -98,6 +98,7 @@ public class depositController implements Initializable
 		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(depositPane);
+		count = 1;
 	}
 
 	void init(MachineModel machine)
