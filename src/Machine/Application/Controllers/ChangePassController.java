@@ -4,6 +4,7 @@ import Machine.AccountManager.HashPassword;
 import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,13 +24,13 @@ public class ChangePassController implements Initializable
 	private StackPane NewPasswordPane;
 
 	@FXML
-	private JFXTextField tempPass;
+	private JFXPasswordField tempPass;
 
 	@FXML
-	private JFXTextField newPass;
+	private JFXPasswordField newPass;
 
 	@FXML
-	private JFXTextField confNewPass;
+	private JFXPasswordField confNewPass;
 
 	@FXML
 	private JFXButton changeButton;
