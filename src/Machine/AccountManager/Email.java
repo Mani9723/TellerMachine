@@ -80,7 +80,7 @@ public class Email
 				"\nYou can now reset your password";
 	}
 
-	public void sendEmail()
+	public void sendEmail() throws RuntimeException
 	{
 		email();
 	}
