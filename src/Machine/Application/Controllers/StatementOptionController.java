@@ -12,6 +12,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 
+import javax.mail.MessagingException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -100,7 +101,11 @@ public class StatementOptionController {
 			File file = fileChooser.showOpenDialog(null);
 			email.setFilePath(file.getPath());
 			email.setFileName(file.getName());
-			email.sendEmail();
+			try {
+				email.sendEmail();
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+			}
 		}
 		showStatus(true,"S E N T");
 		emailButton.setDisable(true);

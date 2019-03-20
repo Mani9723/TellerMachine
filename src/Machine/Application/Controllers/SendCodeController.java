@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
+import javax.mail.MessagingException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Random;
@@ -85,7 +86,7 @@ public class SendCodeController implements Initializable
 			email = new Email(null);
 			email.setRecipient(request);
 			email.setUsernameRequestContent(machineModel.getUsername(request));
-			email.sendEmail();
+			sendRequest(email);
 			hiddenEmail = hideEmail(request);
 			usernameInput.setText("");
 			new DialogeBox(stackPane).drawerOkButton("Sent\n" + hiddenEmail, new JFXDialog());
@@ -101,13 +102,27 @@ public class SendCodeController implements Initializable
 			getEmailAddress();
 			email.setRecipient(actualEmail);
 			hiddenEmail = hideEmail(actualEmail);
-			email.sendEmail();
-			usernameInput.setText("");
-			new DialogeBox(stackPane).drawerOkButton("Sent\n" + hiddenEmail, new JFXDialog());
+			if (sendRequest(email)){
+				usernameInput.setText("");
+				new DialogeBox(stackPane).drawerOkButton("Sent\n" + hiddenEmail, new JFXDialog());
+			}else{
+				sendButton.setDisable(false);
+			}
 		} else {
 			usernameInput.setText("");
 			new DialogeBox(stackPane).drawerOkButton("Incorrect Username", new JFXDialog());
 		}
+	}
+
+	private boolean sendRequest(Email email)
+	{
+		try {
+			email.sendEmail();
+		}catch (RuntimeException e){
+			new DialogeBox(stackPane).drawerOkButton("Not connected to Internet\n",new JFXDialog());
+			return false;
+		}
+		return true;
 	}
 
 	private boolean verifyEmailRegistered(String request) throws SQLException
