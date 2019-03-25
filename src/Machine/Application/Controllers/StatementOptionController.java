@@ -12,7 +12,6 @@ import javafx.stage.DirectoryChooser;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 
-import javax.mail.MessagingException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -48,7 +47,8 @@ public class StatementOptionController {
 		setUsername(username);
 		setMachineModel(machineModel);
 		showStatus(false,"");
-		emailButton.setDisable(true);
+		printButton.setDisable(true);
+		//emailButton.setDisable(true);
 	}
 
 	private void setUsername(String user)
@@ -99,12 +99,17 @@ public class StatementOptionController {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Choose Statement");
 			File file = fileChooser.showOpenDialog(null);
-			email.setFilePath(file.getPath());
-			email.setFileName(file.getName());
+			try {
+				email.setFilePath(file.getPath());
+				email.setFileName(file.getName());
+			}catch (NullPointerException e){
+				showStatus(true,"Choose File");
+			}
 			try {
 				email.sendEmail();
 			} catch (RuntimeException e) {
-				e.printStackTrace();
+				showStatus(true,"No Internet");
+				return;
 			}
 		}
 		showStatus(true,"S E N T");

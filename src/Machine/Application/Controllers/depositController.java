@@ -51,36 +51,6 @@ public class depositController implements Initializable
 	@FXML
 	private Label currBalance;
 
-//	@FXML
-//	private JFXButton seven;
-//
-//	@FXML
-//	private JFXButton three;
-//
-//	@FXML
-//	private JFXButton two;
-//
-//	@FXML
-//	private JFXButton one;
-//
-//	@FXML
-//	private JFXButton six;
-//
-//	@FXML
-//	private JFXButton five;
-//
-//	@FXML
-//	private JFXButton four;
-//
-//	@FXML
-//	private JFXButton nine;
-//
-//	@FXML
-//	private JFXButton eight;
-//
-//	@FXML
-//	private JFXButton zero;
-
 	@FXML
 	private JFXButton decimal;
 

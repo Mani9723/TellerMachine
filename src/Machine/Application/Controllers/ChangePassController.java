@@ -101,7 +101,6 @@ public class ChangePassController implements Initializable
 
 	private boolean validTimeAndInput(String userTempPass, String user) throws SQLException
 	{
-
 		String tempPassFromDB;
 		long currTime = System.currentTimeMillis();
 		long oldTime;
