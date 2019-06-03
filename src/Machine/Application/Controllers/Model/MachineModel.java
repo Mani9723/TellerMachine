@@ -27,6 +27,9 @@ import java.util.Date;
 import java.util.Random;
 
 /**
+ *
+ * This class handles all the database enquiries made by the program.
+ *
  * @author Mani Shah
  * @version 1.0
  * @since 7/28/2018  15:41
@@ -52,6 +55,13 @@ public final class MachineModel
 		}
 	}
 
+	/**
+	 * Method verifies that the database for the application exists.
+	 * If it does not exist then it implies that this is a first time use
+	 * and creates a new one in the same directory.
+	 *
+	 * @throws SQLException - SQL Exception
+	 */
 	private void checkIfTableExists() throws SQLException
 	{
 		DatabaseMetaData databaseMetaData = connection.getMetaData();
@@ -65,6 +75,10 @@ public final class MachineModel
 		resultSet.close();
 	}
 
+	/**
+	 * Makes sure that the databse is connected.
+	 * @return True if Connected
+	 */
 	@SuppressWarnings("unused")
 	public boolean isDbConnected() {
 		try {
@@ -75,6 +89,12 @@ public final class MachineModel
 		}
 	}
 
+	/**
+	 * Creates the main table with all the different users.
+	 * General Table with all the users that are currently registered.
+	 * Only contains the summary not the account transactions of any such detail.
+	 * @throws SQLException - Exception
+	 */
 	private void createMainTable() throws SQLException
 	{
 		String query = "CREATE TABLE IF NOT EXISTS Customer_Information (\n"
@@ -94,6 +114,11 @@ public final class MachineModel
 
 	}
 
+	/**
+	 * General method that generates a SQL statement to be used for queries.
+	 * @param query - String query
+	 * @throws SQLException - Exception
+	 */
 	private void createPrepStmtExecute(String query) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
@@ -109,6 +134,12 @@ public final class MachineModel
 		}
 	}
 
+	/**
+	 * Specific database table for each user.
+	 * THis table details the transaction history of the user.
+	 * @param user - Specific user
+	 * @throws SQLException - Exception
+	 */
 	public void createStatementTable(String user) throws SQLException
 	{
 		String query = "CREATE TABLE IF NOT EXISTS "+user+ " (\n"
@@ -122,6 +153,11 @@ public final class MachineModel
 		System.out.println("Statement Table created: " + user);
 	}
 
+	/**
+	 *
+	 * @param username
+	 * @return
+	 */
 	public ObservableList<StatementData> getStatement(String username)
 	{
 		String query = "SELECT * from "+ username;
