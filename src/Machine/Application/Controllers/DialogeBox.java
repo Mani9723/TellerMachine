@@ -4,6 +4,7 @@ package Machine.Application.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -24,7 +25,7 @@ public class DialogeBox
 	private StackPane stackPane;
 	private JFXDialog dialog;
 	private Parent parent;
-	GaussianBlur gaussianBlur;
+	private GaussianBlur gaussianBlur;
 
 	DialogeBox(StackPane stackPane)
 	{
@@ -45,24 +46,26 @@ public class DialogeBox
 		JFXButton button = new JFXButton("R E T U R N");
 		button.setAlignment(Pos.CENTER);
 		button.setPrefSize(100,50);
+		button.setButtonType(JFXButton.ButtonType.RAISED);
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.CENTER);
-		button.addEventHandler(KeyEvent.KEY_PRESSED,(KeyEvent event ) ->{
-			if(event.getCode().equals(KeyCode.ENTER)){
-				parent.setEffect(null);
-				this.dialog.close();
-			}
-		});
+
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED,(MouseEvent mouseEvent )->{
 			parent.setEffect(null);
 			this.dialog.close();
 		});
 		Label label = new Label(buttonMessage);
+		dialogFinish(dialogLayout,button,label);
+	}
+
+	private void dialogFinish(JFXDialogLayout dialogLayout, JFXButton button, Label label)
+	{
 		label.setContentDisplay(ContentDisplay.CENTER);
 		dialogLayout.setBody(label);
 		dialogLayout.setActions(button);
 		this.dialog.show();
 		parent.setEffect(gaussianBlur);
 	}
+
 	void drawerOkButton(String buttonMessage, JFXDialog dialog)
 	{
 		this.dialog = dialog;
@@ -113,11 +116,7 @@ public class DialogeBox
 			loadLoginPage(rootPane,registerPane);
 		});
 		Label label = new Label("\t".concat(buttonMessage));
-		label.setContentDisplay(ContentDisplay.CENTER);
-		dialogLayout.setBody(label);
-		dialogLayout.setActions(button);
-		this.dialog.show();
-		parent.setEffect(gaussianBlur);
+		dialogFinish(dialogLayout, button, label);
 	}
 
 	private void loadLoginPage(StackPane rootPane, StackPane registerPane)
