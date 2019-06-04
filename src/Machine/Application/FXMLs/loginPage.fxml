@@ -127,7 +127,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="exitResetPass" layoutX="518.0" layoutY="14.0" onAction="#resetPassword" prefHeight="32.0" prefWidth="120.0" styleClass="exitHome" stylesheets="@/Machine/Application/FXMLs/application.css" text="BACK TO LOGIN">
+                  <JFXButton fx:id="exitResetPass" layoutX="350.0" layoutY="13.0" onAction="#resetPassword" prefHeight="32.0" prefWidth="120.0" styleClass="exitHome" stylesheets="@/Machine/Application/FXMLs/application.css" text="BACK TO LOGIN">
                      <font>
                         <Font name="Papyrus" size="10.0" />
                      </font>
