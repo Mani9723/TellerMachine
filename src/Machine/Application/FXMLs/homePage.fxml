@@ -131,7 +131,7 @@
                   </JFXButton>
                   <Label fx:id="accountNumber" alignment="CENTER" prefHeight="20.0" prefWidth="215.0" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
-                        <Font name="Papyrus" size="15.0" />
+                        <Font name="Papyrus" size="24.0" />
                      </font>
                   </Label>
                     </children>

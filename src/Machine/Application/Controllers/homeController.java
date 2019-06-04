@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -86,6 +87,20 @@ public class homeController implements Initializable
 		isNumVisible = false;
 	}
 
+	void init(MachineModel machine)
+	{
+		setMachineModel(machine);
+		try {
+			setFirstName(machineModel.getAccountInfo(getuName(),"FirstName"));
+			greeting.setText(getAppropriateGreeting(getHour()) +", " + getFirst());
+			String bal = machineModel.getAccountInfo(getuName(),"CurrentBalance");
+			currBalance.setText("$"+decimalFormat.format(Double.parseDouble(bal)));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	@FXML
 	void depositMoney(ActionEvent event)
 	{
@@ -153,20 +168,6 @@ public class homeController implements Initializable
 		}
 	}
 
-	void init(MachineModel machine)
-	{
-		setMachineModel(machine);
-		try {
-			setFirstName(machineModel.getAccountInfo(getuName(),"FirstName"));
-			greeting.setText(getAppropriateGreeting(getHour()) +", " + getFirst());
-			String bal = machineModel.getAccountInfo(getuName(),"CurrentBalance");
-			currBalance.setText("$"+decimalFormat.format(Double.parseDouble(bal)));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
 	private void setFirstName(String name)
 	{
 		first = name;
@@ -218,6 +219,7 @@ public class homeController implements Initializable
 				accountNumber.setVisible(true);
 				try {
 					accountNumber.setText(machineModel.getAccountInfo(getuName(),"AccountNumber"));
+					//accountNumber.setFont(Font.font(24));
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
