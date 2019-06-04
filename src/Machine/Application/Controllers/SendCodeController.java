@@ -149,7 +149,7 @@ public class SendCodeController implements Initializable
 		String secureTempPass;
 		HashPassword hashPassword = new HashPassword();
 		hashPassword.setHashPassword(generateRandomWord());
-		secureTempPass = hashPassword.toString();
+		secureTempPass = hashPassword.toString().substring(0,9);
 		email = new Email(secureTempPass);
 		try {
 			setActualEmail(machineModel.getAccountInfo(usernameInput.getText(), "email"));
