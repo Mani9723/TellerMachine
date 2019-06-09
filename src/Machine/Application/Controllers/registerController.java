@@ -65,7 +65,7 @@ public class registerController {
 	{
 		hashPassword = new HashPassword();
 		loadScene = new LoadScene(stackPane,new StackPane());
-		accountType.setText("CHECKING");
+//		accountType.setText("CHECKING");
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(registerPane);
 		setRegisterButtonVisbility(true,INVISIBLE_VAL);

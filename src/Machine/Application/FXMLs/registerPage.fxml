@@ -17,7 +17,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.registerController">
+<StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.registerController">
     <AnchorPane fx:id="registerPane" prefHeight="500.0" prefWidth="600.0">
         <children>
             <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true">
@@ -100,28 +100,6 @@
                                         <stops>
                                             <Stop color="#0274ff" />
                                             <Stop color="#e4ff00" offset="1.0" />
-                                        </stops>
-                                    </RadialGradient>
-                                </unFocusColor>
-                            </JFXTextField>
-                            <JFXTextField fx:id="accountType" alignment="CENTER" editable="false" prefHeight="60.0" prefWidth="320.0" text="Checking" GridPane.rowIndex="6">
-                                <font>
-                                    <Font name="Papyrus" size="17.0" />
-                                </font>
-                                <focusColor>
-                                    <RadialGradient centerX="0.45555555555555555" centerY="1.0" focusAngle="-18.43" focusDistance="1.0" proportional="false" radius="0.2674418604651163">
-                                        <stops>
-                                            <Stop color="#ffd200" />
-                                            <Stop color="#00e7ff" offset="1.0" />
-                                        </stops>
-                                    </RadialGradient>
-                                </focusColor>
-                                <unFocusColor>
-                                    <RadialGradient centerX="0.5111111111111112" centerY="0.5285714285714287" radius="0.5">
-                                        <stops>
-                                            <Stop color="#fff900" />
-                                            <Stop color="#fff900" offset="0.007662835249042145" />
-                                 <Stop color="#0044ff" offset="1.0" />
                                         </stops>
                                     </RadialGradient>
                                 </unFocusColor>

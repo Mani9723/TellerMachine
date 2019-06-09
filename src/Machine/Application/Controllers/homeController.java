@@ -219,7 +219,6 @@ public class homeController implements Initializable
 				accountNumber.setVisible(true);
 				try {
 					accountNumber.setText(machineModel.getAccountInfo(getuName(),"AccountNumber"));
-					//accountNumber.setFont(Font.font(24));
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
