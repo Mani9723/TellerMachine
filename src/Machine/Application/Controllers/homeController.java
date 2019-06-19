@@ -86,7 +86,6 @@ public class homeController implements Initializable
 		accountNumber.setVisible(false);
 		isNumVisible = false;
 
-		stackPane.requestFocus();
 	}
 
 	void init(MachineModel machine)

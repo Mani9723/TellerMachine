@@ -63,13 +63,14 @@ public class registerController {
 	@FXML
 	public void initialize()
 	{
-		stackPane.requestFocus();
 		hashPassword = new HashPassword();
 		loadScene = new LoadScene(stackPane,new StackPane());
 //		accountType.setText("CHECKING");
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(registerPane);
 		setRegisterButtonVisbility(true,INVISIBLE_VAL);
+
+		stackPane.requestFocus();
 	}
 
 	void setMachineModel(MachineModel model)

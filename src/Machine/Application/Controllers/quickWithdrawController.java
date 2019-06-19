@@ -67,6 +67,7 @@ public class quickWithdrawController implements Initializable
 	{
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(quickPane);
+		stackPane.requestFocus();
 	}
 
 	void init(MachineModel machineModel)

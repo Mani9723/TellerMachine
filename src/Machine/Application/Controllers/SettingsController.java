@@ -68,7 +68,6 @@ public class SettingsController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		stackPane.requestFocus();
 		hashPassword = new HashPassword();
 		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
@@ -79,6 +78,8 @@ public class SettingsController implements Initializable
 		cancel.setVisible(false);
 		confDel.setVisible(false);
 		reenterPassword.setVisible(false);
+
+		stackPane.requestFocus();
 	}
 
 	void init(String user, MachineModel machine)

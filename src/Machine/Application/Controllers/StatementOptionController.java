@@ -44,12 +44,13 @@ public class StatementOptionController {
 
 	void init(String username, MachineModel machineModel)
 	{
-		optionPane.requestFocus();
 		setUsername(username);
 		setMachineModel(machineModel);
 		showStatus(false,"");
 		printButton.setDisable(true);
 		//emailButton.setDisable(true);
+
+		optionPane.requestFocus();
 	}
 
 	private void setUsername(String user)

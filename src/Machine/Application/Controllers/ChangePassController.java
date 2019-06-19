@@ -54,6 +54,7 @@ public class ChangePassController implements Initializable
 		username.setOpacity(1.0);
 		tempPass.setOpacity(1.0);
 		newPass.setOpacity(1.0);
+		NewPasswordPane.requestFocus();
 	}
 
 

@@ -97,11 +97,12 @@ public class withdrawController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		stackPane.requestFocus();
 		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(withdrawPane);
 		moneyTextField.setEditable(false);
+
+		stackPane.requestFocus();
 	}
 
 	void init(MachineModel machineModel)

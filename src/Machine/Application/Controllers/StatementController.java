@@ -76,7 +76,6 @@ public class StatementController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		stackPane.requestFocus();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(pane);
 		dateLabel.setText(getDate());
@@ -85,6 +84,7 @@ public class StatementController implements Initializable
 		amountCol.setCellValueFactory(new PropertyValueFactory<>("Amount"));
 		prevCol.setCellValueFactory(new PropertyValueFactory<>("prevBal"));
 		currCol.setCellValueFactory(new PropertyValueFactory<>("currBal"));
+		stackPane.requestFocus();
 	}
 
 	void init()
