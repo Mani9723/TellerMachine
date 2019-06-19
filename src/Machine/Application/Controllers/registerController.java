@@ -63,6 +63,7 @@ public class registerController {
 	@FXML
 	public void initialize()
 	{
+		stackPane.requestFocus();
 		hashPassword = new HashPassword();
 		loadScene = new LoadScene(stackPane,new StackPane());
 //		accountType.setText("CHECKING");

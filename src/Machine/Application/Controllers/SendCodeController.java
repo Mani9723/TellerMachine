@@ -46,6 +46,7 @@ public class SendCodeController implements Initializable
 		sendButton.setOpacity(0.50);
 		machineModel = new MachineModel();
 		usernameInput.setPromptText("U S E R N A M E");
+		stackPane.requestFocus();
 	}
 
 

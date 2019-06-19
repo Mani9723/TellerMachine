@@ -85,6 +85,8 @@ public class homeController implements Initializable
 		settingButton.setGraphic(imageView);
 		accountNumber.setVisible(false);
 		isNumVisible = false;
+
+		stackPane.requestFocus();
 	}
 
 	void init(MachineModel machine)

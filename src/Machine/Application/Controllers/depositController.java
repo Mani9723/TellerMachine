@@ -69,6 +69,7 @@ public class depositController implements Initializable
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(depositPane);
 		count = 1;
+		stackPane.requestFocus();
 	}
 
 	void init(MachineModel machine)

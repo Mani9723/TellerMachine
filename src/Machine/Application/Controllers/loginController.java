@@ -72,6 +72,7 @@ public class loginController implements Initializable {
 		login.setDisable(true);
 		exitResetPass.setDisable(true);
 		exitResetPass.setVisible(false);
+		stackPane.requestFocus();
 	}
 
 	@FXML

@@ -76,6 +76,7 @@ public class StatementController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		stackPane.requestFocus();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(pane);
 		dateLabel.setText(getDate());
