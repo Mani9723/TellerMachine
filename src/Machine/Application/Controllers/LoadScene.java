@@ -245,6 +245,4 @@ class LoadScene
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
-
-
 }
