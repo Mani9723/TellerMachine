@@ -48,6 +48,7 @@ public class DialogeBox
 		button.setPrefSize(100,50);
 		button.setButtonType(JFXButton.ButtonType.RAISED);
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.CENTER);
+		this.dialog.requestFocus();
 
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED,(MouseEvent mouseEvent )->{
 			parent.setEffect(null);
