@@ -95,7 +95,8 @@ public class StatementController implements Initializable
 		if(event.getSource().equals(menuButton)){
 			try {
 				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(getClass().getResource("/Machine/Application/FXMLs/StatementOptions.fxml"));
+				loader.setLocation(getClass()
+						.getResource("/Machine/Application/FXMLs/StatementOptions.fxml"));
 				optionScene = loader.load();
 				StatementOptionController controller = loader.getController();
 				controller.init(username,machineModel);
@@ -103,7 +104,7 @@ public class StatementController implements Initializable
 
 				if (drawerPane.isShown()) {
 					drawerPane.close();
-					table.setOpacity(0.78);
+					if(table.getOpacity() != 0) table.setOpacity(0.78);
 					menuButton.setText("Options");
 				} else {
 					drawerPane.open();
