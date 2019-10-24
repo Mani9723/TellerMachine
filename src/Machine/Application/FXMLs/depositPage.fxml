@@ -41,22 +41,22 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <JFXButton fx:id="menu" buttonType="RAISED" onAction="#menu" opacity="0.85" prefHeight="61.0" prefWidth="164.0" styleClass="takeOut" stylesheets="@/Machine/Application/FXMLs/application.css" text="MAIN MENU">
+                        <JFXButton fx:id="menu" buttonType="RAISED" onAction="#menu" opacity="0.85" prefHeight="48.0" prefWidth="245.0" styleClass="takeOut" stylesheets="@/Machine/Application/FXMLs/application.css" text="MAIN MENU">
                             <font>
-                                <Font name="Papyrus" size="16.0" />
+                                <Font name="Papyrus" size="17.0" />
                             </font>
                             <effect>
                                 <DropShadow />
                             </effect>
                         </JFXButton>
-                        <JFXButton fx:id="withdraw" buttonType="RAISED" onAction="#withdraw" opacity="0.83" prefHeight="61.0" prefWidth="164.0" styleClass="quickCash" stylesheets="@/Machine/Application/FXMLs/application.css" text="WITHDRAW" GridPane.rowIndex="1">
+                        <JFXButton fx:id="withdraw" buttonType="RAISED" onAction="#withdraw" opacity="0.83" prefHeight="48.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@/Machine/Application/FXMLs/application.css" text="WITHDRAW" GridPane.rowIndex="1">
                             <font>
-                                <Font name="Papyrus" size="16.0" />
+                                <Font name="Papyrus" size="17.0" />
                             </font>
                         </JFXButton>
-                        <JFXButton fx:id="logout" buttonType="RAISED" onAction="#logout" opacity="0.78" prefHeight="61.0" prefWidth="164.0" styleClass="exitHome" stylesheets="@/Machine/Application/FXMLs/application.css" text="LOGOUT" GridPane.rowIndex="2">
+                        <JFXButton fx:id="logout" buttonType="RAISED" onAction="#logout" opacity="0.78" prefHeight="48.0" prefWidth="245.0" styleClass="exitHome" stylesheets="@/Machine/Application/FXMLs/application.css" text="LOGOUT" GridPane.rowIndex="2">
                             <font>
-                                <Font name="Papyrus" size="16.0" />
+                                <Font name="Papyrus" size="17.0" />
                             </font>
                         </JFXButton>
                     </children>

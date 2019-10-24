@@ -93,7 +93,7 @@ public class depositController implements Initializable
 				executeQuery(request);
 				updateBalanceLabel();
 			} else{
-				dialogeBox.OkButton("Invalid Amount: $"+request,new JFXDialog());
+				dialogeBox.OkButton("Invalid Amount: $"+(request.isEmpty() ? "0" : request),new JFXDialog());
 			}
 		}
 		depositInput.setText("");
