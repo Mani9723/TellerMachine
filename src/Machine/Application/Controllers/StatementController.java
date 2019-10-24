@@ -3,6 +3,7 @@ package Machine.Application.Controllers;
 import Machine.Application.Controllers.Model.MachineModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -81,6 +82,11 @@ public class StatementController implements Initializable
 	void init()
 	{
 		table.setItems(machineModel.getStatement(username));
+		ObservableList list = table.getItems();
+		if(list.isEmpty()){
+			table.setOpacity(0.0);
+		}
+
 	}
 
 	@FXML
