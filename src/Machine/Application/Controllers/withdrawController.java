@@ -102,7 +102,9 @@ public class withdrawController implements Initializable
 		dialogeBox.setNonStackPane(withdrawPane);
 		moneyTextField.setEditable(false);
 
-		stackPane.requestFocus();
+		//stackPane.requestFocus();
+		//withdrawButton.requestFocus();
+		moneyTextField.requestFocus();
 	}
 
 	void init(MachineModel machineModel)
