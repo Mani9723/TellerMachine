@@ -15,7 +15,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 import java.io.IOException;
@@ -69,6 +73,8 @@ public class DialogeBox
 		label.setContentDisplay(ContentDisplay.CENTER);
 		dialogLayout.setBody(label);
 		dialogLayout.setActions(button);
+		dialogLayout.setBackground(new Background(
+				new BackgroundFill(Color.rgb(185,255,235),null,null)));
 		this.dialog.show();
 		parent.setEffect(gaussianBlur);
 	}
