@@ -475,7 +475,7 @@ public final class MachineModel
 
 	}
 
-	public void saveStatementToPdf(String username, File file) throws SQLException, FileNotFoundException
+	public PdfDocument saveStatementToPdf(String username, File file) throws SQLException, FileNotFoundException
 	{
 		String date, type, amount, prevBal,  currBal;
 		String query = "SELECT * FROM " + username;
@@ -532,6 +532,7 @@ public final class MachineModel
 		document.close();
 		preparedStatement.close();
 		resultSet.close();
+		return document.getPdfDocument();
 	}
 
 	private String getDate(boolean time)

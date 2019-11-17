@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="io-7.1.21">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../JarFiles/iText7-Core-7.1.2/io-7.1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

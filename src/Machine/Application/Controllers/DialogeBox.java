@@ -50,6 +50,12 @@ public class DialogeBox
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.CENTER);
 		this.dialog.requestFocus();
 
+		button.addEventHandler(KeyEvent.KEY_RELEASED,(KeyEvent keyEvent)->{
+			if(keyEvent.getCode()==KeyCode.ENTER){
+				parent.setEffect(null);
+				this.dialog.close();
+			}
+		});
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED,(MouseEvent mouseEvent )->{
 			parent.setEffect(null);
 			this.dialog.close();
