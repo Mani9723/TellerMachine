@@ -105,11 +105,17 @@ public class StatementOptionController {
 				email.setFilePath(file.getPath());
 				email.setFileName(file.getName());
 				try {
-					email.sendEmail();
+					showStatus(true,"SENDING...");
+					email.run();
+					email.start();
+					//showStatus(true,"SENDING...");
+					email.join();
 					showStatus(true,"S E N T");
 					emailButton.setDisable(true);
 				} catch (RuntimeException e) {
 					showStatus(true,"No Internet");
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}catch (NullPointerException e){
 				showStatus(true,"Choose File");
