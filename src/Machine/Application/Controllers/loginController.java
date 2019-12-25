@@ -13,9 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.SwipeEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
@@ -77,26 +77,39 @@ public class loginController implements Initializable {
 	}
 
 	@FXML
-	public void EnterKey(KeyEvent event) {
+	public void verifyMinLoginInput(KeyEvent event)
+	{
 		if (password.getText().length() > 3)
 			login.setDisable(false);
 		if (password.getText().length() < 3 || username.getText().length() < 3)
 			login.setDisable(true);
 		if (event.getCode().equals(KeyCode.CAPS)) {
 			switchCapsLockLabel();
-		}
+		}if(event.getCode().equals(KeyCode.ENTER))
+			EnterKey(event);
+	}
+
+	private void EnterKey(KeyEvent event) {
 		if (event.getCode().equals(KeyCode.ENTER)) {
 //			try {
-				if (machineModel.isFirstTimeRunning()) {
-					showFirstTimeUsingDialog();
-				} else if (processCredentials()) {
-					loadHomePage(null,event);
-				} else {
-					handleIncorrectCredentials();
-				}
+			if (machineModel.isFirstTimeRunning()) {
+				showFirstTimeUsingDialog();
+			} else if (processCredentials()) {
+				loadHomePage(null,event);
+			} else {
+				handleIncorrectCredentials();
+			}
 //			} catch (SQLException e) {
 //				e.printStackTrace();
 //			}
+		}
+	}
+
+	@FXML
+	public void EnterKeyRegister(KeyEvent event)
+	{
+		if(event.getCode().equals(KeyCode.ENTER) && event.getSource().equals(registerButton)){
+			registerButtonKeyEvent(event);
 		}
 	}
 
@@ -127,33 +140,38 @@ public class loginController implements Initializable {
 	}
 
 	@FXML
-	void registerButton(ActionEvent event)
+	public void registerButtonHandler(ActionEvent event)
 	{
 		if(event.getSource().equals(registerButton)){
 			loadScene.setActionEvent(event);
 			loadScene.registerScene(machineModel);
-
 		}
 	}
 
-    private void modifyButtonVisibility(boolean disable)
-    {
-        registerButton.setDisable(disable);
-        forgotButton.setDisable(disable);
-        makeNewPass.setDisable(disable);
-        username.setDisable(disable);
-        password.setDisable(disable);
-    }
+	@FXML
+	public void registerButtonKeyEvent(KeyEvent keyEvent)
+	{
+		loadScene.setKeyEvent(keyEvent);
+		loadScene.registerScene(machineModel);
+	}
+	private void modifyButtonVisibility(boolean disable)
+	{
+		registerButton.setDisable(disable);
+		forgotButton.setDisable(disable);
+		makeNewPass.setDisable(disable);
+		username.setDisable(disable);
+		password.setDisable(disable);
+	}
 
 	private void loginProcess(ActionEvent event)
 	{
-			if(machineModel.isFirstTimeRunning()){
-				showFirstTimeUsingDialog();
-			} else if(processCredentials()){
-				loadHomePage(event,null);
-			} else{
-				handleIncorrectCredentials();
-			}
+		if(machineModel.isFirstTimeRunning()){
+			showFirstTimeUsingDialog();
+		} else if(processCredentials()){
+			loadHomePage(event,null);
+		} else{
+			handleIncorrectCredentials();
+		}
 	}
 
 	private void switchCapsLockLabel()
@@ -227,5 +245,11 @@ public class loginController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@FXML
+	public void handleDragUp(SwipeEvent event)
+	{
+		System.out.println("Dragup hit");
 	}
 }

@@ -7,15 +7,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jfoenix-8.0.1" level="project" />
+    <orderEntry type="library" name="kernel-7.1.2" level="project" />
+    <orderEntry type="library" name="io-7.1.2" level="project" />
+    <orderEntry type="library" name="layout-7.1.2" level="project" />
+    <orderEntry type="library" name="activation" level="project" />
+    <orderEntry type="library" name="mail" level="project" />
+    <orderEntry type="library" name="slf4j-api-1.7.25" level="project" />
+    <orderEntry type="library" name="slf4j-simple-1.7.25" level="project" />
+    <orderEntry type="library" name="forms-7.1.2" level="project" />
     <orderEntry type="library" name="sqlite-jdbc-3.23.1" level="project" />
-    <orderEntry type="library" name="jfoenix-8.0.11" level="project" />
-    <orderEntry type="library" name="io-7.1.21" level="project" />
-    <orderEntry type="library" name="forms-7.1.21" level="project" />
-    <orderEntry type="library" name="kernel-7.1.21" level="project" />
-    <orderEntry type="library" name="layout-7.1.21" level="project" />
-    <orderEntry type="library" name="activation1" level="project" />
-    <orderEntry type="library" name="mail1" level="project" />
-    <orderEntry type="library" name="slf4j-api-1.7.251" level="project" />
-    <orderEntry type="library" name="slf4j-simple-1.7.251" level="project" />
   </component>
 </module>

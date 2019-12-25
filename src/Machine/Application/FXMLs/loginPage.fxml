@@ -32,7 +32,7 @@
                         <Font name="Sitka Small" size="32.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="167.0" layoutY="144.0" prefHeight="42.0" prefWidth="367.0" text="B A N K  O F  J A V A" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="167.0" layoutY="144.0" prefHeight="42.0" prefWidth="367.0" text="B A N K  O F  ______" textFill="WHITE">
                      <font>
                         <Font name="Sitka Small" size="33.0" />
                      </font>
@@ -72,7 +72,7 @@
                               </RadialGradient>
                            </focusColor>
                         </JFXTextField>
-                        <JFXPasswordField fx:id="password" alignment="CENTER" onKeyReleased="#EnterKey" prefHeight="25.0" prefWidth="205.0" promptText="Password" GridPane.rowIndex="1">
+                        <JFXPasswordField fx:id="password" alignment="CENTER" onKeyReleased="#verifyMinLoginInput" prefHeight="25.0" prefWidth="205.0" promptText="Password" GridPane.rowIndex="1">
                            <font>
                               <Font name="Papyrus" size="17.0" />
                            </font>
@@ -94,12 +94,12 @@
                               </RadialGradient>
                            </focusColor>
                         </JFXPasswordField>
-                        <JFXButton fx:id="login" buttonType="RAISED" onAction="#loginButtonHandler" prefHeight="41.0" prefWidth="302.0" text="LOGIN" textFill="WHITE" GridPane.rowIndex="2">
+                        <JFXButton fx:id="login" buttonType="RAISED" onAction="#loginButtonHandler"  onKeyReleased="#verifyMinLoginInput" prefHeight="41.0" prefWidth="302.0" text="LOGIN" textFill="WHITE" GridPane.rowIndex="2">
                            <font>
                               <Font name="Papyrus" size="15.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="registerButton" buttonType="RAISED" onAction="#registerButton" prefHeight="46.0" prefWidth="299.0" text="REGISTER" textFill="WHITE" GridPane.rowIndex="3">
+                        <JFXButton fx:id="registerButton" buttonType="RAISED" onAction="#registerButtonHandler" onKeyReleased="#EnterKeyRegister" prefHeight="46.0" prefWidth="299.0" text="REGISTER" textFill="WHITE" GridPane.rowIndex="3">
                            <font>
                               <Font name="Papyrus" size="15.0" />
                            </font>
@@ -116,13 +116,13 @@
                         </JFXButton>
                      </children>
                   </GridPane>
-                  <JFXDrawer fx:id="drawerPane" defaultDrawerSize="480.0" direction="TOP" layoutX="-1.0" layoutY="1.0" prefHeight="500.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="0.0" />
+                  <JFXDrawer fx:id="drawerPane" defaultDrawerSize="480.0" direction="TOP" onSwipeUp="#handleDragUp" layoutX="-1.0" layoutY="1.0" prefHeight="500.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="0.0" />
                   <JFXButton fx:id="exit" alignment="TOP_RIGHT" layoutX="534.0" layoutY="23.0" onAction="#exit" prefHeight="58.0" prefWidth="49.0" ripplerFill="#f7c600" text="X" textFill="WHITE" AnchorPane.bottomAnchor="442.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="Papyrus" size="20.0" />
                      </font>
                   </JFXButton>
-                  <Label fx:id="capsLockLabel" layoutX="534.0" layoutY="256.0" onKeyReleased="#EnterKey" prefHeight="41.0" prefWidth="146.0" text="CAPS LOCK " textFill="yellow">
+                  <Label fx:id="capsLockLabel" layoutX="534.0" layoutY="256.0" onKeyReleased="#verifyMinLoginInput" prefHeight="41.0" prefWidth="146.0" text="CAPS LOCK " textFill="yellow">
                      <font>
                         <Font size="13.0" />
                      </font>

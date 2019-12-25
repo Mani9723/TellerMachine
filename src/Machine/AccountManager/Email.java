@@ -15,7 +15,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.activation.DataSource;
 
-public class Email
+public class Email extends Thread
 {
 	private String emailUsername, password;
 	private String recipient,subject,content,filePath,name;
@@ -33,7 +33,7 @@ public class Email
 		this();
 		if (tempPassword != null)
 			this.tempPass = tempPassword;
-		setContent();
+		setResetPassContent();
 		setSubject();
 	}
 
@@ -64,7 +64,7 @@ public class Email
 	{
 		this.subject = "Password Reset";
 	}
-	private void setContent()
+	private void setResetPassContent()
 	{
 		this.content = "PLEASE DO NOT REPLY TO THIS ADDRESS AS IT IS NOT MONITORED\n" +
 				"\nDear Customer, \n" +
@@ -76,15 +76,14 @@ public class Email
 	public void setUsernameRequestContent(String user)
 	{
 		this.content = "PLEASE DO NOT REPLY TO THIS ADDRESS AS IT IS NOT MONITORED\n" +
-				"\nYour username is: " + user + "" +
-				"\nYou can now reset your password";
+				"\nYour username is: " + user;
 	}
 
-	public void sendEmail() throws RuntimeException
-	{
-		email();
-	}
-	private void email()
+//	public void sendEmail() throws RuntimeException
+//	{
+//		run();
+//	}
+	public void run() throws RuntimeException
 	{
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
