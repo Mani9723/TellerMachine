@@ -139,7 +139,9 @@ class LoadScene
 		Scene currScene = new Scene(loginParent);
 		registerController controller = loader.getController();
 		controller.setMachineModel(machineModel);
-		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+		Stage homeWindow;
+		if(actionEvent != null) homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+		else homeWindow = (Stage)((Node)keyEvent.getSource()).getScene().getWindow();
 		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
