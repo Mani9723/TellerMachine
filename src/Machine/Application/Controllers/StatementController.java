@@ -80,7 +80,7 @@ public class StatementController implements Initializable
 	void init()
 	{
 		table.setItems(databaseModel.getStatement(username));
-		ObservableList list = table.getItems();
+		ObservableList<StatementData> list = table.getItems();
 		if(list.isEmpty()){
 			table.setOpacity(0.0);
 		}
