@@ -88,7 +88,11 @@ public class quickWithdrawController implements Initializable
 	void cashButtons(ActionEvent event)
 	{
 		JFXButton request = (JFXButton)event.getSource();
-		processRequest(request.getText().substring(1));
+		try {
+			processRequest(request.getText().substring(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -125,14 +129,23 @@ public class quickWithdrawController implements Initializable
 		loadScene.homeSceneAction(username,machineModel);
 	}
 
-	private void processRequest(String request)
+	private void processRequest(String request) throws SQLException
 	{
 		if(validRequest(request)) {
-			executeQuery(request);
-			updateBalanceLabel();
-			dialogeBox.OkButton("Withdraw Amount $" + request, new JFXDialog());
+			if(minBalanceMaintained()) {
+				executeQuery(request);
+				updateBalanceLabel();
+				dialogeBox.OkButton("Withdraw Amount $" + request, new JFXDialog());
+			}else{
+				dialogeBox.OkButton("BALANCE LOW", new JFXDialog());
+			}
 		} else
 			dialogeBox.OkButton("Invalid Amount: $"+request,new JFXDialog());
+	}
+
+	private boolean minBalanceMaintained() throws SQLException
+	{
+		return Double.parseDouble(machineModel.getAccountInfo(getUser(),"CurrentBalance")) >= 100 ;
 	}
 
 	private boolean validRequest(String request) throws NumberFormatException

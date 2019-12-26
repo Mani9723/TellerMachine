@@ -88,7 +88,7 @@ public class withdrawController implements Initializable
 	private int count = 1;
 	private String username;
 	private String previousBalance;
-	private String currBalance;
+	private double currBalance;
 	private MachineModel machineModel;
 	private String newBalance;
 	private DialogeBox dialogeBox;
@@ -101,9 +101,6 @@ public class withdrawController implements Initializable
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(withdrawPane);
 		moneyTextField.setEditable(false);
-
-		//stackPane.requestFocus();
-		//withdrawButton.requestFocus();
 		moneyTextField.requestFocus();
 	}
 
@@ -113,7 +110,7 @@ public class withdrawController implements Initializable
 
 		try {
 			setCurrBalance(machineModel.getAccountInfo(username,"CurrentBalance"));
-			setPreviousBalance(getCurrBalance());
+			setPreviousBalance();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -177,8 +174,12 @@ public class withdrawController implements Initializable
 		if(event.getSource().equals(withdrawButton)){
 			if(validRequest(request) && isWithinBounds(request)){
 				request = Double.toString(Double.parseDouble(request));
-				executeQuery(request);
-				updateBalanceLabel();
+					if(getCurrBalance() >= 100) {
+						executeQuery(request);
+						updateBalanceLabel();
+					}else{
+						dialogeBox.OkButton("BALANCE LOW, Please make a deposit", new JFXDialog());
+					}
 			}else{
 				dialogeBox.OkButton("Invalid Amount: $"+request,new JFXDialog());
 			}
@@ -228,7 +229,7 @@ public class withdrawController implements Initializable
 	private void updateBalanceLabel()
 	{
 		setCurrBalance(newBalance);
-		setPreviousBalance(currBalance);
+		setPreviousBalance();
 	}
 
 	void setUsername(String user)
@@ -241,18 +242,19 @@ public class withdrawController implements Initializable
 		machineModel = model;
 	}
 
-	private String getCurrBalance()
+	private double getCurrBalance()
 	{
 		return currBalance;
 	}
 
-	private void setPreviousBalance(String previousBalance)
+	private void setPreviousBalance()
 	{
 		this.previousBalance = balanceLabel.getText().substring(1);
 	}
 
 	private void setCurrBalance(String currBalance)
 	{
+		this.currBalance = Double.parseDouble(currBalance);
 		balanceLabel.setText("$"+decimalFormat.format(Double.parseDouble(currBalance)));
 	}
 	private void setNewBalance(Double bal)
