@@ -1,15 +1,13 @@
 package Machine.Application.Controllers;
 
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -73,7 +71,7 @@ class LoadScene
 		this.keyEvent = keyEvent;
 	}
 
-	void homeScene(JFXTextField username, MachineModel machineModel)
+	void homeScene(JFXTextField username, DatabaseModel databaseModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(homeFxml));
@@ -86,7 +84,7 @@ class LoadScene
 		Scene currScene = new Scene(loginParent);
 		homeController controller = loader.getController();
 		controller.setUsername(username.getText());
-		controller.init(machineModel);
+		controller.init(databaseModel);
 		Stage homeWindow = (Stage)((Node)keyEvent.getSource()).getScene().getWindow();
 		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
@@ -106,7 +104,7 @@ class LoadScene
 		});
 	}
 
-	void homeSceneAction(String username, MachineModel machineModel)
+	void homeSceneAction(String username, DatabaseModel databaseModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(homeFxml));
@@ -119,14 +117,14 @@ class LoadScene
 		Scene currScene = new Scene(loginParent);
 		homeController controller = loader.getController();
 		controller.setUsername(username);
-		controller.init(machineModel);
+		controller.init(databaseModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
 
-	void registerScene(MachineModel machineModel)
+	void registerScene(DatabaseModel databaseModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(registerFxml));
@@ -138,7 +136,7 @@ class LoadScene
 		}
 		Scene currScene = new Scene(loginParent);
 		registerController controller = loader.getController();
-		controller.setMachineModel(machineModel);
+		controller.setDatabaseModel(databaseModel);
 		Stage homeWindow;
 		if(actionEvent != null) homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 		else homeWindow = (Stage)((Node)keyEvent.getSource()).getScene().getWindow();
@@ -148,7 +146,7 @@ class LoadScene
 	}
 
 
-	void depositPage(String username, MachineModel machineModel)
+	void depositPage(String username, DatabaseModel databaseModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(depositFxml));
@@ -161,14 +159,14 @@ class LoadScene
 		Scene currScene = new Scene(loginParent);
 		depositController controller = loader.getController();
 		controller.setUsername(username);
-		controller.init(machineModel);
+		controller.init(databaseModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
 
-	void statementScene(String username, MachineModel machineModel)
+	void statementScene(String username, DatabaseModel databaseModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(statementFxml));
@@ -181,7 +179,7 @@ class LoadScene
 		Scene currScene = new Scene(loginParent);
 		StatementController controller = loader.getController();
 		controller.setUsername(username);
-		controller.setMachineModel(machineModel);
+		controller.setDatabaseModel(databaseModel);
 		controller.init();
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 		allowDragableScene(loginParent,homeWindow);
@@ -189,7 +187,7 @@ class LoadScene
 		homeWindow.show();
 	}
 
-	void settingsScene(String username, MachineModel machineModel)
+	void settingsScene(String username, DatabaseModel databaseModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(settingsFxml));
@@ -201,14 +199,14 @@ class LoadScene
 		}
 		Scene currScene = new Scene(loginParent);
 		SettingsController controller = loader.getController();
-		controller.init(username, machineModel);
+		controller.init(username, databaseModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
 
-	void withdrawScene(String username, MachineModel machineModel)
+	void withdrawScene(String username, DatabaseModel databaseModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(withdrawFxml));
@@ -221,14 +219,14 @@ class LoadScene
 		Scene currScene = new Scene(loginParent);
 		withdrawController controller = loader.getController();
 		controller.setUsername(username);
-		controller.init(machineModel);
+		controller.init(databaseModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);
 		homeWindow.show();
 	}
 
-	void quickCashScene( String username, MachineModel machineModel)
+	void quickCashScene( String username, DatabaseModel databaseModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(quickFxml));
@@ -241,7 +239,7 @@ class LoadScene
 		Scene currScene = new Scene(loginParent);
 		quickWithdrawController controller = loader.getController();
 		controller.setUsername(username);
-		controller.init(machineModel);
+		controller.init(databaseModel);
 		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 		allowDragableScene(loginParent,homeWindow);
 		homeWindow.setScene(currScene);

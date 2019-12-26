@@ -1,6 +1,6 @@
 package Machine.Application.Controllers;
 
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import javafx.collections.ObservableList;
@@ -14,11 +14,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -60,7 +58,7 @@ public class StatementController implements Initializable
 	@FXML
 	private Label dateLabel;
 
-	private MachineModel machineModel;
+	private DatabaseModel databaseModel;
 	private String username;
 	private DialogeBox dialogeBox;
 
@@ -81,7 +79,7 @@ public class StatementController implements Initializable
 
 	void init()
 	{
-		table.setItems(machineModel.getStatement(username));
+		table.setItems(databaseModel.getStatement(username));
 		ObservableList list = table.getItems();
 		if(list.isEmpty()){
 			table.setOpacity(0.0);
@@ -99,7 +97,7 @@ public class StatementController implements Initializable
 						.getResource("/Machine/Application/FXMLs/StatementOptions.fxml"));
 				optionScene = loader.load();
 				StatementOptionController controller = loader.getController();
-				controller.init(username,machineModel);
+				controller.init(username, databaseModel);
 				drawerPane.setSidePane(optionScene);
 
 				if (drawerPane.isShown()) {
@@ -119,9 +117,9 @@ public class StatementController implements Initializable
 		}
 	}
 
-	void setMachineModel(MachineModel model)
+	void setDatabaseModel(DatabaseModel model)
 	{
-		machineModel = model;
+		databaseModel = model;
 	}
 
 	void setUsername(String user)

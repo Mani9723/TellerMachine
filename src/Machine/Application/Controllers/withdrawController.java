@@ -1,6 +1,6 @@
 package Machine.Application.Controllers;
 
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -89,7 +89,7 @@ public class withdrawController implements Initializable
 	private String username;
 	private String previousBalance;
 	private double currBalance;
-	private MachineModel machineModel;
+	private DatabaseModel databaseModel;
 	private String newBalance;
 	private DialogeBox dialogeBox;
 	private LoadScene loadScene;
@@ -104,12 +104,12 @@ public class withdrawController implements Initializable
 		moneyTextField.requestFocus();
 	}
 
-	void init(MachineModel machineModel)
+	void init(DatabaseModel databaseModel)
 	{
-		setMachine(machineModel);
+		setMachine(databaseModel);
 
 		try {
-			setCurrBalance(machineModel.getAccountInfo(username,"CurrentBalance"));
+			setCurrBalance(databaseModel.getAccountInfo(username,"CurrentBalance"));
 			setPreviousBalance();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -154,7 +154,7 @@ public class withdrawController implements Initializable
 	{
 		if(event.getSource().equals(mainMenu)) {
 			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(username,machineModel);
+			loadScene.homeSceneAction(username, databaseModel);
 		}
 	}
 
@@ -163,7 +163,7 @@ public class withdrawController implements Initializable
 	{
 		if(event.getSource().equals(qCash)) {
 			loadScene.setActionEvent(event);
-			loadScene.quickCashScene(username,machineModel);
+			loadScene.quickCashScene(username, databaseModel);
 		}
 	}
 
@@ -218,8 +218,8 @@ public class withdrawController implements Initializable
 	{
 		String updatedBal = getNewBalance(request);
 		try {
-			machineModel.updateBalanceMainDB(updatedBal,username);
-			machineModel.insertToStatementDB(username,"Withdrawal",request,previousBalance,updatedBal);
+			databaseModel.updateBalanceMainDB(updatedBal,username);
+			databaseModel.insertToStatementDB(username,"Withdrawal",request,previousBalance,updatedBal);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -237,9 +237,9 @@ public class withdrawController implements Initializable
 		username = user;
 	}
 
-	void setMachine(MachineModel model)
+	void setMachine(DatabaseModel model)
 	{
-		machineModel = model;
+		databaseModel = model;
 	}
 
 	private double getCurrBalance()

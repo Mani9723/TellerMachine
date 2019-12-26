@@ -35,13 +35,13 @@ import java.util.Random;
  * @since 7/28/2018  15:41
  */
 @SuppressWarnings({"ConstantConditions", "TryFinallyCanBeTryWithResources"})
-public final class MachineModel
+public final class DatabaseModel
 {
 
 	private Connection connection;
 	private ObservableList<StatementData> observableList = FXCollections.observableArrayList();
 
-	public MachineModel()
+	public DatabaseModel()
 	{
 		connection = DatabaseConnect.connector("AccountDB.sqlite");
 		if(connection == null){

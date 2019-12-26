@@ -1,7 +1,7 @@
 package Machine.Application.Controllers;
 
 
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -57,7 +57,7 @@ public class depositController implements Initializable
 	private DecimalFormat decimalFormat = new DecimalFormat("##.##");
 
 	private String previousBalance, newBalance;
-	private MachineModel machineModel;
+	private DatabaseModel databaseModel;
 	private DialogeBox dialogeBox;
 	private static int count;
 	private LoadScene loadScene;
@@ -72,11 +72,11 @@ public class depositController implements Initializable
 		stackPane.requestFocus();
 	}
 
-	void init(MachineModel machine)
+	void init(DatabaseModel machine)
 	{
 		setModel(machine);
 		try {
-			setCurrBalance(machineModel.getAccountInfo(username,"CurrentBalance"));
+			setCurrBalance(databaseModel.getAccountInfo(username,"CurrentBalance"));
 			setPreviousBalance();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -127,7 +127,7 @@ public class depositController implements Initializable
 	{
 		if(event.getSource().equals(menu)) {
 			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(getUser(),machineModel);
+			loadScene.homeSceneAction(getUser(), databaseModel);
 		}
 	}
 
@@ -136,7 +136,7 @@ public class depositController implements Initializable
 	{
 		if(event.getSource().equals(withdraw)) {
 			loadScene.setActionEvent(event);
-			loadScene.withdrawScene(getUser(),machineModel);
+			loadScene.withdrawScene(getUser(), databaseModel);
 		}
 	}
 
@@ -160,8 +160,8 @@ public class depositController implements Initializable
 	{
 		String updatedBalance = getNewBalance(request);
 		try {
-			machineModel.updateBalanceMainDB(updatedBalance,getUser());
-			machineModel.insertToStatementDB(getUser(),"Deposit",request,previousBalance,updatedBalance);
+			databaseModel.updateBalanceMainDB(updatedBalance,getUser());
+			databaseModel.insertToStatementDB(getUser(),"Deposit",request,previousBalance,updatedBalance);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -206,9 +206,9 @@ public class depositController implements Initializable
 		currBalance.setText("$"+decimalFormat.format(Double.parseDouble(balance)));
 	}
 
-	void setModel(MachineModel model)
+	void setModel(DatabaseModel model)
 	{
-		machineModel = model;
+		databaseModel = model;
 	}
 
 	private void setPreviousBalance()

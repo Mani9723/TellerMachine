@@ -1,17 +1,15 @@
 package Machine.Application.Controllers;
 
 import Machine.AccountManager.HashPassword;
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -38,7 +36,7 @@ public class ChangePassController implements Initializable
 	@FXML
 	private JFXTextField username;
 
-	private MachineModel machineModel;
+	private DatabaseModel databaseModel;
 	private DialogeBox dialogeBox;
 	private static HashPassword hashPassword;
 
@@ -60,7 +58,7 @@ public class ChangePassController implements Initializable
 
 	public void verifyNewPassword()
 	{
-		machineModel = new MachineModel();
+		databaseModel = new DatabaseModel();
 		String user = username.getText();
 		String temp = tempPass.getText();
 		String password = newPass.getText();
@@ -70,7 +68,7 @@ public class ChangePassController implements Initializable
 				if(validPassword(password)){
 					if(validTimeAndInput(temp,user)) {
 						hashPassword.setHashPassword(conf);
-						machineModel.updateNewPassword(user, hashPassword.toString());
+						databaseModel.updateNewPassword(user, hashPassword.toString());
 						clearAllFields();
 						setDialogMessageAndShow("Success\nPassword Changed");
 					}else{
@@ -105,9 +103,9 @@ public class ChangePassController implements Initializable
 		String tempPassFromDB;
 		long currTime = System.currentTimeMillis();
 		long oldTime;
-		if (machineModel.isUsernameTaken(user)) {
-			oldTime = Long.parseLong(machineModel.getAccountInfo(user, "ExpireTime"));
-			tempPassFromDB = machineModel.getAccountInfo(user, "TempPassword");
+		if (databaseModel.isUsernameTaken(user)) {
+			oldTime = Long.parseLong(databaseModel.getAccountInfo(user, "ExpireTime"));
+			tempPassFromDB = databaseModel.getAccountInfo(user, "TempPassword");
 			if (currTime - oldTime > FIFTEEN_MIN) {
 				dialogeBox.drawerOkButton("Code Expired", new JFXDialog());
 				return false;

@@ -3,7 +3,7 @@ package Machine.Application.Controllers;
 import Machine.AccountManager.Email;
 import Machine.AccountManager.HashPassword;
 
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
-import javax.mail.MessagingException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Random;
@@ -37,14 +36,14 @@ public class SendCodeController implements Initializable
 	private String actualEmail;
 	private boolean toggleSelected = false;
 	private Email email;
-	private MachineModel machineModel;
+	private DatabaseModel databaseModel;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		sendButton.setDisable(true);
 		sendButton.setOpacity(0.50);
-		machineModel = new MachineModel();
+		databaseModel = new DatabaseModel();
 		usernameInput.setPromptText("U S E R N A M E");
 
 		stackPane.requestFocus();
@@ -87,7 +86,7 @@ public class SendCodeController implements Initializable
 		if(verifyEmailRegistered(request)){
 			email = new Email(null);
 			email.setRecipient(request);
-			email.setUsernameRequestContent(machineModel.getUsername(request));
+			email.setUsernameRequestContent(databaseModel.getUsername(request));
 			sendRequest(email);
 			hiddenEmail = hideEmail(request);
 			usernameInput.setText("");
@@ -100,7 +99,7 @@ public class SendCodeController implements Initializable
 	private void processPasswordResetCode(ActionEvent event) throws SQLException
 	{
 		String hiddenEmail;
-		if (event.getSource().equals(sendButton) && machineModel.isUsernameTaken(usernameInput.getText())) {
+		if (event.getSource().equals(sendButton) && databaseModel.isUsernameTaken(usernameInput.getText())) {
 			getEmailAddress();
 			email.setRecipient(actualEmail);
 			hiddenEmail = hideEmail(actualEmail);
@@ -129,7 +128,7 @@ public class SendCodeController implements Initializable
 
 	private boolean verifyEmailRegistered(String request) throws SQLException
 	{
-		return request.equalsIgnoreCase(machineModel.verfiyEmailAddres(request));
+		return request.equalsIgnoreCase(databaseModel.verfiyEmailAddres(request));
 	}
 
 	private String hideEmail(String emailToHide)
@@ -154,8 +153,8 @@ public class SendCodeController implements Initializable
 		secureTempPass = hashPassword.toString().substring(0,9);
 		email = new Email(secureTempPass);
 		try {
-			setActualEmail(machineModel.getAccountInfo(usernameInput.getText(), "email"));
-			machineModel.updateTempPassCells(usernameInput.getText()
+			setActualEmail(databaseModel.getAccountInfo(usernameInput.getText(), "email"));
+			databaseModel.updateTempPassCells(usernameInput.getText()
 					, secureTempPass, Long.toString(System.currentTimeMillis()));
 		}
 		catch (SQLException e) {

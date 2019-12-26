@@ -2,7 +2,7 @@ package Machine.Application.Controllers;
 
 import Machine.AccountManager.HashPassword;
 
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDrawer;
@@ -54,7 +54,7 @@ public class loginController implements Initializable {
 	private Label capsLockLabel;
 
 	private boolean isCapsOn = false;
-	private static MachineModel machineModel;
+	private static DatabaseModel databaseModel;
 	private DialogeBox dialogeBox;
 	private LoadScene loadScene;
 	private static HashPassword hashPassword;
@@ -64,7 +64,7 @@ public class loginController implements Initializable {
 		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(rootPane);
-		machineModel = new MachineModel();
+		databaseModel = new DatabaseModel();
 		hashPassword = new HashPassword();
 
 		capsLockLabel.setVisible(false);
@@ -92,7 +92,7 @@ public class loginController implements Initializable {
 	private void EnterKey(KeyEvent event) {
 		if (event.getCode().equals(KeyCode.ENTER)) {
 //			try {
-			if (machineModel.isFirstTimeRunning()) {
+			if (databaseModel.isFirstTimeRunning()) {
 				showFirstTimeUsingDialog();
 			} else if (processCredentials()) {
 				loadHomePage(null,event);
@@ -144,7 +144,7 @@ public class loginController implements Initializable {
 	{
 		if(event.getSource().equals(registerButton)){
 			loadScene.setActionEvent(event);
-			loadScene.registerScene(machineModel);
+			loadScene.registerScene(databaseModel);
 		}
 	}
 
@@ -152,7 +152,7 @@ public class loginController implements Initializable {
 	public void registerButtonKeyEvent(KeyEvent keyEvent)
 	{
 		loadScene.setKeyEvent(keyEvent);
-		loadScene.registerScene(machineModel);
+		loadScene.registerScene(databaseModel);
 	}
 	private void modifyButtonVisibility(boolean disable)
 	{
@@ -165,7 +165,7 @@ public class loginController implements Initializable {
 
 	private void loginProcess(ActionEvent event)
 	{
-		if(machineModel.isFirstTimeRunning()){
+		if(databaseModel.isFirstTimeRunning()){
 			showFirstTimeUsingDialog();
 		} else if(processCredentials()){
 			loadHomePage(event,null);
@@ -205,7 +205,7 @@ public class loginController implements Initializable {
 		hashPassword.setHashPassword(password.getText());
 		String securePass = hashPassword.toString();
 		try {
-			return machineModel.validateLogin(username.getText(),securePass);
+			return databaseModel.validateLogin(username.getText(),securePass);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -216,11 +216,11 @@ public class loginController implements Initializable {
 	{
 		if(event != null) {
 			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(username.getText(),machineModel);
+			loadScene.homeSceneAction(username.getText(), databaseModel);
 		}
 		else if(keyEvent != null) {
 			loadScene.setKeyEvent(keyEvent);
-			loadScene.homeScene(username,machineModel);
+			loadScene.homeScene(username, databaseModel);
 		}
 	}
 

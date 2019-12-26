@@ -1,7 +1,7 @@
 package Machine.Application.Controllers;
 
 import Machine.AccountManager.HashPassword;
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -59,7 +59,7 @@ public class SettingsController implements Initializable
 	@FXML
 	private Label date;
 
-	private static MachineModel machineModel;
+	private static DatabaseModel databaseModel;
 	private LoadScene loadScene;
 	private DialogeBox dialogeBox;
 	private static HashPassword hashPassword;
@@ -82,14 +82,14 @@ public class SettingsController implements Initializable
 		stackPane.requestFocus();
 	}
 
-	void init(String user, MachineModel machine)
+	void init(String user, DatabaseModel machine)
 	{
-		machineModel = machine;
+		databaseModel = machine;
 		try {
-			firstname.setText(machineModel.getAccountInfo(user,"Firstname"));
+			firstname.setText(databaseModel.getAccountInfo(user,"Firstname"));
 			username.setText(user);
-			lastName.setText(machineModel.getAccountInfo(user,"Lastname"));
-			email.setText(machineModel.getAccountInfo(user,"Email"));
+			lastName.setText(databaseModel.getAccountInfo(user,"Lastname"));
+			email.setText(databaseModel.getAccountInfo(user,"Email"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -117,8 +117,8 @@ public class SettingsController implements Initializable
 			String pass = reenterPassword.getText();
 			hashPassword.setHashPassword(pass);
 			try{
-				if(machineModel.getAccountInfo(username.getText(),"Password").equals(hashPassword.toString())){
-					machineModel.deleteUser(username.getText());
+				if(databaseModel.getAccountInfo(username.getText(),"Password").equals(hashPassword.toString())){
+					databaseModel.deleteUser(username.getText());
 					loadScene = new LoadScene(stackPane,new StackPane());
 					loadScene.loginPage();
 					dialogeBox.OkButton("Thank you for you being a customer.\nYour account is deleted",
@@ -150,7 +150,7 @@ public class SettingsController implements Initializable
 	{
 		if(event.getSource().equals(menuButton)){
 			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(username.getText(),machineModel);
+			loadScene.homeSceneAction(username.getText(), databaseModel);
 		}
 	}
 
@@ -162,7 +162,7 @@ public class SettingsController implements Initializable
 				if (validateNewPass()) {
 					hashPassword.setHashPassword(newPass.getText());
 					try {
-						machineModel.updateNewPassword(username.getText(), hashPassword.toString());
+						databaseModel.updateNewPassword(username.getText(), hashPassword.toString());
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
@@ -184,7 +184,7 @@ public class SettingsController implements Initializable
 		hashPassword.setHashPassword(currPass.getText());
 		String encryptedPass = hashPassword.toString();
 		try {
-			return encryptedPass.equals(machineModel.getAccountInfo(username.getText(),"Password"));
+			return encryptedPass.equals(databaseModel.getAccountInfo(username.getText(),"Password"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

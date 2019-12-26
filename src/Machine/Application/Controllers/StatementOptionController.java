@@ -1,7 +1,7 @@
 package Machine.Application.Controllers;
 
 import Machine.AccountManager.Email;
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -39,13 +39,13 @@ public class StatementOptionController {
 	@FXML
 	private Label statusLabel;
 
-	private MachineModel machineModel;
+	private DatabaseModel databaseModel;
 	private String username, statementPath;
 
-	void init(String username, MachineModel machineModel)
+	void init(String username, DatabaseModel databaseModel)
 	{
 		setUsername(username);
-		setMachineModel(machineModel);
+		setDatabaseModel(databaseModel);
 		showStatus(false,"");
 		printButton.setDisable(true);
 		//emailButton.setDisable(true);
@@ -57,9 +57,9 @@ public class StatementOptionController {
 	{
 		username = user;
 	}
-	private void setMachineModel(MachineModel model)
+	private void setDatabaseModel(DatabaseModel model)
 	{
-		machineModel = model;
+		databaseModel = model;
 	}
 
 
@@ -70,7 +70,7 @@ public class StatementOptionController {
 			if(file != null) {
 				setPath(file.getPath());
 				try {
-					machineModel.saveStatementToPdf(username, file);
+					databaseModel.saveStatementToPdf(username, file);
 					showStatus(true,"S A V E D");
 				} catch (SQLException | FileNotFoundException e) {
 					e.printStackTrace();
@@ -85,7 +85,7 @@ public class StatementOptionController {
 		LoadScene loadScene = new LoadScene();
 		if(event.getSource().equals(homeButton)){
 			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(username,machineModel);
+			loadScene.homeSceneAction(username, databaseModel);
 		}
 	}
 
@@ -94,7 +94,7 @@ public class StatementOptionController {
 		Email email = new Email(true);
 		if(event.getSource().equals(emailButton)){
 			try {
-				email.setRecipient(machineModel.getAccountInfo(username,"Email"));
+				email.setRecipient(databaseModel.getAccountInfo(username,"Email"));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

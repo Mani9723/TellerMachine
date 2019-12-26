@@ -1,6 +1,6 @@
 package Machine.Application.Controllers;
 
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,7 +63,7 @@ public class homeController implements Initializable
 
 	private String uName,first;
 	private boolean isNumVisible;
-	private static MachineModel machineModel;
+	private static DatabaseModel databaseModel;
 	private LoadScene loadScene;
 
 
@@ -88,13 +87,13 @@ public class homeController implements Initializable
 
 	}
 
-	void init(MachineModel machine)
+	void init(DatabaseModel machine)
 	{
 		setMachineModel(machine);
 		try {
-			setFirstName(machineModel.getAccountInfo(getuName(),"FirstName"));
+			setFirstName(databaseModel.getAccountInfo(getuName(),"FirstName"));
 			greeting.setText(getAppropriateGreeting(getHour()) +", " + getFirst());
-			String bal = machineModel.getAccountInfo(getuName(),"CurrentBalance");
+			String bal = databaseModel.getAccountInfo(getuName(),"CurrentBalance");
 			currBalance.setText("$"+decimalFormat.format(Double.parseDouble(bal)));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -115,7 +114,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(deposit)) {
 			loadScene.setActionEvent(event);
-			loadScene.depositPage(getuName(), machineModel);
+			loadScene.depositPage(getuName(), databaseModel);
 		}
 	}
 
@@ -124,7 +123,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(settingButton)){
 			loadScene.setActionEvent(event);
-			loadScene.settingsScene(getuName(),machineModel);
+			loadScene.settingsScene(getuName(), databaseModel);
 		}
 	}
 
@@ -146,7 +145,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(statementButton)) {
 			loadScene.setActionEvent(event);
-			loadScene.statementScene(getuName(), machineModel);
+			loadScene.statementScene(getuName(), databaseModel);
 		}
 
 	}
@@ -156,7 +155,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(withdraw)) {
 			loadScene.setActionEvent(event);
-			loadScene.withdrawScene(getuName(), machineModel);
+			loadScene.withdrawScene(getuName(), databaseModel);
 		}
 	}
 
@@ -165,7 +164,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(quickCash)) {
 			loadScene.setActionEvent(event);
-			loadScene.quickCashScene(uName, machineModel);
+			loadScene.quickCashScene(uName, databaseModel);
 		}
 	}
 
@@ -183,9 +182,9 @@ public class homeController implements Initializable
 		uName = name;
 	}
 
-	private void setMachineModel(MachineModel model)
+	private void setMachineModel(DatabaseModel model)
 	{
-		machineModel = model;
+		databaseModel = model;
 	}
 	private String getuName()
 	{
@@ -219,7 +218,7 @@ public class homeController implements Initializable
 				showAccButton.setText("HIDE ACCOUNT NUMBER");
 				accountNumber.setVisible(true);
 				try {
-					accountNumber.setText(machineModel.getAccountInfo(getuName(),"AccountNumber"));
+					accountNumber.setText(databaseModel.getAccountInfo(getuName(),"AccountNumber"));
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

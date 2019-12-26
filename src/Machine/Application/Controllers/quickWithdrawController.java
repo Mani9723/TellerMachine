@@ -1,6 +1,6 @@
 package Machine.Application.Controllers;
 
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import javafx.event.ActionEvent;
@@ -56,7 +56,7 @@ public class quickWithdrawController implements Initializable
 	@FXML
 	private JFXButton deposit;
 
-	private MachineModel machineModel;
+	private DatabaseModel databaseModel;
 	private DecimalFormat decimalFormat = new DecimalFormat("##.##");
 	private String username,previousBalance,newBalance;
 	private LoadScene loadScene;
@@ -70,12 +70,12 @@ public class quickWithdrawController implements Initializable
 		stackPane.requestFocus();
 	}
 
-	void init(MachineModel machineModel)
+	void init(DatabaseModel databaseModel)
 	{
 		loadScene = new LoadScene();
-		setModel(machineModel);
+		setModel(databaseModel);
 		try {
-			String bal = machineModel.getAccountInfo(getUser(),"CurrentBalance");
+			String bal = databaseModel.getAccountInfo(getUser(),"CurrentBalance");
 			setCurrBalance(decimalFormat.format(Double.parseDouble(bal)));
 			setPreviousBalance();
 		} catch (SQLException e) {
@@ -99,14 +99,14 @@ public class quickWithdrawController implements Initializable
 	void clickOther(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.withdrawScene(username,machineModel);
+		loadScene.withdrawScene(username, databaseModel);
 	}
 
 	@FXML
 	void goToDeposit(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.depositPage(username,machineModel);
+		loadScene.depositPage(username, databaseModel);
 	}
 
 	@FXML
@@ -126,7 +126,7 @@ public class quickWithdrawController implements Initializable
 	void goToMenu(ActionEvent event)
 	{
 		loadScene.setActionEvent(event);
-		loadScene.homeSceneAction(username,machineModel);
+		loadScene.homeSceneAction(username, databaseModel);
 	}
 
 	private void processRequest(String request) throws SQLException
@@ -145,7 +145,7 @@ public class quickWithdrawController implements Initializable
 
 	private boolean minBalanceMaintained() throws SQLException
 	{
-		return Double.parseDouble(machineModel.getAccountInfo(getUser(),"CurrentBalance")) >= 100 ;
+		return Double.parseDouble(databaseModel.getAccountInfo(getUser(),"CurrentBalance")) >= 100 ;
 	}
 
 	private boolean validRequest(String request) throws NumberFormatException
@@ -157,8 +157,8 @@ public class quickWithdrawController implements Initializable
 	{
 		String updatedBal = getNewBalance(request);
 		try {
-			machineModel.updateBalanceMainDB(updatedBal,getUser());
-			machineModel.insertToStatementDB(getUser(),"Withdrawal",request,previousBalance,updatedBal);
+			databaseModel.updateBalanceMainDB(updatedBal,getUser());
+			databaseModel.insertToStatementDB(getUser(),"Withdrawal",request,previousBalance,updatedBal);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -184,9 +184,9 @@ public class quickWithdrawController implements Initializable
 		balanceLabel.setText("$"+balance);
 	}
 
-	void setModel(MachineModel model)
+	void setModel(DatabaseModel model)
 	{
-		machineModel = model;
+		databaseModel = model;
 	}
 
 	private void setPreviousBalance()

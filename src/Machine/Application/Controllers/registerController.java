@@ -2,14 +2,13 @@ package Machine.Application.Controllers;
 
 import Machine.AccountManager.HashPassword;
 
-import Machine.Application.Controllers.Model.MachineModel;
+import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
@@ -52,7 +51,7 @@ public class registerController {
 	private final static double VISIBLE_VAL = 0.85, INVISIBLE_VAL = 0.42;
 
 	private DialogeBox dialogeBox;
-	private MachineModel machineModel;
+	private DatabaseModel databaseModel;
 	private LoadScene loadScene;
 	private static final String EMAIL_PATTERN =
 			"^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -73,9 +72,9 @@ public class registerController {
 		stackPane.requestFocus();
 	}
 
-	void setMachineModel(MachineModel model)
+	void setDatabaseModel(DatabaseModel model)
 	{
-		machineModel = model;
+		databaseModel = model;
 	}
 
 	@FXML
@@ -136,7 +135,7 @@ public class registerController {
 	private boolean usernameAlreadyExists(String user)
 	{
 		try {
-			return machineModel.isUsernameTaken(user);
+			return databaseModel.isUsernameTaken(user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -146,7 +145,7 @@ public class registerController {
 	private boolean emailExists(String request)
 	{
 		try{
-			return machineModel.emailAlreadyExists(request.toLowerCase());
+			return databaseModel.emailAlreadyExists(request.toLowerCase());
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
@@ -157,9 +156,9 @@ public class registerController {
 	{
 		hashPassword.setHashPassword(details[1]);
 		try {
-			machineModel.saveUserToMainDB(details[0],hashPassword.toString(),
+			databaseModel.saveUserToMainDB(details[0],hashPassword.toString(),
 					details[2],details[3],details[4]);
-			machineModel.createStatementTable(details[0]);
+			databaseModel.createStatementTable(details[0]);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
