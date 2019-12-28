@@ -13,9 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.SwipeEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
@@ -54,6 +54,7 @@ public class loginController implements Initializable {
 	private Label capsLockLabel;
 
 	private boolean isCapsOn = false;
+	private JFXDialog jfxDialog = new JFXDialog();
 	private static DatabaseModel databaseModel;
 	private DialogeBox dialogeBox;
 	private LoadScene loadScene;
@@ -186,7 +187,8 @@ public class loginController implements Initializable {
 	}
 
 	private void handleIncorrectCredentials() {
-		dialogeBox.OkButton("Incorrect Credentials", new JFXDialog());
+		jfxDialog.requestFocus();
+		dialogeBox.OkButton("Incorrect Credentials", jfxDialog);
 		username.setText("");
 		password.setText("");
 		login.setDisable(true);
@@ -248,7 +250,7 @@ public class loginController implements Initializable {
 	}
 
 	@FXML
-	public void handleDragUp(SwipeEvent event)
+	public void handleDragUp(DragEvent event)
 	{
 		System.out.println("Dragup hit");
 	}

@@ -70,7 +70,7 @@ public class StatementOptionController {
 			if(file != null) {
 				setPath(file.getPath());
 				try {
-					databaseModel.saveStatementToPdf(username, file);
+					databaseModel.saveStatementToPdf(username, file,"123");
 					showStatus(true,"S A V E D");
 				} catch (SQLException | FileNotFoundException e) {
 					e.printStackTrace();
@@ -106,7 +106,6 @@ public class StatementOptionController {
 				email.setFileName(file.getName());
 				try {
 					showStatus(true,"SENDING...");
-					email.run();
 					email.start();
 					//showStatus(true,"SENDING...");
 					email.join();

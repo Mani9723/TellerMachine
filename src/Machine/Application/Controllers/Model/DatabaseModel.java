@@ -475,16 +475,16 @@ public final class DatabaseModel
 
 	}
 
-	public PdfDocument saveStatementToPdf(String username, File file) throws SQLException, FileNotFoundException
+	public PdfDocument saveStatementToPdf(String username, File file,String currBalance) throws SQLException, FileNotFoundException
 	{
-		String date, type, amount, prevBal,  currBal;
+		String date, type, amount, prevBal,  currBal = "";
 		String query = "SELECT * FROM " + username;
 		PreparedStatement preparedStatement;
 		ResultSet resultSet;
 		preparedStatement = connection.prepareStatement(query);
 		resultSet = preparedStatement.executeQuery();
 
-		PdfWriter writer = new PdfWriter(file.getAbsoluteFile()+"/Statement.pdf");
+		PdfWriter writer = new PdfWriter(file.getAbsoluteFile()+"/Statement"+getAccountInfo(username,"FirstName")+".pdf");
 		PdfDocument pdfDocument = new PdfDocument(writer);
 		Document document = new Document(pdfDocument,PageSize.A4);
 		Table table = new Table(5);
@@ -494,6 +494,9 @@ public final class DatabaseModel
 		document.add(new Paragraph("Bank Of American").setTextAlignment(TextAlignment.CENTER).setBold());
 		document.add(new Paragraph("Transaction History: " + getAccountInfo(username,"FirstName").toUpperCase())
 				.setTextAlignment(TextAlignment.CENTER).setBold());
+		document.add(new Paragraph("Current Balance: $" + currBalance)
+				.setTextAlignment(TextAlignment.CENTER).setBold());
+
 		cell = new Cell().add(new Paragraph("Date")).setBold().setItalic();
 		table.addCell(cell);
 		cell = new Cell().add(new Paragraph("Type")).setBold().setItalic();

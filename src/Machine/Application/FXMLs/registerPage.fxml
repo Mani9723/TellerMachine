@@ -20,9 +20,9 @@
 <StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.registerController">
     <AnchorPane fx:id="registerPane" prefHeight="500.0" prefWidth="600.0">
         <children>
-            <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true">
+            <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" opacity="0.78">
             <image>
-               <Image url="@/Machine/images/Firewatch-blue-tonal-art-style-1080p-wallpaper-wp3405551.png" />
+               <Image url="@/Machine/images/minimal_blue_mountains_hd_5k-5120x2880.jpg"/>
             </image>
             </ImageView>
             <VBox layoutX="137.0" layoutY="60.0" prefHeight="400.0" prefWidth="226.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="137.0" AnchorPane.topAnchor="60.0">

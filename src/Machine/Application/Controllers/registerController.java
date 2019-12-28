@@ -3,13 +3,11 @@ package Machine.Application.Controllers;
 import Machine.AccountManager.HashPassword;
 
 import Machine.Application.Controllers.Model.DatabaseModel;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 import java.sql.SQLException;
@@ -96,7 +94,8 @@ public class registerController {
 						} else {
 							saveUserToFile(user, password, first, last, email);
 							clearFields(pass, confirmPass, firstName, lastName, username);
-							dialogeBox.returnToLogin("Welcome " + first, stackPane, stackPane);
+							dialogeBox.OkButton("Welcome " + first, new JFXDialog());
+							loadScene.loginPage();
 						}
 					} else {
 						dialogeBox.OkButton("Invalid Password", new JFXDialog());

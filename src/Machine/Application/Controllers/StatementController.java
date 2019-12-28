@@ -58,6 +58,7 @@ public class StatementController implements Initializable
 	@FXML
 	private Label dateLabel;
 
+
 	private DatabaseModel databaseModel;
 	private String username;
 	private DialogeBox dialogeBox;
