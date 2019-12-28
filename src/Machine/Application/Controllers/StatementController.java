@@ -101,7 +101,7 @@ public class StatementController implements Initializable
 				controller.init(username, databaseModel);
 				drawerPane.setSidePane(optionScene);
 
-				if (drawerPane.isShown()) {
+				if (drawerPane.isOpened()) {
 					drawerPane.close();
 					if(table.getOpacity() != 0) table.setOpacity(0.78);
 					menuButton.setText("Options");
