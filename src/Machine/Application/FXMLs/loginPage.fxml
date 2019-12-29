@@ -16,7 +16,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.loginController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.loginController">
    <children>
       <AnchorPane fx:id="rootPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -27,12 +27,12 @@
                         <Image url="@/Machine/images/stefanus-martanto-blue-mountains-orange-sky-ipad-wallpaper.jpg" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="192.0" layoutY="58.0" prefHeight="42.0" prefWidth="316.0" text="W E L C O M E " textFill="WHITE">
+                  <Label alignment="CENTER" fx:id="welcomeLabel" layoutX="192.0" layoutY="58.0" prefHeight="42.0" prefWidth="316.0" text="W E L C O M E " textFill="WHITE">
                      <font>
                         <Font name="Sitka Small" size="32.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="167.0" layoutY="144.0" prefHeight="42.0" prefWidth="367.0" text="B A N K  O F  ______" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="167.0" fx:id="bankTitle" layoutY="144.0" prefHeight="42.0" prefWidth="367.0" text="B A N K  O F  ______" textFill="WHITE">
                      <font>
                         <Font name="Sitka Small" size="33.0" />
                      </font>
@@ -94,7 +94,7 @@
                               </RadialGradient>
                            </focusColor>
                         </JFXPasswordField>
-                        <JFXButton fx:id="login" buttonType="RAISED" onAction="#loginButtonHandler"  onKeyReleased="#verifyMinLoginInput" prefHeight="41.0" prefWidth="302.0" text="LOGIN" textFill="WHITE" GridPane.rowIndex="2">
+                        <JFXButton fx:id="login" buttonType="RAISED" onAction="#loginButtonHandler" onKeyReleased="#verifyMinLoginInput" prefHeight="41.0" prefWidth="302.0" text="LOGIN" textFill="WHITE" GridPane.rowIndex="2">
                            <font>
                               <Font name="Papyrus" size="15.0" />
                            </font>
@@ -116,7 +116,7 @@
                         </JFXButton>
                      </children>
                   </GridPane>
-                  <JFXDrawer fx:id="drawerPane" defaultDrawerSize="480.0" direction="TOP" onDrawerClosing="#handleDragUp" layoutX="-1.0" layoutY="1.0" prefHeight="500.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="0.0" />
+                  <JFXDrawer fx:id="drawerPane" defaultDrawerSize="480.0" direction="TOP" layoutX="-1.0" layoutY="1.0" onDrawerClosing="#handleDragUp" prefHeight="500.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="0.0" />
                   <JFXButton fx:id="exit" alignment="TOP_RIGHT" layoutX="534.0" layoutY="23.0" onAction="#exit" prefHeight="58.0" prefWidth="49.0" ripplerFill="#f7c600" text="X" textFill="WHITE" AnchorPane.bottomAnchor="442.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="Papyrus" size="20.0" />
@@ -127,9 +127,9 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="exitResetPass" layoutX="350.0" layoutY="13.0" onAction="#resetPassword" prefHeight="32.0" prefWidth="120.0" styleClass="exitHome" stylesheets="@/Machine/Application/FXMLs/application.css" text="BACK TO LOGIN">
+                  <JFXButton fx:id="exitResetPass" buttonType="RAISED" layoutX="300.0" layoutY="13.0" onAction="#resetPassword" prefHeight="32.0" prefWidth="137.0" styleClass="exitHome" stylesheets="@/Machine/Application/FXMLs/application.css" text="BACK TO LOGIN">
                      <font>
-                        <Font name="Papyrus" size="10.0" />
+                        <Font name="Papyrus" size="11.0" />
                      </font>
                   </JFXButton>
                </children>

@@ -92,7 +92,7 @@ public class SendCodeController implements Initializable
 			usernameInput.setText("");
 			new DialogeBox(stackPane).drawerOkButton("Sent\n" + hiddenEmail, new JFXDialog());
 		} else{
-			new DialogeBox(stackPane).drawerOkButton("Email doesn't Exist", new JFXDialog());
+			new DialogeBox(stackPane).drawerOkButton("Email Not Registered", new JFXDialog());
 		}
 	}
 
@@ -119,11 +119,11 @@ public class SendCodeController implements Initializable
 	{
 		try {
 			email.run();
+			return true;
 		}catch (RuntimeException e){
 			new DialogeBox(stackPane).drawerOkButton("Not connected to Internet\n",new JFXDialog());
 			return false;
 		}
-		return true;
 	}
 
 	private boolean verifyEmailRegistered(String request) throws SQLException

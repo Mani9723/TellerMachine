@@ -51,7 +51,7 @@ public class loginController implements Initializable {
 	private JFXButton exit;
 
 	@FXML
-	private Label capsLockLabel;
+	private Label capsLockLabel, welcomeLabel, bankTitle;
 
 	private boolean isCapsOn = false;
 	private JFXDialog jfxDialog = new JFXDialog();
@@ -162,6 +162,8 @@ public class loginController implements Initializable {
 		makeNewPass.setDisable(disable);
 		username.setDisable(disable);
 		password.setDisable(disable);
+		welcomeLabel.setDisable(disable);
+		bankTitle.setDisable(disable);
 	}
 
 	private void loginProcess(ActionEvent event)
