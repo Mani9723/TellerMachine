@@ -108,6 +108,7 @@ public final class DatabaseModel
 				+ "	Email text NOT NULL,\n"
 				+ "	TempPassword text,\n"
 				+ "	ExpireTime text\n"
+				+ "	Admin text\n"
 				+ ")";
 		createPrepStmtExecute(query);
 		System.out.println("Table created Customer_Information");
