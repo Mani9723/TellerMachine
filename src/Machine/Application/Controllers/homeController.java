@@ -1,6 +1,7 @@
 package Machine.Application.Controllers;
 
 import Machine.Application.Controllers.Model.DatabaseModel;
+import Machine.Application.Controllers.Date;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +18,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class homeController implements Initializable
@@ -61,6 +61,8 @@ public class homeController implements Initializable
 
 	private DecimalFormat decimalFormat = new DecimalFormat("##.##");
 
+	private Date date;
+
 	private String uName,first;
 	private boolean isNumVisible;
 	private static DatabaseModel databaseModel;
@@ -71,10 +73,11 @@ public class homeController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		date = new Date();
 		Image image =new Image(getClass().getResourceAsStream("/Machine/images/user-2517433_960_7201.png"));
 		settingButton.setText("");
 		loadScene = new LoadScene();
-		dateTime.setText(getDate());
+		dateTime.setText(date.getDate());
 		accountType.setText("Checking");
 		ImageView imageView = new ImageView(image);
 		imageView.setPreserveRatio(false);
@@ -92,7 +95,7 @@ public class homeController implements Initializable
 		setMachineModel(machine);
 		try {
 			setFirstName(databaseModel.getAccountInfo(getuName(),"FirstName"));
-			greeting.setText(getAppropriateGreeting(getHour()) +", " + getFirst());
+			greeting.setText(getAppropriateGreeting(date.getHour()) +", " + getFirst());
 			String bal = databaseModel.getAccountInfo(getuName(),"CurrentBalance");
 			currBalance.setText("$"+decimalFormat.format(Double.parseDouble(bal)));
 		} catch (SQLException e) {
@@ -193,16 +196,17 @@ public class homeController implements Initializable
 
 	private String getDate()
 	{
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-		Date date = new Date();
-		return dateFormat.format(date);
+		return date.getDate();
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+//		Date date = new Date();
+//		return dateFormat.format(date);
 	}
-	private int getHour()
-	{
-		SimpleDateFormat hourformat = new SimpleDateFormat("HH");
-		Date date = new Date();
-		return Integer.parseInt(hourformat.format(date));
-	}
+//	private int getHour()
+//	{
+//		SimpleDateFormat hourformat = new SimpleDateFormat("HH");
+//		Date date = new Date();
+//		return Integer.parseInt(hourformat.format(date));
+//	}
 	private String getAppropriateGreeting(int hour)
 	{
 		if(hour>=0 && hour<12) return "Good Morning ";

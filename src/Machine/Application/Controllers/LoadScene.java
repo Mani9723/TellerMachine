@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import javax.xml.crypto.Data;
 import java.io.IOException;
 
 /**
@@ -25,6 +27,7 @@ class LoadScene
 	private StackPane stackPaneCurr, stackPaneGoal;
 	private ActionEvent actionEvent;
 	private KeyEvent keyEvent;
+	private final String adminFxml = "/Machine/Application/FXMLs/AdminPage.fxml";
 	private final String loginFxml = "/Machine/Application/FXMLs/loginPage.fxml";
 	private final String homeFxml = "/Machine/Application/FXMLs/homePage.fxml";
 	private final String depositFxml = "/Machine/Application/FXMLs/depositPage.fxml";
@@ -69,6 +72,46 @@ class LoadScene
 	void setKeyEvent(KeyEvent keyEvent)
 	{
 		this.keyEvent = keyEvent;
+	}
+
+	void adminSceneKeyEvent(DatabaseModel databaseModel)
+	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(adminFxml));
+		Parent loginParent = null;
+		try {
+			loginParent = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Scene currScene = new Scene(loginParent);
+		AdministratorController controller = loader.getController();
+		//controller.setUsername(username.getText());
+		controller.init(databaseModel);
+		Stage homeWindow = (Stage)((Node)keyEvent.getSource()).getScene().getWindow();
+		allowDragableScene(loginParent,homeWindow);
+		homeWindow.setScene(currScene);
+		homeWindow.show();
+	}
+
+	void adminSceneActionEvent(DatabaseModel databaseModel)
+	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(adminFxml));
+		Parent loginParent = null;
+		try {
+			loginParent = loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Scene currScene = new Scene(loginParent);
+		AdministratorController controller = loader.getController();
+		//controller.setUsername(username.getText());
+		controller.init(databaseModel);
+		Stage homeWindow = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+		allowDragableScene(loginParent,homeWindow);
+		homeWindow.setScene(currScene);
+		homeWindow.show();
 	}
 
 	void homeScene(JFXTextField username, DatabaseModel databaseModel)

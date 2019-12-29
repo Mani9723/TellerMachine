@@ -96,7 +96,12 @@ public class loginController implements Initializable {
 			if (databaseModel.isFirstTimeRunning()) {
 				showFirstTimeUsingDialog();
 			} else if (processCredentials()) {
-				loadHomePage(null,event);
+				if(username.getText().equalsIgnoreCase("admin")){
+					loadScene.setKeyEvent(event);
+					loadScene.adminSceneKeyEvent(databaseModel);
+				}else {
+					loadHomePage(null, event);
+				}
 			} else {
 				handleIncorrectCredentials();
 			}
@@ -171,7 +176,11 @@ public class loginController implements Initializable {
 		if(databaseModel.isFirstTimeRunning()){
 			showFirstTimeUsingDialog();
 		} else if(processCredentials()){
-			loadHomePage(event,null);
+			if(username.getText().equalsIgnoreCase("admin")) {
+				loadScene.setActionEvent(event);
+				loadScene.adminSceneActionEvent(databaseModel);
+			} else
+				loadHomePage(event,null);
 		} else{
 			handleIncorrectCredentials();
 		}
@@ -209,7 +218,7 @@ public class loginController implements Initializable {
 		hashPassword.setHashPassword(password.getText());
 		String securePass = hashPassword.toString();
 		try {
-			return databaseModel.validateLogin(username.getText(),securePass);
+			return databaseModel.validateLogin(username.getText(), securePass);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
