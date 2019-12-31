@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
@@ -245,7 +246,7 @@ public class loginController implements Initializable {
 			StackPane resetPane = FXMLLoader.load(getClass().getResource(scenePath));
 			drawerPane.setSidePane(resetPane);
 
-			if (drawerPane.isOpened() && event.getSource().equals(exitResetPass)) {
+			if ((drawerPane.isOpened() && event.getSource().equals(exitResetPass)) || drawerPane.isClosing()) {
 				drawerPane.close();
 				exitResetPass.setDisable(true);
 				exitResetPass.setVisible(false);
@@ -261,8 +262,9 @@ public class loginController implements Initializable {
 	}
 
 	@FXML
-	public void handleDragUp(DragEvent event)
+	public void handleDragUp(MouseDragEvent event)
 	{
-		System.out.println("Dragup hit");
+		if(event.isDragDetect())
+			System.out.println("Dragup hit");
 	}
 }

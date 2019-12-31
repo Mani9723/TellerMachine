@@ -453,6 +453,7 @@ public final class DatabaseModel
 		}
 	}
 
+	@SuppressWarnings("SqlResolve")
 	public void insertToStatementDB(String table, String type, String amount, String prevBal, String newBal) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
@@ -476,9 +477,9 @@ public final class DatabaseModel
 
 	}
 
-	public PdfDocument saveStatementToPdf(String username, File file,String currBalance) throws SQLException, FileNotFoundException
+	public void saveStatementToPdf(String username, File file,String currBalance) throws SQLException, FileNotFoundException
 	{
-		String date, type, amount, prevBal,  currBal = "";
+		String date, type, amount, prevBal,  currBal;
 		String query = "SELECT * FROM " + username;
 		PreparedStatement preparedStatement;
 		ResultSet resultSet;
@@ -536,7 +537,6 @@ public final class DatabaseModel
 		document.close();
 		preparedStatement.close();
 		resultSet.close();
-		return document.getPdfDocument();
 	}
 
 	private String getDate(boolean time)

@@ -2,6 +2,7 @@ package Machine.Application.Controllers;
 
 import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTabPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,9 @@ import java.io.IOException;
 
 public class AdministratorController
 {
+
+	@FXML
+	private JFXTabPane tabPane;
 
 	@FXML
 	private JFXButton logoutButton;
@@ -31,6 +35,9 @@ public class AdministratorController
 	public void init(DatabaseModel model)
 	{
 		databaseModel = model;
+
+		tabPane = new JFXTabPane();
+
 	}
 
 	@FXML
@@ -45,4 +52,6 @@ public class AdministratorController
 			}
 		}
 	}
+
+
 }

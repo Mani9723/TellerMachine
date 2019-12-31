@@ -8,7 +8,9 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.*;
 
 import java.net.URL;
@@ -129,8 +131,15 @@ public class ChangePassController implements Initializable
 	}
 	public void KeyReleased(KeyEvent keyEvent)
 	{
-		if(confNewPass.getText().length() == newPass.getText().length())
-			changeButton.setOpacity(0.9);
-		changeButton.setDisable(false);
+		if(keyEvent.getCode().equals(KeyCode.ENTER)) {
+			if (confNewPass.getText().length() == newPass.getText().length())
+				changeButton.setOpacity(0.9);
+			changeButton.setDisable(false);
+		}
+	}
+
+	public void handleDragReleased(MouseDragEvent mouseDragEvent)
+	{
+		System.out.println("Drag detected");
 	}
 }

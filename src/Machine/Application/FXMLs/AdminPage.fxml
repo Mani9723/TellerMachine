@@ -22,7 +22,7 @@
       </ImageView>
       <AnchorPane fx:id="anchorPane" prefHeight="500.0" prefWidth="700.0">
          <children>
-            <HBox layoutY="14.0" prefHeight="62.0" prefWidth="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox layoutY="14.0" prefHeight="62.0" prefWidth="700.0" AnchorPane.bottomAnchor="438.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <GridPane prefHeight="62.0" prefWidth="810.0">
                     <columnConstraints>

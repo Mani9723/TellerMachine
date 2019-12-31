@@ -16,209 +16,209 @@
 <?import javafx.scene.text.Font?>
 
 <StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.SettingsController">
-   <children>
-      <ImageView fitHeight="503.0" fitWidth="701.0" opacity="0.68" pickOnBounds="true">
-         <image>
-            <Image url="@/Machine/images/1_GcWFaQkg_WLPm9Jki215kg.jpeg" />
-         </image>
-      </ImageView>
-      <AnchorPane fx:id="anchor">
-         <children>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <bottom>
-                  <JFXButton fx:id="confirmButton" onAction="#handlePassChange" prefHeight="20.0" prefWidth="197.0" styleClass="seven" stylesheets="@application.css" text="Confirm Changes" textFill="WHITE" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="Papyrus" size="17.0" />
-                     </font>
-                     <BorderPane.margin>
-                        <Insets bottom="20.0" top="20.0" />
-                     </BorderPane.margin>
-                  </JFXButton>
-               </bottom>
-               <center>
-                  <GridPane BorderPane.alignment="CENTER">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.0" minWidth="10.0" prefWidth="321.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="411.0" minWidth="10.0" prefWidth="379.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label fx:id="firstname" prefHeight="46.0" prefWidth="257.0" textFill="WHITE">
-                           <GridPane.margin>
-                              <Insets left="100.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Papyrus" size="23.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lastName" prefHeight="46.0" prefWidth="380.0" textFill="WHITE" GridPane.columnIndex="1">
-                           <GridPane.margin>
-                              <Insets left="80.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Papyrus" size="23.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="username" prefHeight="46.0" prefWidth="249.0" textFill="WHITE" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets left="110.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Papyrus" size="23.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="email" prefHeight="46.0" prefWidth="382.0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets left="50.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Papyrus" size="20.0" />
-                           </font>
-                        </Label>
-                        <JFXPasswordField fx:id="currPass" alignment="CENTER" prefHeight="43.0" prefWidth="310.0" promptText="CURRENT PASSWORD" unFocusColor="WHITE" GridPane.rowIndex="2">
-<!--                           <opaqueInsets>-->
-<!--                              <Insets />-->
-<!--                           </opaqueInsets>-->
-                           <GridPane.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Papyrus" size="13.0" />
-                           </font>
-                        </JFXPasswordField>
-                        <Label prefHeight="35.0" prefWidth="81.0" text="Firstname:" textFill="WHITE">
-                           <font>
-                              <Font name="Papyrus" size="17.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="20.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label prefHeight="35.0" prefWidth="83.0" text="Lastname:" textFill="WHITE" GridPane.columnIndex="1">
-                           <font>
-                              <Font name="Papyrus" size="17.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets />
-                           </GridPane.margin>
-                        </Label>
-                        <Label prefHeight="35.0" prefWidth="71.0" text="Email:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="Papyrus" size="17.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets />
-                           </GridPane.margin>
-                        </Label>
-                        <Label text="Username:" textFill="WHITE" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="Papyrus" size="17.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="20.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <JFXButton fx:id="delAccount" onAction="#handleDelButton" prefHeight="47.0" prefWidth="167.0" styleClass="other" stylesheets="@application.css" text="Delete Account" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <GridPane.margin>
-                              <Insets left="110.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Papyrus" size="17.0" />
-                           </font>
+    <children>
+        <ImageView fitHeight="503.0" fitWidth="701.0" opacity="0.68" pickOnBounds="true">
+            <image>
+                <Image url="@/Machine/images/1_GcWFaQkg_WLPm9Jki215kg.jpeg" />
+            </image>
+        </ImageView>
+        <AnchorPane fx:id="anchor">
+            <children>
+                <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <bottom>
+                        <JFXButton fx:id="confirmButton" onAction="#handlePassChange" prefHeight="20.0" prefWidth="197.0" styleClass="seven" stylesheets="@application.css" text="Confirm Changes" textFill="WHITE" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font name="Papyrus" size="17.0" />
+                            </font>
+                            <BorderPane.margin>
+                                <Insets bottom="20.0" top="20.0" />
+                            </BorderPane.margin>
                         </JFXButton>
-                        <JFXButton fx:id="confDel" onAction="#confirmDelButton" styleClass="seven" stylesheets="@application.css" text="CONFIRM" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <GridPane.margin>
-                              <Insets left="100.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Papyrus" size="12.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="cancel" onAction="#cancelDelButton" styleClass="clear" stylesheets="@application.css" text="CANCEL" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <GridPane.margin>
-                              <Insets left="210.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Papyrus" size="12.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXPasswordField fx:id="newPass" alignment="CENTER" promptText="NEW PASSWORD" unFocusColor="WHITE" GridPane.rowIndex="3">
-                           <font>
-                              <Font name="Papyrus" size="13.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </GridPane.margin>
-                        </JFXPasswordField>
-                        <JFXPasswordField fx:id="confnewPass" alignment="CENTER" promptText="CONFIRM PASSWORD" onKeyPressed="#handleButtonEnable" unFocusColor="WHITE" GridPane.rowIndex="4">
-                           <font>
-                              <Font name="Papyrus" size="13.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="20.0" right="20.0" />
-                           </GridPane.margin>
-                        </JFXPasswordField>
-                        <JFXPasswordField fx:id="reenterPassword" alignment="CENTER" prefHeight="25.0" prefWidth="328.0" promptText="ENTER PASSWORD" unFocusColor="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets left="40.0" right="40.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Papyrus" size="13.0" />
-                           </font>
-                        </JFXPasswordField>
-                     </children>
-                  </GridPane>
-               </center>
-               <top>
-                  <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <AnchorPane prefHeight="100.0" prefWidth="720.0">
-                           <children>
-                              <GridPane layoutX="250.0" layoutY="5.0" prefHeight="90.0" prefWidth="448.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="483.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="345.0" minWidth="10.0" prefWidth="217.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label fx:id="date" alignment="CENTER" prefHeight="103.0" prefWidth="217.0" GridPane.columnIndex="1">
-                                       <font>
-                                          <Font name="Papyrus" size="17.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="100.0" prefWidth="302.0" text="SETTINGS" textFill="WHITE">
-                                       <GridPane.margin>
-                                          <Insets left="200.0" />
-                                       </GridPane.margin>
-                                       <font>
-                                          <Font name="Papyrus" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <JFXButton fx:id="menuButton" onAction="#loadHomeScene" styleClass="quickCash" stylesheets="@application.css" text="MENU" textFill="BLACK">
-                                       <GridPane.margin>
-                                          <Insets left="30.0" />
-                                       </GridPane.margin>
-                                       <font>
-                                          <Font name="Papyrus" size="12.0" />
-                                       </font>
-                                    </JFXButton>
-                                 </children>
-                              </GridPane>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </HBox>
-               </top>
-            </BorderPane>
-         </children>
-      </AnchorPane>
-   </children>
+                    </bottom>
+                    <center>
+                        <GridPane BorderPane.alignment="CENTER">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.0" minWidth="10.0" prefWidth="321.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="411.0" minWidth="10.0" prefWidth="379.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Label fx:id="firstname" prefHeight="46.0" prefWidth="257.0" textFill="WHITE">
+                                    <GridPane.margin>
+                                        <Insets left="100.0" />
+                                    </GridPane.margin>
+                                    <font>
+                                        <Font name="Papyrus" size="23.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lastName" prefHeight="46.0" prefWidth="380.0" textFill="WHITE" GridPane.columnIndex="1">
+                                    <GridPane.margin>
+                                        <Insets left="80.0" />
+                                    </GridPane.margin>
+                                    <font>
+                                        <Font name="Papyrus" size="23.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="username" prefHeight="46.0" prefWidth="249.0" textFill="WHITE" GridPane.rowIndex="1">
+                                    <GridPane.margin>
+                                        <Insets left="110.0" />
+                                    </GridPane.margin>
+                                    <font>
+                                        <Font name="Papyrus" size="23.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="email" prefHeight="46.0" prefWidth="382.0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <GridPane.margin>
+                                        <Insets left="50.0" />
+                                    </GridPane.margin>
+                                    <font>
+                                        <Font name="Papyrus" size="20.0" />
+                                    </font>
+                                </Label>
+                                <JFXPasswordField fx:id="currPass" alignment="CENTER" prefHeight="43.0" prefWidth="310.0" promptText="CURRENT PASSWORD" unFocusColor="WHITE" GridPane.rowIndex="2">
+                                    <!--                           <opaqueInsets>-->
+                                    <!--                              <Insets />-->
+                                    <!--                           </opaqueInsets>-->
+                                    <GridPane.margin>
+                                        <Insets left="20.0" right="20.0" />
+                                    </GridPane.margin>
+                                    <font>
+                                        <Font name="Papyrus" size="13.0" />
+                                    </font>
+                                </JFXPasswordField>
+                                <JFXPasswordField fx:id="newPass" alignment="CENTER" promptText="NEW PASSWORD" unFocusColor="WHITE" GridPane.rowIndex="3">
+                                    <font>
+                                        <Font name="Papyrus" size="13.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="20.0" right="20.0" />
+                                    </GridPane.margin>
+                                </JFXPasswordField>
+                                <JFXPasswordField fx:id="confnewPass" alignment="CENTER" promptText="CONFIRM PASSWORD" onKeyPressed="#handleButtonEnable" unFocusColor="WHITE" GridPane.rowIndex="4">
+                                    <font>
+                                        <Font name="Papyrus" size="13.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="20.0" right="20.0" />
+                                    </GridPane.margin>
+                                </JFXPasswordField>
+                                <Label prefHeight="35.0" prefWidth="81.0" text="Firstname:" textFill="WHITE">
+                                    <font>
+                                        <Font name="Papyrus" size="17.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin>
+                                </Label>
+                                <Label prefHeight="35.0" prefWidth="83.0" text="Lastname:" textFill="WHITE" GridPane.columnIndex="1">
+                                    <font>
+                                        <Font name="Papyrus" size="17.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets />
+                                    </GridPane.margin>
+                                </Label>
+                                <Label prefHeight="35.0" prefWidth="71.0" text="Email:" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <font>
+                                        <Font name="Papyrus" size="17.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets />
+                                    </GridPane.margin>
+                                </Label>
+                                <Label text="Username:" textFill="WHITE" GridPane.rowIndex="1">
+                                    <font>
+                                        <Font name="Papyrus" size="17.0" />
+                                    </font>
+                                    <GridPane.margin>
+                                        <Insets left="20.0" />
+                                    </GridPane.margin>
+                                </Label>
+                                <JFXButton fx:id="delAccount" onAction="#handleDelButton" prefHeight="47.0" prefWidth="167.0" styleClass="other" stylesheets="@application.css" text="Delete Account" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <GridPane.margin>
+                                        <Insets left="110.0" />
+                                    </GridPane.margin>
+                                    <font>
+                                        <Font name="Papyrus" size="17.0" />
+                                    </font>
+                                </JFXButton>
+                                <JFXButton fx:id="confDel" onAction="#confirmDelButton" styleClass="seven" stylesheets="@application.css" text="CONFIRM" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <GridPane.margin>
+                                        <Insets left="100.0" />
+                                    </GridPane.margin>
+                                    <font>
+                                        <Font name="Papyrus" size="12.0" />
+                                    </font>
+                                </JFXButton>
+                                <JFXButton fx:id="cancel" onAction="#cancelDelButton" styleClass="clear" stylesheets="@application.css" text="CANCEL" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <GridPane.margin>
+                                        <Insets left="210.0" />
+                                    </GridPane.margin>
+                                    <font>
+                                        <Font name="Papyrus" size="12.0" />
+                                    </font>
+                                </JFXButton>
+                                <JFXPasswordField fx:id="reenterPassword" alignment="CENTER" prefHeight="25.0" prefWidth="328.0" promptText="ENTER PASSWORD" unFocusColor="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <GridPane.margin>
+                                        <Insets left="40.0" right="40.0" />
+                                    </GridPane.margin>
+                                    <font>
+                                        <Font name="Papyrus" size="13.0" />
+                                    </font>
+                                </JFXPasswordField>
+                            </children>
+                        </GridPane>
+                    </center>
+                    <top>
+                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane prefHeight="100.0" prefWidth="720.0">
+                                    <children>
+                                        <GridPane layoutX="250.0" layoutY="5.0" prefHeight="90.0" prefWidth="448.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="483.0" minWidth="10.0" prefWidth="483.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="345.0" minWidth="10.0" prefWidth="217.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <Label fx:id="date" alignment="CENTER" prefHeight="103.0" prefWidth="217.0" GridPane.columnIndex="1">
+                                                    <font>
+                                                        <Font name="Papyrus" size="17.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label alignment="CENTER" prefHeight="100.0" prefWidth="302.0" text="SETTINGS" textFill="WHITE">
+                                                    <GridPane.margin>
+                                                        <Insets left="200.0" />
+                                                    </GridPane.margin>
+                                                    <font>
+                                                        <Font name="Papyrus" size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <JFXButton fx:id="menuButton" onAction="#loadHomeScene" styleClass="quickCash" stylesheets="@application.css" text="MENU" textFill="BLACK">
+                                                    <GridPane.margin>
+                                                        <Insets left="30.0" />
+                                                    </GridPane.margin>
+                                                    <font>
+                                                        <Font name="Papyrus" size="12.0" />
+                                                    </font>
+                                                </JFXButton>
+                                            </children>
+                                        </GridPane>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </HBox>
+                    </top>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+    </children>
 </StackPane>
