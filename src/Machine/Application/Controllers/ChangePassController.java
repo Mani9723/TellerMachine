@@ -67,26 +67,32 @@ public class ChangePassController implements Initializable
 		String conf = confNewPass.getText();
 		if(password.equals(conf)) {
 			try {
-				if(validPassword(password)){
-					if(isWithinTimeLimit(user)) {
-						if(validateTempPassword(temp,user)) {
-							hashPassword.setHashPassword(conf);
-							databaseModel.updateNewPassword(user, hashPassword.toString());
-							clearAllFields();
-							setDialogMessageAndShow("Success\nPassword Changed");
-							databaseModel.unlockAccount(user);
-						}else{
-							dialogeBox.drawerOkButton("Invalid Code", new JFXDialog());
+				if (databaseModel.isUsernameTaken(user)) {
+					if (validPassword(password)) {
+						if (isWithinTimeLimit(user)) {
+							if (validateTempPassword(temp, user)) {
+								hashPassword.setHashPassword(conf);
+								databaseModel.updateNewPassword(user, hashPassword.toString());
+								clearAllFields();
+								setDialogMessageAndShow("Success\nPassword Changed");
+								databaseModel.unlockAccount(user);
+							} else {
+								dialogeBox.drawerOkButton("Invalid Code", new JFXDialog());
+								tempPass.setText("");
+							}
+						} else {
+							dialogeBox.drawerOkButton("Code Expired", new JFXDialog());
+							tempPass.setText("");
 						}
-					}else{
-						dialogeBox.drawerOkButton("Code Expired", new JFXDialog());
+					} else {
+						setDialogMessageAndShow("Password >= 8 Chars");
+						newPass.setText("");
+						confNewPass.setText("");
 					}
-				}else {
-					setDialogMessageAndShow("Password >= 8 Chars");
-					newPass.setText("");
-					confNewPass.setText("");
+				}else{
+					dialogeBox.drawerOkButton("Invalid Username", new JFXDialog());
+					username.setText("");
 				}
-
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -110,32 +116,21 @@ public class ChangePassController implements Initializable
 	private boolean validateTempPassword(String userTempPass, String user) throws SQLException
 	{
 		String tempPassFromDB;
-		if (databaseModel.isUsernameTaken(user)) {
-			tempPassFromDB = databaseModel.getAccountInfo(user, "TempPassword");
-			if (!tempPassFromDB.equals(userTempPass)) {
-				return false;
-			}else{
-				return true;
-			}
-		}else {
-			dialogeBox.drawerOkButton("Invalid Username", new JFXDialog());
-			return false;
-		}
+		tempPassFromDB = databaseModel.getAccountInfo(user, "TempPassword");
+		return tempPassFromDB.equals(userTempPass);
 	}
 
 	private boolean isWithinTimeLimit(String user) throws SQLException
 	{
 		long currTime = System.currentTimeMillis();
-		long oldTime = 0;
+		long oldTime;
 		if (databaseModel.isUsernameTaken(user)) {
 			try {
 				oldTime = Long.parseLong(databaseModel.getAccountInfo(user, "ExpireTime"));
 			} catch (NumberFormatException e) {
 				return false;
 			}
-			if (currTime - oldTime > FIFTEEN_MIN) {
-				return false;
-			}
+			return currTime - oldTime <= FIFTEEN_MIN;
 		}
 		return true;
 	}
