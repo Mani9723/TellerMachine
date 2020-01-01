@@ -34,7 +34,7 @@ import java.util.Random;
  * @version 1.0
  * @since 7/28/2018  15:41
  */
-@SuppressWarnings({"ConstantConditions", "TryFinallyCanBeTryWithResources"})
+@SuppressWarnings({"ConstantConditions"})
 public final class DatabaseModel
 {
 
@@ -171,8 +171,10 @@ public final class DatabaseModel
 			if (connection != null) preparedStatement = connection.prepareStatement(query);
 			if (preparedStatement != null) resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				observableList.add(new StatementData(resultSet.getString("Date"), resultSet.getString("Type"),
-						"$"+resultSet.getString("Amount"), "$"+resultSet.getString("PreviousBalance"),
+				observableList.add(new StatementData(resultSet.getString("Date"),
+						resultSet.getString("Type"),
+						"$"+resultSet.getString("Amount"), "$"+
+						resultSet.getString("PreviousBalance"),
 						"$"+resultSet.getString("CurrentBalance")));
 			}
 			return observableList;
