@@ -73,6 +73,7 @@ public class ChangePassController implements Initializable
 						databaseModel.updateNewPassword(user, hashPassword.toString());
 						clearAllFields();
 						setDialogMessageAndShow("Success\nPassword Changed");
+						databaseModel.unlockAccount(user);
 					}else{
 						setDialogMessageAndShow("Password Doesn't Match");
 						newPass.setText("");

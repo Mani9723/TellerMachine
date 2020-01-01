@@ -54,6 +54,7 @@ public class loginController implements Initializable {
 	@FXML
 	private Label capsLockLabel, welcomeLabel, bankTitle;
 
+	private static final int MAX_LOGIN_ATTEMPT = 3;
 	private boolean isCapsOn = false;
 	private JFXDialog jfxDialog = new JFXDialog();
 	private static DatabaseModel databaseModel;
@@ -88,7 +89,7 @@ public class loginController implements Initializable {
 		if (event.getCode().equals(KeyCode.CAPS)) {
 			switchCapsLockLabel();
 		}if(event.getCode().equals(KeyCode.ENTER))
-			EnterKey(event);
+		EnterKey(event);
 	}
 
 	private void EnterKey(KeyEvent event) {
@@ -96,15 +97,21 @@ public class loginController implements Initializable {
 //			try {
 			if (databaseModel.isFirstTimeRunning()) {
 				showFirstTimeUsingDialog();
-			} else if (processCredentials()) {
-				if(username.getText().equalsIgnoreCase("admin")){
-					loadScene.setKeyEvent(event);
-					loadScene.adminSceneKeyEvent(databaseModel);
+			} else if(attemptsRemaining()) {
+				if (processCredentials() && !databaseModel.accountLocked(username.getText())) {
+					if (username.getText().equalsIgnoreCase("admin")) {
+						loadScene.setKeyEvent(event);
+						loadScene.adminSceneActionEvent(databaseModel);
+					} else
+						loadHomePage(null, event);
 				}else {
-					loadHomePage(null, event);
+					handleIncorrectCredentials();
 				}
-			} else {
-				handleIncorrectCredentials();
+			}else{
+				dialogeBox.OkButton("Account Locked. Reset Password",jfxDialog);
+				username.setText("");
+				password.setText("");
+				login.setDisable(true);
 			}
 //			} catch (SQLException e) {
 //				e.printStackTrace();
@@ -176,16 +183,24 @@ public class loginController implements Initializable {
 	{
 		if(databaseModel.isFirstTimeRunning()){
 			showFirstTimeUsingDialog();
-		} else if(processCredentials()){
-			if(username.getText().equalsIgnoreCase("admin")) {
-				loadScene.setActionEvent(event);
-				loadScene.adminSceneActionEvent(databaseModel);
-			} else
-				loadHomePage(event,null);
-		} else{
-			handleIncorrectCredentials();
+		} else if(attemptsRemaining()) {
+			if (processCredentials() && !databaseModel.accountLocked(username.getText())) {
+				if (username.getText().equalsIgnoreCase("admin")) {
+					loadScene.setActionEvent(event);
+					loadScene.adminSceneActionEvent(databaseModel);
+				} else
+					loadHomePage(event, null);
+			}else {
+				handleIncorrectCredentials();
+			}
+		}else{
+			dialogeBox.OkButton("Account Locked. Reset Password",jfxDialog);
+			username.setText("");
+			password.setText("");
+			login.setDisable(true);
 		}
 	}
+
 
 	private void switchCapsLockLabel()
 	{
@@ -200,10 +215,43 @@ public class loginController implements Initializable {
 
 	private void handleIncorrectCredentials() {
 		jfxDialog.requestFocus();
+		try {
+			databaseModel.updateAttempts(username.getText());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(!attemptsRemaining()) {
+			try {
+				lockThisAccount();
+				username.setText("");
+				password.setText("");
+				login.setDisable(true);
+				return;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		dialogeBox.OkButton("Incorrect Credentials", jfxDialog);
 		username.setText("");
 		password.setText("");
 		login.setDisable(true);
+	}
+
+	private void lockThisAccount() throws SQLException
+	{
+		dialogeBox.OkButton("Account Locked. Reset Password",jfxDialog);
+		databaseModel.lockAccount(username.getText());
+
+	}
+
+	private boolean attemptsRemaining()
+	{
+		try {
+			return databaseModel.getLoginAttempts(username.getText()) < MAX_LOGIN_ATTEMPT;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	private void showFirstTimeUsingDialog()

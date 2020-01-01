@@ -151,6 +151,7 @@ public class SendCodeController implements Initializable
 		HashPassword hashPassword = new HashPassword();
 		hashPassword.setHashPassword(generateRandomWord());
 		secureTempPass = hashPassword.toString().substring(0,9);
+		System.out.println(secureTempPass);
 		email = new Email(secureTempPass);
 		try {
 			setActualEmail(databaseModel.getAccountInfo(usernameInput.getText(), "email"));

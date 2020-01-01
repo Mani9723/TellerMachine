@@ -109,6 +109,8 @@ public final class DatabaseModel
 				+ "	TempPassword text,\n"
 				+ "	ExpireTime text\n"
 				+ "	Admin text\n"
+				+ "	LoginAttempts text\n"
+				+ "	AccountLocked text\n"
 				+ ")";
 		createPrepStmtExecute(query);
 		System.out.println("Table created Customer_Information");
@@ -381,8 +383,8 @@ public final class DatabaseModel
 	{
 		PreparedStatement preparedStatement = null;
 
-		String query = "INSERT into Customer_Information(username,password,firstname,lastname,currentbalance,datecreated,email,AccountNumber)" +
-				"VALUES(?,?,?,?,?,?,?,?)";
+		String query = "INSERT into Customer_Information(username,password,firstname,lastname,currentbalance,datecreated,email,AccountNumber,LoginAttempts,AccountLocked)" +
+				"VALUES(?,?,?,?,?,?,?,?,?,?)";
 
 		try{
 			preparedStatement = connection.prepareStatement(query);
@@ -394,6 +396,8 @@ public final class DatabaseModel
 			preparedStatement.setString(6,getDate(true));
 			preparedStatement.setString(7,values[4]);
 			preparedStatement.setString(8,generateAccountNumber());
+			preparedStatement.setString(9,"0");
+			preparedStatement.setString(10,"false");
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -411,6 +415,98 @@ public final class DatabaseModel
 		int num = minimum + rand.nextInt((maximum - minimum) + 1);
 		accNum += Integer.toString(num);
 		return accNum;
+	}
+
+	public void lockAccount(String user) throws SQLException
+	{
+		PreparedStatement preparedStatement = null;
+
+		String query = "UPDATE Customer_Information set AccountLocked = ? where Username = ?";
+
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,"true");
+			preparedStatement.setString(2,user);
+			preparedStatement.executeUpdate();
+		}catch (SQLException e){
+			e.printStackTrace();
+		}finally {
+			assert preparedStatement != null;
+			preparedStatement.close();
+		}
+	}
+
+	public void updateAttempts(String user) throws SQLException
+	{
+		int attempts = getLoginAttempts(user);
+		PreparedStatement preparedStatement = null;
+		String query = "UPDATE Customer_Information set LoginAttempts = ? where Username = ?";
+
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,Integer.toString(++attempts));
+			preparedStatement.setString(2,user);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			assert preparedStatement != null;
+			preparedStatement.close();
+		}
+
+	}
+
+	public int getLoginAttempts(String user) throws SQLException
+	{
+		return Integer.parseInt(getAccountInfo(user,"LoginAttempts"));
+	}
+
+	public boolean accountLocked(String user)
+	{
+		boolean isAccLocked = false;
+		try {
+			isAccLocked = Boolean.parseBoolean(getAccountInfo(user,"AccountLocked"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return isAccLocked;
+	}
+
+	public void unlockAccount(String user) throws SQLException
+	{
+		resetLoginAttempts(user);
+		PreparedStatement preparedStatement = null;
+		String query = "UPDATE Customer_Information set AccountLocked = ? where Username = ?";
+
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,"false");
+			preparedStatement.setString(2,user);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			assert preparedStatement != null;
+			preparedStatement.close();
+		}
+	}
+
+	public void resetLoginAttempts(String user) throws SQLException
+	{
+		PreparedStatement preparedStatement = null;
+		String query = "UPDATE Customer_Information set LoginAttempts = ? where Username = ?";
+
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,"0");
+			preparedStatement.setString(2,user);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			assert preparedStatement != null;
+			preparedStatement.close();
+		}
 	}
 
 
