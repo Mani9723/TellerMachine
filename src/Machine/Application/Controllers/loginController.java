@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseDragEvent;
@@ -86,36 +85,42 @@ public class loginController implements Initializable {
 			login.setDisable(false);
 		if (password.getText().length() < 3 || username.getText().length() < 3)
 			login.setDisable(true);
-		if (event.getCode().equals(KeyCode.CAPS)) {
+		if (event.getCode().equals(KeyCode.CAPS))
 			switchCapsLockLabel();
-		}if(event.getCode().equals(KeyCode.ENTER))
-		EnterKey(event);
+		if(event.getCode().equals(KeyCode.ENTER)) {
+			try {
+				EnterKey(event);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
-	private void EnterKey(KeyEvent event) {
+	private void EnterKey(KeyEvent event) throws SQLException{
 		if (event.getCode().equals(KeyCode.ENTER)) {
-//			try {
 			if (databaseModel.isFirstTimeRunning()) {
 				showFirstTimeUsingDialog();
-			} else if(attemptsRemaining()) {
-				if (processCredentials() && !databaseModel.accountLocked(username.getText())) {
-					if (username.getText().equalsIgnoreCase("admin")) {
-						loadScene.setKeyEvent(event);
-						loadScene.adminSceneActionEvent(databaseModel);
-					} else
-						loadHomePage(null, event);
-				}else {
-					handleIncorrectCredentials();
+			} else if(databaseModel.usernameExists(username.getText())){
+				if(attemptsRemaining()) {
+					if (processCredentials() && !databaseModel.accountLocked(username.getText())) {
+						if (username.getText().equalsIgnoreCase("admin")) {
+							loadScene.setKeyEvent(event);
+							loadScene.adminSceneActionEvent(databaseModel);
+						} else
+							loadHomePage(null, event);
+					} else {
+						handleIncorrectCredentials();
+					}
+				}
+				else{
+					dialogeBox.OkButton("Account Locked. Reset Password",jfxDialog);
+					username.setText("");
+					password.setText("");
+					login.setDisable(true);
 				}
 			}else{
-				dialogeBox.OkButton("Account Locked. Reset Password",jfxDialog);
-				username.setText("");
-				password.setText("");
-				login.setDisable(true);
+				dialogeBox.OkButton("Incorrent Credentials", jfxDialog);
 			}
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
 		}
 	}
 
@@ -149,7 +154,11 @@ public class loginController implements Initializable {
 	void loginButtonHandler(ActionEvent event)
 	{
 		if(event.getSource().equals(login)){
-			loginProcess(event);
+			try {
+				loginProcess(event);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -179,25 +188,29 @@ public class loginController implements Initializable {
 		bankTitle.setDisable(disable);
 	}
 
-	private void loginProcess(ActionEvent event)
+	private void loginProcess(ActionEvent event) throws SQLException
 	{
 		if(databaseModel.isFirstTimeRunning()){
 			showFirstTimeUsingDialog();
-		} else if(attemptsRemaining()) {
-			if (processCredentials() && !databaseModel.accountLocked(username.getText())) {
-				if (username.getText().equalsIgnoreCase("admin")) {
-					loadScene.setActionEvent(event);
-					loadScene.adminSceneActionEvent(databaseModel);
-				} else
-					loadHomePage(event, null);
-			}else {
-				handleIncorrectCredentials();
+		} else if(databaseModel.usernameExists(username.getText())){
+			if(attemptsRemaining()) {
+				if (processCredentials() && !databaseModel.accountLocked(username.getText())) {
+					if (username.getText().equalsIgnoreCase("admin")) {
+						loadScene.setActionEvent(event);
+						loadScene.adminSceneActionEvent(databaseModel);
+					} else
+						loadHomePage(event, null);
+				} else {
+					handleIncorrectCredentials();
+				}
+			}else{
+				dialogeBox.OkButton("Account Locked. Reset Password",jfxDialog);
+				username.setText("");
+				password.setText("");
+				login.setDisable(true);
 			}
 		}else{
-			dialogeBox.OkButton("Account Locked. Reset Password",jfxDialog);
-			username.setText("");
-			password.setText("");
-			login.setDisable(true);
+			dialogeBox.OkButton("Incorrent Credentials", jfxDialog);
 		}
 	}
 

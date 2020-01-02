@@ -7,7 +7,6 @@ import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 import java.sql.SQLException;
@@ -134,7 +133,7 @@ public class registerController {
 	private boolean usernameAlreadyExists(String user)
 	{
 		try {
-			return databaseModel.isUsernameTaken(user);
+			return databaseModel.usernameExists(user);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -245,7 +245,7 @@ public final class DatabaseModel
 		return false;
 	}
 
-	public boolean isUsernameTaken(String user) throws SQLException
+	public boolean usernameExists(String user) throws SQLException
 	{
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -385,8 +385,8 @@ public final class DatabaseModel
 	{
 		PreparedStatement preparedStatement = null;
 
-		String query = "INSERT into Customer_Information(username,password,firstname,lastname,currentbalance,datecreated,email,AccountNumber,LoginAttempts,AccountLocked)" +
-				"VALUES(?,?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT into Customer_Information(username,password,firstname,lastname,currentbalance,datecreated,email,AccountNumber,Admin,LoginAttempts,AccountLocked)" +
+				"VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
 		try{
 			preparedStatement = connection.prepareStatement(query);
@@ -398,8 +398,12 @@ public final class DatabaseModel
 			preparedStatement.setString(6,getDate(true));
 			preparedStatement.setString(7,values[4]);
 			preparedStatement.setString(8,generateAccountNumber());
-			preparedStatement.setString(9,"0");
-			preparedStatement.setString(10,"false");
+			preparedStatement.setString(9,"false");
+			preparedStatement.setString(10,"0");
+			preparedStatement.setString(11,"false");
+			for(int i = 0 ; i < values.length;i++){
+				System.out.println(values[i]);
+			}
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -460,7 +464,9 @@ public final class DatabaseModel
 
 	public int getLoginAttempts(String user) throws SQLException
 	{
-		return Integer.parseInt(getAccountInfo(user,"LoginAttempts"));
+		String attemps = getAccountInfo(user,"LoginAttempts");
+		System.out.println("Attempt: "+ attemps);
+		return Integer.parseInt(attemps);
 	}
 
 	public boolean accountLocked(String user)

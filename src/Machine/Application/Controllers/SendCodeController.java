@@ -99,7 +99,7 @@ public class SendCodeController implements Initializable
 	private void processPasswordResetCode(ActionEvent event) throws SQLException
 	{
 		String hiddenEmail;
-		if (event.getSource().equals(sendButton) && databaseModel.isUsernameTaken(usernameInput.getText())) {
+		if (event.getSource().equals(sendButton) && databaseModel.usernameExists(usernameInput.getText())) {
 			getEmailAddress();
 			email.setRecipient(actualEmail);
 			hiddenEmail = hideEmail(actualEmail);

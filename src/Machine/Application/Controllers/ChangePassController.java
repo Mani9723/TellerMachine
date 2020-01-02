@@ -67,7 +67,7 @@ public class ChangePassController implements Initializable
 		String conf = confNewPass.getText();
 		if(password.equals(conf)) {
 			try {
-				if (databaseModel.isUsernameTaken(user)) {
+				if (databaseModel.usernameExists(user)) {
 					if (validPassword(password)) {
 						if (isWithinTimeLimit(user)) {
 							if (validateTempPassword(temp, user)) {
@@ -124,7 +124,7 @@ public class ChangePassController implements Initializable
 	{
 		long currTime = System.currentTimeMillis();
 		long oldTime;
-		if (databaseModel.isUsernameTaken(user)) {
+		if (databaseModel.usernameExists(user)) {
 			try {
 				oldTime = Long.parseLong(databaseModel.getAccountInfo(user, "ExpireTime"));
 			} catch (NumberFormatException e) {
