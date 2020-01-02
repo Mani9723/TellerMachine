@@ -100,7 +100,7 @@ public class loginController implements Initializable {
 		if (event.getCode().equals(KeyCode.ENTER)) {
 			if (databaseModel.isFirstTimeRunning()) {
 				showFirstTimeUsingDialog();
-			} else if(databaseModel.usernameExists(username.getText())){
+			} else if(databaseModel.usernameExists(username.getText().toLowerCase())){
 				if(attemptsRemaining()) {
 					if (processCredentials() && !databaseModel.accountLocked(username.getText())) {
 						if (username.getText().equalsIgnoreCase("admin")) {

@@ -57,7 +57,7 @@
                         <Insets left="10.0" right="10.0" />
                      </GridPane.margin>
                   </JFXTextField>
-                  <JFXButton fx:id="sendButton" buttonType="RAISED" onAction="#sendEmailCode" opacity="0.9" prefHeight="25.0" prefWidth="310.0" styleClass="seven" stylesheets="@/Machine/Application/FXMLs/application.css" text="S E N D   E M A I L" GridPane.rowIndex="3">
+                  <JFXButton fx:id="sendButton" buttonType="RAISED" onAction="#sendEmailCode" opacity="0.9" prefHeight="25.0" prefWidth="310.0" styleClass="seven" stylesheets="@/Machine/Application/FXMLs/application.css" text="S U B M I T" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="80.0" right="80.0" />
                      </GridPane.margin>

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.SettingsController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.SettingsController">
     <children>
         <ImageView fitHeight="503.0" fitWidth="701.0" opacity="0.68" pickOnBounds="true">
             <image>
@@ -24,6 +24,11 @@
         </ImageView>
         <AnchorPane fx:id="anchor">
             <children>
+            <Label fx:id="memberSinceLabel" prefHeight="45.0" prefWidth="195.0" text="Label" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="30.0" >
+                <font>
+                    <Font name = "Papyrus" size = "15.0"/>
+                </font>
+            </Label>
                 <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <bottom>
                         <JFXButton fx:id="confirmButton" onAction="#handlePassChange" prefHeight="20.0" prefWidth="197.0" styleClass="seven" stylesheets="@application.css" text="Confirm Changes" textFill="WHITE" BorderPane.alignment="CENTER">
@@ -100,7 +105,7 @@
                                         <Insets left="20.0" right="20.0" />
                                     </GridPane.margin>
                                 </JFXPasswordField>
-                                <JFXPasswordField fx:id="confnewPass" alignment="CENTER" promptText="CONFIRM PASSWORD" onKeyPressed="#handleButtonEnable" unFocusColor="WHITE" GridPane.rowIndex="4">
+                                <JFXPasswordField fx:id="confnewPass" alignment="CENTER" onKeyPressed="#handleButtonEnable" promptText="CONFIRM PASSWORD" unFocusColor="WHITE" GridPane.rowIndex="4">
                                     <font>
                                         <Font name="Papyrus" size="13.0" />
                                     </font>

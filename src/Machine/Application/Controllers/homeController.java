@@ -195,16 +195,7 @@ public class homeController implements Initializable
 	private String getDate()
 	{
 		return date.getDate();
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-//		Date date = new Date();
-//		return dateFormat.format(date);
 	}
-//	private int getHour()
-//	{
-//		SimpleDateFormat hourformat = new SimpleDateFormat("HH");
-//		Date date = new Date();
-//		return Integer.parseInt(hourformat.format(date));
-//	}
 	private String getAppropriateGreeting(int hour)
 	{
 		if(hour>=0 && hour<12) return "Good Morning ";

@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -30,7 +31,7 @@ public class SettingsController implements Initializable
 	private StackPane stackPane;
 
 	@FXML
-	private Label firstname;
+	private Label firstname, memberSinceLabel;
 
 	@FXML
 	private AnchorPane anchor;
@@ -78,7 +79,6 @@ public class SettingsController implements Initializable
 		cancel.setVisible(false);
 		confDel.setVisible(false);
 		reenterPassword.setVisible(false);
-
 		stackPane.requestFocus();
 	}
 
@@ -90,6 +90,9 @@ public class SettingsController implements Initializable
 			username.setText(user);
 			lastName.setText(databaseModel.getAccountInfo(user,"Lastname"));
 			email.setText(databaseModel.getAccountInfo(user,"Email"));
+			memberSinceLabel.setText("Member Since: " +
+					databaseModel.getAccountInfo(username.getText(),"DateCreated").substring(0,10));
+			memberSinceLabel.setContentDisplay(ContentDisplay.CENTER);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

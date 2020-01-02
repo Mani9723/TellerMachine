@@ -49,9 +49,12 @@ public class DialogeBox
 		button.setPrefSize(100,50);
 		button.setButtonType(JFXButton.ButtonType.RAISED);
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.CENTER);
+		this.dialog.toFront();
 		this.dialog.requestFocus();
+		button.setFocusTraversable(true);
 
 		button.addEventHandler(KeyEvent.KEY_RELEASED,(KeyEvent keyEvent)->{
+			System.out.println("Key Pressed");
 			if(keyEvent.getCode()==KeyCode.ENTER){
 				parent.setEffect(null);
 				this.dialog.close();
