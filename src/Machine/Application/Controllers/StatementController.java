@@ -103,11 +103,13 @@ public class StatementController implements Initializable
 
 				if (drawerPane.isOpened()) {
 					drawerPane.close();
-					if(table.getOpacity() != 0) table.setOpacity(0.78);
+					if(table.getOpacity() != 0) {
+						setTableOpacity(0.78);
+					}
 					menuButton.setText("Options");
 				} else {
 					drawerPane.open();
-					table.setOpacity(0.2);
+					setTableOpacity(table.getOpacity() == 0 ? 0.0 : 0.2);
 					menuButton.setText("Return");
 				}
 
@@ -116,6 +118,11 @@ public class StatementController implements Initializable
 			}
 
 		}
+	}
+
+	private void setTableOpacity(double tableOpacity)
+	{
+		table.setOpacity(tableOpacity);
 	}
 
 	void setDatabaseModel(DatabaseModel model)

@@ -103,7 +103,7 @@ public final class DatabaseModel
 				+ "	Firstname text NOT NULL,\n"
 				+ "	Lastname text NOT NULL,\n"
 				+ "	CurrentBalance text NOT NULL,\n"
-				+ "	AccountNumber text NOT NULL,\n"
+				+ "	AccountNumber text NOT NULL UNIQUE,\n"
 				+ "	DateCreated text NOT NULL,\n"
 				+ "	Email text NOT NULL,\n"
 				+ "	TempPassword text,\n"
