@@ -99,8 +99,10 @@ public class StatementController implements Initializable
 				StatementOptionController controller = loader.getController();
 				controller.init(username, databaseModel);
 				drawerPane.setSidePane(optionScene);
+				drawerPane.toFront();
 
 				if (drawerPane.isOpened()) {
+					drawerPane.toBack();
 					drawerPane.close();
 					if(table.getOpacity() != 0) {
 						setTableOpacity(0.78);

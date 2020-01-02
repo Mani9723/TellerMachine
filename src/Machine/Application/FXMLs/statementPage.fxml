@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.StatementController">
+<StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.StatementController">
    <children>
       <AnchorPane fx:id="pane" prefHeight="500.0" prefWidth="700.0">
          <children>
@@ -25,6 +25,7 @@
                   <Image url="@/Machine/images/landscape__1____forest_mountain_by_ncoll36-daxsdd5.jpg" />
                </image>
             </ImageView>
+            <JFXDrawer fx:id="drawerPane" defaultDrawerSize="500.0" direction="BOTTOM" layoutY="91.0" prefHeight="408.0" prefWidth="124.0" />
             <TableView fx:id="table" layoutY="75.0" opacity="0.78" prefHeight="399.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="92.0">
               <columns>
                 <TableColumn fx:id="dateCol" editable="false" prefWidth="123.0" resizable="false" text="   Date" />
@@ -37,7 +38,6 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <JFXDrawer fx:id="drawerPane" defaultDrawerSize="500.0" direction="BOTTOM" layoutY="91.0" prefHeight="408.0" prefWidth="124.0" />
             <HBox layoutY="23.0" prefHeight="74.0" prefWidth="690.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane prefHeight="74.0" prefWidth="810.0">

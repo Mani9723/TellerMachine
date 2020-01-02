@@ -106,8 +106,10 @@ public class loginController implements Initializable {
 						if (username.getText().equalsIgnoreCase("admin")) {
 							loadScene.setKeyEvent(event);
 							loadScene.adminSceneActionEvent(databaseModel);
-						} else
+						} else {
 							loadHomePage(null, event);
+						}
+						databaseModel.resetLoginAttempts(username.getText());
 					} else {
 						handleIncorrectCredentials();
 					}
@@ -198,8 +200,10 @@ public class loginController implements Initializable {
 					if (username.getText().equalsIgnoreCase("admin")) {
 						loadScene.setActionEvent(event);
 						loadScene.adminSceneActionEvent(databaseModel);
-					} else
+					} else {
 						loadHomePage(event, null);
+					}
+					databaseModel.resetLoginAttempts(username.getText());
 				} else {
 					handleIncorrectCredentials();
 				}
