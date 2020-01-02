@@ -156,11 +156,6 @@ public final class DatabaseModel
 		System.out.println("Statement Table created: " + user);
 	}
 
-	/**
-	 *
-	 * @param username
-	 * @return
-	 */
 	public ObservableList<StatementData> getStatement(String username)
 	{
 		String query = "SELECT * from "+ username;
@@ -401,9 +396,6 @@ public final class DatabaseModel
 			preparedStatement.setString(9,"false");
 			preparedStatement.setString(10,"0");
 			preparedStatement.setString(11,"false");
-			for(int i = 0 ; i < values.length;i++){
-				System.out.println(values[i]);
-			}
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -469,6 +461,7 @@ public final class DatabaseModel
 		return Integer.parseInt(attemps);
 	}
 
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public boolean accountLocked(String user)
 	{
 		boolean isAccLocked = false;

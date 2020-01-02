@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.*;
 
 import java.net.URL;
@@ -151,10 +150,5 @@ public class ChangePassController implements Initializable
 		if(keyEvent.getCode().equals(KeyCode.ENTER)){
 			verifyNewPassword();
 		}
-	}
-
-	public void handleDragReleased(MouseDragEvent mouseDragEvent)
-	{
-		System.out.println("Drag detected");
 	}
 }

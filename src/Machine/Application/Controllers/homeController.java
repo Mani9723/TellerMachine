@@ -1,7 +1,6 @@
 package Machine.Application.Controllers;
 
 import Machine.Application.Controllers.Model.DatabaseModel;
-import Machine.Application.Controllers.Date;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 public class homeController implements Initializable
@@ -77,7 +75,7 @@ public class homeController implements Initializable
 		Image image =new Image(getClass().getResourceAsStream("/Machine/images/user-2517433_960_7201.png"));
 		settingButton.setText("");
 		loadScene = new LoadScene();
-		dateTime.setText(date.getDate());
+		dateTime.setText(getDate());
 		accountType.setText("Checking");
 		ImageView imageView = new ImageView(image);
 		imageView.setPreserveRatio(false);

@@ -27,7 +27,7 @@ public class StatementController implements Initializable
 	@FXML
 	private StackPane stackPane, optionScene;
 	@FXML
-	private AnchorPane pane, optionPane;
+	private AnchorPane pane;
 	@FXML
 	private JFXDrawer drawerPane;
 
@@ -61,13 +61,12 @@ public class StatementController implements Initializable
 
 	private DatabaseModel databaseModel;
 	private String username;
-	private DialogeBox dialogeBox;
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		dialogeBox = new DialogeBox(stackPane);
+		DialogeBox dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(pane);
 		dateLabel.setText(getDate());
 		dateCol.setCellValueFactory(new PropertyValueFactory<>("Date"));

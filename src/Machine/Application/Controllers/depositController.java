@@ -62,13 +62,23 @@ public class depositController implements Initializable
 	private static int count;
 	private LoadScene loadScene;
 
+	public static int getCount()
+	{
+		return count;
+	}
+
+	public static void setCount(int count)
+	{
+		depositController.count = count;
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(depositPane);
-		count = 1;
+		setCount(1);
 		stackPane.requestFocus();
 	}
 
@@ -97,7 +107,7 @@ public class depositController implements Initializable
 			}
 		}
 		depositInput.setText("");
-		resetCount();
+		if(getCount() > 1) resetCount();
 	}
 
 	@FXML

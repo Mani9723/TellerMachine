@@ -11,7 +11,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 
 /**
@@ -27,15 +26,15 @@ class LoadScene
 	private StackPane stackPaneCurr, stackPaneGoal;
 	private ActionEvent actionEvent;
 	private KeyEvent keyEvent;
-	private final String adminFxml = "/Machine/Application/FXMLs/AdminPage.fxml";
-	private final String loginFxml = "/Machine/Application/FXMLs/loginPage.fxml";
-	private final String homeFxml = "/Machine/Application/FXMLs/homePage.fxml";
-	private final String depositFxml = "/Machine/Application/FXMLs/depositPage.fxml";
-	private final String withdrawFxml = "/Machine/Application/FXMLs/withdrawPage.fxml";
-	private final String registerFxml = "/Machine/Application/FXMLs/registerPage.fxml";
-	private final String statementFxml = "/Machine/Application/FXMLs/statementPage.fxml";
-	private final String quickFxml = "/Machine/Application/FXMLs/QuickWithdraw.fxml";
-	private final String settingsFxml = "/Machine/Application/FXMLs/SettingPage.fxml";
+	private static final String adminFxml = "/Machine/Application/FXMLs/AdminPage.fxml";
+	private static final String loginFxml = "/Machine/Application/FXMLs/loginPage.fxml";
+	private static final String homeFxml = "/Machine/Application/FXMLs/homePage.fxml";
+	private static final String depositFxml = "/Machine/Application/FXMLs/depositPage.fxml";
+	private static final String withdrawFxml = "/Machine/Application/FXMLs/withdrawPage.fxml";
+	private static final String registerFxml = "/Machine/Application/FXMLs/registerPage.fxml";
+	private static final String statementFxml = "/Machine/Application/FXMLs/statementPage.fxml";
+	private static final String quickFxml = "/Machine/Application/FXMLs/QuickWithdraw.fxml";
+	private static final String settingsFxml = "/Machine/Application/FXMLs/SettingPage.fxml";
 
 	private double xOffset = 0;
 	private double yOffset = 0;
@@ -74,6 +73,7 @@ class LoadScene
 		this.keyEvent = keyEvent;
 	}
 
+	@SuppressWarnings("unused")
 	void adminSceneKeyEvent(DatabaseModel databaseModel)
 	{
 		FXMLLoader loader = new FXMLLoader();

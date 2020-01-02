@@ -84,9 +84,7 @@ public class DialogeBox
 		button.setAlignment(Pos.CENTER);
 		button.setPrefSize(80,50);
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.CENTER);
-		button.addEventHandler(MouseEvent.MOUSE_CLICKED,(MouseEvent mouseEvent )->{
-			this.dialog.close();
-		});
+		button.addEventHandler(MouseEvent.MOUSE_CLICKED,(MouseEvent mouseEvent )-> this.dialog.close());
 		Label label = new Label(buttonMessage);
 		label.setFont(Font.font(12));
 		label.setContentDisplay(ContentDisplay.CENTER);
@@ -96,15 +94,14 @@ public class DialogeBox
 		this.dialog.show();
 	}
 
+	@SuppressWarnings("unused")
 	void cancelButton(String buttonMessage)
 	{
 		JFXDialogLayout dialogLayout = new JFXDialogLayout();
 		JFXButton button = new JFXButton("C A N C E L");
 		button.setAlignment(Pos.CENTER_LEFT);
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.TOP);
-		button.addEventHandler(MouseEvent.MOUSE_CLICKED,(MouseEvent mouseEvent )->{
-			this.dialog.close();
-		});
+		button.addEventHandler(MouseEvent.MOUSE_CLICKED,(MouseEvent mouseEvent )-> this.dialog.close());
 		Label label = new Label("\t".concat(buttonMessage));
 		label.setContentDisplay(ContentDisplay.CENTER);
 		dialogLayout.setBody(label);
@@ -113,6 +110,7 @@ public class DialogeBox
 
 	}
 
+	@SuppressWarnings("unused")
 	void returnToLogin(String buttonMessage, StackPane rootPane, StackPane registerPane)
 	{
 		JFXDialogLayout dialogLayout = new JFXDialogLayout();
@@ -129,6 +127,7 @@ public class DialogeBox
 		dialogFinish(dialogLayout, button, label);
 	}
 
+	@SuppressWarnings("ParameterCanBeLocal")
 	private void loadLoginPage(StackPane rootPane, StackPane registerPane)
 	{
 		try {

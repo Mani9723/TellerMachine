@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @version 1.0
  * @since 8/1/2018  23:03
  */
+@SuppressWarnings("unused")
 public class StatementData
 {
 	SimpleStringProperty date,type,amount,prevBal,currBal;

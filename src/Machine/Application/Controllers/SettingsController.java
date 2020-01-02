@@ -167,11 +167,12 @@ public class SettingsController implements Initializable
 						e.printStackTrace();
 					}
 					dialogeBox.OkButton("Password Changed", new JFXDialog());
-					currPass.setText(""); newPass.setText(""); confnewPass.setText("");
+					currPass.setText("");
 				} else {
 					dialogeBox.OkButton("Password does not match", new JFXDialog());
-					newPass.setText("");confnewPass.setText("");
 				}
+				newPass.setText("");
+				confnewPass.setText("");
 			}else{
 				dialogeBox.OkButton("Original Password is incorrect", new JFXDialog());
 				currPass.setText("");

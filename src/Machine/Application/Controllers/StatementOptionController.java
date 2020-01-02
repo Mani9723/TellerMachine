@@ -40,7 +40,7 @@ public class StatementOptionController {
 	private Label statusLabel;
 
 	private DatabaseModel databaseModel;
-	private String username, statementPath;
+	private String username;
 
 	void init(String username, DatabaseModel databaseModel)
 	{
@@ -68,7 +68,7 @@ public class StatementOptionController {
 		if(event.getSource().equals(saveButton)) {
 			File file = getDestinationFromUser();
 			if(file != null) {
-				setPath(file.getPath());
+				//setPath(file.getPath());
 				try {
 					databaseModel.saveStatementToPdf(username, file,"123");
 					showStatus(true,"S A V E D");
@@ -122,19 +122,11 @@ public class StatementOptionController {
 		}
 	}
 
-	private void setPath(String path)
-	{
-		statementPath = path;
-	}
 	private File getDestinationFromUser()
 	{
 		DirectoryChooser fileChooser = new DirectoryChooser();
 		fileChooser.setTitle("Select Location");
-		File file = fileChooser.showDialog(null);
-		if(file != null) {
-			return file;
-		}
-		return null;
+		return fileChooser.showDialog(null);
 	}
 
 	private void showStatus(boolean visible, String message)
