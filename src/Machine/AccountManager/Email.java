@@ -15,7 +15,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.activation.DataSource;
 
-public class Email extends Thread
+public class Email
 {
 	private String emailUsername, password;
 	private String recipient,subject,content,filePath,name;
@@ -79,11 +79,11 @@ public class Email extends Thread
 				"\nYour username is: " + user;
 	}
 
-//	public void sendEmail() throws RuntimeException
-//	{
-//		run();
-//	}
-	public void run() throws RuntimeException
+	public void sendEmail() throws RuntimeException
+	{
+		send();
+	}
+	public void send() throws RuntimeException
 	{
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");

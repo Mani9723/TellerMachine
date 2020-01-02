@@ -118,7 +118,7 @@ public class SendCodeController implements Initializable
 	private boolean sendRequest(Email email)
 	{
 		try {
-			email.start();
+			email.sendEmail();
 			return true;
 		}catch (RuntimeException e){
 			new DialogeBox(stackPane).drawerOkButton("Not connected to Internet\n",new JFXDialog());
