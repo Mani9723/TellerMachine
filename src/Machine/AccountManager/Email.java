@@ -34,7 +34,7 @@ public class Email
 		if (tempPassword != null)
 			this.tempPass = tempPassword;
 		setResetPassContent();
-		setSubject();
+		setSubject("Password Reset");
 	}
 
 	public Email( boolean sendStatement)
@@ -45,6 +45,12 @@ public class Email
 			this.subject = "\t\tBANK OF AMERICAN\n\t\tSTATEMENT";
 			this.content = "Dear Customer,\n\t Your statement is attached.\n";
 		}
+	}
+
+	public void setContent(String subject, String message)
+	{
+		setSubject(subject);
+		this.content = message;
 	}
 
 	public void setRecipient(String recipient)
@@ -60,9 +66,9 @@ public class Email
 	{
 		this.name = name;
 	}
-	private void setSubject()
+	private void setSubject(String subject)
 	{
-		this.subject = "Password Reset";
+		this.subject = subject;
 	}
 	private void setResetPassContent()
 	{

@@ -1,5 +1,6 @@
 package Machine.Application.Controllers;
 
+import Machine.AccountManager.Email;
 import Machine.AccountManager.HashPassword;
 
 import Machine.Application.Controllers.Model.DatabaseModel;
@@ -93,8 +94,10 @@ public class registerController {
 						} else {
 							saveUserToFile(user, password, first, last, email);
 							clearFields(pass, confirmPass, firstName, lastName, username);
+
 							dialogeBox.OkButton("Welcome " + first, new JFXDialog());
 							loadScene.loginPage();
+							sendWelcomeEmail();
 						}
 					} else {
 						dialogeBox.OkButton("Invalid Password", new JFXDialog());
@@ -109,6 +112,20 @@ public class registerController {
 				emailLabel.setText("");
 			}
 		}
+	}
+
+	private void sendWelcomeEmail()
+	{
+		Email email1 = new Email();
+		try {
+			email1.setRecipient(databaseModel.getAccountInfo(username.getText(),"Email"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		email1.setContent("Welcome " + firstName,
+				"Please Maintain a minimum of $100 in your account." +
+						"We hope you find our services satisfying.");
+		email1.sendEmail();
 	}
 
 	@FXML
