@@ -15,8 +15,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.depositController">
@@ -71,24 +69,13 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <JFXTextField fx:id="depositInput" alignment="TOP_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="82.0" prefWidth="423.0" promptText="0.00" stylesheets="@/Machine/Application/FXMLs/application.css" unFocusColor="WHITE" GridPane.columnSpan="2147483647">
+                        <JFXTextField fx:id="depositInput" alignment="TOP_LEFT" focusColor="#00f2ff" nodeOrientation="RIGHT_TO_LEFT" prefHeight="82.0" prefWidth="423.0" promptText="0.00" stylesheets="@/Machine/Application/FXMLs/application.css" unFocusColor="WHITE" GridPane.columnSpan="2147483647">
                             <font>
                                 <Font name="Papyrus" size="29.0" />
                             </font>
                             <GridPane.margin>
                                 <Insets right="40.0" />
                             </GridPane.margin>
-                            <focusColor>
-                                <RadialGradient centerX="0.4444444444444444" centerY="0.5238095238095238" cycleMethod="REFLECT" radius="0.5">
-                                    <stops>
-                                        <Stop color="#f1ff57" />
-                                        <Stop color="#00f1ff" offset="1.0" />
-                                    </stops>
-                                </RadialGradient>
-                            </focusColor>
-                            <effect>
-                                <DropShadow />
-                            </effect>
                         </JFXTextField>
                         <Label alignment="CENTER" prefHeight="84.0" prefWidth="68.0" text="\$">
                             <font>
