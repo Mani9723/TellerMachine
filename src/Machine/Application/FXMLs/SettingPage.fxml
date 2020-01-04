@@ -24,7 +24,7 @@
         </ImageView>
         <AnchorPane fx:id="anchor">
             <children>
-            <Label fx:id="memberSinceLabel" prefHeight="45.0" prefWidth="195.0" text="Label" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="30.0" >
+            <Label fx:id="memberSinceLabel" prefHeight="45.0" prefWidth="195.0" text="Label" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="30.0" textFill="WHITE">
                 <font>
                     <Font name = "Papyrus" size = "15.0"/>
                 </font>
