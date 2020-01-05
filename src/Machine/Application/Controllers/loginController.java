@@ -116,17 +116,20 @@ public class loginController implements Initializable {
 				}
 				else{
 					dialogeBox.OkButton("Account Locked. Reset Password",jfxDialog);
-					username.setText("");
-					password.setText("");
-					login.setDisable(true);
+					resetLoginAreas();
 				}
 			}else{
 				dialogeBox.OkButton("Incorrent Credentials", jfxDialog);
-				username.setText("");
-				password.setText("");
-				login.setDisable(true);
+				resetLoginAreas();
 			}
 		}
+	}
+
+	private void resetLoginAreas()
+	{
+		username.setText("");
+		password.setText("");
+		login.setDisable(true);
 	}
 
 	@FXML
