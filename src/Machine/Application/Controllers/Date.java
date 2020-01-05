@@ -17,6 +17,11 @@ public class Date
 	}
 	public int getHour()
 	{
+		return calcHour();
+	}
+
+	private int calcHour()
+	{
 		SimpleDateFormat hourformat = new SimpleDateFormat("HH");
 		java.util.Date date = new java.util.Date();
 		return Integer.parseInt(hourformat.format(date));
