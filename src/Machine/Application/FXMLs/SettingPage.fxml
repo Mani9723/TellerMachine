@@ -174,7 +174,7 @@
                               <Insets left="40.0" right="40.0" />
                            </GridPane.margin>
                            <font>
-                              <Font name="Papyrus" size="13.0" />
+                              <Font name="Papyrus" size="15.0" />
                            </font>
                         </JFXTextField>
                                 <JFXPasswordField fx:id="reenterPassword" alignment="CENTER" prefHeight="25.0" prefWidth="328.0" promptText="ENTER PASSWORD" unFocusColor="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
