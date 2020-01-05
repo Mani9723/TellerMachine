@@ -122,6 +122,9 @@ public class loginController implements Initializable {
 				}
 			}else{
 				dialogeBox.OkButton("Incorrent Credentials", jfxDialog);
+				username.setText("");
+				password.setText("");
+				login.setDisable(true);
 			}
 		}
 	}
