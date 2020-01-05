@@ -38,8 +38,8 @@ import java.util.Random;
 public final class DatabaseModel
 {
 
-	private Connection connection;
-	private ObservableList<StatementData> observableList = FXCollections.observableArrayList();
+	private static Connection connection;
+	private static ObservableList<StatementData> observableList = FXCollections.observableArrayList();
 
 	public DatabaseModel()
 	{
