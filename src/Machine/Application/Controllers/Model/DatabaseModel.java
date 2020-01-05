@@ -375,6 +375,24 @@ public final class DatabaseModel
 		}
 	}
 
+	public void updateEmailAddress(String user, String email) throws SQLException
+	{
+		PreparedStatement preparedStatement = null;
+
+		String query = "UPDATE Customer_Information set Email = ? where Username = ?";
+		try{
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,email);
+			preparedStatement.setString(2,user);
+			preparedStatement.executeUpdate();
+		}catch (SQLException e){
+			e.printStackTrace();
+		}finally {
+			assert preparedStatement != null;
+			preparedStatement.executeUpdate();
+		}
+	}
+
 
 	public void saveUserToMainDB(String...values) throws SQLException
 	{

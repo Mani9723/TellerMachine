@@ -25,7 +25,7 @@ public class SettingsController implements Initializable
 {
 
 	@FXML
-	private JFXButton confirmButton, menuButton, delAccount, confDel, cancel;
+	private JFXButton confirmButton, menuButton, delAccount, confDel, cancel, changeEmailButton;
 
 	@FXML
 	private StackPane stackPane;
@@ -64,6 +64,7 @@ public class SettingsController implements Initializable
 	private LoadScene loadScene;
 	private DialogeBox dialogeBox;
 	private static HashPassword hashPassword;
+	private boolean isEmailChangeMode = false;
 
 
 	@Override
@@ -106,36 +107,83 @@ public class SettingsController implements Initializable
 		else
 			confirmButton.setDisable(true);
 	}
+
 	@FXML
 	public void handleDelButton(ActionEvent event)
 	{
 		if(event.getSource().equals(delAccount)){
 			setFunctionality(true);
+			changeEmailButton.setDisable(true);
+			reenterPassword.setPromptText("RE-ENTER PASSWORD");
 		}
 	}
+
+	@FXML
+	public void handleChangeEmailButton(ActionEvent event)
+	{
+		if(event.getSource().equals(changeEmailButton)){
+			this.isEmailChangeMode = true;
+			setFunctionality(true);
+			changeUserEmailAddress();
+			delAccount.setDisable(true);
+		}
+	}
+
 	@FXML
 	public void confirmDelButton(ActionEvent event)
 	{
-		if(event.getSource().equals(confDel) && !reenterPassword.getText().isEmpty()){
-			String pass = reenterPassword.getText();
-			hashPassword.setHashPassword(pass);
-			try{
-				if(databaseModel.getAccountInfo(username.getText(),"Password").equals(hashPassword.toString())){
-					databaseModel.deleteUser(username.getText());
-					loadScene = new LoadScene(stackPane,new StackPane());
-					loadScene.loginPage();
-					dialogeBox.OkButton("Thank you for you being a customer.\nYour account is deleted",
-							new JFXDialog());
-				}else{
-					dialogeBox.OkButton("Incorrect Password", new JFXDialog());
-					reenterPassword.setText("");
-				}
-			}catch (SQLException e){
-				e.printStackTrace();
-			}
-		}else{
-			dialogeBox.OkButton("Please Enter Password", new JFXDialog());
+		if(event.getSource().equals(confDel)){
+			confirmAccountDeletion();
 		}
+
+	}
+
+	private void changeUserEmailAddress()
+	{
+		reenterPassword.setPromptText("NEW EMAIL ADDRESS");
+		delAccount.setDisable(true);
+	}
+
+	private void confirmAccountDeletion()
+	{
+		if(isEmailChangeMode){
+			if(!reenterPassword.getText().isEmpty()){
+				try {
+					databaseModel.updateEmailAddress(username.getText(),reenterPassword.getText());
+					dialogeBox.OkButton("Email Succesfully Changed", new JFXDialog());
+					delAccount.setDisable(false);
+					email.setText(reenterPassword.getText());
+					reenterPassword.setText("");
+					setFunctionality(false);
+					changeEmailButton.setDisable(false);
+					this.isEmailChangeMode = false;
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}else {
+			if (!reenterPassword.getText().isEmpty()) {
+				String pass = reenterPassword.getText();
+				hashPassword.setHashPassword(pass);
+				try {
+					if (databaseModel.getAccountInfo(username.getText(), "Password").equals(hashPassword.toString())) {
+						databaseModel.deleteUser(username.getText());
+						loadScene = new LoadScene(stackPane, new StackPane());
+						loadScene.loginPage();
+						dialogeBox.OkButton("Thank you for you being a customer.\nYour account is deleted",
+								new JFXDialog());
+					} else {
+						dialogeBox.OkButton("Incorrect Password", new JFXDialog());
+						reenterPassword.setText("");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} else {
+				dialogeBox.OkButton("Please Enter Password", new JFXDialog());
+			}
+		}
+		stackPane.requestFocus();
 	}
 
 	@FXML
@@ -144,6 +192,9 @@ public class SettingsController implements Initializable
 		if(event.getSource().equals(cancel)){
 			setFunctionality(false);
 			reenterPassword.setText("");
+			changeEmailButton.setDisable(false);
+			delAccount.setDisable(false);
+			stackPane.requestFocus();
 
 		}
 	}
