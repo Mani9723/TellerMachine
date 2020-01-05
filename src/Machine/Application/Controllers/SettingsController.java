@@ -6,6 +6,7 @@ import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,6 +56,9 @@ public class SettingsController implements Initializable
 	private JFXPasswordField confnewPass;
 
 	@FXML
+	private JFXTextField emailUpdateField;
+
+	@FXML
 	private JFXPasswordField reenterPassword;
 
 	@FXML
@@ -80,6 +84,8 @@ public class SettingsController implements Initializable
 		cancel.setVisible(false);
 		confDel.setVisible(false);
 		reenterPassword.setVisible(false);
+		emailUpdateField.setDisable(true);
+		emailUpdateField.setVisible(false);
 		stackPane.requestFocus();
 	}
 
@@ -115,6 +121,8 @@ public class SettingsController implements Initializable
 			setFunctionality(true);
 			changeEmailButton.setDisable(true);
 			reenterPassword.setPromptText("RE-ENTER PASSWORD");
+			reenterPassword.setDisable(false);
+			reenterPassword.setVisible(true);
 		}
 	}
 
@@ -124,8 +132,11 @@ public class SettingsController implements Initializable
 		if(event.getSource().equals(changeEmailButton)){
 			this.isEmailChangeMode = true;
 			setFunctionality(true);
+			reenterPassword.setDisable(true);
+			reenterPassword.setVisible(false);
 			changeUserEmailAddress();
 			delAccount.setDisable(true);
+
 		}
 	}
 
@@ -140,23 +151,26 @@ public class SettingsController implements Initializable
 
 	private void changeUserEmailAddress()
 	{
-		reenterPassword.setPromptText("NEW EMAIL ADDRESS");
+		emailUpdateField.setVisible(true);
+		emailUpdateField.setDisable(false);
 		delAccount.setDisable(true);
 	}
 
 	private void confirmAccountDeletion()
 	{
 		if(isEmailChangeMode){
-			if(!reenterPassword.getText().isEmpty()){
+			if(!emailUpdateField.getText().isEmpty()){
 				try {
-					databaseModel.updateEmailAddress(username.getText(),reenterPassword.getText());
+					databaseModel.updateEmailAddress(username.getText(),emailUpdateField.getText());
 					dialogeBox.OkButton("Email Succesfully Changed", new JFXDialog());
 					delAccount.setDisable(false);
-					email.setText(reenterPassword.getText());
-					reenterPassword.setText("");
+					email.setText(emailUpdateField.getText());
+					emailUpdateField.setText("");
 					setFunctionality(false);
 					changeEmailButton.setDisable(false);
 					this.isEmailChangeMode = false;
+					emailUpdateField.setDisable(true);
+					emailUpdateField.setVisible(false);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -195,6 +209,8 @@ public class SettingsController implements Initializable
 			changeEmailButton.setDisable(false);
 			delAccount.setDisable(false);
 			stackPane.requestFocus();
+			emailUpdateField.setDisable(true);
+			emailUpdateField.setVisible(false);
 
 		}
 	}

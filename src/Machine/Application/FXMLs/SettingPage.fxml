@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.SettingsController">
+<StackPane fx:id="stackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.SettingsController">
     <children>
         <ImageView fitHeight="503.0" fitWidth="701.0" opacity="0.75" pickOnBounds="true">
          <image>
@@ -168,6 +169,14 @@
                                         <Font name="Papyrus" size="12.0" />
                                     </font>
                                 </JFXButton>
+                        <JFXTextField fx:id="emailUpdateField" alignment="CENTER" prefHeight="25.0" prefWidth="328.0" promptText="NEW EMAIL" unFocusColor="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font name="Papyrus" size="13.0" />
+                           </font>
+                        </JFXTextField>
                                 <JFXPasswordField fx:id="reenterPassword" alignment="CENTER" prefHeight="25.0" prefWidth="328.0" promptText="ENTER PASSWORD" unFocusColor="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                     <GridPane.margin>
                                         <Insets left="40.0" right="40.0" />
