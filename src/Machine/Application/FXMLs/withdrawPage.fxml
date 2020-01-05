@@ -150,11 +150,11 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <JFXButton fx:id="withdrawButton" buttonType="RAISED" onAction="#withdraw" opacity="0.87" prefHeight="67.0" prefWidth="167.0" ripplerFill="BLACK" styleClass="takeOut" stylesheets="@/Machine/Application/FXMLs/application.css" text="WITHDRAW">
+                                        <JFXButton fx:id="withdrawButton" buttonType="RAISED" onAction="#withdraw" opacity="0.95" prefHeight="67.0" prefWidth="167.0" ripplerFill="BLACK" styleClass="takeOut" stylesheets="@/Machine/Application/FXMLs/application.css" text="WITHDRAW">
                                             <font>
                                                 <Font name="Papyrus" size="15.0" />
                                             </font></JFXButton>
-                                        <JFXButton fx:id="reset" buttonType="RAISED" onAction="#clear" opacity="0.87" prefHeight="67.0" prefWidth="146.0" styleClass="clear" stylesheets="@/Machine/Application/FXMLs/application.css" text="CLEAR" textFill="WHITE" GridPane.columnIndex="1">
+                                        <JFXButton fx:id="reset" buttonType="RAISED" onAction="#clear" opacity="0.90" prefHeight="67.0" prefWidth="146.0" styleClass="clear" stylesheets="@/Machine/Application/FXMLs/application.css" text="CLEAR" textFill="WHITE" GridPane.columnIndex="1">
                                             <font>
                                                 <Font name="Papyrus" size="15.0" />
                                             </font></JFXButton>

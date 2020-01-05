@@ -155,7 +155,7 @@ public class quickWithdrawController implements Initializable
 
 	private void executeQuery(String request)
 	{
-		String updatedBal = getNewBalance(request);
+		String updatedBal = decimalFormat.format(getNewBalance(request));
 		try {
 			databaseModel.updateBalanceMainDB(updatedBal,getUser());
 			databaseModel.insertToStatementDB(getUser(),"Withdrawal",request,previousBalance,updatedBal);
