@@ -1,5 +1,3 @@
-package Machine.Application.Main;
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
