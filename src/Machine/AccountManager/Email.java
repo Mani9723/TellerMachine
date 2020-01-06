@@ -89,7 +89,55 @@ public class Email
 	{
 		send();
 	}
-	public void send() throws RuntimeException
+
+	private void sendNormalEmail(Session session) throws MessagingException
+	{
+		Message message = new MimeMessage(session);
+		message.setFrom(new InternetAddress(from));
+		message.setRecipients(Message.RecipientType.TO,
+				InternetAddress.parse(recipient));
+		message.setSubject(subject);
+		message.setText(content);
+		System.out.println("Sending message...");
+		long start = System.currentTimeMillis();
+		Transport.send(message);
+		System.out.println(System.currentTimeMillis() - start);
+		System.out.println("Message sent to : " + recipient);
+	}
+
+	private void sendStatement(Session session) throws MessagingException
+	{
+		Message message = new MimeMessage(session);
+		message.setFrom(new InternetAddress(from));
+		message.setRecipients(Message.RecipientType.TO,
+				InternetAddress.parse(this.recipient));
+		message.setSubject(this.subject);
+
+		MimeBodyPart messageBodyPart;
+		MimeBodyPart emailText = new MimeBodyPart();
+		emailText.setText(this.content);
+
+		Multipart multipart = new MimeMultipart();
+
+		messageBodyPart = new MimeBodyPart();
+		String file = filePath;
+		String fileName = name;
+		DataSource source = new FileDataSource(file);
+		messageBodyPart.setDataHandler(new DataHandler(source));
+		messageBodyPart.setFileName(fileName);
+
+		multipart.addBodyPart(emailText);
+		multipart.addBodyPart(messageBodyPart);
+
+		message.setContent(multipart);
+
+		System.out.println("Sending message...");
+		long start = System.currentTimeMillis();
+		Transport.send(message);
+		System.out.println("Done in: " + (System.currentTimeMillis() - start) + "ms");
+	}
+
+	private void send() throws RuntimeException
 	{
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -107,49 +155,10 @@ public class Email
 				});
 
 		try {
-			if(!this.sendStatement) {
-				Message message = new MimeMessage(session);
-				message.setFrom(new InternetAddress(from));
-				message.setRecipients(Message.RecipientType.TO,
-						InternetAddress.parse(recipient));
-				message.setSubject(subject);
-				message.setText(content);
-				System.out.println("Sending message...");
-				long start = System.currentTimeMillis();
-				Transport.send(message);
-				System.out.println(System.currentTimeMillis() - start);
-				System.out.println("Message sent to : " + recipient);
-			}
-			else{
-				Message message = new MimeMessage(session);
-				message.setFrom(new InternetAddress(from));
-				message.setRecipients(Message.RecipientType.TO,
-						InternetAddress.parse(this.recipient));
-				message.setSubject(this.subject);
-
-				MimeBodyPart messageBodyPart;
-				MimeBodyPart emailText = new MimeBodyPart();
-				emailText.setText(this.content);
-
-				Multipart multipart = new MimeMultipart();
-
-				messageBodyPart = new MimeBodyPart();
-				String file = filePath;
-				String fileName = name;
-				DataSource source = new FileDataSource(file);
-				messageBodyPart.setDataHandler(new DataHandler(source));
-				messageBodyPart.setFileName(fileName);
-
-				multipart.addBodyPart(emailText);
-				multipart.addBodyPart(messageBodyPart);
-
-				message.setContent(multipart);
-
-				System.out.println("Sending message...");
-				long start = System.currentTimeMillis();
-				Transport.send(message);
-				System.out.println("Done in: " + (System.currentTimeMillis() - start) + "ms");
-			}
+			if(!this.sendStatement)
+				sendNormalEmail(session);
+			else
+				sendStatement(session);
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
