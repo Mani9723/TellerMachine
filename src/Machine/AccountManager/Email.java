@@ -139,13 +139,13 @@ public class Email
 
 	private void send() throws RuntimeException
 	{
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
+		Properties properties = new Properties();
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port", "587");
 
-		Session session = Session.getInstance(props,
+		Session session = Session.getInstance(properties,
 				new javax.mail.Authenticator()
 				{
 					protected PasswordAuthentication getPasswordAuthentication()
