@@ -105,7 +105,7 @@ public class loginController implements Initializable {
 					if (processCredentials() && !databaseModel.accountLocked(username.getText())) {
 						if (username.getText().equalsIgnoreCase("admin")) {
 							loadScene.setKeyEvent(event);
-							loadScene.adminSceneActionEvent(databaseModel);
+							loadScene.adminSceneKeyEvent(databaseModel);
 						} else {
 							loadHomePage(null, event);
 						}
