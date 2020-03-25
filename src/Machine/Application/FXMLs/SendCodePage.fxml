@@ -28,7 +28,7 @@
                <children>
                   <AnchorPane prefHeight="100.0" prefWidth="303.0">
                      <children>
-                        <Label fx:id="titleLabel" layoutX="71.0" layoutY="42.0" prefHeight="31.0" prefWidth="164.0" text="   GET PASSWORD" textFill="WHITE">
+                        <Label fx:id="titleLabel" layoutX="71.0" layoutY="42.0" prefHeight="31.0" prefWidth="184.0" text=" RESET PASSWORD" textFill="WHITE">
                            <font>
                               <Font name="Papyrus" size="14.0" />
                            </font>

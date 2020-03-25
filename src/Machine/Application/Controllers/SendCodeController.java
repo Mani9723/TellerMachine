@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -45,8 +46,9 @@ public class SendCodeController implements Initializable
 		sendButton.setOpacity(0.50);
 		databaseModel = new DatabaseModel();
 		usernameInput.setPromptText("U S E R N A M E");
-
-		stackPane.requestFocus();
+		titleLabel.setTextFill(Paint.valueOf("Black"));
+		//stackPane.requestFocus();
+		titleLabel.requestFocus();
 	}
 
 
@@ -59,7 +61,7 @@ public class SendCodeController implements Initializable
 		}else{
 			usernameInput.setPromptText("U S E R N A M E");
 			toggleSelected = false;
-			titleLabel.setText("GET PASSWORD");
+			titleLabel.setText("RESET PASSWORD");
 		}
 	}
 
