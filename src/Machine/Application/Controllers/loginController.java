@@ -151,7 +151,7 @@ public class loginController implements Initializable {
 
 	@FXML
 	void resetPassword(ActionEvent event) {
-		if(event.getSource().equals(forgotButton)) {
+		if(event.getSource().equals(forgotButton) || event.getSource().equals(exitResetPass)) {
 			openDrawerPane("/Machine/Application/FXMLs/SendCodePage.fxml", event);
 		}
 	}
@@ -159,7 +159,7 @@ public class loginController implements Initializable {
 	@FXML
 	void createNewPassword(ActionEvent event)
 	{
-		if(event.getSource().equals(makeNewPass)) {
+		if(event.getSource().equals(makeNewPass) || event.getSource().equals(exitResetPass)) {
 			openDrawerPane("/Machine/Application/FXMLs/ChangePassPage.fxml", event);
 		}
 	}
@@ -326,7 +326,7 @@ public class loginController implements Initializable {
 			drawerPane.setSidePane(resetPane);
 
 			drawerPane.setOnDrawerClosed((JFXDrawerEvent drawerEvent) -> {
-				if(!isDrawerClosed.get()) {
+				if(isDrawerClosed.get() == false) {
 					drawerPane.close();
 					exitResetPass.setDisable(true);
 					exitResetPass.setVisible(false);
@@ -335,7 +335,7 @@ public class loginController implements Initializable {
 				}
 			});
 
-			if ((drawerPane.isOpened() && event.getSource().equals(exitResetPass)) || drawerPane.isClosing()) {
+			if ((drawerPane.isOpened() && event.getSource().equals(exitResetPass))) {
 				drawerPane.close();
 				exitResetPass.setDisable(true);
 				exitResetPass.setVisible(false);
