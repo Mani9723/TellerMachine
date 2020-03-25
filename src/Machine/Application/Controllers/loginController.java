@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.events.JFXDrawerEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class loginController implements Initializable {
 
@@ -149,13 +151,17 @@ public class loginController implements Initializable {
 
 	@FXML
 	void resetPassword(ActionEvent event) {
-		openDrawerPane("/Machine/Application/FXMLs/SendCodePage.fxml",event);
+		if(event.getSource().equals(forgotButton)) {
+			openDrawerPane("/Machine/Application/FXMLs/SendCodePage.fxml", event);
+		}
 	}
 
 	@FXML
 	void createNewPassword(ActionEvent event)
 	{
-		openDrawerPane("/Machine/Application/FXMLs/ChangePassPage.fxml",event);
+		if(event.getSource().equals(makeNewPass)) {
+			openDrawerPane("/Machine/Application/FXMLs/ChangePassPage.fxml", event);
+		}
 	}
 
 	@FXML
@@ -311,11 +317,23 @@ public class loginController implements Initializable {
 
 	private void openDrawerPane(String scenePath, ActionEvent event)
 	{
+		AtomicBoolean isDrawerClosed = new AtomicBoolean(false);
 		exitResetPass.setDisable(false);
 		exitResetPass.setVisible(true);
+
 		try {
 			StackPane resetPane = FXMLLoader.load(getClass().getResource(scenePath));
 			drawerPane.setSidePane(resetPane);
+
+			drawerPane.setOnDrawerClosed((JFXDrawerEvent drawerEvent) -> {
+				if(!isDrawerClosed.get()) {
+					drawerPane.close();
+					exitResetPass.setDisable(true);
+					exitResetPass.setVisible(false);
+					modifyButtonVisibility(false);
+					isDrawerClosed.set(true);
+				}
+			});
 
 			if ((drawerPane.isOpened() && event.getSource().equals(exitResetPass)) || drawerPane.isClosing()) {
 				drawerPane.close();

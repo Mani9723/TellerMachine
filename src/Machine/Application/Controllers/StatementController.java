@@ -3,6 +3,7 @@ package Machine.Application.Controllers;
 import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.events.JFXDrawerEvent;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class StatementController implements Initializable
 {
@@ -90,6 +92,7 @@ public class StatementController implements Initializable
 	@FXML
 	public void handleMenu(ActionEvent event)
 	{
+		AtomicBoolean isDrawerClosing = new AtomicBoolean(false);
 		if(event.getSource().equals(menuButton)){
 			try {
 				FXMLLoader loader = new FXMLLoader();
@@ -100,6 +103,19 @@ public class StatementController implements Initializable
 				controller.init(username, databaseModel);
 				drawerPane.setSidePane(optionScene);
 				drawerPane.toFront();
+
+				drawerPane.setOnDrawerClosed((JFXDrawerEvent drawerEvent)->{
+					if(!isDrawerClosing.get()){
+						drawerPane.toBack();
+						drawerPane.close();
+						if(table.getOpacity() != 0) {
+							setTableOpacity(0.78);
+						}
+						menuButton.setText("Options");
+						isDrawerClosing.set(true);
+					}
+				});
+
 
 				if (drawerPane.isOpened()) {
 					drawerPane.toBack();
