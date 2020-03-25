@@ -4,6 +4,7 @@ package Machine.Application.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.events.JFXDialogEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -17,6 +18,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 import java.io.IOException;
@@ -47,24 +49,21 @@ public class DialogeBox
 		JFXButton button = new JFXButton("R E T U R N");
 		button.setAlignment(Pos.CENTER);
 		button.setPrefSize(100,50);
+		button.setTextFill(Paint.valueOf("White"));
 		button.setButtonType(JFXButton.ButtonType.RAISED);
 		this.dialog = new JFXDialog(stackPane,dialogLayout,JFXDialog.DialogTransition.CENTER);
 		this.dialog.toFront();
 		this.dialog.requestFocus();
 		button.setFocusTraversable(true);
 
-		button.addEventHandler(KeyEvent.KEY_RELEASED,(KeyEvent keyEvent)->{
-			System.out.println("Key Pressed");
-			if(keyEvent.getCode()==KeyCode.ENTER){
-				parent.setEffect(null);
-				this.dialog.close();
-			}
-		});
 		button.addEventHandler(MouseEvent.MOUSE_CLICKED,(MouseEvent mouseEvent )->{
 			parent.setEffect(null);
 			this.dialog.close();
 		});
+		this.dialog.setOnDialogClosed((JFXDialogEvent event)-> parent.setEffect(null));
+
 		Label label = new Label(buttonMessage);
+		label.setTextFill(Color.valueOf("White"));
 		dialogFinish(dialogLayout,button,label);
 	}
 
@@ -74,7 +73,7 @@ public class DialogeBox
 		dialogLayout.setBody(label);
 		dialogLayout.setActions(button);
 		dialogLayout.setBackground(new Background(
-				new BackgroundFill(Color.rgb(185,255,235),null,null)));
+				new BackgroundFill(Color.rgb(111,169,235),null,null)));
 		this.dialog.show();
 		parent.setEffect(gaussianBlur);
 	}
