@@ -474,9 +474,7 @@ public final class DatabaseModel
 
 	public int getLoginAttempts(String user) throws SQLException
 	{
-		String attemps = getAccountInfo(user,"LoginAttempts");
-		System.out.println("Attempt: "+ attemps);
-		return Integer.parseInt(attemps);
+		return Integer.parseInt(getAccountInfo(user,"LoginAttempts"));
 	}
 
 	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
