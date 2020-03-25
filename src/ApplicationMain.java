@@ -18,6 +18,10 @@ public class ApplicationMain extends Application {
         primaryStage.setTitle("Bank of American");
         primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().add(new Image("/Machine/images/240_F_119004171_qekVyleykNEcYt11JGhyI8scUcsLMxv2.jpg"));
+        primaryStage.setMaxWidth(700);
+        primaryStage.setMaxHeight(500);
+        primaryStage.setMinHeight(500);
+        primaryStage.setMinWidth(700);
 
         //grab your root here
         root.setOnMousePressed(event -> {
