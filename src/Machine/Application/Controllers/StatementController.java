@@ -117,7 +117,7 @@ public class StatementController implements Initializable
 				});
 
 
-				if (drawerPane.isOpened()) {
+				if (drawerPane.isShown()) {
 					drawerPane.toBack();
 					drawerPane.close();
 					if(table.getOpacity() != 0) {

@@ -106,7 +106,8 @@ public class StatementOptionController {
 				email.setFileName(file.getName());
 				try {
 					showStatus(true,"SENDING...");
-					email.sendEmail();
+					Thread emailThread = new Thread(email);
+					emailThread.start();
 					//showStatus(true,"SENDING...");
 					showStatus(true,"S E N T");
 					emailButton.setDisable(true);

@@ -125,7 +125,8 @@ public class registerController {
 		email1.setContent("Welcome " + firstName,
 				"Please Maintain a minimum of $100 in your account." +
 						"We hope you find our services satisfying.");
-		email1.sendEmail();
+		Thread emailThread = new Thread(email1);
+		emailThread.start();
 	}
 
 	@FXML

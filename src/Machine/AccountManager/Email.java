@@ -15,7 +15,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.activation.DataSource;
 
-public class Email
+public class Email implements Runnable
 {
 	private String emailUsername, password;
 	private String recipient,subject,content,filePath,name;
@@ -85,7 +85,7 @@ public class Email
 				"\nYour username is: " + user;
 	}
 
-	public void sendEmail() throws RuntimeException
+	public void run() throws RuntimeException
 	{
 		send();
 	}

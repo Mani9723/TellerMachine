@@ -335,7 +335,7 @@ public class loginController implements Initializable {
 				}
 			});
 
-			if ((drawerPane.isOpened() && event.getSource().equals(exitResetPass))) {
+			if ((drawerPane.isShown() && event.getSource().equals(exitResetPass))) {
 				drawerPane.close();
 				exitResetPass.setDisable(true);
 				exitResetPass.setVisible(false);

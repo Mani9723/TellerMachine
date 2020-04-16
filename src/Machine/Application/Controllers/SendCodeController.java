@@ -105,26 +105,31 @@ public class SendCodeController implements Initializable
 			getEmailAddress();
 			email.setRecipient(actualEmail);
 			hiddenEmail = hideEmail(actualEmail);
-			if (sendRequest(email)){
-				usernameInput.setText("");
-				new DialogeBox(stackPane).drawerOkButton("Sent\n" + hiddenEmail, new JFXDialog());
-			}else{
-				sendButton.setDisable(false);
+			Thread thread = sendRequest(email);
+			usernameInput.setText("");
+			try {
+				thread.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		} else {
+			new DialogeBox(stackPane).drawerOkButton("Sent\n" + hiddenEmail, new JFXDialog());
+			sendButton.setDisable(false);
+		}
+		else {
 			usernameInput.setText("");
 			new DialogeBox(stackPane).drawerOkButton("Incorrect Username", new JFXDialog());
 		}
 	}
 
-	private boolean sendRequest(Email email)
+	private Thread sendRequest(Email email)
 	{
 		try {
-			email.sendEmail();
-			return true;
+			Thread emailThread = new Thread(email);
+			emailThread.start();
+			return emailThread;
 		}catch (RuntimeException e){
 			new DialogeBox(stackPane).drawerOkButton("Not connected to Internet\n",new JFXDialog());
-			return false;
+			return null;
 		}
 	}
 
