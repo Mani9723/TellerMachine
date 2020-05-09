@@ -32,7 +32,7 @@
                         <Font name="Sitka Small" size="32.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="167.0" fx:id="bankTitle" layoutY="144.0" prefHeight="42.0" prefWidth="367.0" text="B A N K  O F  ______" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="167.0" fx:id="bankTitle" layoutY="144.0" prefHeight="42.0" prefWidth="367.0" text="G U A V A  B A N K" textFill="WHITE">
                      <font>
                         <Font name="Sitka Small" size="33.0" />
                      </font>
