@@ -65,6 +65,8 @@ public class loginController implements Initializable {
 	private LoadScene loadScene;
 	private static HashPassword hashPassword;
 
+	private Transition transition;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loadScene = new LoadScene();
@@ -78,6 +80,8 @@ public class loginController implements Initializable {
 		login.setDisable(true);
 		exitResetPass.setDisable(true);
 		exitResetPass.setVisible(false);
+
+		transition = new Transition(stackPane,null);
 
 		//stackPane.requestFocus();
 	}
@@ -307,12 +311,7 @@ public class loginController implements Initializable {
 
 	private void loadHomePage(ActionEvent event, KeyEvent keyEvent)
 	{
-		FadeTransition fadeTransition = new FadeTransition();
-		fadeTransition.setDuration(Duration.millis(500));
-		fadeTransition.setNode(stackPane);
-		fadeTransition.setFromValue(1);
-		fadeTransition.setToValue(0);
-		fadeTransition.setOnFinished((ActionEvent transitionEvent) -> {
+		transition.fadeOut().setOnFinished((ActionEvent transitionEvent) -> {
 			if(event != null) {
 				loadScene.setActionEvent(event);
 				loadScene.homeSceneAction(username.getText(), databaseModel);
@@ -322,7 +321,6 @@ public class loginController implements Initializable {
 				loadScene.homeScene(username.getText(), databaseModel);
 			}
 		});
-		fadeTransition.play();
 	}
 
 	private void openDrawerPane(String scenePath, ActionEvent event)
