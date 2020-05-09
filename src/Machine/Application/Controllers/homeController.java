@@ -2,7 +2,10 @@ package Machine.Application.Controllers;
 
 import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
+import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +22,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class homeController implements Initializable
@@ -92,6 +97,17 @@ public class homeController implements Initializable
 		accountNumber.setVisible(false);
 		isNumVisible = false;
 		transition.fadeIn();
+
+		initClock();
+	}
+	private void initClock() {
+
+		Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm:ss");
+			dateTime.setText(LocalDateTime.now().format(formatter));
+		}), new KeyFrame(Duration.seconds(1)));
+		clock.setCycleCount(Animation.INDEFINITE);
+		clock.play();
 	}
 
 	void init(DatabaseModel machine)
