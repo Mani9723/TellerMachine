@@ -69,6 +69,7 @@ public class loginController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		transition = new Transition(stackPane,null);
 		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(rootPane);
@@ -80,8 +81,6 @@ public class loginController implements Initializable {
 		login.setDisable(true);
 		exitResetPass.setDisable(true);
 		exitResetPass.setVisible(false);
-
-		transition = new Transition(stackPane,null);
 
 		//stackPane.requestFocus();
 	}
@@ -186,16 +185,20 @@ public class loginController implements Initializable {
 	public void registerButtonHandler(ActionEvent event)
 	{
 		if(event.getSource().equals(registerButton)){
-			loadScene.setActionEvent(event);
-			loadScene.registerScene(databaseModel);
+			transition.fadeOut().setOnFinished((ActionEvent transitionEvent) ->{
+				loadScene.setActionEvent(event);
+				loadScene.registerScene(databaseModel);
+			});
 		}
 	}
 
 	@FXML
 	public void registerButtonKeyEvent(KeyEvent keyEvent)
 	{
-		loadScene.setKeyEvent(keyEvent);
-		loadScene.registerScene(databaseModel);
+		transition.fadeOut().setOnFinished((ActionEvent transitionEvent) ->{
+			loadScene.setKeyEvent(keyEvent);
+			loadScene.registerScene(databaseModel);
+		});
 	}
 	private void modifyButtonVisibility(boolean disable)
 	{

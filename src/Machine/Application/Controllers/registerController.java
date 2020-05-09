@@ -133,7 +133,10 @@ public class registerController {
 	void returnButtonHandler(ActionEvent event)
 	{
 		if(event.getSource().equals(returnButton))
-			loadScene.loginPage();
+			new Transition(stackPane,null).fadeOut().setOnFinished((ActionEvent evt) ->{
+				loadScene.loginPage();
+			});
+
 	}
 
 	private boolean isValidPasswordLength(String request)

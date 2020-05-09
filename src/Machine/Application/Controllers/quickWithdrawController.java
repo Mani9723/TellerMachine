@@ -62,12 +62,17 @@ public class quickWithdrawController implements Initializable
 	private LoadScene loadScene;
 	private DialogeBox dialogeBox;
 
+	private Transition transition;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		stackPane.setOpacity(0);
+		transition = new Transition(stackPane, null);
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(quickPane);
 		stackPane.requestFocus();
+		transition.fadeIn();
 	}
 
 	void init(DatabaseModel databaseModel)
@@ -98,35 +103,44 @@ public class quickWithdrawController implements Initializable
 	@FXML
 	void clickOther(ActionEvent event)
 	{
-		loadScene.setActionEvent(event);
-		loadScene.withdrawScene(username, databaseModel);
+		transition.fadeOut().setOnFinished((ActionEvent evt) ->{
+			loadScene.setActionEvent(event);
+			loadScene.withdrawScene(username, databaseModel);
+		});
 	}
 
 	@FXML
 	void goToDeposit(ActionEvent event)
 	{
-		loadScene.setActionEvent(event);
-		loadScene.depositPage(username, databaseModel);
+		transition.fadeOut().setOnFinished((ActionEvent evt) ->{
+			loadScene.setActionEvent(event);
+			loadScene.depositPage(username, databaseModel);
+		});
 	}
 
 	@FXML
 	void goToExit(ActionEvent event)
 	{
 		if(event.getSource().equals(exit)) {
-			try {
-				stackPane2 = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/loginPage.fxml"));
+			transition.fadeOut().setOnFinished((ActionEvent evt) ->{
+				try {
+					stackPane2 = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/loginPage.fxml"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				stackPane.getChildren().setAll(stackPane2);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+				stackPane.setOpacity(1);
+			});
 		}
 	}
 
 	@FXML
 	void goToMenu(ActionEvent event)
 	{
-		loadScene.setActionEvent(event);
-		loadScene.homeSceneAction(username, databaseModel);
+		transition.fadeOut().setOnFinished((ActionEvent evt) ->{
+			loadScene.setActionEvent(event);
+			loadScene.homeSceneAction(username, databaseModel);
+		});
 	}
 
 	private void processRequest(String request) throws SQLException

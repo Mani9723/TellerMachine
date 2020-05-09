@@ -64,10 +64,14 @@ public class StatementController implements Initializable
 	private DatabaseModel databaseModel;
 	private String username;
 
+	private Transition transition;
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		stackPane.setOpacity(0);
+		transition = new Transition(stackPane, null);
 		DialogeBox dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(pane);
 		dateLabel.setText(getDate());
@@ -77,6 +81,7 @@ public class StatementController implements Initializable
 		prevCol.setCellValueFactory(new PropertyValueFactory<>("prevBal"));
 		currCol.setCellValueFactory(new PropertyValueFactory<>("currBal"));
 		stackPane.requestFocus();
+		transition.fadeIn();
 	}
 
 	void init()
@@ -100,10 +105,9 @@ public class StatementController implements Initializable
 						.getResource("/Machine/Application/FXMLs/StatementOptions.fxml"));
 				optionScene = loader.load();
 				StatementOptionController controller = loader.getController();
-				controller.init(username, databaseModel);
+				controller.init(username, databaseModel,stackPane);
 				drawerPane.setSidePane(optionScene);
 				drawerPane.toFront();
-
 				drawerPane.setOnDrawerClosed((JFXDrawerEvent drawerEvent)->{
 					if(!isDrawerClosing.get()){
 						drawerPane.toBack();
@@ -115,7 +119,6 @@ public class StatementController implements Initializable
 						isDrawerClosing.set(true);
 					}
 				});
-
 
 				if (drawerPane.isShown()) {
 					drawerPane.toBack();

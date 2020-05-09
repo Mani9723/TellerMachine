@@ -70,10 +70,14 @@ public class SettingsController implements Initializable
 	private static HashPassword hashPassword;
 	private boolean isEmailChangeMode = false;
 
+	private Transition transition;
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		transition = new Transition(stackPane,null);
+		stackPane.setOpacity(0);
 		hashPassword = new HashPassword();
 		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
@@ -87,6 +91,7 @@ public class SettingsController implements Initializable
 		emailUpdateField.setDisable(true);
 		emailUpdateField.setVisible(false);
 		stackPane.requestFocus();
+		transition.fadeIn();
 	}
 
 	void init(String user, DatabaseModel machine)
@@ -219,8 +224,10 @@ public class SettingsController implements Initializable
 	public void loadHomeScene(ActionEvent event)
 	{
 		if(event.getSource().equals(menuButton)){
-			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(username.getText(), databaseModel);
+			transition.fadeOut().setOnFinished((ActionEvent transitionEvent) ->{
+				loadScene.setActionEvent(event);
+				loadScene.homeSceneAction(username.getText(), databaseModel);
+			});
 		}
 	}
 

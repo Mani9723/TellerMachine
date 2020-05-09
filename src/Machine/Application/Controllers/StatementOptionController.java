@@ -12,6 +12,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -39,17 +40,20 @@ public class StatementOptionController {
 	@FXML
 	private Label statusLabel;
 
+	@FXML
+	private StackPane parentPane;
+
 	private DatabaseModel databaseModel;
 	private String username;
 
-	void init(String username, DatabaseModel databaseModel)
+	void init(String username, DatabaseModel databaseModel, StackPane stackPane)
 	{
 		setUsername(username);
 		setDatabaseModel(databaseModel);
 		showStatus(false,"");
 		printButton.setDisable(true);
 		//emailButton.setDisable(true);
-
+		parentPane = stackPane;
 		optionPane.requestFocus();
 	}
 
@@ -84,8 +88,10 @@ public class StatementOptionController {
 	{
 		LoadScene loadScene = new LoadScene();
 		if(event.getSource().equals(homeButton)){
-			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(username, databaseModel);
+			new Transition(parentPane, null).fadeOut().setOnFinished((ActionEvent evt) ->{
+				loadScene.setActionEvent(event);
+				loadScene.homeSceneAction(username, databaseModel);
+			});
 		}
 	}
 

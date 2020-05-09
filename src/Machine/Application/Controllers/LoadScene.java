@@ -58,6 +58,7 @@ class LoadScene
 		try {
 			stackPaneGoal = FXMLLoader.load(getClass().getResource(loginFxml));
 			stackPaneCurr.getChildren().setAll(stackPaneGoal);
+			stackPaneCurr.setOpacity(1);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

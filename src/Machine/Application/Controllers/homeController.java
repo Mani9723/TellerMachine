@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -68,12 +69,14 @@ public class homeController implements Initializable
 	private static DatabaseModel databaseModel;
 	private LoadScene loadScene;
 
+	private Transition transition;
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
 		rootPane.setOpacity(0);
+		transition = new Transition(null,rootPane);
 		date = new Date();
 		Image image =new Image(getClass().getResourceAsStream("/Machine/images/user-2517433_960_7201.png"));
 		settingButton.setText("");
@@ -88,7 +91,7 @@ public class homeController implements Initializable
 		settingButton.setGraphic(imageView);
 		accountNumber.setVisible(false);
 		isNumVisible = false;
-		new Transition(null,rootPane).fadeIn();
+		transition.fadeIn();
 	}
 
 	void init(DatabaseModel machine)
@@ -109,25 +112,22 @@ public class homeController implements Initializable
 	void depositMoney(ActionEvent event)
 	{
 		if(event.getSource().equals(deposit)){
-			loadDepositPage(event);
+			transition.fadeOut().setOnFinished((ActionEvent transitionEvent) ->{
+				loadScene.setActionEvent(event);
+				loadScene.depositPage(getuName(), databaseModel);
+			});
 		}
 	}
 
-	@FXML
-	private void loadDepositPage(ActionEvent event)
-	{
-		if(event.getSource().equals(deposit)) {
-			loadScene.setActionEvent(event);
-			loadScene.depositPage(getuName(), databaseModel);
-		}
-	}
 
 	@FXML
 	void settings(ActionEvent event)
 	{
 		if(event.getSource().equals(settingButton)){
-			loadScene.setActionEvent(event);
-			loadScene.settingsScene(getuName(), databaseModel);
+			transition.fadeOut().setOnFinished((ActionEvent transtionEvent) -> {
+				loadScene.setActionEvent(event);
+				loadScene.settingsScene(getuName(), databaseModel);
+			});
 		}
 	}
 
@@ -135,12 +135,16 @@ public class homeController implements Initializable
 	void exitToHome(ActionEvent event)
 	{
 		if(event.getSource().equals(exitHome)){
-			try {
-				stackPane = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/loginPage.fxml"));
+			transition.fadeOut().setOnFinished((ActionEvent) -> {
+				try {
+					stackPane = FXMLLoader.load(getClass()
+							.getResource("/Machine/Application/FXMLs/loginPage.fxml"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				rootPane.getChildren().setAll(stackPane);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+				rootPane.setOpacity(1);
+			});
 		}
 	}
 
@@ -148,18 +152,21 @@ public class homeController implements Initializable
 	void handleStatementButton(ActionEvent event)
 	{
 		if(event.getSource().equals(statementButton)) {
-			loadScene.setActionEvent(event);
-			loadScene.statementScene(getuName(), databaseModel);
+			transition.fadeOut().setOnFinished((ActionEvent transitionEvent) -> {
+				loadScene.setActionEvent(event);
+				loadScene.statementScene(getuName(), databaseModel);
+			});
 		}
-
 	}
 
 	@FXML
 	void withdrawMoney(ActionEvent event)
 	{
 		if(event.getSource().equals(withdraw)) {
-			loadScene.setActionEvent(event);
-			loadScene.withdrawScene(getuName(), databaseModel);
+			transition.fadeOut().setOnFinished((ActionEvent transitionEvent) ->{
+				loadScene.setActionEvent(event);
+				loadScene.withdrawScene(getuName(), databaseModel);
+			});
 		}
 	}
 
@@ -167,8 +174,10 @@ public class homeController implements Initializable
 	void quickCash(ActionEvent event)
 	{
 		if(event.getSource().equals(quickCash)) {
-			loadScene.setActionEvent(event);
-			loadScene.quickCashScene(uName, databaseModel);
+			transition.fadeOut().setOnFinished((ActionEvent transitionEvent) ->{
+				loadScene.setActionEvent(event);
+				loadScene.quickCashScene(getuName(), databaseModel);
+			});
 		}
 	}
 
@@ -202,7 +211,7 @@ public class homeController implements Initializable
 	private String getAppropriateGreeting(int hour)
 	{
 		if(hour>=0 && hour<12) return "Good Morning ";
-		else if(hour>=12 && hour<16) return "Good Afternoon ";
+		else if(hour>=12 && hour<=16) return "Good Afternoon ";
 		else return "Good Evening ";
 
 	}

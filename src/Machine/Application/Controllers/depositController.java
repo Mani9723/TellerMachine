@@ -62,6 +62,8 @@ public class depositController implements Initializable
 	private static int count;
 	private LoadScene loadScene;
 
+	private Transition transition;
+
 	public static int getCount()
 	{
 		return count;
@@ -75,11 +77,14 @@ public class depositController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		stackPane.setOpacity(0);
+		transition = new Transition(stackPane, null);
 		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(depositPane);
 		setCount(1);
 		stackPane.requestFocus();
+		transition.fadeIn();
 	}
 
 	void init(DatabaseModel machine)
@@ -121,14 +126,17 @@ public class depositController implements Initializable
 	@FXML
 	void logout(ActionEvent event)
 	{
-		StackPane stackPane1;
 		if(event.getSource().equals(logout)) {
-			try {
-				stackPane1 = FXMLLoader.load(getClass().getResource("../FXMLs/loginPage.fxml"));
+			transition.fadeOut().setOnFinished((ActionEvent evt) ->{
+				StackPane stackPane1 = null;
+				try {
+					stackPane1 = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/loginPage.fxml"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				stackPane.getChildren().setAll(stackPane1);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+				stackPane.setOpacity(1);
+			});
 		}
 	}
 
@@ -136,8 +144,10 @@ public class depositController implements Initializable
 	void menu(ActionEvent event)
 	{
 		if(event.getSource().equals(menu)) {
-			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(getUser(), databaseModel);
+			transition.fadeOut().setOnFinished((ActionEvent evt) ->{
+				loadScene.setActionEvent(event);
+				loadScene.homeSceneAction(getUser(), databaseModel);
+			});
 		}
 	}
 
@@ -145,8 +155,10 @@ public class depositController implements Initializable
 	void withdraw(ActionEvent event)
 	{
 		if(event.getSource().equals(withdraw)) {
-			loadScene.setActionEvent(event);
-			loadScene.withdrawScene(getUser(), databaseModel);
+			transition.fadeOut().setOnFinished((ActionEvent evt) ->{
+				loadScene.setActionEvent(event);
+				loadScene.withdrawScene(getUser(), databaseModel);
+			});
 		}
 	}
 

@@ -17,12 +17,12 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.registerController">
+<StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Machine.Application.Controllers.registerController">
     <AnchorPane fx:id="registerPane" prefHeight="500.0" prefWidth="600.0">
         <children>
-            <ImageView fitHeight="500.0" fitWidth="700.0" pickOnBounds="true" opacity="0.78">
+            <ImageView fitHeight="500.0" fitWidth="700.0" opacity="0.78" pickOnBounds="true">
             <image>
-               <Image url="@/Machine/images/minimal_blue_mountains_hd_5k-5120x2880.jpg"/>
+               <Image url="@/Machine/images/abstract.jpg" />
             </image>
             </ImageView>
             <VBox layoutX="137.0" layoutY="60.0" prefHeight="400.0" prefWidth="226.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="137.0" AnchorPane.topAnchor="60.0">
@@ -42,12 +42,12 @@
                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         </rowConstraints>
                         <children>
-                            <JFXButton fx:id="registerButton" alignment="TOP_CENTER" buttonType="RAISED" contentDisplay="BOTTOM" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleRegisterButton" opacity="0.82" prefHeight="46.0" prefWidth="444.0" ripplerFill="#dfed0e" styleClass="quickCash" stylesheets="@/Machine/Application/FXMLs/application.css" text="REGISTER" textFill="WHITE" GridPane.rowIndex="7">
+                            <JFXButton fx:id="registerButton" alignment="TOP_CENTER" buttonType="RAISED" contentDisplay="BOTTOM" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleRegisterButton" opacity="0.82" prefHeight="46.0" prefWidth="444.0" ripplerFill="#dfed0e" styleClass="quickCash" stylesheets="@/Machine/Application/FXMLs/application.css" text="REGISTER" GridPane.rowIndex="7">
                                 <font>
                                     <Font name="Papyrus" size="16.0" />
                                 </font>
                             </JFXButton>
-                            <JFXTextField fx:id="firstName" alignment="CENTER" cache="true" depthTest="DISABLE" focusColor="#2bbf30" prefHeight="81.0" prefWidth="320.0" promptText="F I R S T *">
+                            <JFXTextField fx:id="firstName" alignment="CENTER" cache="true" depthTest="DISABLE" focusColor="#2b60bd" prefHeight="81.0" prefWidth="320.0" promptText="F I R S T *">
                                 <font>
                                     <Font name="Papyrus" size="17.0" />
                                 </font>
@@ -55,7 +55,7 @@
                                     <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
                                         <stops>
                                             <Stop color="#4800ff" />
-                                            <Stop color="#4dff00" offset="1.0" />
+                                            <Stop color="#006cff" offset="1.0" />
                                         </stops>
                                     </RadialGradient>
                                 </unFocusColor>
@@ -76,7 +76,7 @@
                                     <RadialGradient centerX="0.4666666666666667" centerY="0.5571428571428572" radius="0.5">
                                         <stops>
                                             <Stop color="#0274ff" />
-                                            <Stop color="#e4ff00" offset="1.0" />
+                                            <Stop color="#2b3ebd" offset="1.0" />
                                         </stops>
                                     </RadialGradient>
                                 </unFocusColor>
@@ -94,15 +94,31 @@
                                     </RadialGradient>
                                 </unFocusColor>
                             </JFXTextField>
-                            <JFXPasswordField fx:id="pass" alignment="CENTER" focusColor="#3dfffd" prefHeight="87.0" prefWidth="320.0" promptText="P A S S W O R D *" unFocusColor="RED" GridPane.rowIndex="3">
+                            <JFXPasswordField fx:id="pass" alignment="CENTER" focusColor="#3dfffd" prefHeight="87.0" prefWidth="320.0" promptText="P A S S W O R D *" GridPane.rowIndex="3">
                                 <font>
                                     <Font name="Papyrus" size="17.0" />
                                 </font>
+                        <unFocusColor>
+                           <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                              <stops>
+                                 <Stop color="#4800ff" />
+                                 <Stop color="#00b1ff" offset="1.0" />
+                              </stops>
+                           </RadialGradient>
+                        </unFocusColor>
                             </JFXPasswordField>
-                            <JFXPasswordField fx:id="confirmPass" alignment="CENTER" focusColor="#0040ff" prefHeight="120.0" prefWidth="320.0" promptText="C O N F I R M *" unFocusColor="RED" GridPane.rowIndex="4">
+                            <JFXPasswordField fx:id="confirmPass" alignment="CENTER" focusColor="#0040ff" prefHeight="120.0" prefWidth="320.0" promptText="C O N F I R M *" GridPane.rowIndex="4">
                                 <font>
                                     <Font name="Papyrus" size="17.0" />
                                 </font>
+                        <unFocusColor>
+                           <RadialGradient centerX="0.4666666666666667" centerY="0.5571428571428572" radius="0.5">
+                              <stops>
+                                 <Stop color="#0274ff" />
+                                 <Stop color="#0093ff" offset="1.0" />
+                              </stops>
+                           </RadialGradient>
+                        </unFocusColor>
                             </JFXPasswordField>
                      <JFXTextField fx:id="emailLabel" alignment="CENTER" onKeyReleased="#enableRegisterButton" promptText="E M A I L*" GridPane.rowIndex="5">
                         <font>

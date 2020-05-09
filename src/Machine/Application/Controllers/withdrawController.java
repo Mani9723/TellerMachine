@@ -94,14 +94,19 @@ public class withdrawController implements Initializable
 	private DialogeBox dialogeBox;
 	private LoadScene loadScene;
 
+	private Transition transition;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		stackPane.setOpacity(0);
+		transition = new Transition(stackPane,null);
 		loadScene = new LoadScene();
 		dialogeBox = new DialogeBox(stackPane);
 		dialogeBox.setNonStackPane(withdrawPane);
 		moneyTextField.setEditable(false);
 		moneyTextField.requestFocus();
+		transition.fadeIn();
 	}
 
 	void init(DatabaseModel databaseModel)
@@ -140,12 +145,15 @@ public class withdrawController implements Initializable
 	void logOut(ActionEvent event)
 	{
 		if(event.getSource().equals(LOGOUT)) {
-			try {
-				stackPane2 = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/loginPage.fxml"));
+			transition.fadeOut().setOnFinished((ActionEvent evt) ->{
+				try {
+					stackPane2 = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/loginPage.fxml"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				stackPane.getChildren().setAll(stackPane2);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+				stackPane.setOpacity(1);
+			});
 		}
 	}
 
@@ -153,8 +161,10 @@ public class withdrawController implements Initializable
 	void menu(ActionEvent event)
 	{
 		if(event.getSource().equals(mainMenu)) {
-			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(username, databaseModel);
+			transition.fadeOut().setOnFinished((ActionEvent evt) ->{
+				loadScene.setActionEvent(event);
+				loadScene.homeSceneAction(username, databaseModel);
+			});
 		}
 	}
 
@@ -162,8 +172,10 @@ public class withdrawController implements Initializable
 	void qkCash(ActionEvent event)
 	{
 		if(event.getSource().equals(qCash)) {
-			loadScene.setActionEvent(event);
-			loadScene.quickCashScene(username, databaseModel);
+			transition.fadeOut().setOnFinished((ActionEvent evt) ->{
+				loadScene.setActionEvent(event);
+				loadScene.quickCashScene(username, databaseModel);
+			});
 		}
 	}
 
@@ -174,12 +186,12 @@ public class withdrawController implements Initializable
 		if(event.getSource().equals(withdrawButton)){
 			if(validRequest(request) && isWithinBounds(request)){
 				request = Double.toString(Double.parseDouble(request));
-					if(getCurrBalance() >= 100) {
-						executeQuery(request);
-						updateBalanceLabel();
-					}else{
-						dialogeBox.OkButton("BALANCE LOW, Please make a deposit", new JFXDialog());
-					}
+				if(getCurrBalance() >= 100) {
+					executeQuery(request);
+					updateBalanceLabel();
+				}else{
+					dialogeBox.OkButton("BALANCE LOW, Please make a deposit", new JFXDialog());
+				}
 			}else{
 				dialogeBox.OkButton("Invalid Amount: $"+request,new JFXDialog());
 			}

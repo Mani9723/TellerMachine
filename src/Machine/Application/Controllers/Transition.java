@@ -7,7 +7,7 @@ import javafx.util.Duration;
 
 public class Transition
 {
-	private static final int DURATION = 250;
+	private static final int DURATION = 200;
 	private StackPane stackPane;
 	private AnchorPane anchorPane;
 
