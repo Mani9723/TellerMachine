@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.events.JFXDrawerEvent;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -208,7 +210,7 @@ public class loginController implements Initializable {
 			showFirstTimeUsingDialog();
 		} else if(databaseModel.usernameExists(username.getText())){
 			if(attemptsRemaining()) {
-				if (processCredentials() && !databaseModel.accountLocked(username.getText())) {
+				if (processCredentials()) {
 					if (username.getText().equalsIgnoreCase("admin")) {
 						loadScene.setActionEvent(event);
 						loadScene.adminSceneActionEvent(databaseModel);
@@ -305,14 +307,22 @@ public class loginController implements Initializable {
 
 	private void loadHomePage(ActionEvent event, KeyEvent keyEvent)
 	{
-		if(event != null) {
-			loadScene.setActionEvent(event);
-			loadScene.homeSceneAction(username.getText(), databaseModel);
-		}
-		else if(keyEvent != null) {
-			loadScene.setKeyEvent(keyEvent);
-			loadScene.homeScene(username, databaseModel);
-		}
+		FadeTransition fadeTransition = new FadeTransition();
+		fadeTransition.setDuration(Duration.millis(500));
+		fadeTransition.setNode(stackPane);
+		fadeTransition.setFromValue(1);
+		fadeTransition.setToValue(0);
+		fadeTransition.setOnFinished((ActionEvent transitionEvent) -> {
+			if(event != null) {
+				loadScene.setActionEvent(event);
+				loadScene.homeSceneAction(username.getText(), databaseModel);
+			}
+			else if(keyEvent != null) {
+				loadScene.setKeyEvent(keyEvent);
+				loadScene.homeScene(username.getText(), databaseModel);
+			}
+		});
+		fadeTransition.play();
 	}
 
 	private void openDrawerPane(String scenePath, ActionEvent event)

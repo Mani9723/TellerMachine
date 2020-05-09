@@ -114,7 +114,7 @@ class LoadScene
 		homeWindow.show();
 	}
 
-	void homeScene(JFXTextField username, DatabaseModel databaseModel)
+	void homeScene(String username, DatabaseModel databaseModel)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(homeFxml));
@@ -126,7 +126,7 @@ class LoadScene
 		}
 		Scene currScene = new Scene(loginParent);
 		homeController controller = loader.getController();
-		controller.setUsername(username.getText());
+		controller.setUsername(username);
 		controller.init(databaseModel);
 		Stage homeWindow = (Stage)((Node)keyEvent.getSource()).getScene().getWindow();
 		allowDragableScene(loginParent,homeWindow);

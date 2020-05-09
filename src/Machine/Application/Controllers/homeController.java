@@ -2,6 +2,7 @@ package Machine.Application.Controllers;
 
 import Machine.Application.Controllers.Model.DatabaseModel;
 import com.jfoenix.controls.JFXButton;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +24,7 @@ public class homeController implements Initializable
 {
 
 	@FXML
-	private AnchorPane secondPane;
+	private AnchorPane rootPane;
 
 	@FXML
 	private StackPane stackPane;
@@ -71,6 +73,7 @@ public class homeController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
+		rootPane.setOpacity(0);
 		date = new Date();
 		Image image =new Image(getClass().getResourceAsStream("/Machine/images/user-2517433_960_7201.png"));
 		settingButton.setText("");
@@ -85,7 +88,17 @@ public class homeController implements Initializable
 		settingButton.setGraphic(imageView);
 		accountNumber.setVisible(false);
 		isNumVisible = false;
+		fadeIn();
+	}
 
+	private void fadeIn()
+	{
+		FadeTransition fadeTransition = new FadeTransition();
+		fadeTransition.setDuration(Duration.millis(1000));
+		fadeTransition.setNode(rootPane);
+		fadeTransition.setFromValue(0);
+		fadeTransition.setToValue(1);
+		fadeTransition.play();
 	}
 
 	void init(DatabaseModel machine)
@@ -134,7 +147,7 @@ public class homeController implements Initializable
 		if(event.getSource().equals(exitHome)){
 			try {
 				stackPane = FXMLLoader.load(getClass().getResource("/Machine/Application/FXMLs/loginPage.fxml"));
-				secondPane.getChildren().setAll(stackPane);
+				rootPane.getChildren().setAll(stackPane);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
