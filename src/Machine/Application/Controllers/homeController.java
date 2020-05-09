@@ -82,7 +82,7 @@ public class homeController implements Initializable
 		settingButton.setText("");
 		loadScene = new LoadScene();
 		dateTime.setText(getDate());
-		accountType.setText("Checking");
+		//accountType.setText("Checking");
 		ImageView imageView = new ImageView(image);
 		imageView.setPreserveRatio(false);
 		imageView.setSmooth(true);
@@ -220,7 +220,7 @@ public class homeController implements Initializable
 	{
 		if(event.getSource().equals(showAccButton)){
 			if(!isNumVisible){
-				showAccButton.setText("HIDE ACCOUNT NUMBER");
+				showAccButton.setText("Hide account number");
 				accountNumber.setVisible(true);
 				try {
 					accountNumber.setText(databaseModel.getAccountInfo(getuName(),"AccountNumber"));
@@ -230,7 +230,7 @@ public class homeController implements Initializable
 				isNumVisible = true;
 			} else{
 				isNumVisible = false;
-				showAccButton.setText("SHOW ACCOUNT NUMBER");
+				showAccButton.setText("Show account number");
 				accountNumber.setVisible(false);
 			}
 		}
