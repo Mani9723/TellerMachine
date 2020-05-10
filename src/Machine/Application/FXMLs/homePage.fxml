@@ -136,7 +136,7 @@
                 </GridPane>
             </children>
         </AnchorPane>
-        <JFXButton fx:id="statementButton" layoutX="409.0" layoutY="387.0" onAction="#handleStatementButton" opacity="0.90" prefHeight="48.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@/Machine/Application/FXMLs/application.css" text="STATEMENT" textFill="black">
+        <JFXButton fx:id="statementButton" layoutX="409.0" layoutY="387.0" onAction="#handleStatementButton" opacity=".97" prefHeight="48.0" prefWidth="245.0" styleClass="quickCash" stylesheets="@/Machine/Application/FXMLs/application.css" text="STATEMENT" textFill="black">
             <font>
                 <Font name="Papyrus" size="16.0" />
             </font>
