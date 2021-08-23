@@ -44,7 +44,7 @@ Uses a local database so a simple download of .jar file will handle everything
 
 ## Author
 
-* **Mani Shah** - *Initial work* - [PurpleBooth](https://github.com/Mani9723)
+* **Mani Shah** - *Initial work* - [Homepage](https://github.com/Mani9723)
 
 ## License
 
